@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 20:45:23 by smonte-e          #+#    #+#              #
-#    Updated: 2023/02/24 20:45:47 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/03/01 18:52:13 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC =         gcc
 CFLAGS =     -Wall -Wextra -Werror
 RM =         rm -f
 
-SRCS =		 ft_printf_utils.c ft_printf.c
+SRCS =		ft_printf_utils.c ft_printf.c 
 OBJS =		${SRCS:.c=.o}
 
 NAME =     libftprintf.a
