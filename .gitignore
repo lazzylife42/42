@@ -1,2 +1,5 @@
 .DS_STORE
-
+main.c
+.vscode
+*.o
+*.a
