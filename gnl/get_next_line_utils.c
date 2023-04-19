@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:42:30 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/19 18:52:45 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/04/19 23:20:45 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,17 @@ char	*split_line(const char *buff)
 char	*keep_buff(char *buff, char *new_buff)
 {
 	size_t	i;
-
+	size_t	j;
+	
 	i = 0;
+	j = 0;
 	while (buff[i] != '\0')
 		i++;	
-		while (new_buff[i] != '\0')
+		while (new_buff[j] != '\0')
 		{
-			buff[i] = new_buff[i];
+			buff[i] = new_buff[j];
 			i++;
+			j++;
 		}
 	buff[i] = '\0';
 	return (buff);
