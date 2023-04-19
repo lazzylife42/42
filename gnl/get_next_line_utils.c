@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:42:30 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/19 17:17:32 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:52:45 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*ft_strchr(const char *s, int c)
 char	*split_line(const char *buff)
 {
 	//à completer
+	
 	
 	return (buff);
 }
