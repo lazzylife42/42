@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/20 16:10:39 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/04/20 17:21:24 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ char	*get_next_line(int fd)
 	char	*text;
 	char	*buff;
 	char	*new_buff;
-
-if (fd < 0 || BUFFER_SIZE <= 0 || read(fd,))
-{
-	/* code */
-}
-
 
 /*
 	while (fd != NULL)
@@ -44,11 +38,26 @@ if (fd < 0 || BUFFER_SIZE <= 0 || read(fd,))
 
 /*	retourne line et reset le buffer */
 
-int		*split_line(char **line, char **backup, char *next_line);
+static int	split_line(char **backup, char **line, int newline_index)
 {
-	line = malloc(sizeof((next_line - backup +1)));
-	
+	char	*temp;
+	int		len;
 
+	(*backup)[newline_index] = '\0';
+	if (!(*line = ft_strdup(*backup)))
+		return (1);
+	len = ft_strlen(*backup + newline_index + 1);
+	if (!len)
+	{
+		free(*backup);
+		*backup = NULL;
+		return (0);
+	}
+	if (!(temp = ft_strdup(*backup + newline_index + 1)))
+		return (0);
+	free(*backup);
+	*backup = temp;
+	return (1);
 }
 
 /*	Coppie new_buff dans buff */
