@@ -6,11 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:42:30 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/19 23:20:45 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:12:45 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+/*	Cherche '\n' dans buff et retourne l'adresse de '\n' */
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -28,37 +30,52 @@ char	*ft_strchr(const char *s, int c)
 	return (&ptr[i]);
 }
 
-char	*split_line(const char *buff)
-{
-	//à completer
-	
-	
-	return (buff);
-}
+/*	Coppy la string jusqu'a la longeur dstsize */
 
-char	*keep_buff(char *buff, char *new_buff)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
-	size_t	j;
-	
+
 	i = 0;
-	j = 0;
-	while (buff[i] != '\0')
-		i++;	
-		while (new_buff[j] != '\0')
-		{
-			buff[i] = new_buff[j];
-			i++;
-			j++;
-		}
-	buff[i] = '\0';
-	return (buff);
+	if (dstsize == 0)
+		return (ft_strlen(src));
+	while (src[i] != '\0' && i < (dstsize - 1))
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }
 
-char	*return_all(char *buff)
-{
-	
-	// à completer
+/*	Retourne la longeur de la string */
 
-	return (buff);
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+/*	Duplique la string */
+
+char	*ft_strdup(const char *src)
+{
+	char	*new;
+	size_t	i;
+
+	i = 0;
+	new = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (!new)
+		return (NULL);
+	while (src[i] != '\0')
+	{
+		new[i] = src[i];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
 }
