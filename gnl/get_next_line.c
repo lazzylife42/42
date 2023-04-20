@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/20 17:21:24 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/04/20 17:34:06 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ static int	split_line(char **backup, char **line, int newline_index)
 
 	(*backup)[newline_index] = '\0';
 	if (!(*line = ft_strdup(*backup)))
-		return (1);
+		return (-1);
 	len = ft_strlen(*backup + newline_index + 1);
 	if (!len)
 	{
 		free(*backup);
 		*backup = NULL;
-		return (0);
+		return (1);
 	}
 	if (!(temp = ft_strdup(*backup + newline_index + 1)))
-		return (0);
+		return (-1);
 	free(*backup);
 	*backup = temp;
 	return (1);
