@@ -3,38 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/20 20:11:38 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/04/24 01:40:45 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+
+#define BUFF_SIZE 500000
+
+static char *buff;
+
+void	init()
+{
+	buff = malloc(sizeof(char) * BUFF_SIZE);
+}
 
 char	*get_next_line(int fd)
 {
-	size_t	count;
-	char	*text;
-	char	*buff;
-	char	*new_buff;
+	size_t		newline_index = 0;
+	char		*line;
 
-/*
-	while (fd != NULL)
+	while (fd)
 	{
-		if(ft_strchr(text, '\n') == NULL)
+		while (read(fd, &buff[newline_index], 1))
 		{
-			if (read(fd, text, count) > 0)
-				keep_buff(buff, new_buff);
+			;
+			printf("Buff : [%c]\n", buff[newline_index]);
+			newline_index++;
+			if (read(fd, &buff[newline_index], 1) == 0)
+				break;
 		}
-		else if (ft_strchr(text, '\n') == '\n')
-		{
-			split_line(buff);
-		}	
+		printf("oui ! \n");
+		split_line(buff, line, newline_index);
+		return (line);
+		break;
 	}
-	return (return_all(buff));
-*/
+	return (NULL);
 }
+
 
 /*	retourne line et reset le buffer */
 
@@ -82,6 +92,19 @@ char	*keep_buff(char *buff, char *new_buff)
 		}
 	buff[i] = '\0';
 	return (buff);
+}
+
+size_t	find_newline_index(char **backup)
+{
+	size_t	newline_index;
+
+	while (ft_strchr(*backup,'\n') == NULL) 
+	{
+		
+	}
+	
+
+	return (newline_index);
 }
 
 /*	*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 18:49:53 by sab               #+#    #+#             */
-/*   Updated: 2023/04/20 18:41:01 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/04/24 01:30:32 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 5
 #endif
+
+void	init(); // a effacer
 
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);
