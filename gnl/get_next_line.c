@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/20 17:34:06 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/04/20 20:11:38 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,16 @@ char	*get_next_line(int fd)
 
 /*	retourne line et reset le buffer */
 
-static int	split_line(char **backup, char **line, int newline_index)
+size_t	split_line(char **backup, char **line, size_t newline_index)
 {
 	char	*temp;
 	int		len;
-
+/*	Termine la string *backup par \0 a la fin de la ligne */
 	(*backup)[newline_index] = '\0';
+/*	Renvoie une erreur si il ne peut pas copier *backup dans *line */
 	if (!(*line = ft_strdup(*backup)))
 		return (-1);
+/*	Essaye d'affecter (*backup + newline_index) a len, free *backup si !len */
 	len = ft_strlen(*backup + newline_index + 1);
 	if (!len)
 	{
@@ -53,6 +55,7 @@ static int	split_line(char **backup, char **line, int newline_index)
 		*backup = NULL;
 		return (1);
 	}
+/*	Essaye de copier la line dans temp, retourne une erreur si !temp*/
 	if (!(temp = ft_strdup(*backup + newline_index + 1)))
 		return (-1);
 	free(*backup);
