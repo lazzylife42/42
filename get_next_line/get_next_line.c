@@ -6,46 +6,49 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/24 16:17:21 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/24 23:22:44 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-#define BUFF_SIZE 500000
+#define BUFF_SIZE 4096
 
 char	*get_next_line(int fd)
 {
 	size_t		newline_index = 0;
-	char				*line;
-	static char			*buff;
+	ssize_t 	ret;
+	char		*line;
+	char		*buff;
 
 	buff = malloc(sizeof(char) * BUFF_SIZE);
+	line = NULL;
 
-	while (fd)
+	while (1)
 	{
-/*	Coppie le text dans buff */
-		while (read(fd, &buff[newline_index], 1))
+		if (find_newline_index(buff) > 0)
 		{
-			while(find_newline_index(buff) > 0)
-			{
-				newline_index = find_newline_index(buff);
-				gpt_split_line(&buff, &line, newline_index);
-//				printf("Buff Line : [%s]\n", buff);
-			}
-//			printf("Buff : [%c]\n", buff[newline_index]);
-			newline_index++;	
-//			if (read(fd, &buff[newline_index], 1) == 0)
-//				break;
+			newline_index = find_newline_index(buff);
+			split_line(&buff, &line, newline_index);
+			break;
 		}
-//		printf("oui ! \n");
-		return (line);
-		break;
+		else
+		{
+			ret = read(fd, &buff[newline_index], 1);
+			if (ret == -1)
+				return (NULL);
+			if (ret == 0)
+			{
+				line = return_all(buff);
+				printf("\n--------------------------------------------------\n");
+				break;
+			}
+			newline_index++;
+		}
 	}
-	return (NULL);
+	return (line);
 }
-
 
 /*	retourne line et reset le buffer */
 
@@ -53,6 +56,9 @@ size_t	split_line(char **buff, char **line, size_t newline_index)
 {
 	char	*temp;
 	int		len;
+
+	if (newline_index < 0)
+		return (0);
 /*	Termine la string *buff par \0 a la fin de la ligne */
 	(*buff)[newline_index] = '\0';
 /*	Renvoie une erreur si il ne peut pas copier *buff dans *line */
@@ -69,6 +75,7 @@ size_t	split_line(char **buff, char **line, size_t newline_index)
 /*	Essaye de copier la line dans temp, retourne une erreur si !temp*/
 	if (!(temp = ft_strdup(*buff + newline_index + 1)))
 		return (-1);
+		
 	free(*buff);
 	*buff = temp;
 	return (1);
@@ -113,49 +120,6 @@ int		find_newline_index(char *buff)
 
 char	*return_all(char *buff)
 {
-	
-	// à completer
 
-	return (buff);
 }
 
-size_t gpt_split_line(char **buff, char **line, size_t newline_index)
-{
-    char    *temp;
-    int     len;
-    size_t  i;
-
-    // Terminate the string at the newline index
-    (*buff)[newline_index] = '\0';
-
-    // Allocate memory for the line
-    *line = malloc(sizeof(char) * (newline_index + 1));
-    if (!*line)
-        return (-1);
-
-    // Copy the line into the newly allocated memory
-    i = 0;
-    while (i < newline_index)
-    {
-        (*line)[i] = (*buff)[i];
-        i++;
-    }
-    (*line)[i] = '\0';
-
-    // Calculate the length of the remaining part of the buffer
-    len = ft_strlen(*buff + newline_index + 1);
-
-    // Allocate memory for the remaining part of the buffer
-    temp = malloc(sizeof(char) * (len + 1));
-    if (!temp)
-        return (-1);
-
-    // Copy the remaining part of the buffer into the newly allocated memory
-    ft_strcpy(temp, *buff + newline_index + 1);
-
-    // Free the original buffer and assign the new buffer to the pointer
-    free(*buff);
-    *buff = temp;
-
-    return (1);
-}

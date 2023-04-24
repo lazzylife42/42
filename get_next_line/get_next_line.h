@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 18:49:53 by sab               #+#    #+#             */
-/*   Updated: 2023/04/24 16:22:18 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/24 23:11:56 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@
 #endif
 
 int		find_newline_index(char *backup);
-size_t	gpt_split_line(char **buff, char **line, size_t newline_index);
 char	*ft_strcpy(char *dest, const char *src);
 
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);
-char	*keep_buff(char *buff, char *new_buff);
 char	*return_all(char *buff);
 char	*ft_strdup(const char *src);
 size_t	split_line(char **backup, char **line, size_t newline_index);
