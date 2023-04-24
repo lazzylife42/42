@@ -3,20 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 16:24:06 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/01/13 16:31:52 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/03/27 18:49:53 by sab               #+#    #+#             */
+/*   Updated: 2023/04/24 16:22:18 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#define GET_NEXT_LINE_H
 
-
-# include <unistd.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 
-char	*gqet_next_line(int fd);
+#ifndef BUFFER_SIZE
+#define BUFFER_SIZE 5
+#endif
+
+int		find_newline_index(char *backup);
+size_t	gpt_split_line(char **buff, char **line, size_t newline_index);
+char	*ft_strcpy(char *dest, const char *src);
+
+char	*get_next_line(int fd);
+char	*ft_strchr(const char *s, int c);
+char	*keep_buff(char *buff, char *new_buff);
+char	*return_all(char *buff);
+char	*ft_strdup(const char *src);
+size_t	split_line(char **backup, char **line, size_t newline_index);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlen(const char *s);
 
 #endif
