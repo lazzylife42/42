@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/24 23:22:44 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/24 23:31:47 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,27 +79,6 @@ size_t	split_line(char **buff, char **line, size_t newline_index)
 	free(*buff);
 	*buff = temp;
 	return (1);
-}
-
-/*	Coppie new_buff dans buff */
-
-char	*keep_buff(char *buff, char *new_buff)
-{
-	size_t	i;
-	size_t	j;
-	
-	i = 0;
-	j = 0;
-	while (buff[i] != '\0')
-		i++;	
-		while (new_buff[j] != '\0')
-		{
-			buff[i] = new_buff[j];
-			i++;
-			j++;
-		}
-	buff[i] = '\0';
-	return (buff);
 }
 
 int		find_newline_index(char *buff)

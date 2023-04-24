@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:24:23 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/24 23:01:26 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/24 23:38:32 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ int	main(void)
 	int RUN = 1;
 
 	fd = open("test.txt", O_RDONLY);
-	while (RUN)
+	while (RUN < 5)
 	{
 		line = get_next_line(fd);
 		printf("%s", line);
-//		RUN = 0;
+				printf("\n\n++++++++++++++++++++++++++++++++++++++++++++++\n\n");
+		RUN++;
 		if (line == NULL)
 			break ;
 		free(line);
