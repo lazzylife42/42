@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 18:49:53 by sab               #+#    #+#             */
-/*   Updated: 2023/04/24 01:30:32 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/24 02:11:38 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #define BUFFER_SIZE 5
 #endif
 
-void	init(); // a effacer
+int		find_newline_index(char *backup);
 
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);

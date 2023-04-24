@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/24 01:40:45 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/24 02:17:13 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,33 @@
 
 #define BUFF_SIZE 500000
 
-static char *buff;
-
-void	init()
-{
-	buff = malloc(sizeof(char) * BUFF_SIZE);
-}
-
 char	*get_next_line(int fd)
 {
 	size_t		newline_index = 0;
 	char		*line;
+	static char *buff;
+
+	buff = malloc(sizeof(char) * BUFF_SIZE);
 
 	while (fd)
 	{
+/*	Coppie le text dans buff */
 		while (read(fd, &buff[newline_index], 1))
 		{
-			;
+			if(find_newline_index(buff) > 0)
+			{
+				newline_index = find_newline_index(buff);
+				split_line(&buff, &line, newline_index);
+
+			}
 			printf("Buff : [%c]\n", buff[newline_index]);
-			newline_index++;
+			newline_index++;	
 			if (read(fd, &buff[newline_index], 1) == 0)
 				break;
 		}
 		printf("oui ! \n");
-		split_line(buff, line, newline_index);
 		return (line);
+
 		break;
 	}
 	return (NULL);
@@ -94,17 +96,18 @@ char	*keep_buff(char *buff, char *new_buff)
 	return (buff);
 }
 
-size_t	find_newline_index(char **backup)
+int		find_newline_index(char *backup)
 {
-	size_t	newline_index;
+	int	i;
 
-	while (ft_strchr(*backup,'\n') == NULL) 
+	i = 0;
+	while (backup[i])
 	{
-		
+		if (backup[i] == '\n')
+			return (i);
+		i++;
 	}
-	
-
-	return (newline_index);
+	return (-1);
 }
 
 /*	*/

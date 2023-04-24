@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:24:23 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/24 01:30:10 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/24 01:44:22 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	main(void)
 {
 	int		fd;
 	char	*line;
-	
-	init();// a effacer
 
 	fd = open("test.txt", O_RDONLY);
 	while (1)
