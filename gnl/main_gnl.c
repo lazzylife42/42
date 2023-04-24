@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:24:23 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/24 15:30:21 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/24 16:22:36 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(void)
 	{
 		line = get_next_line(fd);
 		printf("%s", line);
-		RUN = 0;
+//		RUN = 0;
 		if (line == NULL)
 			break ;
 		free(line);

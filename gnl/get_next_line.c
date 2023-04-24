@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/24 15:30:15 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/24 16:17:21 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_next_line(int fd)
 			while(find_newline_index(buff) > 0)
 			{
 				newline_index = find_newline_index(buff);
-				split_line(&buff, &line, newline_index);
+				gpt_split_line(&buff, &line, newline_index);
 //				printf("Buff Line : [%s]\n", buff);
 			}
 //			printf("Buff : [%c]\n", buff[newline_index]);
@@ -117,4 +117,45 @@ char	*return_all(char *buff)
 	// à completer
 
 	return (buff);
+}
+
+size_t gpt_split_line(char **buff, char **line, size_t newline_index)
+{
+    char    *temp;
+    int     len;
+    size_t  i;
+
+    // Terminate the string at the newline index
+    (*buff)[newline_index] = '\0';
+
+    // Allocate memory for the line
+    *line = malloc(sizeof(char) * (newline_index + 1));
+    if (!*line)
+        return (-1);
+
+    // Copy the line into the newly allocated memory
+    i = 0;
+    while (i < newline_index)
+    {
+        (*line)[i] = (*buff)[i];
+        i++;
+    }
+    (*line)[i] = '\0';
+
+    // Calculate the length of the remaining part of the buffer
+    len = ft_strlen(*buff + newline_index + 1);
+
+    // Allocate memory for the remaining part of the buffer
+    temp = malloc(sizeof(char) * (len + 1));
+    if (!temp)
+        return (-1);
+
+    // Copy the remaining part of the buffer into the newly allocated memory
+    ft_strcpy(temp, *buff + newline_index + 1);
+
+    // Free the original buffer and assign the new buffer to the pointer
+    free(*buff);
+    *buff = temp;
+
+    return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:42:30 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/24 00:39:25 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/24 16:22:14 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,18 @@ char	*ft_strdup(const char *src)
 	}
 	new[i] = '\0';
 	return (new);
+}
+
+char	*ft_strcpy(char *dest, const char *src)
+{
+	int i;
+
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
