@@ -6,14 +6,14 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/25 15:52:21 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/25 15:55:03 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-#define BUFF_SIZE 4096
+
 
 char	*get_next_line(int fd)
 {
@@ -21,7 +21,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*buff;
 
-	buff = malloc(sizeof(char) * BUFF_SIZE);
+	buff = malloc(sizeof(char) * BUFFER_SIZE);
 	line = NULL;
 
 	while (read(fd, &buff[newline_index], 1) > 0)
