@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/25 14:30:35 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/25 15:52:21 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,37 @@
 char	*get_next_line(int fd)
 {
 	size_t		newline_index = 0;
-	ssize_t 	ret;
 	char		*line;
-	char	*buff;
+	char		*buff;
 
 	buff = malloc(sizeof(char) * BUFF_SIZE);
 	line = NULL;
 
 	while (read(fd, &buff[newline_index], 1) > 0)
 	{
-//		newline_index = find_newline_index(buff);
 		if (buff[newline_index] != '\0' && buff[newline_index] == '\n')
 		{
-			printf("\n--------------------------------------------------\n");
 			split_line(&buff, &line, newline_index);
 			return (line);
 		}
 		else if(buff[newline_index] == '\n'&& buff[newline_index] == '\0')
 		{
+			free(buff);
+			break;
+		}
+/*		else if(buff[newline_index] == '\n'&& buff[newline_index] == '\0')
+		{
+			return (NULL);
 
 			ret = read(fd, &buff[newline_index], 1);
 			if (ret == -1)
 				return (NULL);
 			if (ret == 0)
 			{
-//				line = return_all(buff);
+				return_all(buff, line);
 				break;
 			}
-		}
+		}*/
 		newline_index++;
 	}
 	return (NULL);
@@ -94,11 +97,24 @@ int		find_newline_index(char *buff)
 	return (-1);
 }
 
-/*	
+/*	Renvoie ce qu'il reste dans buff */
 
-char	*return_all(char *buff)
+int	return_all(char *buff, char *line)
 {
+//	int		newline_index;
 
+	if (!(*buff))
+	{
+		if (!(line = ft_strdup("")))
+			return (-1);
+		return (0);
+	}
+//	if ((newline_index = find_newline_index(buff)) >= 0)
+//		return (split_line(buff, line, newline_index));
+	else
+	{
+		*line = *buff;
+//		*buff = NULL;
+		return (0);
+	}
 }
-
-*/
