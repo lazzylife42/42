@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/25 14:18:20 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/25 14:30:35 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@ char	*get_next_line(int fd)
 				return (NULL);
 			if (ret == 0)
 			{
-				line = return_all(buff);
+//				line = return_all(buff);
 				break;
 			}
 		}
 		newline_index++;
 	}
-//	return (line);
+	return (NULL);
 }
 
 /*	retourne line et reset le buffer */
-size_t	split_line(char **buff, char **line, size_t newline_index)
+int	split_line(char **buff, char **line, int newline_index)
 {
 	char	*temp;
 	int		len;
@@ -94,10 +94,11 @@ int		find_newline_index(char *buff)
 	return (-1);
 }
 
-/*	*/
+/*	
 
 char	*return_all(char *buff)
 {
 
 }
 
+*/
