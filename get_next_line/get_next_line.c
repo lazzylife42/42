@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/24 23:31:47 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/25 14:18:20 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,38 @@ char	*get_next_line(int fd)
 	size_t		newline_index = 0;
 	ssize_t 	ret;
 	char		*line;
-	char		*buff;
+	char	*buff;
 
 	buff = malloc(sizeof(char) * BUFF_SIZE);
 	line = NULL;
 
-	while (1)
+	while (read(fd, &buff[newline_index], 1) > 0)
 	{
-		if (find_newline_index(buff) > 0)
+//		newline_index = find_newline_index(buff);
+		if (buff[newline_index] != '\0' && buff[newline_index] == '\n')
 		{
-			newline_index = find_newline_index(buff);
+			printf("\n--------------------------------------------------\n");
 			split_line(&buff, &line, newline_index);
-			break;
+			return (line);
 		}
-		else
+		else if(buff[newline_index] == '\n'&& buff[newline_index] == '\0')
 		{
+
 			ret = read(fd, &buff[newline_index], 1);
 			if (ret == -1)
 				return (NULL);
 			if (ret == 0)
 			{
 				line = return_all(buff);
-				printf("\n--------------------------------------------------\n");
 				break;
 			}
-			newline_index++;
 		}
+		newline_index++;
 	}
-	return (line);
+//	return (line);
 }
 
 /*	retourne line et reset le buffer */
-
 size_t	split_line(char **buff, char **line, size_t newline_index)
 {
 	char	*temp;
@@ -75,7 +75,6 @@ size_t	split_line(char **buff, char **line, size_t newline_index)
 /*	Essaye de copier la line dans temp, retourne une erreur si !temp*/
 	if (!(temp = ft_strdup(*buff + newline_index + 1)))
 		return (-1);
-		
 	free(*buff);
 	*buff = temp;
 	return (1);
