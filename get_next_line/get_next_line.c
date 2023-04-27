@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/25 19:47:33 by sab              ###   ########.fr       */
+/*   Updated: 2023/04/27 20:53:22 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_next_line(int fd)
 	static int		newline_index;
 	char			*line;
 	char			*buff;
-//	char			*backup;
+	static char		*backup;
 
 	buff = malloc(sizeof(char) * BUFFER_SIZE);
 	read(fd, buff, BUFFER_SIZE);
@@ -68,7 +68,7 @@ char	*get_next_line(int fd)
 }
 
 /*	retourne line et reset le buffer */
-int	split_line(char **buff, char **line, int newline_index)
+int	split_line(char **buff, char **line,char *backup, int newline_index)
 {
 	char	*temp;
 	int		len;
@@ -93,8 +93,8 @@ int	split_line(char **buff, char **line, int newline_index)
 /*	Essaye de copier la line dans temp, retourne une erreur si !temp*/
 	if (!(temp = ft_strdup(*buff + newline_index + 2)))
 		return (-1);
-	free(*buff);
-	buff = &temp; // problme par la
+	free(*backup);
+	backup = &temp; // problme par la
 	return (1);
 }
 
@@ -102,7 +102,7 @@ int		find_newline_index(char *buff, int newline_index)
 {
 	int	i;
 
-	if (buff[newline_index] == '\n')
+	if (buff[newline_index] == '\0')
 		i = newline_index;
 	else
 		i = 0;
