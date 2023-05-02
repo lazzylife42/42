@@ -3,55 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/04/27 20:53:22 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/05/02 17:11:31 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
+
+
 char	*get_next_line(int fd)
 {
 	static int		newline_index;
 	char			*line;
 	char			*buff;
-	static char		*backup;
+//	char			*backup;
 
 	buff = malloc(sizeof(char) * BUFFER_SIZE);
-	read(fd, buff, BUFFER_SIZE);
-	newline_index = find_newline_index(buff, newline_index);
+	line = NULL;
 
-	while (buff[newline_index] != '\0')
+	while (read(fd, &buff[newline_index], 1) > 0)
 	{
-
-		if (buff[newline_index] == '\n')
+		if (buff[newline_index] != '\0' && buff[newline_index] == '\n')
 		{
 			split_line(&buff, &line, newline_index);
 			return (line);
 		}
-/*		if (buff[newline_index] == '\0')
+		else if(buff[newline_index] == '\n'&& buff[newline_index] == '\0')
 		{
 			free(buff);
 			break;
-		}*/
-		newline_index++;
-	}
-	return (NULL);
-/*
-	if (read(fd, &buff[newline_index], BUFFER_SIZE) < 0)
-	{
-		return (NULL);
-	}
-*/	
-			/*
-			if(buff[newline_index] == '\n'&& buff[newline_index] == '\0')
-			{
-				free(buff);
-			}
-			*/	
+		}
 /*		else if(buff[newline_index] == '\n'&& buff[newline_index] == '\0')
 		{
 			return (NULL);
@@ -65,6 +50,9 @@ char	*get_next_line(int fd)
 				break;
 			}
 		}*/
+		newline_index++;
+	}
+	return (NULL);
 }
 
 /*	retourne line et reset le buffer */
@@ -79,9 +67,7 @@ int	split_line(char **buff, char **line,char *backup, int newline_index)
 	(*buff)[newline_index] = '\0';
 /*	Renvoie une erreur si il ne peut pas copier *buff dans *line */
 	if (!(*line = ft_strdup(*buff)))
-	{
 		return (-1);
-	}
 /*	Essaye d'affecter (*buff + newline_index) a len, free *buff si !len */
 	len = ft_strlen(*buff) + newline_index + 1;
 	if (!len)
@@ -91,18 +77,18 @@ int	split_line(char **buff, char **line,char *backup, int newline_index)
 		return (1);
 	}
 /*	Essaye de copier la line dans temp, retourne une erreur si !temp*/
-	if (!(temp = ft_strdup(*buff + newline_index + 2)))
+	if (!(temp = ft_strdup(*buff + newline_index + 1)))
 		return (-1);
-	free(*backup);
-	backup = &temp; // problme par la
+	free(*buff);
+	buff = &temp; // problme par la
 	return (1);
 }
 
-int		find_newline_index(char *buff, int newline_index)
+int		find_newline_index(char *buff)
 {
 	int	i;
 
-	if (buff[newline_index] == '\0')
+	if (buff[newline_index] == '\n')
 		i = newline_index;
 	else
 		i = 0;
