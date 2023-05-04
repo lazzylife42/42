@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 22:19:37 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/02/22 14:09:41 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:35:46 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,19 @@ int ft_printf(const char *format, ...)
 	}
 	va_end(ap);
 	return (len);
+}
+
+int		ft_printf_conv(char format, va_list ap)
+{
+	if (format == '%')
+		return (ft_printf_char('%'));
+	else if (format == 'c')
+		return (ft_printf_char(va_arg(ap, char)));
+	else if (format == 's')
+		return (ft_printf_str(va_arg(ap, char *)));
+	else if (format == 'p')
+		return (ft_printf_str(va_arg(ap, char *)));
+	else if (format == 'd' || format == 'i')
+		return (ft_printf(''))
+	
 }
