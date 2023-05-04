@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/05/02 17:11:31 by sab              ###   ########.fr       */
+/*   Updated: 2023/05/02 17:32:52 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ char	*get_next_line(int fd)
 {
 	static int		newline_index;
 	char			*line;
-	char			*buff;
-//	char			*backup;
+	static char		*buff;
 
 	buff = malloc(sizeof(char) * BUFFER_SIZE);
 	line = NULL;
@@ -56,7 +55,7 @@ char	*get_next_line(int fd)
 }
 
 /*	retourne line et reset le buffer */
-int	split_line(char **buff, char **line,char *backup, int newline_index)
+int	split_line(char **buff, char **line, int newline_index)
 {
 	char	*temp;
 	int		len;
@@ -64,6 +63,7 @@ int	split_line(char **buff, char **line,char *backup, int newline_index)
 	if (newline_index < 0)
 		return (0);
 /*	Termine la string *buff par \0 a la fin de la ligne */
+	newline_index = find_newline_index(*buff);
 	(*buff)[newline_index] = '\0';
 /*	Renvoie une erreur si il ne peut pas copier *buff dans *line */
 	if (!(*line = ft_strdup(*buff)))
@@ -88,10 +88,7 @@ int		find_newline_index(char *buff)
 {
 	int	i;
 
-	if (buff[newline_index] == '\n')
-		i = newline_index;
-	else
-		i = 0;
+	i = 0;
 	while (buff[i])
 	{
 		if (buff[i] == '\n')
