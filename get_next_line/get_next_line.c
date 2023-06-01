@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/06/01 17:21:51 by sab              ###   ########.fr       */
+/*   Updated: 2023/06/01 17:24:04 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char *get_next_line(int fd)
 {
 	int newline_index;
 	int bytes_readed;
-	static char *buff;
-	char *line;
+	static char *buff = NULL;
+	char *line = NULL;
 
 	bytes_readed = 1;
 	if (buff == NULL)
