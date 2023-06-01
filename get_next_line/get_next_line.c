@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/06/01 17:32:52 by sab              ###   ########.fr       */
+/*   Updated: 2023/06/01 19:35:16 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char *get_next_line(int fd)
 	static char *buff = NULL;
 	char *line = NULL;
 
+	if ((fd < 0) || (BUFFER_SIZE <= 0))
+		return (NULL);
 	bytes_readed = 1;
 	if (buff == NULL)
 	{
@@ -59,7 +61,7 @@ char *copy_line(char *buff, char *line, int newline_index)
 	line = malloc(sizeof(char) * (newline_index + 1));
 	if (!line)
 	{
-		free_all(buff, line);
+		free(line);
 		return (NULL);
 	}
 	ft_strlcpy(line, buff, newline_index + 1);
