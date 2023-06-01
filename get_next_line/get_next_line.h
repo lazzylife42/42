@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 18:49:53 by sab               #+#    #+#             */
-/*   Updated: 2023/05/30 15:38:04 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:01:01 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 char 	*get_next_line(int fd);
 char 	*ft_substr(char *src, int pos, int len);
+void	free_all(char *buff, char *line);
 int 	find_newline_index(char *buff);
 size_t 	ft_strlen(const char *str);
 size_t 	ft_strlcpy(char *dst, const char *src, size_t dstsize);

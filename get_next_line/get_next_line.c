@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/06/01 16:31:25 by sab              ###   ########.fr       */
+/*   Updated: 2023/06/01 17:00:27 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char *get_next_line(int fd)
 	int newline_index;
 	int bytes_readed;
 	static char *buff = NULL;
-	char *tmp = NULL;
 	char *line = NULL;
 
 	bytes_readed = 1;
@@ -27,7 +26,7 @@ char *get_next_line(int fd)
 		buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (buff == NULL)
 		{
-			free(buff);
+			free_all(buff,line);
 			return (NULL);
 		}
 	}
@@ -36,9 +35,7 @@ char *get_next_line(int fd)
 		bytes_readed = read(fd, buff, BUFFER_SIZE);
 		if (bytes_readed == -1)
 		{
-			free(buff);
-			free(line);
-			free(tmp);
+			free_all(buff,line);
 			return (NULL);
 		}
 		newline_index = find_newline_index(buff);
@@ -46,13 +43,16 @@ char *get_next_line(int fd)
 		{
 			line = malloc(sizeof(char) * (newline_index + 1));
 			ft_strlcpy(line, buff, newline_index + 1);
-			tmp = malloc(sizeof(char) * (ft_strlen(buff) - newline_index));
-			ft_strlcpy(tmp, &buff[newline_index + 1], ft_strlen(buff) - newline_index);
-			free(buff);
-			buff = tmp;
+			ft_strlcpy(buff, &buff[newline_index + 1], ft_strlen(buff) - newline_index);
 			return (line);
 		}
 	}
 	free(buff);
 	return (NULL);
+}
+
+void free_all(char *buff, char *line)
+{
+	free_all(buff,line);
+	free(line);
 }
