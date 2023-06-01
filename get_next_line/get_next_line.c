@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/06/01 17:13:24 by sab              ###   ########.fr       */
+/*   Updated: 2023/06/01 17:21:51 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char *get_next_line(int fd)
 {
 	int newline_index;
 	int bytes_readed;
-	static char *buff = NULL;
-	char *line = NULL;
+	static char *buff;
+	char *line;
 
 	bytes_readed = 1;
 	if (buff == NULL)
@@ -43,6 +43,11 @@ char *get_next_line(int fd)
 		{
 			line = copy_line(buff, line, newline_index);
 			return (line);
+		}
+		else
+		{
+			free_all(buff, line);
+			return (NULL);
 		}
 	}
 	free_all(buff, line);
