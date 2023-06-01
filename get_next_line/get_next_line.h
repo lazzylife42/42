@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 18:49:53 by sab               #+#    #+#             */
-/*   Updated: 2023/06/01 19:29:11 by sab              ###   ########.fr       */
+/*   Updated: 2023/06/01 19:48:53 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 char	*get_next_line(int fd);
 char	*copy_line(char *buff, char *line, int newline_index);
-void	free_all(char *buff, char *line);
 int		find_newline_index(char *buff);
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
