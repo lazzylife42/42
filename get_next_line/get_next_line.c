@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/05/30 15:44:33 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:31:25 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ char *get_next_line(int fd)
 	{
 		buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (buff == NULL)
+		{
+			free(buff);
 			return (NULL);
+		}
 	}
 	while (bytes_readed > 0)
 	{
@@ -35,6 +38,7 @@ char *get_next_line(int fd)
 		{
 			free(buff);
 			free(line);
+			free(tmp);
 			return (NULL);
 		}
 		newline_index = find_newline_index(buff);
