@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/06/01 19:48:48 by sab              ###   ########.fr       */
+/*   Updated: 2023/06/01 20:04:06 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ char *get_next_line(int fd)
 			line = copy_line(buff, line, newline_index);
 			return (line);
 		}
+		else
+		{
+			free(line);
+			return (NULL);
+		}	
 	}
 	free(buff);
 	return (NULL);
