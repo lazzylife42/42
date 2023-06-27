@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/06/01 20:04:06 by sab              ###   ########.fr       */
+/*   Updated: 2023/06/27 19:12:38 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,33 @@ char *get_next_line(int fd)
 {
 	int newline_index;
 	int bytes_readed;
-	static char *buff = NULL;
+	static char *buff;
 	char *line = NULL;
 
 	if ((fd < 0) || (BUFFER_SIZE <= 0))
 		return (NULL);
 	bytes_readed = 1;
-	if (buff == NULL)
+	if (!buff)
 	{
 		buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buff)
-		{
-			free(buff);
 			return (NULL);
-		}
 	}
 	while (bytes_readed > 0)
 	{
 		bytes_readed = read(fd, buff, BUFFER_SIZE);
 		if (bytes_readed == -1)
-		{
 			free(buff);
-			free(line);
-			return (NULL);
-		}
 		newline_index = find_newline_index(buff);
 		if (newline_index >= 0)
 		{
 			line = copy_line(buff, line, newline_index);
+			if (!line)
+				break;
 			return (line);
 		}
-		else
-		{
-			free(line);
-			return (NULL);
-		}	
 	}
-	free(buff);
+//	free(buff);
 	return (NULL);
 }
 
