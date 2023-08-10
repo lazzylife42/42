@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:20:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/10 13:41:09 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/10 23:36:25 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 // gcc main_test_fonction.c get_next_line.c get_next_line_utils.c get_next_line.h -g && ./a.out
 
 int test_copy_line(int fd, int lenght_to_check);
+int test_gnl_read(int fd, char *buff);
 
 int	main(void)
 {
@@ -35,6 +36,8 @@ int	main(void)
 
 	if(test_copy_line(fd, lenght) > 0)
 		printf("ERROR WITH copy_line !\n");
+
+		
 	return 0;
 }
 
@@ -57,4 +60,9 @@ int test_copy_line(int fd, int newline_index)
 	free(copied_line);
 	return 0;
 	
+}
+
+int test_gnl_read(int fd, char *buff)
+{
+	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/10 13:38:48 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/10 16:01:21 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,22 @@ char *copy_line(char *buff, char *line, int newline_index)
 	ft_strlcpy(line, buff, newline_index + 1);
 	ft_strlcpy(buff, &buff[newline_index + 1], ft_strlen(buff) - newline_index);
 	return (line);
+}
+
+char *gnl_read(int fd, char *buff)
+{
+	int bytes_readed;
+	
+	if ((fd < 0) || (BUFFER_SIZE <= 0))
+		return (NULL);
+	bytes_readed = 1;
+	if (!buff)
+	{
+		buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!buff)
+			return (NULL);
+	}
+	while (bytes_readed > 0)
+		bytes_readed = read(fd, buff, BUFFER_SIZE);
+	return(buff);
 }
