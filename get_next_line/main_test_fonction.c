@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 10:20:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/10 23:36:25 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/11 12:45:06 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,24 @@ int	main(void)
 	int	fd;
 	int lenght;
 
-	fd = open("test1.txt", O_RDONLY);
+	fd = open("01", O_RDONLY);
+
+	/* Test pour gnl_read */
+
+	char *buff;
+	buff = gnl_read(fd, buff);
+//	if (buff == NULL)
+//		printf("ERROR WITH gnl_read() !\n");
+	printf("buff : %s", buff);
 
 	/* Test pour copy_line */
-
+/*
 	printf("------\n");
 	printf("Test copy_line()\n");
 	printf("------\n");
 	printf("Longeur de la copie :\n\n");
 	scanf("%d", &lenght);
-
-	if(test_copy_line(fd, lenght) > 0)
-		printf("ERROR WITH copy_line !\n");
-
-		
+*/
 	return 0;
 }
 
@@ -64,5 +68,7 @@ int test_copy_line(int fd, int newline_index)
 
 int test_gnl_read(int fd, char *buff)
 {
+	gnl_read(fd, buff);
+	
 	return 0;
 }
