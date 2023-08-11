@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:42:30 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/11 23:41:41 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/11 23:55:43 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,6 @@ size_t	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
-
-ssize_t	find_newline_index(char *buff)
-{
-	ssize_t i;
-
-	i = 0;
-	while (buff[i])
-	{
-		if (buff[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)

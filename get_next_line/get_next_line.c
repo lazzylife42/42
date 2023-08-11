@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/11 23:38:04 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/12 01:09:18 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char *get_next_line(int fd)
 	if ((fd < 0) || (BUFFER_SIZE <= 0))
 		return (NULL);
 	buff = gnl_read(fd, buff);
-	if (!buff || buff == NULL)
+	if (!buff)
 		return (NULL);
 	newline_index = find_newline_index(buff);
 	if (newline_index < 0)
@@ -30,7 +30,7 @@ char *get_next_line(int fd)
 		free(buff);
 		return (NULL);
 	}
-	line = malloc(sizeof(char) * (newline_index + 1));
+	line = (char *)ft_calloc((newline_index + 1),sizeof(char));
 	if (!line)
 	{
 		free(line);	
@@ -40,18 +40,25 @@ char *get_next_line(int fd)
 	return (copy_line(buff, line, newline_index));
 }
 
-char *copy_line(char *buff, char *line, int newline_index)
+ssize_t	find_newline_index(char *buff)
 {
-	ft_strlcpy(line, buff, newline_index + 1);
-	ft_strlcpy(buff, &buff[newline_index + 1], ft_strlen(buff) - newline_index);
-	return (line);
+	ssize_t i;
+
+	i = 0;
+	while (buff[i])
+	{
+		if (buff[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
 char *gnl_read(int fd, char *buff)
 {
 	ssize_t bytes_readed;
 	
-	buff = malloc(sizeof(char) * (BUFFER_SIZE));
+	buff = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buff)
 	{
 		free(buff);
@@ -69,3 +76,11 @@ char *gnl_read(int fd, char *buff)
 	}
 	return(buff);
 }
+
+char *copy_line(char *buff, char *line, int newline_index)
+{
+	ft_strlcpy(line, buff, newline_index + 1);
+	ft_strlcpy(buff, &buff[newline_index + 1], ft_strlen(buff) - newline_index);
+	return (line);
+}
+

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:24:23 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/11 14:39:40 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/12 00:05:09 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(void)
 	
 	int RUN = 1;
 
-	fd = open("test.txt", O_RDONLY);
+	fd = open("01", O_RDONLY);
 	while (RUN)
 	{
 		line = get_next_line(fd);
