@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/11 16:38:30 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/11 23:38:04 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 char *get_next_line(int fd)
 {
-	int newline_index;
+	ssize_t newline_index;
 	static char *buff;
 	char *line;
 
@@ -33,8 +33,8 @@ char *get_next_line(int fd)
 	line = malloc(sizeof(char) * (newline_index + 1));
 	if (!line)
 	{
+		free(line);	
 		free(buff);
-		free(line);
 		return (NULL);
 	}
 	return (copy_line(buff, line, newline_index));
@@ -42,14 +42,6 @@ char *get_next_line(int fd)
 
 char *copy_line(char *buff, char *line, int newline_index)
 {
-/*
-	line = malloc(sizeof(char) * (newline_index + 1));
-	if (!line)
-	{
-		free(line);
-		return (NULL);
-	}
-*/
 	ft_strlcpy(line, buff, newline_index + 1);
 	ft_strlcpy(buff, &buff[newline_index + 1], ft_strlen(buff) - newline_index);
 	return (line);
@@ -57,9 +49,9 @@ char *copy_line(char *buff, char *line, int newline_index)
 
 char *gnl_read(int fd, char *buff)
 {
-	int bytes_readed;
+	ssize_t bytes_readed;
 	
-	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buff = malloc(sizeof(char) * (BUFFER_SIZE));
 	if (!buff)
 	{
 		free(buff);

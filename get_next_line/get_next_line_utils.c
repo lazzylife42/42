@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:42:30 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/06/27 19:04:10 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/11 23:41:41 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-int	find_newline_index(char *buff)
+ssize_t	find_newline_index(char *buff)
 {
-	int i;
+	ssize_t i;
 
 	i = 0;
 	while (buff[i])
@@ -50,4 +50,23 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	}
 	dst[i] = '\0';
 	return (ft_strlen(src));
+}
+
+void	*ft_calloc(size_t nb_elem, size_t size_elem)
+{
+	void			*ptr;
+	size_t			i;
+	unsigned char	c;
+
+	ptr = malloc(nb_elem * size_elem);
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	c = '\0';
+	while (i < (nb_elem * size_elem))
+	{
+		((char *)ptr)[i] = c;
+		i++;
+	}
+	return (ptr);
 }
