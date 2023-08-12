@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:42:30 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/12 11:58:53 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/12 12:09:52 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,35 @@ char	*ft_strndup(char *buff, size_t end)
 		str[i] = buff[i];
 		i++;
 	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_gnl_strjoin(char *line, char *buff)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+	size_t	tlen;
+
+	tlen = ft_strlen(line) + ft_strlen(buff) + 1;
+	str = (char *)ft_calloc(tlen, sizeof(char));
+	if (!str)
+		free(line);
+	if (!str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		str[i] = line[i];
+		i++;
+	}
+	while (buff[j])
+	{
+		str[i++] = buff[j++];
+	}
+	free(line);
 	str[i] = '\0';
 	return (str);
 }

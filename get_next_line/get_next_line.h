@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 18:49:53 by sab               #+#    #+#             */
-/*   Updated: 2023/08/12 11:58:36 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/12 12:12:26 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ char	*get_next_line(int fd);
 char	*gnl_remove_old_line(char *buff);
 char	*gnl_get_line(char *buff);
 char	*ft_strndup(char *buff, size_t end);
-char 	*gnl_read(int fd, char *buff);
+char 	*gnl_read(int fd, char *res);
+char	*ft_gnl_strjoin(char *line, char *buff);
 void	*ft_calloc(size_t nb_elem, size_t size_elem);
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);

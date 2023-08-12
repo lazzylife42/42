@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/12 11:57:25 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/12 12:16:33 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 char *get_next_line(int fd)
 {
 	static char *buff;
-	char *line;
+	char 		*line;
 
 	if ((fd < 0) || (BUFFER_SIZE <= 0))
 		return (NULL);
@@ -42,16 +42,16 @@ ssize_t	find_newline_index(char *buff)
 	return (-1);
 }
 
-char *gnl_read(int fd, char *buff)
+char *gnl_read(int fd, char *res)
 {
 	ssize_t bytes_readed;
+	char	*buff;
 	
+	if (!res)
+		res = (char *)ft_calloc(1, sizeof(char));
 	buff = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!buff)
-	{
-		free(buff);
+	if (!res || !buff)
 		return (NULL);
-	}
 	bytes_readed = 1;
 	while (bytes_readed > 0)
 	{
@@ -59,10 +59,17 @@ char *gnl_read(int fd, char *buff)
 		if (bytes_readed == -1)
 		{
 			free(buff);
+			free(res);
 			return (NULL);
 		}
+		buff[bytes_readed] = 0;
+		res = ft_gnl_strjoin(res, buff);
+		if (find_newline_index(buff) != -1)
+			break;
+		
 	}
-	return(buff);
+	free(buff);
+	return(res);
 }
 
 char	*gnl_get_line(char *buff)
