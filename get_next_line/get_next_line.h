@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 18:49:53 by sab               #+#    #+#             */
-/*   Updated: 2023/08/11 23:41:58 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/12 11:58:36 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@
 # endif
 
 char	*get_next_line(int fd);
-char	*copy_line(char *buff, char *line, int newline_index);
-ssize_t	find_newline_index(char *buff);
+char	*gnl_remove_old_line(char *buff);
+char	*gnl_get_line(char *buff);
+char	*ft_strndup(char *buff, size_t end);
 char 	*gnl_read(int fd, char *buff);
+void	*ft_calloc(size_t nb_elem, size_t size_elem);
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-void	*ft_calloc(size_t nb_elem, size_t size_elem);
+ssize_t	find_newline_index(char *buff);
+
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/12 01:09:18 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/12 11:57:25 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 char *get_next_line(int fd)
 {
-	ssize_t newline_index;
 	static char *buff;
 	char *line;
 
@@ -24,20 +23,9 @@ char *get_next_line(int fd)
 	buff = gnl_read(fd, buff);
 	if (!buff)
 		return (NULL);
-	newline_index = find_newline_index(buff);
-	if (newline_index < 0)
-	{
-		free(buff);
-		return (NULL);
-	}
-	line = (char *)ft_calloc((newline_index + 1),sizeof(char));
-	if (!line)
-	{
-		free(line);	
-		free(buff);
-		return (NULL);
-	}
-	return (copy_line(buff, line, newline_index));
+	line = gnl_get_line(buff);
+	buff = gnl_remove_old_line(buff);
+	return (line);
 }
 
 ssize_t	find_newline_index(char *buff)
@@ -77,10 +65,49 @@ char *gnl_read(int fd, char *buff)
 	return(buff);
 }
 
-char *copy_line(char *buff, char *line, int newline_index)
+char	*gnl_get_line(char *buff)
 {
-	ft_strlcpy(line, buff, newline_index + 1);
-	ft_strlcpy(buff, &buff[newline_index + 1], ft_strlen(buff) - newline_index);
-	return (line);
+	int		i;
+	char	*str;
+
+	if (!buff[0])
+		return (NULL);
+	i = find_newline_index(buff);
+	if (i == -1)
+		i = ft_strlen(buff);
+	str = ft_strndup(buff, i);
+	if (!str)
+		return (NULL);
+	return (str);
 }
 
+char	*gnl_remove_old_line(char *buff)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	if (buff == NULL)
+	{
+		free(buff);
+		return (NULL);
+	}
+	i = find_newline_index(buff);
+	if (i == -1)
+	{
+		free(buff);
+		return (NULL);
+	}
+	str = (char *)ft_calloc(ft_strlen(buff) - i + 1, sizeof(char));
+	if (!str)
+	{
+		free(buff);
+		return (NULL);
+	}
+	j = 0;
+	while (buff[++i])
+		str[j++] = buff[i];
+	str[j] = '\0';
+	free(buff);
+	return (str);
+}
