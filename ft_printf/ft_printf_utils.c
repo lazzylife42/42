@@ -6,15 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 20:12:38 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 18:15:29 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:30:24 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
-#include <stdarg.h>
 
-int		ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
 	size_t	i;
 
@@ -24,9 +22,9 @@ int		ft_strlen(const char *str)
 	return (i);
 }
 
-int ft_printf_char(char c)
+int	ft_printf_char(char c)
 {
-    return (write(1, &c, 1));
+	return (write(1, &c, 1));
 }
 
 int	ft_printf_str(char *str)
@@ -46,10 +44,10 @@ int	ft_printf_str(char *str)
 	}
 	else
 		len = ft_printf_str("(null)");
-    return (len);
+	return (len);
 }
 
-int		ft_printf_ui(unsigned int number)
+int	ft_printf_ui(unsigned int number)
 {
 	int		len;
 	char	*str;
@@ -83,4 +81,3 @@ int	ft_printf_n_base(long long number, char *base)
 		len += ft_printf_char(base[number]);
 	return (len);
 }
-

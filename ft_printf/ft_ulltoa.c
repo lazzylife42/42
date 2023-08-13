@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:56:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 18:18:32 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:34:48 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	ft_ullen_base(unsigned long long number, char *base)
 {
 	int	len;
-	
+
 	len = 0;
 	if (len == 0)
 		len++;
@@ -27,7 +27,7 @@ static int	ft_ullen_base(unsigned long long number, char *base)
 	return (len);
 }
 
-char *ft_ulltoa_base(unsigned long long number, char *base)
+char	*ft_ulltoa_base(unsigned long long number, char *base)
 {
 	int		i;
 	char	*str;

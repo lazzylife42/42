@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_ptr.c                                    :+:      :+:    :+:   */
+/*   main_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 18:08:12 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 18:35:28 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/08/13 19:24:44 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/08/13 19:39:06 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "stdio.h"
 
-int	ft_printf_ptr(unsigned long ptr)
+int	main(void)
 {
-	int		len;
 	char	*str;
 
-	len = ft_printf_str("0x");
-	if (ptr == 0)
-		len += ft_printf_char('0');
-	else
-	{
-		str = ft_ulltoa_base(ptr, "0123456789abcdef");
-		if (!str)
-			return (0);
-		len += ft_printf_str(str);
-		free(str);
-	}
-	return (len);
+	printf("Rentrer la string :");
+	scanf("%s", str);
+	ft_printf("ft_printf         :%s", str);
+	printf("\n\n");
+	return (0);
 }
