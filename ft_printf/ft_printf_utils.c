@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 20:12:38 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/02/24 20:27:11 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:15:29 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 
-int		ft_strlen(const char *s)
+int		ft_strlen(const char *str)
 {
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (str[i] != '\0')
 		i++;
 	return (i);
 }
@@ -44,7 +44,43 @@ int	ft_printf_str(char *str)
 			i++;
 		}
 	}
-	/*else
-		len = ft_printf_str("(null)");*/
+	else
+		len = ft_printf_str("(null)");
     return (len);
 }
+
+int		ft_printf_ui(unsigned int number)
+{
+	int		len;
+	char	*str;
+
+	str = ft_ulltoa_base(number, "0123456789");
+	if (!str)
+		return (0);
+	len = ft_printf_str(str);
+	free(str);
+	return (len);
+}
+
+int	ft_printf_n_base(long long number, char *base)
+{
+	int		baselen;
+	int		len;
+
+	baselen = ft_strlen(base);
+	len = 0;
+	if (number < 0)
+	{
+		len += ft_printf_char('-');
+		len += ft_printf_n_base(number * -1, base);
+	}
+	else if (number >= baselen)
+	{
+		len += ft_printf_n_base(number / baselen, base);
+		len += ft_printf_n_base(number % baselen, base);
+	}
+	else
+		len += ft_printf_char(base[number]);
+	return (len);
+}
+
