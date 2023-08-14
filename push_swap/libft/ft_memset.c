@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 19:24:44 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 19:47:47 by smonte-e         ###   ########.fr       */
+/*   Created: 2022/11/01 16:47:26 by smonte-e          #+#    #+#             */
+/*   Updated: 2022/12/07 22:39:14 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "stdio.h"
+#include "libft.h"
 
-int	main(void)
+void	*ft_memset(void *str, int c, size_t n)
 {
-	char	*str;
-	int		len;
+	unsigned int	i;
+	unsigned char	*buffer;
 
-	printf("Rentrer la string :");
-	scanf("%s", str);
-	len = ft_printf("ft_printf         :%s", str);
-	printf("\n\n");
-	printf("len               : %i", len);
-	return (0);
+	i = 0;
+	buffer = str;
+	while (i < n)
+	{
+		buffer[i] = (unsigned char)c;
+		i++;
+	}
+	return (buffer);
 }

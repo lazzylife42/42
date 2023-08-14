@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 20:12:38 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 18:30:24 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/13 20:47:13 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strlen(const char *str)
 {
-	size_t	i;
+	unsigned int	i;
 
 	i = 0;
 	while (str[i] != '\0')

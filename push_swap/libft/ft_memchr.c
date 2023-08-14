@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 19:24:44 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 19:47:47 by smonte-e         ###   ########.fr       */
+/*   Created: 2022/11/12 19:35:11 by smonte-e          #+#    #+#             */
+/*   Updated: 2022/11/29 01:25:44 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "stdio.h"
+#include "libft.h"
 
-int	main(void)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
 	char	*str;
-	int		len;
+	size_t	i;
 
-	printf("Rentrer la string :");
-	scanf("%s", str);
-	len = ft_printf("ft_printf         :%s", str);
-	printf("\n\n");
-	printf("len               : %i", len);
-	return (0);
+	i = 0;
+	str = (char *)s;
+	while (i < n)
+	{
+		if ((unsigned char)str[i] == (unsigned char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	return (NULL);
 }

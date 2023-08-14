@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 19:24:44 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 19:47:47 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/04/24 16:23:48 by sab               #+#    #+#             */
+/*   Updated: 2023/08/12 12:55:14 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "stdio.h"
-
-int	main(void)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	char	*str;
-	int		len;
+	int	i;
 
-	printf("Rentrer la string :");
-	scanf("%s", str);
-	len = ft_printf("ft_printf         :%s", str);
-	printf("\n\n");
-	printf("len               : %i", len);
-	return (0);
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

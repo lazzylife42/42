@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 19:24:44 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 19:47:47 by smonte-e         ###   ########.fr       */
+/*   Created: 2022/12/06 02:46:09 by smonte-e          #+#    #+#             */
+/*   Updated: 2022/12/07 22:41:02 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "stdio.h"
+#include "libft.h"
 
-int	main(void)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*str;
-	int		len;
+	int	i;
 
-	printf("Rentrer la string :");
-	scanf("%s", str);
-	len = ft_printf("ft_printf         :%s", str);
-	printf("\n\n");
-	printf("len               : %i", len);
-	return (0);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
 }

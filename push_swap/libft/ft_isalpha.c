@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 19:24:44 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 19:47:47 by smonte-e         ###   ########.fr       */
+/*   Created: 2022/10/24 12:38:39 by smonte-e          #+#    #+#             */
+/*   Updated: 2022/11/04 12:54:21 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "stdio.h"
+#include "libft.h"
 
-int	main(void)
+int	ft_isalpha(int c)
 {
-	char	*str;
-	int		len;
-
-	printf("Rentrer la string :");
-	scanf("%s", str);
-	len = ft_printf("ft_printf         :%s", str);
-	printf("\n\n");
-	printf("len               : %i", len);
-	return (0);
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	else
+		return (0);
 }
+
+/*
+int	main(int argc, char **argv)
+{
+	printf("out : %i\n",ft_isalpha(atoi(argv[1])));
+	return 0;
+}
+*/

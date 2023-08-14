@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:56:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 18:34:48 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/13 20:45:38 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ char	*ft_ulltoa_base(unsigned long long number, char *base)
 	str = (char *)malloc(sizeof(char) * (i + 1));
 	if (!str)
 		return (NULL);
+	str[i--] = '\0';
+	if (number <= 0)
+		str[i] = 0;
 	while (i >= 0)
 	{
 		str[i--] = base[number % ft_strlen(base)];

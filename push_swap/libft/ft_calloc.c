@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 19:24:44 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 19:47:47 by smonte-e         ###   ########.fr       */
+/*   Created: 2022/11/25 19:17:54 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/08/12 12:50:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "stdio.h"
+#include "libft.h"
 
-int	main(void)
+void	*ft_calloc(size_t nb_elem, size_t size_elem)
 {
-	char	*str;
-	int		len;
+	void			*ptr;
+	size_t			i;
+	unsigned char	c;
 
-	printf("Rentrer la string :");
-	scanf("%s", str);
-	len = ft_printf("ft_printf         :%s", str);
-	printf("\n\n");
-	printf("len               : %i", len);
-	return (0);
+	ptr = malloc(nb_elem * size_elem);
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	c = '\0';
+	while (i < (nb_elem * size_elem))
+	{
+		((char *)ptr)[i] = c;
+		i++;
+	}
+	return (ptr);
 }
