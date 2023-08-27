@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:48:11 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/14 11:08:47 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:15:36 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,4 @@ typedef struct s_stack_node
 /* ALGORITHME */
 
 /* COMMANDS */
-
-
-
 #endif
