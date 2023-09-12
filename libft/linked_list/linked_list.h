@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 23:53:56 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/12 01:27:08 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/12 21:23:38 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		get_at(List *, int);
 long	len_list(List *);
 List	*empty_list(void);
 List	*add_at(List *, int, int);
+List	*add_end(List *list, int data);
 List	*free_at(List *, int);
 List	*free_list(List *);
 

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 00:16:25 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/12 01:37:07 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/12 21:23:22 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,20 @@ List	*add_at(List *list, int data, int pos)
 	prec->next = cell;
 	cell->next = cur;
 	return list;
+}
+
+List *add_end(List *list, int data)
+{
+    Cell *cell = create_cell(data);
+    if (!cell)
+        return list;
+    if (!list)
+        return cell;
+    List *cur = list;
+    while (cur->next)
+        cur = cur->next;
+    cur->next = cell;
+    return list;
 }
 
 List	*free_at(List *list, int pos)
