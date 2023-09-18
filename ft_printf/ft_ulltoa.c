@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:56:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/18 15:58:32 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/18 19:32:16 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	ft_ullen_base(unsigned long long number, char *base)
 	int	len;
 
 	len = 0;
+	if (number == 0)
+		return (1);
 	while (number > 0)
 	{
 		number /= ft_strlen(base);
