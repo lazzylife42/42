@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ulltoa.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:56:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 20:45:38 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:58:32 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static int	ft_ullen_base(unsigned long long number, char *base)
 	int	len;
 
 	len = 0;
-	if (len == 0)
-		len++;
 	while (number > 0)
 	{
 		number /= ft_strlen(base);
@@ -33,7 +31,7 @@ char	*ft_ulltoa_base(unsigned long long number, char *base)
 	char	*str;
 
 	i = ft_ullen_base(number, base);
-	str = (char *)malloc(sizeof(char) * (i + 1));
+		str = (char *)malloc(sizeof(char) * (i + 1));
 	if (!str)
 		return (NULL);
 	str[i--] = '\0';

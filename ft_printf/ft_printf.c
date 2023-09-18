@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 22:19:37 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/18 15:45:48 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:40:18 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ int	ft_printf_conv(char format, va_list ap)
 		return (ft_printf_char(va_arg(ap, int)));
 	else if (format == 's')
 		return (ft_printf_str(va_arg(ap, char *)));
-	else if (format == 'p') // segfault
-		return (ft_printf_str(va_arg(ap, char *)));
 	else if (format == 'd' || format == 'i')
 		return (ft_printf_n_base(va_arg(ap, int), "0123456789"));
-	else if (format == 'u') // print 0X au lieu de X
+	else if (format == 'u')
 		return (ft_printf_ui(va_arg(ap, unsigned int)));
 	else if (format == 'x')
 		return (ft_printf_n_base(va_arg(ap, unsigned int), "0123456789abcdef"));

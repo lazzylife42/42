@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 20:12:38 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/18 15:46:01 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:43:41 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_printf_str(char *str)
 	return (len);
 }
 
-int	ft_printf_ui(unsigned int number)
+int	ft_printf_ui(unsigned long long number)
 {
 	int		len;
 	char	*str;

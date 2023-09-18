@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:44:39 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/13 18:34:07 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:44:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 
 int		ft_printf(const char *format, ...);
-int		ft_printf_ui(unsigned int number);
+int     ft_printf_ui(unsigned long long number);
 int		ft_printf_conv(char format, va_list ap);
 int		ft_printf_char(char c);
 int		ft_printf_str(char *str);
