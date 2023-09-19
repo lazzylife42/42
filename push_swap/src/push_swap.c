@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:54:54 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/15 02:11:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/19 20:53:53 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,37 +32,16 @@ int	main(int argc, char **argv)
 		else
 			push_swap(&a, &b);
 	}
-	// print_list(a);
-	// ra(&a);
-	// print_list(a);
-	// rb(&a);
-	// print_list(a);
-	// sa(&a);
-	// print_list(a);
-	// sb(&a);
-	// print_list(a);
-	// ss(&a, &a);
-	// print_list(a);
-	// rr(&a, &a);
-	// print_list(a);
-	// rra(&a);
-	// print_list(a);
-	// rrb(&a);
-	// print_list(a);
-	// rrr(&a, &a);
-	// print_list(a);
-	// print_list(b);
-	// pa(&a, &b);
-	// print_list(a);
-	// print_list(b);
-	// pb(&b, &a);
-	// print_list(a);
-	// print_list(b);
-
-	// if (!list_sorted(a))
-	// 	printf("Non!");
-	// else
-	// 	print_list(a);
+	if (!stack_sorted(a))
+	{
+		if (len_list(a) == 2)
+			sa(&a);
+		else if (len_list(a) == 3)
+			tiny_sort(&a);
+		else
+			push_swap(&a, &b);
+	}
+	free_stack(&a);
 	
 
 }
