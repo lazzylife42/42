@@ -6,21 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 20:12:38 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/18 19:36:18 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:48:00 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	ft_strlen(const char *str)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
 
 int	ft_printf_char(char c)
 {

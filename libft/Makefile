@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:38:23 by smonte-e          #+#    #+#              #
-#    Updated: 2023/08/12 12:59:26 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/09/19 15:42:48 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,17 @@ MY_SOURCES =	ft_isalpha.c \
 				ft_putendl_fd.c \
 				ft_putnbr_fd.c \
 				ft_strcpy.c \
-				ft_strndup.c\
-				ft_free_null.c\
+				ft_strndup.c \
+				ft_free_null.c \
+				ft_printf/ft_printf.c \
+				ft_printf/ft_printf_ptr.c \
+				ft_printf/ft_printf_utils.c \
+				ft_printf/ft_ulltoa.c \
+				linked_list/llist_a.c \
+				linked_list/llist_b.c \
+				linked_list/llist_c.c \
+				
+				
 
 MY_OBJECTS = ${MY_SOURCES:.c=.o}
 

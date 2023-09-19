@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 12:58:34 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/12 13:22:21 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:56:11 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdarg.h>
+
+//  libft 
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -53,5 +56,37 @@ void	ft_putnbr_fd(int n, int fd);
 char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strndup(char *buff, size_t end);
 char	*ft_free_null(char *buff);
+
+//  ft_printf
+
+int		ft_printf(const char *format, ...);
+int		ft_printf_ui(unsigned long long number);
+int		ft_printf_conv(char format, va_list ap);
+int		ft_printf_char(char c);
+int		ft_printf_str(char *str);
+int		ft_printf_n_base(long long number, char *base);
+int		ft_printf_ptr(unsigned long ptr);
+char	*ft_ulltoa_base(unsigned long long number, char *base);
+
+//  linked_list
+
+typedef struct t_Cell
+{
+	int				data;
+	struct t_Cell	*next;
+}t_List,	t_Cell;
+
+t_Cell	*create_cell(int data);
+void	set_at(t_List *list, int data, int pos);
+void	print_list(t_List *list);
+int		is_emplty_list(t_List *list);
+int		get_at(t_List *list, int pos);
+long	len_list(t_List *list);
+t_List	*empty_list(void);
+t_List	*add_at(t_List *list, int data, int pos);
+t_List	*add_end(t_List *list, int data);
+t_List	*free_at(t_List *list, int pos);
+t_List	*free_list(t_List *list);
+
 
 #endif
