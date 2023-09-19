@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:18:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/19 11:04:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/08/12 12:41:32 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,7 @@ char	*gnl_read(int fd, char *res)
 		res = (char *)ft_calloc(1, sizeof(char));
 	buff = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!res || !buff)
-	{
-		free(buff);
-		free(res);
 		return (NULL);
-	}
 	bytes_readed = 1;
 	while (bytes_readed > 0)
 	{
