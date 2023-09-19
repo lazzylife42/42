@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 23:53:56 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/12 21:23:38 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:05:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,30 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-typedef	struct Cell_t
+typedef struct t_Cell
 {
-	int	data;
-	struct Cell_t *next;
-}List, Cell;
+	int				data;
+	struct t_Cell	*next;
+}t_List,	t_Cell;
 
-void	set_at(List *,int, int);
-void	print_list(List *);
-int		is_emplty_list(List *);
-int		get_at(List *, int);
-long	len_list(List *);
-List	*empty_list(void);
-List	*add_at(List *, int, int);
-List	*add_end(List *list, int data);
-List	*free_at(List *, int);
-List	*free_list(List *);
+//	llist_a.c 
+
+t_Cell	*create_cell(int data);
+void	set_at(t_List *list, int data, int pos);
+void	print_list(t_List *list);
+int		is_emplty_list(t_List *list);
+int		get_at(t_List *list, int pos);
+
+//	llist_b.c
+
+long	len_list(t_List *list);
+t_List	*empty_list(void);
+t_List	*add_at(t_List *list, int data, int pos);
+t_List	*add_end(t_List *list, int data);
+t_List	*free_at(t_List *list, int pos);
+
+//	llist_c.c
+
+t_List	*free_list(t_List *list);
 
 #endif

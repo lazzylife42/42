@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   llist_c.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 19:24:44 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/18 19:28:46 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/09/19 15:00:09 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/09/19 15:05:44 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "stdio.h"
+#include "linked_list.h"
 
-int	main(void)
+t_List	*free_list(t_List *list)
 {
-	char	*str;
+	t_List	*tmp;
 
-	//printf("Rentrer la string :");
-	//scanf("%s", str);
-	ft_printf(" %u %u %u ", 0, 2, 3);
-	printf("\n\n");
-	return (0);
+	tmp = NULL;
+	while (list)
+	{
+		tmp = list->next;
+		free(list);
+		list = tmp;
+	}
+	return (list);
 }

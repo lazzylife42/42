@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:42:30 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/12 13:14:39 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/19 11:26:47 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strndup(char *buff, size_t end)
 	char	*str;
 	size_t	i;
 
-	str = (char *)ft_calloc(end + 2, sizeof(char));
+	str = (char *)ft_calloc(end + 1, sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;
