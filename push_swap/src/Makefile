@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 13:56:17 by smonte-e          #+#    #+#              #
-#    Updated: 2023/09/20 13:59:24 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/09/20 16:04:07 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,16 +29,12 @@ $(ARCHIVE) : $(OBJS)
 
 %.o : %.c 
 	$(CC) $(CFLAGS) -c $< -o $@ 
-
-bonus : 
-	cd ../checker && make
 	
 clean :
 	rm -f $(OBJS) $(ARCHIVE)
 
 fclean : clean
 	rm -f $(NAME)
-	cd ../checker && make fclean
 
 re : fclean all
 

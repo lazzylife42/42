@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:54:54 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/20 12:50:30 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:44:32 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ int	main(int argc, char **argv)
 			sa(&a);
 		else if (len_list(a) == 3)
 			tiny_sort(&a);
-		else 
-			ghetto_sort(&a, &b);
+		else
+		{
+			print_list(a);
+			find_smallest(a);
+			find_largest(a);
+		}
 	}
 
 }

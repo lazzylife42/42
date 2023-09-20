@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:48:11 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/20 12:40:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:45:22 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 typedef	struct Cell_t
 {
 	int	data;
+	int price;
 	struct Cell_t *next;
 }List, Cell;
 
@@ -68,6 +69,8 @@ long	len_list(List *list);
 int		list_sorted(List *list);
 void	tiny_sort(List **a);
 void    ghetto_sort(List **a, List **b);
+int		find_smallest(List *list);
+int		find_largest(List *list);
 
 /* COMMANDS */
 
