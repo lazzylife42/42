@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 14:24:08 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/20 11:05:20 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:31:52 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,18 @@ List	*array_to_llist(char **array, List *list, int argc)
 	if (argc > 2)
 		list = free_at(list, 0);
 	return list;
+}
+
+List	*free_list(List *list)
+{
+	List	*tmp;
+
+	tmp = NULL;
+	while (list)
+	{
+		tmp = list->next;
+		free(list);
+		list = tmp;
+	}
+	return (list);
 }

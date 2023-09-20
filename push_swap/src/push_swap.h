@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:48:11 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/20 11:13:26 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:40:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,17 @@ int		error_syntax(char *str_number);
 List	*add_at(List *list, int data, int pos);
 List	*free_at(List *list, int pos);
 List	*array_to_llist(char **array, List *list, int argc);
+List	*free_list(List *list);
 void	print_list(List *list); // à effacer !
 long	len_list(List *list);
+
 
 
 /* ALGORITHME */
 
 int		list_sorted(List *list);
 void	tiny_sort(List **a);
+void    ghetto_sort(List **a, List **b);
 
 /* COMMANDS */
 
