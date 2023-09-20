@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:48:11 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/20 18:45:22 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/20 20:10:52 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	tiny_sort(List **a);
 void    ghetto_sort(List **a, List **b);
 int		find_smallest(List *list);
 int		find_largest(List *list);
+int		price_to_top(List *list, int pos);
+int		find_pos_w_data(List *list, int data);
 
 /* COMMANDS */
 

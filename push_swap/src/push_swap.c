@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:54:54 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/20 18:44:32 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/20 20:22:28 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ int	main(int argc, char **argv)
 		else
 		{
 			print_list(a);
-			find_smallest(a);
-			find_largest(a);
+			printf("-------------------------\n");
+			price_to_top(a, find_pos_w_data(a, find_smallest(a)));
+			printf("-------------------------\n");
+			price_to_top(a, find_pos_w_data(a, find_largest(a)));
+			//price_to_top(a, find_largest(a));
 		}
 	}
 
