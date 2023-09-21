@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:54:54 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/20 20:22:28 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/20 23:58:20 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int argc, char **argv)
 		else
 		{
 			print_list(a);
+			print_list(b);
 			printf("-------------------------\n");
 			price_to_top(a, find_pos_w_data(a, find_smallest(a)));
 			printf("-------------------------\n");

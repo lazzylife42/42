@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_ghetto_sort.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:38:22 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/20 20:25:33 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/21 00:02:36 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	price_to_top(List *list, int pos)
 	price = 0;
 	if ((len_list(list) / 2) < pos)
 	{
-		pos = len_list(list) - pos;
+		pos = len_list(list)/2 - pos;
 		while (pos > 0)
 		{
 			price++;
