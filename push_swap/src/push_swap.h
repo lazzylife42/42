@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:48:11 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/20 20:10:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:19:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,7 @@
 # include <limits.h>
 # include <unistd.h>
 
-// typedef struct s_stack_node
-// {
-// 	int					value;
-// 	int					current_position;
-// //	int					push_price;
-// //	int					above_median;/* BOOL */
-// //	int					cheapest;/* BOOL */
-// 	struct s_stack_node	*target_node;
-// 	struct s_stack_node	*next;
-// 	struct s_stack_node	*prev;
-// }	List;
+enum naturel {SX, RX, RRX, SMALLEST, LARGEST, STACK_A, STACK_B};
 
 typedef	struct Cell_t
 {
@@ -51,8 +41,6 @@ void	error_free(List **a, char **array);
 int		error_repetition(List *a, int number);
 int		error_syntax(char *str_number);
 
-/* STACK creation */
-
 /* LINKED LISTS utils */
 
 List	*add_at(List *list, int data, int pos);
@@ -62,17 +50,27 @@ List	*free_list(List *list);
 void	print_list(List *list); // à effacer !
 long	len_list(List *list);
 
-
-
 /* ALGORITHME */
 
 int		list_sorted(List *list);
 void	tiny_sort(List **a);
 void    ghetto_sort(List **a, List **b);
+void	play_maker(List *a);
+void	b_boy(List *b);
+
+/*	PRICE CALCULATOR */
+
+List	*find_highest(List *list);
 int		find_smallest(List *list);
 int		find_largest(List *list);
+int		n_val(List *list, int pos);
 int		price_to_top(List *list, int pos);
 int		find_pos_w_data(List *list, int data);
+int		price_sx(int pos);
+int 	price_rx(int pos);
+int 	price_rrx(List *list, int pos);
+int		move_sx_rx_rrx(List *list, int pos);
+int		move_small_or_large(List *list, int smallest, int largest);
 
 /* COMMANDS */
 

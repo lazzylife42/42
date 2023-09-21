@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_ghetto_sort.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:38:22 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/21 00:02:36 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:22:47 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,92 +17,56 @@ void	ghetto_sort(List **a, List **b)
 	print_list(*a);
 	print_list(*b);
 	printf("====================\n");
+	play_maker(*a);
 	pb(a, b);
-	pb(a, b);
-}
+	printf("====================\n");
+	print_list(*a);
+	print_list(*b);
 
-int	find_smallest(List *list)
-{
-	int smallest;
 	
-	smallest = list->data;
-	while (list->next != NULL)
+}
+
+int	n_val(List *list, int pos)
+{
+	int	i;
+
+	i = 0;
+	while (i < pos)
 	{
-		if (smallest > list->data)
-			smallest = list->data;
 		list = list->next;
+		i++;
 	}
-	printf("Smallest -> [%i]\n", smallest);
-	return (smallest);
+	return(list->data);
+}
+void	b_boy(List *b)
+{
+	while (b->data != find_highest(b)->data)
+		rb(&b);
 }
 
-int	find_largest(List *list)
+void	play_maker(List *a)
 {
-	int largest;
-	
-	largest = list->data;
-	while (list->next != NULL)
-	{
-		if (largest < list->data)
-			largest = list->data;
-		list = list->next;
-	}
-	printf("Largest  -> [%i]\n", largest);
-	return (largest);
-}
+	int small_large;
+	int sx_rx_rrx;
+	int data;
 
-int	find_pos_w_data(List *list, int data)
-{
-	int	pos;
-
-	pos = 0;
-	if (list->data == data)
-		return (0);
-	while (list->data != data)
-	{
-		pos++;
-		list = list->next; 
-	}
-	printf("Pos -> %i\n", pos);
-	return (pos);
-}
-
-int	price_to_top(List *list, int pos)
-{
-	int	price;
-
-	price = 0;
-	if ((len_list(list) / 2) < pos)
-	{
-		pos = len_list(list)/2 - pos;
-		while (pos > 0)
-		{
-			price++;
-			pos--;
-		}
-	}
+	data = 0;
+	small_large = move_small_or_large(a, find_smallest(a), find_largest(a));
+	if (small_large == SMALLEST)
+		sx_rx_rrx = move_sx_rx_rrx(a, find_smallest(a));
 	else
+		sx_rx_rrx = move_sx_rx_rrx(a, find_largest(a));
+	if (small_large == SMALLEST)
+		data = n_val(a, find_smallest(a));
+	else if (small_large == LARGEST)
+		data = n_val(a, find_largest(a));
+	while (data != a->data)
 	{
-		while (pos < 0)
-		{
-			price++;
-			pos--;
-		}
+		if (sx_rx_rrx == SX)
+			sa(&a);
+		else if (sx_rx_rrx == RX)
+			ra(&a);
+		else
+			rra(&a);
 	}
-	printf("Price to top -> $%i\n", price);
-	return (price);
 }
-
-/*
-void	find_next_move(List *a, List *b)
-{
-	int smallest;
-	int	cost_largest;
-	int	largest;
-	int	cost_smallest;
-
-	smallest = find_smallest(a);
-	largest = find_largest(a);
-	while ()	
-}
-*/

@@ -6,13 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 00:47:35 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/20 11:14:39 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:43:04 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static List	*find_highest(List *list)
+List	*find_highest(List *list)
 {
 	int				highest;
 	List	*highest_node;
