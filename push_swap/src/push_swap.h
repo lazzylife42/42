@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:48:11 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/21 21:19:54 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/22 00:45:27 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ long	len_list(List *list);
 int		list_sorted(List *list);
 void	tiny_sort(List **a);
 void    ghetto_sort(List **a, List **b);
-void	play_maker(List *a);
-void	b_boy(List *b);
+void	play_maker(List **a);
+void	b_boy(List **b);
 
 /*	PRICE CALCULATOR */
 
