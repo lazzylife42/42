@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 21:54:54 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/22 03:11:09 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:58:12 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,9 @@ int	main(int argc, char **argv)
 		{
 			print_list(a);
 			print_list(b);
-			pb(&a, &b);
-			pb(&a, &b);
-			b_boy(&a);
-			while (len_list(a) > 3)
-			{
-				ghetto_sort(&a, &b);
-				if (a->data > b->data)
-					pb(&a, &b);
-				else if (a->data < b->data)
-				{
-					pb(&a, &b);
-					rb(&b);
-				}
-			}
-			tiny_sort(&a);
-			print_list(a);
-			print_list(b);
-			while(b->next != NULL)
-				pa(&a, &b);
-			pa(&a, &b);
-			//while (!list_sorted(a))
-			//	ra(&a);
+			printf("====================\n");
+			ghetto_sort(&a, &b);
+			printf("====================\n");
 			print_list(a);
 			print_list(b);
 		}
