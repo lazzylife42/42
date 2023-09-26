@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:50:51 by sab               #+#    #+#             */
-/*   Updated: 2023/09/25 16:55:02 by sab              ###   ########.fr       */
+/*   Updated: 2023/09/26 18:01:08 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct t_cell
 }t_stack;
 
 /*	ERROR AND FREE	*/
+
+int error_check(char **argv);
 
 /*	LINKED LIST		*/
 

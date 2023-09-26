@@ -6,7 +6,7 @@
 #    By: sab <sab@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:38:23 by smonte-e          #+#    #+#              #
-#    Updated: 2023/09/25 17:18:35 by sab              ###   ########.fr        #
+#    Updated: 2023/09/26 18:20:18 by sab              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ MY_SOURCES =	ft_isalpha.c \
 				ft_tolower.c \
 				ft_strchr.c \
 				ft_strrchr.c \
+				ft_strcmp.c \
 				ft_strncmp.c \
 				ft_memchr.c \
 				ft_memcmp.c \

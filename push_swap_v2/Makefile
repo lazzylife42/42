@@ -6,7 +6,7 @@
 #    By: sab <sab@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:50:47 by sab               #+#    #+#              #
-#    Updated: 2023/09/25 16:33:30 by sab              ###   ########.fr        #
+#    Updated: 2023/09/26 17:57:57 by sab              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ RM = rm -f
 OPTIONS = -I
 
 SRC = 	src/main.c \
-		src/linked_list.c
+		src/linked_list.c \
+		src/error.c
 
 OBJS = $(SRC:.c=.o)
 
