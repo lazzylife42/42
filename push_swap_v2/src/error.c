@@ -6,7 +6,7 @@
 /*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:47:44 by sab               #+#    #+#             */
-/*   Updated: 2023/09/26 18:17:34 by sab              ###   ########.fr       */
+/*   Updated: 2023/09/26 18:48:34 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,18 @@ int error_check(char **argv)
 		exit(EXIT_FAILURE);
 	}
 	return (0);
+}
+
+t_stack	*free_all(t_stack *node)
+{
+	t_stack	*tmp;
+
+	tmp = NULL;
+	while (node)
+	{
+		tmp = node->next;
+		free(node);
+		node = tmp;
+	}
+	return (node);
 }
