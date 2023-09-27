@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 12:58:34 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/19 15:56:11 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:12:19 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,13 @@ int		ft_toupper(int c);
 int		ft_tolower(int c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
+int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *str);
+long	ft_atol(const char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *src);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
@@ -88,5 +90,19 @@ t_List	*add_end(t_List *list, int data);
 t_List	*free_at(t_List *list, int pos);
 t_List	*free_list(t_List *list);
 
+
+//	get_next_line
+
+char	*get_next_line(int fd);
+char	*gnl_remove_old_line(char *buff);
+char	*gnl_get_line(char *buff);
+char	*ft_strndup(char *buff, size_t end);
+char	*gnl_read(int fd, char *res);
+char	*ft_gnl_strjoin(char *line, char *buff);
+void	*ft_calloc(size_t nb_elem, size_t size_elem);
+char	*ft_free_null(char *buff);
+size_t	ft_strlen(const char *str);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+ssize_t	find_newline_index(char *buff);
 
 #endif

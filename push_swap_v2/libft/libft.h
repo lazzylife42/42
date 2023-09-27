@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 12:58:34 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/26 18:21:11 by sab              ###   ########.fr       */
+/*   Updated: 2023/09/27 16:09:24 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,19 @@ t_List	*add_end(t_List *list, int data);
 t_List	*free_at(t_List *list, int pos);
 t_List	*free_list(t_List *list);
 
+
+//	get_next_line
+
+char	*get_next_line(int fd);
+char	*gnl_remove_old_line(char *buff);
+char	*gnl_get_line(char *buff);
+char	*ft_strndup(char *buff, size_t end);
+char	*gnl_read(int fd, char *res);
+char	*ft_gnl_strjoin(char *line, char *buff);
+void	*ft_calloc(size_t nb_elem, size_t size_elem);
+char	*ft_free_null(char *buff);
+size_t	ft_strlen(const char *str);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+ssize_t	find_newline_index(char *buff);
 
 #endif

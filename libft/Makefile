@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:38:23 by smonte-e          #+#    #+#              #
-#    Updated: 2023/09/19 15:42:48 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/09/27 16:16:17 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,13 @@ MY_SOURCES =	ft_isalpha.c \
 				ft_tolower.c \
 				ft_strchr.c \
 				ft_strrchr.c \
+				ft_strcmp.c \
 				ft_strncmp.c \
 				ft_memchr.c \
 				ft_memcmp.c \
 				ft_strnstr.c \
 				ft_atoi.c \
+				ft_atol.c \
 				ft_calloc.c \
 				ft_strdup.c \
 				ft_substr.c \
@@ -59,6 +61,8 @@ MY_SOURCES =	ft_isalpha.c \
 				linked_list/llist_a.c \
 				linked_list/llist_b.c \
 				linked_list/llist_c.c \
+				get_next_line/get_next_line.c \
+				get_next_line/get_next_line_utils.c \
 				
 				
 

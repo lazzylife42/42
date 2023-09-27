@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sab <sab@student.42.fr>                    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:38:23 by smonte-e          #+#    #+#              #
-#    Updated: 2023/09/26 18:20:18 by sab              ###   ########.fr        #
+#    Updated: 2023/09/27 16:07:27 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,8 @@ MY_SOURCES =	ft_isalpha.c \
 				linked_list/llist_a.c \
 				linked_list/llist_b.c \
 				linked_list/llist_c.c \
+				get_next_line/get_next_line.c \
+				get_next_line/get_next_line_utils.c \
 				
 				
 
