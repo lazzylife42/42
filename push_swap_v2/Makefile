@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:50:47 by sab               #+#    #+#              #
-#    Updated: 2023/09/28 16:48:30 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/09/28 22:03:25 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,10 @@ SRC = 	src/main.c \
 		src/error.c \
 		src/find_next_move.c \
 		src/price_calculator.c \
+		src/cmd_push.c \
+		src/cmd_reverse_rotate.c \
+		src/cmd_rotate.c \
+		src/cmd_swap.c \
 
 OBJS = $(SRC:.c=.o)
 
