@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_swap.c                                         :+:      :+:    :+:   */
+/*   cmd_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 12:30:45 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/28 22:08:44 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/09/14 21:13:22 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/09/28 22:05:38 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void swap(t_stack **node)
+static	void push(t_stack **a, t_stack **b)
 {
-	int tmp;
+	t_stack *top_b;
 	
-    if (*node == NULL || (*node)->next == NULL)
+    if (*b == NULL)
         return;
-    tmp = (*node)->data;
-    (*node)->data = (*node)->next->data;
-    (*node)->next->data = tmp;
+    top_b = *b;
+    *b = (*b)->next;
+    top_b->next = *a;
+    *a = top_b;
 }
 
-void sa(t_stack **a) {
-    swap(a);
-    write(1, "sa\n", 3);
+void pa(t_stack **a, t_stack **b)
+{
+    push(a, b);
+    write(1, "pa\n", 3);
 }
 
-void sb(t_stack **b) {
-    swap(b);
-    write(1, "sb\n", 3);
-}
-
-void ss(t_stack **a, t_stack **b) {
-    swap(a);
-    swap(b);
-    write(1, "ss\n", 3);
+void pb(t_stack **a, t_stack **b)
+{
+    push(b, a);
+    write(1, "pb\n", 3);
 }

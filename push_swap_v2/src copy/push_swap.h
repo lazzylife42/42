@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:50:51 by sab               #+#    #+#             */
-/*   Updated: 2023/09/28 22:04:14 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/28 21:57:18 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct t_cell
 
 /*	ERROR, INIT AND FREE	*/
 
-void	stack_init(t_stack *a, t_stack *b, char **argv);
+void	stack_init(t_stack **a, t_stack **b, char **argv);
 t_stack	*free_all(t_stack *node);
 
 /*	LINKED LIST				*/

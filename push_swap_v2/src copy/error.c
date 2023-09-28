@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:47:44 by sab               #+#    #+#             */
-/*   Updated: 2023/09/28 22:19:34 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/28 21:59:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static	int error_check(char **argv)
 	return (0);
 }
 
-void	stack_init(t_stack *a, t_stack *b, char **argv)
+void	stack_init(t_stack **a, t_stack **b, char **argv)
 {
 	int i;
 	
@@ -85,12 +85,12 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 		ft_lpush_back(&a, ft_atoi(argv[i]));
 		i++;
 	}
-	pb(&a, &b);
-	pb(&a, &b);
-	if (b->data < b->next->data)
-		rb(&b);
+	pb(a, b);
+	pb(a, b);
 	refresh_price(a);
 	refresh_next(a);
+	refresh_price(b);
+	refresh_next(b);
 	ft_lprint(a);
 	ft_lprint(b);
 }
