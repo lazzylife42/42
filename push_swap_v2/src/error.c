@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:47:44 by sab               #+#    #+#             */
-/*   Updated: 2023/09/26 18:48:34 by sab              ###   ########.fr       */
+/*   Updated: 2023/09/28 13:53:41 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-#define INT_MAX 2147483647
-#define INT_MIN -2147483648
 
 static int is_an_int(const char *str)
 {

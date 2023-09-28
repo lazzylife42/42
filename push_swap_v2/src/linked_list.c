@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:28:45 by sab               #+#    #+#             */
-/*   Updated: 2023/09/25 17:08:38 by sab              ###   ########.fr       */
+/*   Updated: 2023/09/28 20:02:53 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lprint(t_stack *node)
 {
 	while (node != NULL)
 	{
-		ft_printf("[%d] -> ", node->data);
+		ft_printf("[%d]$%d -> ", node->data, node->price);
 		node = node->next;
 	}
 	ft_printf("NULL\n");

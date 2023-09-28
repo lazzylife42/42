@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:50:51 by sab               #+#    #+#             */
-/*   Updated: 2023/09/26 18:49:11 by sab              ###   ########.fr       */
+/*   Updated: 2023/09/28 19:11:39 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,29 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 
+#define INT_MAX 2147483647
+#define INT_MIN -2147483648
+#define SX		101
+#define RX		102
+#define RRX		103
+#define TRUE 	1
+#define FALSE	0
+
 typedef struct t_cell
 {
-	int index;
-	int data;
+	int		data;
+	int		price;
+	int		next_to_move;
 	struct t_cell *next;
 	struct t_cell *prev;
 }t_stack;
 
-/*	ERROR AND FREE	*/
+/*	ERROR AND FREE		*/
 
 int 	error_check(char **argv);
 t_stack	*free_all(t_stack *node);
 
-/*	LINKED LIST		*/
+/*	LINKED LIST			*/
 
 void	ft_lprint(t_stack *node);
 int		ft_llen(t_stack* node);
@@ -38,11 +47,15 @@ int		ft_lpush(t_stack** head, int new_data);
 int		ft_lpush_back(t_stack** head, int new_data);
 int		ft_ldelete(t_stack** head, t_stack* del);
 
-/*	ALGORYTHME		*/
+/*	ALGORYTHME			*/
 
-/*	FIND NEXT MOVE	*/
+/*	PRICE CALCULATOR	*/
 
-/*	COMMANDS		*/
+void	refresh_price(t_stack *stack);
+
+/*	FIND NEXT MOVE		*/
+
+/*	COMMANDS			*/
 
 void	sa(t_stack **a);
 void 	sb(t_stack **b);

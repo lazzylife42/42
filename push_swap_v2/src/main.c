@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:43:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/27 17:56:28 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:47:56 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	main(int argc, char **argv)
 				ft_lpush_back(&a, ft_atoi(argv[i]));
 				i++;
 			}
+			ft_lprint(a);
+			refresh_price(a);
 			ft_lprint(a);
 		}
 /*		

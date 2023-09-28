@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sab <sab@student.42.fr>                    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:50:47 by sab               #+#    #+#              #
-#    Updated: 2023/09/26 17:57:57 by sab              ###   ########.fr        #
+#    Updated: 2023/09/28 16:48:30 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ OPTIONS = -I
 
 SRC = 	src/main.c \
 		src/linked_list.c \
-		src/error.c
+		src/error.c \
+		src/find_next_move.c \
+		src/price_calculator.c \
 
 OBJS = $(SRC:.c=.o)
 
