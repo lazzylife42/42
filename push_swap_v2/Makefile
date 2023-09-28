@@ -6,7 +6,11 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:50:47 by sab               #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/09/28 23:18:46 by smonte-e         ###   ########.fr        #
+=======
+#    Updated: 2023/09/28 22:03:25 by smonte-e         ###   ########.fr        #
+>>>>>>> 430902aa5c07740e74fae2eb8978a230e8102f3f
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +31,11 @@ SRC = 	src/main.c \
 		src/cmd_reverse_rotate.c \
 		src/cmd_rotate.c \
 		src/cmd_swap.c \
+<<<<<<< HEAD
 		src/tiny_sort.c \
 		src/dollar_sort.c \
+=======
+>>>>>>> 430902aa5c07740e74fae2eb8978a230e8102f3f
 
 OBJS = $(SRC:.c=.o)
 

@@ -6,11 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:47:44 by sab               #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/09/28 22:50:16 by smonte-e         ###   ########.fr       */
-=======
-/*   Updated: 2023/09/28 22:19:34 by smonte-e         ###   ########.fr       */
->>>>>>> 430902aa5c07740e74fae2eb8978a230e8102f3f
+/*   Updated: 2023/09/28 21:59:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +74,7 @@ static	int error_check(char **argv)
 	return (0);
 }
 
-<<<<<<< HEAD
-void	stack_init(t_stack *a, char **argv)
-=======
-void	stack_init(t_stack *a, t_stack *b, char **argv)
+void	stack_init(t_stack **a, t_stack **b, char **argv)
 {
 	int i;
 	
@@ -92,42 +85,26 @@ void	stack_init(t_stack *a, t_stack *b, char **argv)
 		ft_lpush_back(&a, ft_atoi(argv[i]));
 		i++;
 	}
-	pb(&a, &b);
-	pb(&a, &b);
-	if (b->data < b->next->data)
-		rb(&b);
+	pb(a, b);
+	pb(a, b);
 	refresh_price(a);
 	refresh_next(a);
+	refresh_price(b);
+	refresh_next(b);
 	ft_lprint(a);
 	ft_lprint(b);
 }
 
 t_stack	*free_all(t_stack *node)
->>>>>>> 430902aa5c07740e74fae2eb8978a230e8102f3f
 {
-	int i;
-	
-	error_check(argv);
-	i = 1;
-	while (argv[i])
+	t_stack	*tmp;
+
+	tmp = NULL;
+	while (node)
 	{
-		ft_lpush_back(&a, ft_atoi(argv[i]));
-		i++;
+		tmp = node->next;
+		free(node);
+		node = tmp;
 	}
-}
-
-void free_stack(t_stack **node)
-{
-    t_stack *current = *node;
-    t_stack *tmp;
-
-	current = *node;
-    while (current) 
-	{
-        tmp = current->next;
-        free(current);
-        current = tmp;
-    }
-
-    *node = NULL;
+	return (node);
 }

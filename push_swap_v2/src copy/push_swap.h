@@ -6,11 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:50:51 by sab               #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/09/28 23:02:57 by smonte-e         ###   ########.fr       */
-=======
-/*   Updated: 2023/09/28 22:04:14 by smonte-e         ###   ########.fr       */
->>>>>>> 430902aa5c07740e74fae2eb8978a230e8102f3f
+/*   Updated: 2023/09/28 21:57:18 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +36,8 @@ typedef struct t_cell
 
 /*	ERROR, INIT AND FREE	*/
 
-<<<<<<< HEAD
-void	stack_init(t_stack *a, char **argv);
-void 	free_stack(t_stack **node);
-=======
-void	stack_init(t_stack *a, t_stack *b, char **argv);
+void	stack_init(t_stack **a, t_stack **b, char **argv);
 t_stack	*free_all(t_stack *node);
->>>>>>> 430902aa5c07740e74fae2eb8978a230e8102f3f
 
 /*	LINKED LIST				*/
 
@@ -58,16 +49,8 @@ int		ft_ldelete(t_stack** head, t_stack* del);
 
 /*	ALGORYTHME				*/
 
-<<<<<<< HEAD
-void	tiny_sort(t_stack **a);
-void	dollar_sort(t_stack *a, t_stack *b);
-=======
-/*	PRICE CALCULATOR		*/
->>>>>>> 430902aa5c07740e74fae2eb8978a230e8102f3f
-
 /*	PRICE CALCULATOR		*/
 
-int		stack_sorted(t_stack *stack);
 void	refresh_price(t_stack *stack);
 void	refresh_next(t_stack *stack);
 

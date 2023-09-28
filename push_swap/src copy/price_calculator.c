@@ -6,11 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 13:33:01 by smonte-e          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/09/28 22:51:06 by smonte-e         ###   ########.fr       */
-=======
-/*   Updated: 2023/09/28 22:17:32 by smonte-e         ###   ########.fr       */
->>>>>>> 430902aa5c07740e74fae2eb8978a230e8102f3f
+/*   Updated: 2023/09/28 21:50:01 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,28 +80,11 @@ void refresh_next(t_stack *stack)
 		if (current == min_element) 
 		{
 			current->next_to_move = TRUE;
-<<<<<<< HEAD
-//			printf("Element with min data to move: [%d] $%d (%d)\n", current->data, current->price, current->next_to_move);
-=======
 //			printf("Element with min value to move: [%d] $%d (%d)\n", current->data, current->price, current->next_to_move);
->>>>>>> 430902aa5c07740e74fae2eb8978a230e8102f3f
 		} else 
 		{
 			current->next_to_move = FALSE;
 		}
 		current = current->next;
 	}
-}
-
-int	stack_sorted(t_stack *stack)
-{
-	if (stack == NULL)
-		return (-1);
-	while (stack->next)
-	{
-		if (stack->data > stack->next->data)
-			return (FALSE);
-		stack = stack->next;
-	}
-	return (TRUE);
 }
