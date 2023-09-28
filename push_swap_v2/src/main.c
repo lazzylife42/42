@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:43:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/28 15:47:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/28 20:38:40 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char **argv)
 			}
 			ft_lprint(a);
 			refresh_price(a);
+			refresh_next(a);
 			ft_lprint(a);
 		}
 /*		

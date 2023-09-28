@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:50:51 by sab               #+#    #+#             */
-/*   Updated: 2023/09/28 19:11:39 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/28 20:39:00 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		ft_ldelete(t_stack** head, t_stack* del);
 /*	PRICE CALCULATOR	*/
 
 void	refresh_price(t_stack *stack);
+void	refresh_next(t_stack *stack);
 
 /*	FIND NEXT MOVE		*/
 
