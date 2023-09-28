@@ -6,12 +6,13 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:50:47 by sab               #+#    #+#              #
-#    Updated: 2023/09/28 22:03:25 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/09/28 23:18:46 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 DIR_SRC = src/
+DIR_OBJ = obj/
 CFLAGS = -Wall -Wextra -Werror
 LIBFT = libft
 RM = rm -f
@@ -26,6 +27,8 @@ SRC = 	src/main.c \
 		src/cmd_reverse_rotate.c \
 		src/cmd_rotate.c \
 		src/cmd_swap.c \
+		src/tiny_sort.c \
+		src/dollar_sort.c \
 
 OBJS = $(SRC:.c=.o)
 

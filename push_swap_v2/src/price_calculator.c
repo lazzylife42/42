@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 13:33:01 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/28 22:17:32 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/28 22:51:06 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,24 @@ void refresh_next(t_stack *stack)
 		if (current == min_element) 
 		{
 			current->next_to_move = TRUE;
-//			printf("Element with min value to move: [%d] $%d (%d)\n", current->data, current->price, current->next_to_move);
+//			printf("Element with min data to move: [%d] $%d (%d)\n", current->data, current->price, current->next_to_move);
 		} else 
 		{
 			current->next_to_move = FALSE;
 		}
 		current = current->next;
 	}
+}
+
+int	stack_sorted(t_stack *stack)
+{
+	if (stack == NULL)
+		return (-1);
+	while (stack->next)
+	{
+		if (stack->data > stack->next->data)
+			return (FALSE);
+		stack = stack->next;
+	}
+	return (TRUE);
 }

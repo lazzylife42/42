@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:43:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/28 22:04:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/28 23:03:14 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,17 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	if (argc == 1|| (argc == 2 && !argv[1][0]))
-		return (1);
-	else
-		{
-			stack_init(a, b, argv);
-		}
-/*		
+		return (1);		
+	stack_init(a, argv);	
 	if (!stack_sorted(a))
 	{
-		if (stack_len(a) == 2)
-			sa(&a, false);
-		else if (stack_len(a) == 3)
+		if (ft_llen(a) == 2)
+			sa(&a);
+		else if (ft_llen(a) == 3)
 			tiny_sort(&a);
 		else
-			push_swap(&a, &b);
+			dollar_sort(a, b);
 	}
 	free_stack(&a);
-*/
+	free_stack(&b);
 }
