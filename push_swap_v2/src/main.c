@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:43:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/29 01:11:12 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:00:17 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int	main(int argc, char **argv)
 		else if (ft_llen(a) == 3)
 			tiny_sort(&a);
 		else
+		{
 			dollar_sort(a, b);
+			free_stack(&b);
+		}	
 	}
 	free_stack(&a);
-	free_stack(&b);
 }
