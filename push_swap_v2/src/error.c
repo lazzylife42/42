@@ -6,13 +6,10 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:47:44 by sab               #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/09/28 22:50:16 by smonte-e         ###   ########.fr       */
-=======
-/*   Updated: 2023/09/28 22:19:34 by smonte-e         ###   ########.fr       */
->>>>>>> 430902aa5c07740e74fae2eb8978a230e8102f3f
+/*   Updated: 2023/09/29 13:44:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "push_swap.h"
 
@@ -78,40 +75,15 @@ static	int error_check(char **argv)
 	return (0);
 }
 
-<<<<<<< HEAD
-void	stack_init(t_stack *a, char **argv)
-=======
-void	stack_init(t_stack *a, t_stack *b, char **argv)
+void	stack_init(t_stack **a, char **argv)
 {
 	int i;
 	
 	error_check(argv);
 	i = 1;
-	while (argv[i])
+	while (argv[i] != NULL)
 	{
-		ft_lpush_back(&a, ft_atoi(argv[i]));
-		i++;
-	}
-	pb(&a, &b);
-	pb(&a, &b);
-	if (b->data < b->next->data)
-		rb(&b);
-	refresh_price(a);
-	refresh_next(a);
-	ft_lprint(a);
-	ft_lprint(b);
-}
-
-t_stack	*free_all(t_stack *node)
->>>>>>> 430902aa5c07740e74fae2eb8978a230e8102f3f
-{
-	int i;
-	
-	error_check(argv);
-	i = 1;
-	while (argv[i])
-	{
-		ft_lpush_back(&a, ft_atoi(argv[i]));
+		ft_lpush_back(a, ft_atoi(argv[i]));
 		i++;
 	}
 }

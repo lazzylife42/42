@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:43:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/29 13:00:17 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:45:39 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	b = NULL;
 	if (argc == 1|| (argc == 2 && !argv[1][0]))
 		return (1);		
-	stack_init(a, argv);	
+	stack_init(&a, argv);
 	if (!stack_sorted(a))
 	{
 		if (ft_llen(a) == 2)
