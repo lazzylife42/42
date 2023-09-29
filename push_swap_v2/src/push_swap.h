@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:50:51 by sab               #+#    #+#             */
-/*   Updated: 2023/09/29 13:44:54 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:06:52 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,20 @@ int		ft_ldelete(t_stack** head, t_stack* del);
 
 /*	ALGORYTHME				*/
 
+t_stack	*find_highest(t_stack *node);
+t_stack *find_lowest(t_stack *node) ;
 void	tiny_sort(t_stack **a);
 void	dollar_sort(t_stack *a, t_stack *b);
+void	push_b_top_to_low(t_stack **a, t_stack **b);
+void 	push_a_top_to_low(t_stack **a, t_stack **b);
+void	push_b_to_a_or_rotate_b(t_stack **a, t_stack **b);
+void	reverse_sort_b(t_stack **b);
 /*	PRICE CALCULATOR		*/
 
 /*	PRICE CALCULATOR		*/
 
 int		stack_sorted(t_stack *stack);
+int		stack_reverse_sorted(t_stack *stack);
 void	refresh_price(t_stack *stack);
 void	refresh_next(t_stack *stack);
 

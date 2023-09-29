@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:28:45 by sab               #+#    #+#             */
-/*   Updated: 2023/09/28 20:02:53 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/29 15:01:50 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lprint(t_stack *node)
 {
 	while (node != NULL)
 	{
-		ft_printf("[%d]$%d -> ", node->data, node->price);
+		ft_printf("[%d] -> ", node->data);
 		node = node->next;
 	}
 	ft_printf("NULL\n");

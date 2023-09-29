@@ -6,13 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 00:47:35 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/28 22:28:25 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/09/29 16:00:18 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static	t_stack	*find_highest(t_stack *node)
+t_stack	*find_highest(t_stack *node)
 {
 	int		highest;
 	t_stack	*highest_node;
@@ -30,6 +30,25 @@ static	t_stack	*find_highest(t_stack *node)
 		node = node->next;
 	}
 	return (highest_node);
+}
+
+t_stack *find_lowest(t_stack *node) 
+{
+    int lowest;
+    t_stack *lowest_node;
+
+    if (node == NULL)
+        return (NULL);
+
+    lowest = INT_MAX;
+    while (node) {
+        if (node->data < lowest) {
+            lowest = node->data;
+            lowest_node = node;
+        }
+        node = node->next;
+    }
+    return (lowest_node);
 }
 
 void	tiny_sort(t_stack **a)
