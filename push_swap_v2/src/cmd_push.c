@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 21:13:22 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/28 22:05:38 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:47:52 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static	void push(t_stack **a, t_stack **b)
+static void push(t_stack **a, t_stack **b)
 {
 	t_stack *top_b;
 	

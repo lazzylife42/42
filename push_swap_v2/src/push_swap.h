@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:50:51 by sab               #+#    #+#             */
-/*   Updated: 2023/10/02 03:08:57 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:06:13 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void 	free_stack(t_stack **node);
 /*	LINKED LIST				*/
 
 void	ft_lprint(t_stack *node);
+void 	pll(t_stack *a, t_stack *b);
 int		ft_llen(t_stack* node);
 int		ft_lpush(t_stack** head, int new_data);
 int		ft_lpush_back(t_stack** head, int new_data);
@@ -55,7 +56,7 @@ t_stack	*find_highest(t_stack *node);
 t_stack *find_lowest(t_stack *node) ;
 void	tiny_sort(t_stack **a);
 void	dollar_sort(t_stack *a, t_stack *b);
-t_stack	push_or_rotate(t_stack *a, t_stack *b, int pivot);
+void 	push_or_rotate(t_stack **a, t_stack **b, int pivot);
 
 /*	PRICE CALCULATOR		*/
 
@@ -81,5 +82,6 @@ void	rrb(t_stack **b);
 void	rrr(t_stack **a, t_stack **b);
 void	pa(t_stack **a, t_stack **b);
 void	pb(t_stack **a, t_stack **b);
+
 
 #endif
