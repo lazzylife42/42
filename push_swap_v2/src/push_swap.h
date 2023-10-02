@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:50:51 by sab               #+#    #+#             */
-/*   Updated: 2023/09/29 18:06:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/02 03:08:57 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct t_cell
 {
 	int		data;
 	int		price;
+	int		pivot;
 	int		next_to_move;
 	struct t_cell *next;
 	struct t_cell *prev;
@@ -54,10 +55,8 @@ t_stack	*find_highest(t_stack *node);
 t_stack *find_lowest(t_stack *node) ;
 void	tiny_sort(t_stack **a);
 void	dollar_sort(t_stack *a, t_stack *b);
-void	push_b_top_to_low(t_stack **a, t_stack **b);
-void 	push_a_top_to_low(t_stack **a, t_stack **b);
-void	push_b_to_a_or_rotate_b(t_stack **a, t_stack **b);
-void	reverse_sort_b(t_stack **b);
+t_stack	push_or_rotate(t_stack *a, t_stack *b, int pivot);
+
 /*	PRICE CALCULATOR		*/
 
 /*	PRICE CALCULATOR		*/
