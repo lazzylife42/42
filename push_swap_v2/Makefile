@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:50:47 by sab               #+#    #+#              #
-#    Updated: 2023/10/02 02:11:19 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/10/04 14:51:45 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ OPTIONS = -I
 
 SRC = 	src/main.c \
 		src/linked_list.c \
+		src/linked_list2.c \
 		src/error.c \
 		src/find_next_move.c \
 		src/price_calculator.c \
@@ -29,7 +30,7 @@ SRC = 	src/main.c \
 		src/cmd_rotate.c \
 		src/cmd_swap.c \
 		src/tiny_sort.c \
-		src/dollar_sort.c \
+		src/quick_sort.c \
 
 OBJS = $(SRC:.c=.o)
 

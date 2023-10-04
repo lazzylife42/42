@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 13:33:01 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/29 13:14:15 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:18:35 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,19 @@ int	stack_sorted(t_stack *stack)
 	while (stack->next)
 	{
 		if (stack->data > stack->next->data)
+			return (FALSE);
+		stack = stack->next;
+	}
+	return (TRUE);
+}
+
+int	stack_reverse_sorted(t_stack *stack)
+{
+	if (stack == NULL)
+		return (-1);
+	while (stack->next)
+	{
+		if (stack->data < stack->next->data)
 			return (FALSE);
 		stack = stack->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 22:36:03 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/02 17:56:47 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:28:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,6 @@
 
 #include "push_swap.h"
 
-int set_pivot(t_stack *a)
-{
-	int	pos;
-	int	pivot;
-	
-	pos = 0;
-	while (pos < (ft_llen(a) + 1 )/ 2)
-	{
-		pos++;
-		a = a->next;
-	}
-	a->pivot = TRUE;
-	pivot = a->data;
-//	ft_printf("Pivot : %d\n", pivot);
-	return (pivot);
-}
 
 void push_or_rotate_a(t_stack **a, t_stack **b, int pivot)
 {
@@ -100,14 +84,12 @@ void dollar_sort(t_stack *a, t_stack *b)
 	int passe;
 	
 	passe = 0;
-	pivot = set_pivot(a);
-	while (passe < 10)
+	pivot = 0;
+	while (passe < 5)
 	{
-		push_or_rotate_a(&a, &b, pivot);
-		pivot = set_pivot(b);
-		push_or_rotate_b(&a, &b, pivot);
+		push_or_rotate_a(&a, &b, pivot(a));
+		push_or_rotate_b(&a, &b, pivot(b));
 		move_back_to_a(&a, &b);
-		pivot /= set_pivot(a);
 		passe++;
 	}
 }
