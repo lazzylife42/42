@@ -1,1 +1,2 @@
 git remote set-url origin git@github.com:lazzylife42/42.git
+https://medium.com/nerd-for-tech/push-swap-tutorial-fa746e6aba1e

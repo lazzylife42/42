@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:50:51 by sab               #+#    #+#             */
-/*   Updated: 2023/10/04 14:57:27 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:42:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	tiny_sort(t_stack **a);
 void	dollar_sort(t_stack *a, t_stack *b);
 void 	push_or_rotate(t_stack **a, t_stack **b, int pivot);
 
-/*	QUICK SORT				*/
+/*	RADIX SORT				*/
 
-void 	quick_sort(t_stack **a, t_stack **b);
+void shift_2(void);
 
 /*	PRICE CALCULATOR		*/
 

@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:50:47 by sab               #+#    #+#              #
-#    Updated: 2023/10/04 14:51:45 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/10/05 16:43:13 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC = 	src/main.c \
 		src/cmd_rotate.c \
 		src/cmd_swap.c \
 		src/tiny_sort.c \
-		src/quick_sort.c \
+		src/radix.c \
 
 OBJS = $(SRC:.c=.o)
 

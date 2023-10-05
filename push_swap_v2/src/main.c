@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:43:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/04 13:14:26 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:42:21 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 			tiny_sort(&a);
 		else
 		{
-			quick_sort(&a, &b);
+			shift_2();
 			free_stack(&b);
 		}	
 	}
