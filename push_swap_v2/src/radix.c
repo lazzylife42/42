@@ -6,14 +6,14 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:33:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/05 23:52:29 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/06 01:26:00 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../src/push_swap.h"
 
 void radix(t_stack **a, t_stack **b)
-{
+{	
 	int size;
 	int max_num;
 	int max_bits;
@@ -40,6 +40,11 @@ void radix(t_stack **a, t_stack **b)
 		}
 		i++;
 		while ((*b) != NULL)
-			pa(a, b);	
+			pa(a, b);
+	}
+	if (!stack_sorted(*a))
+	{
+		while (!stack_sorted(*a))
+			rra(a);
 	}
 }

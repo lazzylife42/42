@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tiny_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 00:47:35 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/09/29 16:00:18 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/06 01:30:10 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,24 @@ void	tiny_sort(t_stack **a)
 		rra(a);
 	if ((*a)->data > (*a)->next->data)
 		sa(a);
+}
+
+void five_sort(t_stack **a, t_stack **b)
+{
+    int size;
+
+	size = ft_llen(*a);
+    if (size == 4) 
+	{
+        sa(a);
+        ra(a);
+    } 
+	else if (size == 5) 
+	{
+        sa(a);
+        ra(a);
+        pb(a, b);
+        sa(a);
+        pa(a, b);
+    }
 }
