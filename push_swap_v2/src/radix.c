@@ -3,23 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:33:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/05 17:41:08 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/05 23:52:29 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../src/push_swap.h"
 
-void shift_2(void)
+void radix(t_stack **a, t_stack **b)
 {
-	int number = 0;
+	int size;
+	int max_num;
+	int max_bits;
+	int	i;
+	int j;
 
-	while (number < 1)
+	size = ft_llen(*a);
+	max_num = size - 1;
+	max_bits = 0;
+	while ((max_num >> max_bits) != 0)
+		max_bits++;	
+	i = 0;
+	while (i < max_bits)
 	{
-		ft_printf("Num >> 2 :%d\n", 8&7);
-		ft_printf("Num 	 :%d\n", 2);
-		number++;
+		j = 0;
+		while (j < size)
+		{
+			int num = (*a)->data;
+			if (((num >> i)&1) == 1)
+				ra(a);
+			else
+				pb(a, b);
+			j++;
+		}
+		i++;
+		while ((*b) != NULL)
+			pa(a, b);	
 	}
 }

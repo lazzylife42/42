@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:50:51 by sab               #+#    #+#             */
-/*   Updated: 2023/10/05 16:42:54 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/05 23:51:33 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void 	push_or_rotate(t_stack **a, t_stack **b, int pivot);
 
 /*	RADIX SORT				*/
 
-void shift_2(void);
+void radix(t_stack **a, t_stack **b);
 
 /*	PRICE CALCULATOR		*/
 
