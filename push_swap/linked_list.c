@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:28:45 by sab               #+#    #+#             */
-/*   Updated: 2023/10/06 14:11:19 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:02:16 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	ft_lprint(t_stack *node)
 {
 	while (node != NULL)
 	{
-		ft_printf("[%d] -> ", node->data);
+		ft_printf("[%d][%d] -> ", node->data, node->index);
 		node = node->next;
 	}
 	ft_printf("NULL\n");
 }
 
-int	ft_llen(t_stack* node)
+int	ft_llen(t_stack *node)
 {
   int res;
 
@@ -35,9 +35,9 @@ int	ft_llen(t_stack* node)
   return (res);
 }
 
-int	ft_lpush(t_stack** head, int new_data)
+int	ft_lpush(t_stack **head, int new_data)
 {
-	t_stack* new_node;
+	t_stack *new_node;
 
 	new_node = (t_stack*)malloc(sizeof(t_stack));
 	if (new_node == NULL)
@@ -51,10 +51,10 @@ int	ft_lpush(t_stack** head, int new_data)
 	return (0);
 }
 
-int	ft_lpush_back(t_stack** head, int new_data)
+int	ft_lpush_back(t_stack **head, int new_data)
 {
-	t_stack* new_node;
-	t_stack* last_node;
+	t_stack *new_node;
+	t_stack *last_node;
 
 	new_node = (t_stack*)malloc(sizeof(t_stack));
 	if (new_node == NULL)
@@ -75,7 +75,7 @@ int	ft_lpush_back(t_stack** head, int new_data)
 	return (0);
 }
 
-int	ft_ldelete(t_stack** head, t_stack* del)
+int	ft_ldelete(t_stack **head, t_stack *del)
 {
 	if (*head == NULL || del == NULL)
 		return (-1);

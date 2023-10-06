@@ -6,14 +6,13 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:50:47 by sab               #+#    #+#              #
-#    Updated: 2023/10/06 14:18:37 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/10/06 17:20:53 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = push_swap
 DIR_SRC = src/
-DIR_OBJ = obj/
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = libft
 RM = rm -f
@@ -24,6 +23,7 @@ SRC = 	cmd_push.c \
 		cmd_rotate.c \
 		cmd_swap.c \
 		error.c \
+		index_sort.c \
 		linked_list.c \
 		main.c \
 		radix.c \
