@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 00:47:35 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/06 14:15:38 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/06 20:56:04 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,24 +77,42 @@ void	tiny_sort(t_stack **a)
 	if ((*a)->data > (*a)->next->data)
 		sa(a);
 }
-/*
-void five_sort(t_stack **a, t_stack **b)
-{
-    int size;
 
-	size = ft_llen(*a);
-    if (size == 4) 
-	{
-        sa(a);
-        ra(a);
-    } 
-	else if (size == 5) 
-	{
-        sa(a);
-        ra(a);
-        pb(a, b);
-        sa(a);
+void tiny_sort_5(t_stack **a, t_stack **b) 
+{
+    while (!stack_sorted(*a) || ft_llen(*a) > 3) {
+        if (ft_llen(*a) > 3) {
+            finish_rotation(a, find_lowest(*a));
+            pb(a, b);
+        }
+        tiny_sort(a);
+    }
+
+    while (*b) {
         pa(a, b);
     }
 }
-*/
+
+void tiny_rotate(t_stack **a, int direction) 
+{
+    if (direction == 1) {
+        ra(a);
+    } else if (direction == -1) {
+        rra(a);
+    }
+}
+
+void finish_rotation(t_stack **a, t_stack *node) 
+{
+    int position = 0;
+    int direction = 1;
+
+    while (*a != node) {
+        tiny_rotate(a, direction);
+        position++;
+    }
+    while (position < ft_llen(*a)) {
+        tiny_rotate(a, - direction);
+        position++;
+    }
+}
