@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:50:51 by sab               #+#    #+#             */
-/*   Updated: 2023/10/06 20:56:13 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/06 22:58:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ t_stack	*find_highest(t_stack *node);
 t_stack *find_lowest(t_stack *node);
 int		stack_sorted(t_stack *stack);
 void	tiny_sort(t_stack **a);
-void 	tiny_sort_5(t_stack **a, t_stack **b);
-void 	tiny_rotate(t_stack **a, int direction);
-void	finish_rotation(t_stack **a, t_stack *node);
 void	radix(t_stack **a, t_stack **b);
 void	update_index(t_stack *head);
 
