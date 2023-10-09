@@ -3,115 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:33:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/06 20:11:45 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:47:09 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void radix(t_stack **a, t_stack **b)
-{	
-	int size;
-	int max_num;
-	int max_bits;
+static void	radix_pass(t_stack **a, t_stack **b, int bit)
+{
+	int	size;
 	int	i;
-	int j;
-	
+	int	num;
+
+	i = 0;
 	size = ft_llen(*a);
-	max_num = size - 1;
+	while (i < size)
+	{
+		num = (*a)->index;
+		if (((num >> bit) & 1) == 1)
+			ra(a);
+		else
+			pb(a, b);
+		i++;
+	}
+	while (*b != NULL)
+		pa(a, b);
+}
+
+void	radix(t_stack **a, t_stack **b)
+{
+	int	max_num;
+	int	max_bits;
+	int	i;
+
+	max_num = ft_llen(*a) - 1;
 	max_bits = 0;
+	i = 0;
 	while ((max_num >> max_bits) != 0)
-		max_bits++;	
+		max_bits++;
 	i = 0;
 	while (i < max_bits)
 	{
-		j = 0;
-		while (j < size)
-		{
-			int num = (*a)->index;
-			if (((num >> i)&1) == 1)
-				ra(a);
-			else
-				pb(a, b);
-			j++;
-		}
+		radix_pass(a, b, i);
 		i++;
-		while ((*b) != NULL)
-			pa(a, b);
 	}
 }
 
-void update_index(t_stack *head)
+void	update_index(t_stack *head)
 {
-    t_stack *current;
-	int index;
-	
-	current = head;
+	t_stack	*current;
+	int		index;
+
 	index = 1;
-    while (current != NULL)
-    {
-        current->index = index;
-        index++;
-        current = current->next;
-    }
-}
-
-/*
-void swap_nodes(t_stack *head, int index1, int index2)
-{
-	t_stack *node1 = NULL;
-	t_stack *node2 = NULL;
-
-	t_stack *current = head;
-
+	current = head;
 	while (current != NULL)
 	{
-		if (current->index == index1)
-			node1 = current;
-		else if (current->index == index2)
-			node2 = current;
+		current->index = index;
+		index++;
 		current = current->next;
 	}
-	int temp = node1->data;
-	node1->data = node2->data;
-	node2->data = temp;
 }
-
-void radix_index(t_stack **a)
-{	
-	int size;
-	int max_num;
-	int max_bits;
-	int	i;
-	int j;
-
-	size = ft_llen(*a);
-	max_num = size - 1;
-	max_bits = 0;
-	while ((max_num >> max_bits) != 0)
-		max_bits++;	
-	i = 0;
-	while (i < max_bits)
-	{
-		j = 0;
-		while (j < size)
-		{
-			int num = (*a)->index;
-			if (((num >> i)&1) == 1)
-			{
-				swap_nodes(*a, (*a)->index, ft_llen(*a));
-//				ra(a);
-			}				
-			else
-				pb(a, b);
-			j++;
-		}
-		i++;
-		while ((*b) != NULL)
-			pa(a, b);
-	}
-}
-*/

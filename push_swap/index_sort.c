@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:32:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/09 17:25:54 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:27:28 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	ft_bubble_sort(int arr[], int n)
 	{
 		sorted = 1;
 		j = 0;
-
 		while (j < n - i - 1)
 		{
 			if (arr[j] > arr[j + 1])
@@ -49,7 +48,7 @@ static void	ft_bubble_sort(int arr[], int n)
 	}
 }
 
-static void	ft_sort_stack_data(t_stack *a)
+static int	*ft_get_sorted_array(t_stack *a)
 {
 	int		i;
 	int		*pos_to_sort;
@@ -65,8 +64,16 @@ static void	ft_sort_stack_data(t_stack *a)
 		i++;
 	}
 	ft_bubble_sort(pos_to_sort, ft_llen(a));
-	tmp = a;
+	return (pos_to_sort);
+}
+
+static void	ft_update_indices(t_stack *a, int *pos_to_sort)
+{
+	int		i;
+	t_stack	*tmp;
+
 	i = 0;
+	tmp = a;
 	while (i < ft_llen(a))
 	{
 		while (tmp != NULL && tmp->data != pos_to_sort[i])
@@ -78,11 +85,14 @@ static void	ft_sort_stack_data(t_stack *a)
 		}
 		i++;
 	}
-	free(pos_to_sort);
 }
 
-t_stack	*ft_index_sort(t_stack *a)
+t_stack	*index_sort(t_stack *a)
 {
-	ft_sort_stack_data(a);
+	int	*pos_to_sort;
+
+	pos_to_sort = ft_get_sorted_array(a);
+	ft_update_indices(a, pos_to_sort);
+	free(pos_to_sort);
 	return (a);
 }

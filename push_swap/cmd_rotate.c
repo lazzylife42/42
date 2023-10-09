@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 21:13:52 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/09 16:00:46 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:49:11 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static	void	rotate(t_stack **node)
 	t_stack	*last;
 
 	last = *node;
-	if (*node == NULL || (*node)->next == NULL) 
+	if (*node == NULL || (*node)->next == NULL)
 		return ;
 	while (last->next != NULL)
 	{
