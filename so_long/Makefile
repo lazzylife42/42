@@ -3,20 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 15:31:24 by smonte-e          #+#    #+#              #
-#    Updated: 2023/10/07 16:03:05 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/10/09 15:44:23 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 DIR_SRC = src/
-CFLAGS = -Wall -Werror -Wextra -framework OpenGL -framework AppKit -L./minilibx -lmlx
+CFLAGS = -Wall -Werror -Wextra
 LIBFT = libft
 MLX = minilibx
 RM = rm -f
-OPTIONS = -I
+OPTIONS = -Imlx -Ilibft
 
 SRC = 	main.c \
 
@@ -26,7 +26,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	gcc $(CFLAGS) $(OBJS) -L./$(LIBFT) -lft -L./$(MLX) -lmlx -o $(NAME)
+	$(MAKE) -C $(MLX)
+	gcc $(CFLAGS) $(OBJS) -L./$(LIBFT) -lft -L./$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o : %.c
 	gcc $(CFLAGS) $(OPTIONS)$(DIR_SRC) -c $< -o $@
@@ -34,7 +35,7 @@ $(NAME): $(OBJS)
 $(LIBFT):
 	$(MAKE) -C $(LIBFT)
 
-$(LIBFT):
+$(MLX):
 	$(MAKE) -C $(MLX)
 
 clean:
@@ -44,6 +45,7 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(LIBFT) fclean
+	$(MAKE) -C $(MLX) clean
 
 re: fclean all
 
