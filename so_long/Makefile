@@ -6,13 +6,13 @@
 #    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 15:31:24 by smonte-e          #+#    #+#              #
-#    Updated: 2023/10/07 15:43:21 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/10/07 16:03:05 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 DIR_SRC = src/
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -framework OpenGL -framework AppKit -L./minilibx -lmlx
 LIBFT = libft
 MLX = minilibx
 RM = rm -f
