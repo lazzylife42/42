@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:28:45 by sab               #+#    #+#             */
-/*   Updated: 2023/10/06 17:02:16 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:07:13 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,22 @@ void	ft_lprint(t_stack *node)
 
 int	ft_llen(t_stack *node)
 {
-  int res;
+	int	res;
 
-  res = 0;
-  while (node != NULL)
-  {
+	res = 0;
+	while (node != NULL)
+	{
 	res++;
 	node = node->next;
-  }
-  return (res);
+	}
+	return (res);
 }
 
 int	ft_lpush(t_stack **head, int new_data)
 {
-	t_stack *new_node;
+	t_stack	*new_node;
 
-	new_node = (t_stack*)malloc(sizeof(t_stack));
+	new_node = (t_stack *)malloc(sizeof(t_stack));
 	if (new_node == NULL)
 		return (-1);
 	new_node->data = new_data;
@@ -53,10 +53,10 @@ int	ft_lpush(t_stack **head, int new_data)
 
 int	ft_lpush_back(t_stack **head, int new_data)
 {
-	t_stack *new_node;
-	t_stack *last_node;
+	t_stack	*new_node;
+	t_stack	*last_node;
 
-	new_node = (t_stack*)malloc(sizeof(t_stack));
+	new_node = (t_stack *)malloc(sizeof(t_stack));
 	if (new_node == NULL)
 		return (-1);
 	new_node->data = new_data;

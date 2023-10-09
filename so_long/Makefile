@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 15:31:24 by smonte-e          #+#    #+#              #
-#    Updated: 2023/10/09 15:44:23 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/10/09 15:48:11 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,12 +40,12 @@ $(MLX):
 
 clean:
 	$(MAKE) -C $(LIBFT) clean
+	$(MAKE) -C $(MLX) clean
 	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(LIBFT) fclean
-	$(MAKE) -C $(MLX) clean
 
 re: fclean all
 

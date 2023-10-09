@@ -6,17 +6,16 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:47:44 by sab               #+#    #+#             */
-/*   Updated: 2023/10/06 16:24:34 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:41:45 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "push_swap.h"
 
-static int is_an_int(const char *str)
+static	int	is_an_int(const char *str)
 {
-	int i;
-	long long_val;
+	int		i;
+	long	long_val;
 
 	i = 0;
 	if (str[i] == '-')
@@ -33,29 +32,31 @@ static int is_an_int(const char *str)
 	return (0);
 }
 
-static int has_duplicates(char **argv) 
+static	int	has_duplicates(char **argv)
 {
-    int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 1;
-    while (argv[i] != NULL) 
+	while (argv[i] != NULL)
 	{
-        j = i + 1;
-        while (argv[j] != NULL) {
-            if (ft_strcmp(argv[i], argv[j]) == 0) {
-                return (-1);
-            }
-            j++;
-        }
-        i++;
-    }
-    return (0);
+		j = i + 1;
+		while (argv[j] != NULL)
+		{
+			if (ft_strcmp(argv[i], argv[j]) == 0)
+			{
+				return (-1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
-static	int error_check(char **argv)
+static	int	error_check(char **argv)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (argv[i] != NULL)
@@ -77,8 +78,8 @@ static	int error_check(char **argv)
 
 void	stack_init(t_stack **a, char **argv)
 {
-	int i;
-	
+	int	i;
+
 	error_check(argv);
 	i = 1;
 	while (argv[i] != NULL)
@@ -88,18 +89,17 @@ void	stack_init(t_stack **a, char **argv)
 	}
 }
 
-void free_stack(t_stack **node)
+void	free_stack(t_stack **node)
 {
-    t_stack *current = *node;
-    t_stack *tmp;
+	t_stack	*current;
+	t_stack	*tmp;
 
 	current = *node;
-    while (current) 
+	while (current)
 	{
-        tmp = current->next;
-        free(current);
-        current = tmp;
-    }
-
-    *node = NULL;
+		tmp = current->next;
+		free(current);
+		current = tmp;
+	}
+	*node = NULL;
 }
