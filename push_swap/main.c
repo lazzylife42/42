@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:43:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/09 22:12:34 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:41:18 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ int	main(int argc, char **argv)
 		return (1);
 	stack_init(&a, argv);
 	len = ft_llen(a);
-	if (!stack_sorted(a) && len >= 5)
-		tiny_sort(&a, &b);
-	else if (!stack_sorted(a))
+	while (!stack_sorted(a))
 	{
-		update_index(a);
-		a = index_sort(a);
-		radix(&a, &b);
+		if (len <= 5)
+			small_sort(&a, &b);
+		else if (len > 5)
+		{
+			update_index(a);
+			a = index_sort(a);
+			radix(&a, &b);
+		}
 		free_stack(&b);
 		free_stack(&a);
 	}

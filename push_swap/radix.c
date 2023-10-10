@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:33:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/09 18:47:09 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:45:26 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,44 @@ void	update_index(t_stack *head)
 		index++;
 		current = current->next;
 	}
+}
+
+t_stack	*find_highest(t_stack *node)
+{
+	int		highest;
+	t_stack	*highest_node;
+
+	if (node == NULL)
+		return (NULL);
+	highest = INT_MIN;
+	while (node)
+	{
+		if (node->data > highest)
+		{
+			highest = node->data;
+			highest_node = node;
+		}
+		node = node->next;
+	}
+	return (highest_node);
+}
+
+t_stack	*find_lowest(t_stack *node)
+{
+	int		lowest;
+	t_stack	*lowest_node;
+
+	if (node == NULL)
+		return (NULL);
+	lowest = INT_MAX;
+	while (node)
+	{
+		if (node->data < lowest)
+		{
+			lowest = node->data;
+			lowest_node = node;
+		}
+		node = node->next;
+	}
+	return (lowest_node);
 }

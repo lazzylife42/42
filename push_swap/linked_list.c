@@ -6,20 +6,33 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:28:45 by sab               #+#    #+#             */
-/*   Updated: 2023/10/09 16:07:13 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:44:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+/*
 void	ft_lprint(t_stack *node)
 {
 	while (node != NULL)
 	{
-		ft_printf("[%d][%d] -> ", node->data, node->index);
+		ft_printf("[%d] -> ", node->data);
 		node = node->next;
 	}
 	ft_printf("NULL\n");
+}
+*/
+int	stack_sorted(t_stack *stack)
+{
+	if (stack == NULL)
+		return (-1);
+	while (stack->next)
+	{
+		if (stack->data > stack->next->data)
+			return (FALSE);
+		stack = stack->next;
+	}
+	return (TRUE);
 }
 
 int	ft_llen(t_stack *node)

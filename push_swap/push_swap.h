@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:50:51 by sab               #+#    #+#             */
-/*   Updated: 2023/10/09 21:27:20 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:57:24 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	free_stack(t_stack **node);
 
 /*	LINKED LIST				*/
 
+int		stack_sorted(t_stack *stack);
 void	ft_lprint(t_stack *node);
 int		ft_llen(t_stack *node);
 int		ft_lpush(t_stack **head, int new_data);
@@ -47,13 +48,17 @@ int		ft_ldelete(t_stack **head, t_stack *del);
 
 t_stack	*index_sort(t_stack *a);
 
-/*	ALGORYTHME				*/
+/*	SMALL SORT				*/
+
+void	tiny_sort(t_stack **a);
+void	small_sort(t_stack **a, t_stack **b);
+void	four_sort(t_stack **a, t_stack **b);
+void	five_sort(t_stack **a, t_stack **b);
+
+/*	RADIX SORT				*/
 
 t_stack	*find_highest(t_stack *node);
 t_stack	*find_lowest(t_stack *node);
-int		stack_sorted(t_stack *stack);
-void	tiny_sort(t_stack **a, t_stack **b);
-void	tiny_sort_3(t_stack **a);
 void	radix(t_stack **a, t_stack **b);
 void	update_index(t_stack *head);
 
