@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:43:42 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/10 13:41:18 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:59:20 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 			a = index_sort(a);
 			radix(&a, &b);
 		}
-		free_stack(&b);
-		free_stack(&a);
 	}
+	free_stack(&b);
+	free_stack(&a);
 }
