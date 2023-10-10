@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tiny_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 00:47:35 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/09 16:10:44 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/09 22:08:04 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,42 @@ t_stack	*find_lowest(t_stack *node)
 	return (lowest_node);
 }
 
-void	tiny_sort(t_stack **a)
+void	tiny_sort(t_stack **a, t_stack **b)
 {
-	t_stack	*highest_node;
+	while (ft_llen(*a) > 3)
+		pb(a, b);
+	tiny_sort_3(a);
+	while (*b)
+		pa(a, b);
+}
 
-	highest_node = find_highest(*a);
-	if (*a == highest_node)
-		ra(a);
-	else if ((*a)->next == highest_node)
-		rra(a);
-	if ((*a)->data > (*a)->next->data)
+void	tiny_sort_3(t_stack **a)
+{
+	if (ft_llen(*a) == 2)
 		sa(a);
+	else if (ft_llen(*a) == 3)
+	{
+		if ((*a)->data > (*a)->next->data
+			&& (*a)->data < (*a)->next->next->data)
+			sa(a);
+		else if ((*a)->data > (*a)->next->data
+			&& (*a)->data > (*a)->next->next->data)
+		{
+			sa(a);
+			ra(a);
+		}
+		else if ((*a)->data < (*a)->next->data
+			&& (*a)->data > (*a)->next->next->data)
+			rra(a);
+		else if ((*a)->data > (*a)->next->data
+			&& (*a)->next->data < (*a)->next->next->data)
+			ra(a);
+		else if ((*a)->data < (*a)->next->data
+			&& (*a)->data < (*a)->next->next->data &&
+			(*a)->next->data > (*a)->next->next->data)
+		{
+			sa(a);
+			rra(a);
+		}
+	}
 }
