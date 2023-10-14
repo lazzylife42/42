@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 22:46:46 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/11 22:56:18 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:25:51 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 
 # include <mlx.h>
 # include "lib/libft/libft.h"
+
+#define WIDTH 232
+#define HEIGHT 300
+
 
 #endif
 
