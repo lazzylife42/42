@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 15:02:19 by sab               #+#    #+#              #
-#    Updated: 2023/10/12 17:30:27 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/10/18 22:15:39 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,10 @@ NAME = test
 CC = gcc
 FLAG =
 DIR_LIB = lib
-SRC = main.c
+SRC = 	main.c \
+		ft_mlx_input.c \
+		
+		
 OBJS = $(SRC:.c=.o)
 LIBFT = $(DIR_LIB)/libft
 
@@ -33,10 +36,10 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
 	$(MAKE) -C $(MLX)
-	$(CC) $(OBJS) $(GRAPHICS) -o $(NAME)
+	$(CC) $(OBJS) -L/$(LIBFT) -lft $(GRAPHICS) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(FLAG) -I/usr/include -I$(MLX) -O3 -c $< -o $@
+	$(CC) $(FLAG) -I/usr/include -Ilibft -I$(MLX) -O3 -c $< -o $@
 
 clean:
 	$(MAKE) -C $(LIBFT) clean
