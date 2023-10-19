@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:57:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/19 12:16:59 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:10:26 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,17 @@ typedef struct  s_mlx_data
 {
     void    *mlx;
     void    *mlx_win;
+	int		*width;
+	int		*height;
+	int 	sprite[1][576];
 }   t_mlx_data;
 
-/*  INPUT   */
+/*  INPUT			*/
 
-int handle_imput(int keysym, t_mlx_data *data);
+int 	handle_imput(int keysym, t_mlx_data *data);
+
+/*	RENDER FRAME	*/
+
+void	render_map(t_mlx_data data, int map[][]);
 
 #endif

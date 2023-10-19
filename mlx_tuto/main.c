@@ -6,11 +6,19 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:58:19 by sab               #+#    #+#             */
-/*   Updated: 2023/10/19 12:18:54 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:08:37 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_mlx.h"
+
+int map[5][5] = {
+	1, 1, 1, 1, 1,
+	1, 0, 0, 0, 1,
+	1, 0, 0, 0, 1,
+	1, 0, 0, 0, 1,
+	1, 1, 1, 1, 1,
+};
 
 int main(void)
 {
@@ -19,14 +27,17 @@ int main(void)
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)
 		return (1);
-	data.mlx_win = mlx_new_window(data.mlx, 400, 300, "Salut");
+	data.mlx_win = mlx_new_window(data.mlx, 400, 300, "window");
 	if (data.mlx_win == NULL)
 	{
 		mlx_destroy_window(data.mlx, data.mlx_win);
 		free(data.mlx);
 		return (1);
 	}
-	mlx_key_hook(data.mlx_win, handle_imput, &data);
+	sprite_init(data, 400, 300, new_pixel_data);
+	mlx_loop_hook(data.mlx, render_frame, &data);
+	
+//	mlx_key_hook(data.mlx_win, handle_imput, &data);
 	mlx_loop(data.mlx_win);
     mlx_destroy_window(data.mlx, data.mlx_win);
 	return (0);

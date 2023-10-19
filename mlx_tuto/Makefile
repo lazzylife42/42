@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 15:02:19 by sab               #+#    #+#              #
-#    Updated: 2023/10/19 12:13:37 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/10/19 15:10:03 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ MLX = lib/minilibx
 RM = rm -f
 OPTIONS = -Imlx -Ilibft
 
-SRC = 	main.c ft_mlx_input.c \
+SRC = 	main.c ft_mlx_input.c ft_mlx_display.c\
 
 OBJS = $(SRC:.c=.o)
 

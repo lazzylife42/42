@@ -6,7 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:56:08 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/18 20:56:09 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:09:43 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_mlx.h"
+
+void	render_map(t_mlx_data data, int map[][])
+{
+	
+}
