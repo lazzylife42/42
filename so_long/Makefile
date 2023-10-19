@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 15:31:24 by smonte-e          #+#    #+#              #
-#    Updated: 2023/10/10 11:53:30 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/10/19 20:48:44 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,10 @@ LIBFT = libft
 MLX = minilibx
 RM = rm -f
 OPTIONS = -Imlx -Ilibft
+INCLUDES = -I/opt/X11/include -Imlx
 
-SRC = 	main.c \
+SRC = 	src/main.c \
+		src/map.c \
 
 OBJS = $(SRC:.c=.o)
 
@@ -30,7 +32,7 @@ $(NAME): $(OBJS)
 	gcc $(CFLAGS) $(OBJS) -L./$(LIBFT) -lft -L./$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o : %.c
-	gcc $(CFLAGS) $(OPTIONS)$(DIR_SRC) -c $< -o $@
+	gcc $(CFLAGS) $(OPTIONS)$(DIR_SRC) -c $< -o $@ $(INCLUDES)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT)
