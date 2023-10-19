@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:58:19 by sab               #+#    #+#             */
-/*   Updated: 2023/10/19 00:48:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/19 12:18:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int main(void)
 		free(data.mlx);
 		return (1);
 	}
-	mlx_key_hook(data.mlx, *handle_imput, &data);
-//	mlx_hook(data.mlx_win, ON_DESTROY, 0, close, &data);
+	mlx_key_hook(data.mlx_win, handle_imput, &data);
 	mlx_loop(data.mlx_win);
     mlx_destroy_window(data.mlx, data.mlx_win);
 	return (0);
