@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:38:22 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/20 01:30:51 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/22 00:33:55 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main(void)
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (1);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 900, 600, "Les Singes Viennent de Sortir du Zoo");
+	data.win_ptr = mlx_new_window(data.mlx_ptr, 896, 448, "Les Singes Viennent de Sortir du Zoo");
 	if (!data.win_ptr)
 		return (free(data.mlx_ptr), 1);
 	
