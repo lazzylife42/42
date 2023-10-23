@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/20 01:17:53 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:53:36 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,10 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
 # include "libft/libft.h"
 # include "minilibx/mlx.h"
-# include <stdio.h>
-# include <X11/X.h>
-# include <X11/keysym.h>
-
-typedef struct s_map
-{
-	int		width;
-	int		height;
-	char	**layout;
-}t_map;
 
 typedef struct s_data
 {
@@ -40,12 +32,14 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	int		*textures[5];
-	t_map	*map;
+	int		**map;
+	int		map_width;
+    int		map_height;
 } t_data;
 
 /*	MAP	MAKER	*/
-void 	map_to_str(t_data data);
-void	sprite_init(t_data data);
-void 	char_to_sprite(t_data data, char *str);
+void 	map_to_str(t_data *data, char **argv);
+void    map_sprit_init(t_data *data);
+void 	char_to_sprite(t_data *data, char *str);
 
 #endif

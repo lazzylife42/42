@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 15:31:24 by smonte-e          #+#    #+#              #
-#    Updated: 2023/10/19 20:48:44 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/10/23 13:39:23 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	$(MAKE) -C $(MLX)
+	$(MAKE) -sC $(MLX)
 	gcc $(CFLAGS) $(OBJS) -L./$(LIBFT) -lft -L./$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o : %.c
@@ -38,7 +38,7 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT)
 
 $(MLX):
-	$(MAKE) -C $(MLX)
+	$(MAKE) -sC $(@D)
 
 clean:
 	$(MAKE) -C $(LIBFT) clean
