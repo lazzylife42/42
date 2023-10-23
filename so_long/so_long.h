@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/23 15:53:36 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/23 20:21:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 # include "minilibx/mlx.h"
+
+# define WIDTH_MAX 30
+# define HEIGHT_MAX 16
 
 typedef struct s_data
 {

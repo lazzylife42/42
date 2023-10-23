@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 20:47:56 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/23 15:59:08 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/23 20:15:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void map_init(t_data *data, int width, int height)
 {
-    data->map_width = width;
-    data->map_height = height;
+    data->map_width = 64;
+    data->map_height = 64;
 
     data->map = (int **)malloc(height * sizeof(int *));
 
@@ -41,33 +41,39 @@ void map_to_tab(int fd, t_data *data)
 	int j;
 
 	i = 0;
-	while ((buff = get_next_line(fd))
+	while ((buff = get_next_line(fd)))
 	{
 		j = 0;
 		while (buff[j])
 		{
 			data->map[i][j] = buff[j];
+			ft_printf("[%c]", data->map[i][j]);
 			j++;
 		}
 		i++;
+		ft_printf("\n");
 		free(buff);
 	}
+	data->map_width = j;
+	data->map_height = i;
 }
 
 void map_to_str(t_data *data, char **argv)
 {
 	int fd;
-	char *str;
+//	char *str;
 	
 	fd = open(argv[1], O_RDONLY);
 	map_sprit_init(data);
-	while ((str = get_next_line(fd)))
+	map_init(data, 14, 5);
+	map_to_tab(fd, data);
+/*	while ((str = get_next_line(fd)))
 	{
 		ft_printf("map: %s", str);
 		char_to_sprite(data, str);
 		free(str);
 	}
-	close(fd);
+*/	close(fd);
 }
 
 void map_sprit_init(t_data *data)
