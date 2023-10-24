@@ -6,12 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:38:22 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/24 18:56:11 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:00:10 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-#include <fcntl.h>
  
 int on_destroy(t_data *data)
 {
@@ -46,7 +45,7 @@ int main(int argc, char **argv)
 		return (free(data.mlx_ptr), 1);
 	map_renderer(&data);
 
-	mlx_hook(data.win_ptr, 3, 0, &on_keypress, &data);
+	mlx_hook(data.win_ptr, 3, 0, &player_move, &data);
 	mlx_hook(data.win_ptr, 17, 0, &on_destroy, &data);
 	mlx_loop(data.mlx_ptr);
 	return (0);

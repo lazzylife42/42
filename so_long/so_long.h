@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/24 18:50:09 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:28:40 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_data
     int		map_height;
 } t_data;
 
-/*	MAP	MAKER	*/
+/*	MAP	MAKER		*/
 
 void	map_renderer_init(t_data *data, char **argv);
 void	map_renderer(t_data *data);
@@ -46,5 +46,17 @@ void	map_init(int fd, t_data *data);
 void	map_dim(int fd, t_data *data);
 void	map_to_tab(int fd, t_data *data);
 void 	char_to_sprite(t_data *data, char *str);
+
+/*	PLAYER MOVE		*/
+
+int		player_move(int keysym, t_data *data);
+void	move_up(t_data *data);
+void	move_left(t_data *data);
+void	move_down(t_data *data);
+void	move_right(t_data *data);
+
+/*	EXIT AND ERROR	*/
+
+int 	on_destroy(t_data *data);
 
 #endif
