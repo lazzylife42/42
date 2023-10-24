@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/23 20:21:30 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:50:09 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 # include "libft/libft.h"
 # include "minilibx/mlx.h"
 
-# define WIDTH_MAX 30
-# define HEIGHT_MAX 16
-
 typedef struct s_data
 {
 	void	*img;
@@ -35,14 +32,19 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	int		*textures[5];
-	int		**map;
+	char	**map;
 	int		map_width;
     int		map_height;
 } t_data;
 
 /*	MAP	MAKER	*/
-void 	map_to_str(t_data *data, char **argv);
+
+void	map_renderer_init(t_data *data, char **argv);
+void	map_renderer(t_data *data);
 void    map_sprit_init(t_data *data);
+void	map_init(int fd, t_data *data);
+void	map_dim(int fd, t_data *data);
+void	map_to_tab(int fd, t_data *data);
 void 	char_to_sprite(t_data *data, char *str);
 
 #endif
