@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/25 11:21:35 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:12:19 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ void	check_e(t_data *data);
 /*	EXIT AND ERROR	*/
 
 int 	on_destroy(t_data *data);
+void 	free_map(t_data *data);
 
 #endif

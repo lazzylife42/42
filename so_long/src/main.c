@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:38:22 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/25 11:32:22 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:35:41 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int on_destroy(t_data *data)
 {
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	free_map(data);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -45,7 +46,6 @@ int main(int argc, char **argv)
 		return (free(data.mlx_ptr), 1);
 
 	data.moves = 0;
-
 	map_renderer(&data);
 	mlx_hook(data.win_ptr, 3, 0, &player_move, &data);
 	mlx_hook(data.win_ptr, 17, 0, &on_destroy, &data);

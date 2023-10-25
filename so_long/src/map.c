@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 20:47:56 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/25 11:31:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:16:03 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,24 @@ void	map_init(int fd, t_data *data)
 void map_dim(int fd, t_data *data)
 {
 	int y;
+	size_t check;
 	char *buff;
 
 	y = 0;
+	check = 0;
 	data->map_width = 0;
 	data->map_height = 0;
 	while ((buff = get_next_line(fd)))
 	{
+		ft_printf("check : %d\n", check);
 		y++;
-		data->map_width = ft_strlen(buff);
+		if (check != ft_strlen(buff) && check > 0)
+			perror("Map non carré!");
+		check = ft_strlen(buff);
 		free(buff);
 	}
 	data->map_height = y;
+	data->map_width = check;
 }
 
 void map_to_tab(int fd, t_data *data)
@@ -95,7 +101,7 @@ void	map_sprit_init(t_data *data)
 	data->textures[4] = mlx_xpm_file_to_image(data->mlx_ptr, "sprites/xpm/tile03.xpm", &data->width, &data->height);
 }
 
-void	map_renderer(t_data *data)
+void map_renderer(t_data *data)
 {
 	int x;
 	int y;
@@ -107,29 +113,23 @@ void	map_renderer(t_data *data)
 		x = 0;
 		while (x < data->map_width)
 		{
-			switch (data->map[y][x])
-			{
-				case '1':
-					texture_index = 2;
-					break;
-				case '0':
-					texture_index = 3;
-					break;
-				case 'P':
-					texture_index = 0;
-					break;
-				case 'C':
-					texture_index = 1;
-					break;
-				case 'E':
-					texture_index = 4;
-					break;
-			}
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[texture_index], x * 64, y * 64);
-		x++;			
+			if (data->map[y][x] == '1')
+				texture_index = 2;
+			else if (data->map[y][x] == '0')
+				texture_index = 3;
+			else if (data->map[y][x] == 'P')
+				texture_index = 0;
+			else if (data->map[y][x] == 'C')
+				texture_index = 1;
+			else if (data->map[y][x] == 'E')
+				texture_index = 4;
+
+			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[texture_index], x * 64, y * 64);
+			x++;
 		}
-	y++;
+		y++;
 	}
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 8, 20, 0xffffff, ft_itoa(data->moves));
 }
 
 void free_map(t_data *data)
@@ -149,19 +149,3 @@ void free_map(t_data *data)
 	free(data->map);
 	data->map = NULL;
 }
-
-
-/*
-	data.textures[0] = mlx_xpm_file_to_image(data.mlx_ptr, "sprites/xpm/kaaris.xpm", &data.width, &data.height);
-	data.textures[1] = mlx_xpm_file_to_image(data.mlx_ptr, "sprites/xpm/harambe.xpm", &data.width, &data.height);
-    data.textures[2] = mlx_xpm_file_to_image(data.mlx_ptr, "sprites/xpm/tile01.xpm", &data.width, &data.height);
-    data.textures[3] = mlx_xpm_file_to_image(data.mlx_ptr, "sprites/xpm/tile02.xpm", &data.width, &data.height);
-    data.textures[4] = mlx_xpm_file_to_image(data.mlx_ptr, "sprites/xpm/tile03.xpm", &data.width, &data.height);
-*///	map_renderer(&data, &argv[1]);
-
-/*	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.textures[0], 0, 0);
-	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.textures[1], 64, 0);
-	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.textures[2], 128, 0);
-	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.textures[3], 192, 0);
-	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.textures[4], 256, 0);
-*/	
