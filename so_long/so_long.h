@@ -6,12 +6,12 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/24 20:28:40 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:21:35 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef SO_LONG
+# define SO_LONG
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -19,6 +19,9 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 # include "minilibx/mlx.h"
+
+# define TRUE 1
+# define FALSE 0
 
 typedef struct s_data
 {
@@ -35,6 +38,9 @@ typedef struct s_data
 	char	**map;
 	int		map_width;
     int		map_height;
+	int		win;
+	int		finish;
+	int		moves;
 } t_data;
 
 /*	MAP	MAKER		*/
@@ -54,6 +60,12 @@ void	move_up(t_data *data);
 void	move_left(t_data *data);
 void	move_down(t_data *data);
 void	move_right(t_data *data);
+
+/*	GAME STATE	*/
+
+void	game_state(t_data *data);
+void	check_c(t_data *data);
+void	check_e(t_data *data);
 
 /*	EXIT AND ERROR	*/
 
