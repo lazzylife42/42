@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 20:47:56 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/25 15:16:03 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/26 20:48:56 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	map_init(int fd, t_data *data)
 
 void map_dim(int fd, t_data *data)
 {
-	int y;
-	size_t check;
-	char *buff;
+	int 	y;
+	size_t	check;
+	char	*buff;
 
 	y = 0;
 	check = 0;
@@ -45,10 +45,7 @@ void map_dim(int fd, t_data *data)
 	data->map_height = 0;
 	while ((buff = get_next_line(fd)))
 	{
-		ft_printf("check : %d\n", check);
 		y++;
-		if (check != ft_strlen(buff) && check > 0)
-			perror("Map non carré!");
 		check = ft_strlen(buff);
 		free(buff);
 	}
@@ -123,13 +120,12 @@ void map_renderer(t_data *data)
 				texture_index = 1;
 			else if (data->map[y][x] == 'E')
 				texture_index = 4;
-
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[texture_index], x * 64, y * 64);
 			x++;
 		}
 		y++;
 	}
-	mlx_string_put(data->mlx_ptr, data->win_ptr, 8, 20, 0xffffff, ft_itoa(data->moves));
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 23, 19, 0xffffff, ft_itoa(data->moves));
 }
 
 void free_map(t_data *data)

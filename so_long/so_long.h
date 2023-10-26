@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/25 12:12:19 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/26 20:55:34 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 
 # define TRUE 1
 # define FALSE 0
+
+typedef struct s_error
+{
+	int		empty;
+	int		square;
+	int		walls;
+	int		v_path;
+	int		bad_char;
+	int		bad_map;
+} t_error;
 
 typedef struct s_data
 {
@@ -46,7 +56,7 @@ typedef struct s_data
 /*	MAP	MAKER		*/
 
 void	map_renderer_init(t_data *data, char **argv);
-void	map_renderer(t_data *data);
+void 	map_renderer(t_data *data);
 void    map_sprit_init(t_data *data);
 void	map_init(int fd, t_data *data);
 void	map_dim(int fd, t_data *data);
@@ -67,9 +77,18 @@ void	game_state(t_data *data);
 void	check_c(t_data *data);
 void	check_e(t_data *data);
 
-/*	EXIT AND ERROR	*/
+/*	EXIT 		*/
 
 int 	on_destroy(t_data *data);
+int 	off_destroy(t_data *data);
 void 	free_map(t_data *data);
+
+/*	ERRORS		*/
+
+void	error_init(t_error *error);
+void	error_char(t_error *error, char c);
+void	error_size(t_error *error, t_data *data);
+void	error_check(t_error *error, t_data *data);
+void	error_elements(t_error *error, t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 15:31:24 by smonte-e          #+#    #+#              #
-#    Updated: 2023/10/25 09:37:00 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/10/26 13:56:26 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC = 	src/main.c \
 		src/map.c \
 		src/player.c \
 		src/state.c \
+		src/error.c \
 
 OBJS = $(SRC:.c=.o)
 
