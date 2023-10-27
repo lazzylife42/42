@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:57:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/26 20:59:15 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:20:08 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	error_size(t_error *error, t_data *data)
 
 void	error_char(t_error *error, char c)
 {
-	char *allow = "01PCE";
+	char *allow = "01PCEB";
 	int	flag;
 	int i;
 
@@ -110,12 +110,31 @@ void	error_elements(t_error *error, t_data *data)
 		error->bad_map = TRUE;
 }
 
+void	error_square(t_error *error, t_data *data)
+{
+    int expected_width;
+    int y;
+
+	expected_width = data->map_width;
+	y = 0;
+    while (y < data->map_height)
+    {
+        if (data->map[y] == NULL || (int)ft_strlen(data->map[y]) != expected_width)
+        {
+            error->square = TRUE;
+        }
+		y++;
+    }
+}
+
 void	error_check(t_error *error, t_data *data)
 {
 	int flag = FALSE;
 	error_init(error);
+	error_square(error, data);
 	error_elements(error, data);
 	error_size(error, data);
+	error_path(error, data);
 	if (error->empty)
 	{
 		ft_printf("La carte ne peut etre vide.\n");
@@ -141,12 +160,12 @@ void	error_check(t_error *error, t_data *data)
 		ft_printf("La carte ne dispoe pas des éléments minimums.\n");
 		flag = TRUE;
 	}
-	ft_printf("\n[%d][%d][%d][%d][%d][%d]\n",	error->empty, 
-											error->square,
-											error->walls,
-											error->v_path,
-											error->bad_char,
-											error->bad_map);
+	ft_printf("\n[%d][%d][%d][%d][%d][%d]\n\n",	error->empty, 
+												error->square,
+												error->walls,
+												error->v_path,
+												error->bad_char,
+												error->bad_map);
 //	if (flag == TRUE)
 //		off_destroy(data);
 											

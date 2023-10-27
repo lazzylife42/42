@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 20:47:56 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/26 20:48:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/27 11:05:08 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	map_sprit_init(t_data *data)
 	data->textures[2] = mlx_xpm_file_to_image(data->mlx_ptr, "sprites/xpm/tile01.xpm", &data->width, &data->height);
 	data->textures[3] = mlx_xpm_file_to_image(data->mlx_ptr, "sprites/xpm/tile02.xpm", &data->width, &data->height);
 	data->textures[4] = mlx_xpm_file_to_image(data->mlx_ptr, "sprites/xpm/tile03.xpm", &data->width, &data->height);
+	data->textures[5] = mlx_xpm_file_to_image(data->mlx_ptr, "sprites/xpm/booba.xpm", &data->width, &data->height);
 }
 
 void map_renderer(t_data *data)
@@ -120,6 +121,8 @@ void map_renderer(t_data *data)
 				texture_index = 1;
 			else if (data->map[y][x] == 'E')
 				texture_index = 4;
+			else if (data->map[y][x] == 'B')
+				texture_index = 5;
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[texture_index], x * 64, y * 64);
 			x++;
 		}

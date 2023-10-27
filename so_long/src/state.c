@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 09:21:11 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/26 18:30:13 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/27 12:25:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	game_state(t_data *data)
 
 	check_c(data);
 	check_e(data);
+	move_booba(data);
 	if (data->finish == TRUE && data->win == TRUE)
 	{
 		ft_printf("YOU WIN :D !\n");
@@ -78,4 +79,40 @@ void	check_e(t_data *data)
 		data->finish = TRUE;
 	else
 		data->finish = FALSE;
+}
+
+void move_booba(t_data *data)
+{
+    int x;
+	int y;
+
+    y = 0;
+    while (y < data->map_height)
+    {
+        x = 0;
+        while (x < data->map_width)
+        {
+            if (data->map[y][x] == 'B')
+            {
+                if ((data->moves % 2) == 0)
+                {
+                    if (x < data->map_width - 1 && data->map[y][x + 1] == '0')
+                    {
+                        data->map[y][x + 1] = 'B';
+                        data->map[y][x] = '0';
+                    }
+                }
+                else
+                {
+                    if (x > 0 && data->map[y][x - 1] == '0')
+                    {
+                        data->map[y][x - 1] = 'B';
+                        data->map[y][x] = '0';
+                    }
+                }
+            }
+            x++;
+        }
+        y++;
+    }
 }

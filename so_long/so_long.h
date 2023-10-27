@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/26 20:55:34 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:20:15 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_error
 typedef struct s_data
 {
 	void	*img;
-	char	*addr[5];
+	char	*addr[6];
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -44,7 +44,7 @@ typedef struct s_data
 	int		height;
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int		*textures[5];
+	int		*textures[6];
 	char	**map;
 	int		map_width;
     int		map_height;
@@ -76,6 +76,8 @@ void	move_right(t_data *data);
 void	game_state(t_data *data);
 void	check_c(t_data *data);
 void	check_e(t_data *data);
+void	check_b(t_data *data);
+void	move_booba(t_data *data);
 
 /*	EXIT 		*/
 
@@ -90,5 +92,7 @@ void	error_char(t_error *error, char c);
 void	error_size(t_error *error, t_data *data);
 void	error_check(t_error *error, t_data *data);
 void	error_elements(t_error *error, t_data *data);
+void	error_square(t_error *error, t_data *data);
+void	error_path(t_error *error, t_data *data);
 
 #endif
