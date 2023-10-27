@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:57:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/26 20:59:15 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/26 23:53:16 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ void	error_size(t_error *error, t_data *data)
 {
 	int x;
 	int y;
-	int cells;
 
-	cells = data->map_width;
 	if (data->map_width == 0 || data->map_height == 0)
 		error->empty = TRUE;
 	y = 0;
@@ -141,13 +139,14 @@ void	error_check(t_error *error, t_data *data)
 		ft_printf("La carte ne dispoe pas des éléments minimums.\n");
 		flag = TRUE;
 	}
-	ft_printf("\n[%d][%d][%d][%d][%d][%d]\n",	error->empty, 
-											error->square,
-											error->walls,
-											error->v_path,
-											error->bad_char,
-											error->bad_map);
-//	if (flag == TRUE)
+	ft_printf("\nERROR log : [%d][%d][%d][%d][%d][%d]\n\n",	error->empty, 
+															error->square,
+															error->walls,
+															error->v_path,
+															error->bad_char,
+															error->bad_map);
+	if (flag == TRUE)
+		ft_printf("\n");
 //		off_destroy(data);
 											
 }
