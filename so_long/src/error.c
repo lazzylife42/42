@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:57:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/27 13:30:57 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:34:56 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	error_check(t_error *error, t_data *data)
 	error_square(error, data);
 	error_elements(error, data);
 	error_size(error, data);
-	error_path(error, data);
+//	error_path(error, data);
 	if (error->empty)
 	{
 		ft_printf("La carte ne peut etre vide.\n");
