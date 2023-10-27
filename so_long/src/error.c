@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:57:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/27 13:34:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:16:01 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,8 @@ void	error_check(t_error *error, t_data *data)
 											error->v_path,
 											error->bad_char,
 											error->bad_map);
-//	if (flag == TRUE)
+	if (flag == TRUE)
+		execl("/usr/bin/afplay", "afplay", "mp3/27.mp3", (char *)0);
 //		off_destroy(data);
 											
 }

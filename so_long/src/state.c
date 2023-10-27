@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 09:21:11 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/27 12:25:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:46:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ void	game_state(t_data *data)
 	if (data->finish == TRUE && data->win == TRUE)
 	{
 		ft_printf("YOU WIN :D !\n");
+		execl("/usr/bin/afplay", "afplay", "mp3/kaaris.mp3", (char *)0);
 		on_destroy(data);
 	}
 	else if (data->finish == TRUE && data->win == FALSE)
 	{
 		ft_printf("YOU LOSE :/ !\n");
+		execl("/usr/bin/afplay", "afplay", "mp3/booba.mp3", (char *)0);
 		on_destroy(data);
 	}
 	ft_printf("MOVES : %d\n", data->moves);

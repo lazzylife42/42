@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:14:16 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/27 12:05:00 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:47:55 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ void	move_up(t_data *data)
 				if (data->map[y - 1][x] == 'B')
 				{
 					ft_printf("YOU LOSE :/ !\n");
+					execl("/usr/bin/afplay", "afplay", "mp3/booba.mp3", (char *)0);
 					on_destroy(data);
-				}					
+				}		
 				data->map[y - 1][x] = 'P';
 				data->map[y][x] = '0';
 				break;
@@ -86,6 +87,7 @@ void	move_left(t_data *data)
 				if (data->map[y][x - 1] == 'B')
 				{
 				ft_printf("YOU LOSE :/ !\n");
+				execl("/usr/bin/afplay", "afplay", "mp3/booba.mp3", (char *)0);
 				on_destroy(data);
 				}
 				data->map[y][x - 1] = 'P';
@@ -114,8 +116,9 @@ void move_down(t_data *data)
 				if (data->map[y + 1][x] == 'B')
 				{
 					ft_printf("YOU LOSE :/ !\n");
+					execl("/usr/bin/afplay", "afplay", "mp3/booba.mp3", (char *)0);
 					on_destroy(data);
-				}										
+				}							
 				data->map[y + 1][x] = 'P';
 				data->map[y][x] = '0';
 				return;
@@ -142,8 +145,9 @@ void move_right(t_data *data)
 				if (data->map[y][x + 1] == 'B')
 				{
 					ft_printf("YOU LOSE :/ !\n");
+					execl("/usr/bin/afplay", "afplay", "mp3/booba.mp3", (char *)0);
 					on_destroy(data);
-				}							
+				}				
 				data->map[y][x + 1] = 'P';
 				data->map[y][x] = '0';
 				break;
