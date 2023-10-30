@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 15:31:24 by smonte-e          #+#    #+#              #
-#    Updated: 2023/10/27 13:18:02 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/10/30 18:17:30 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC = 	src/main.c \
 		src/player.c \
 		src/state.c \
 		src/error.c \
-		src/path.c \
+		src/flood_fill.c \
 
 OBJS = $(SRC:.c=.o)
 

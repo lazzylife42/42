@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/27 13:20:15 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:34:02 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ void	move_booba(t_data *data);
 int 	on_destroy(t_data *data);
 int 	off_destroy(t_data *data);
 void 	free_map(t_data *data);
+
+/*	FLOOD FILL	*/
+
+t_data 	*copy_data(const t_data *source);
+void    flood(t_data *data, int x, int y, char old_char, char new_char);
 
 /*	ERRORS		*/
 

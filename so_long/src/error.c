@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:57:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/27 18:16:01 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:37:15 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,15 @@ void	error_square(t_error *error, t_data *data)
 void	error_check(t_error *error, t_data *data)
 {
 	int flag = FALSE;
+	t_data *cp;
+
+	cp = copy_data(data);
 	error_init(error);
 	error_square(error, data);
 	error_elements(error, data);
 	error_size(error, data);
-//	error_path(error, data);
+	error_path(error, cp);
+//	free(cp);
 	if (error->empty)
 	{
 		ft_printf("La carte ne peut etre vide.\n");
@@ -147,6 +151,12 @@ void	error_check(t_error *error, t_data *data)
 	{
 		ft_printf("La carte doit être fermée en étant encadrée par des murs.\n");
 		flag = TRUE;
+	}
+	if (error->v_path)
+	{
+		ft_printf("Il néxiste pas de chemin valide.\n");
+		flag = TRUE;
+		
 	}
 	if (error->bad_char)
 	{
