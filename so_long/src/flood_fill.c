@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:58:47 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/30 19:33:02 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:39:04 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,26 @@ void	error_path(t_error *error, t_data *data)
 	int		x;
 	int		y;
 
-	flood(data, 1, 1, '0', 'C');
-	flood(data, 1, 1, 'C', 'P');
-	flood(data, 1, 1, 'P', 'E');
-	print_array(data);
+	y = 0;
+	while (y < data->map_height)
+	{
+		x = 0;
+		while (x < data->map_width)
+		{
+			if (data->map[y][x] == '0')
+				break ;
+//			ft_printf("[%d:%d]\n", y, x);
+			x++;
+		}
+		if (data->map[y][x] == '0')
+			break ;
+		y++;
+	}
+	ft_printf("\n[%d:%d]\n", y, x);
+	
+	flood(data, x, y, '0', 'C');
+	flood(data, x, y, 'C', 'P');
+	flood(data, x, y, 'P', 'E');
 	y = 0;
 	while (y < data->map_height)
 	{
@@ -62,13 +78,12 @@ void	error_path(t_error *error, t_data *data)
 			if (data->map[y][x] != '1' && data->map[y][x] != 'E')
 			{
 				error->v_path = TRUE;
-//				free(data);
 			}
 			x++;
 		}
 		y++;
 	}
-//	free(data);
+	print_array(data);
 }
 
 t_data *copy_data(const t_data *source)
@@ -106,4 +121,14 @@ t_data *copy_data(const t_data *source)
         y++;
     }
     return copy;
+}
+
+void free_data(t_data *copy) 
+{
+    for (int y = 0; y < copy->map_height; y++)
+	{
+        free(copy->map[y]);
+    }
+    free(copy->map);
+    free(copy);
 }

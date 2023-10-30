@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/30 19:34:02 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:37:58 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_error
 	int		empty;
 	int		square;
 	int		walls;
+	int		overflow;
 	int		v_path;
 	int		bad_char;
 	int		bad_map;
@@ -88,6 +89,7 @@ void 	free_map(t_data *data);
 /*	FLOOD FILL	*/
 
 t_data 	*copy_data(const t_data *source);
+void	free_data(t_data *copy);
 void    flood(t_data *data, int x, int y, char old_char, char new_char);
 
 /*	ERRORS		*/

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:57:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/30 19:37:15 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:13:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	error_init(t_error *error)
 	error->empty = FALSE;
 	error->square = FALSE;
 	error->walls = FALSE;
+	error->overflow = FALSE;
 	error->v_path = FALSE;
 	error->bad_char = FALSE;
 	error->bad_map = FALSE;
@@ -108,35 +109,45 @@ void	error_elements(t_error *error, t_data *data)
 		error->bad_map = TRUE;
 }
 
-void	error_square(t_error *error, t_data *data)
+void error_square(t_error *error, t_data *data)
 {
-    int expected_width;
     int y;
+    int expected_width = -1;  // Initialise à -1 pour la première ligne
 
-	expected_width = data->map_width;
-	y = 0;
+    y = 0;
+    if (data->map_width >= 28 || data->map_height >= 22)
+        error->overflow = TRUE;
     while (y < data->map_height)
     {
-        if (data->map[y] == NULL || (int)ft_strlen(data->map[y]) != expected_width)
-        {
+        if (data->map[y] == NULL)
+		{
             error->square = TRUE;
+            ft_printf("ERROR: NULL line at [%d]\n", y);
+        } 
+		else if (expected_width == -1)
+            expected_width = (int)ft_strlen(data->map[y]);
+		else if ((int)ft_strlen(data->map[y]) != expected_width)
+		{
+            error->square = TRUE;
+            ft_printf("ERROR: Line width mismatch at [%d]\n", y);
         }
-		y++;
+        y++;
     }
 }
+
 
 void	error_check(t_error *error, t_data *data)
 {
 	int flag = FALSE;
-	t_data *cp;
+//	t_data *cp;
 
-	cp = copy_data(data);
+//	cp = copy_data(data);
 	error_init(error);
 	error_square(error, data);
 	error_elements(error, data);
 	error_size(error, data);
-	error_path(error, cp);
-//	free(cp);
+	error_path(error, data);
+//	free_data(data);
 	if (error->empty)
 	{
 		ft_printf("La carte ne peut etre vide.\n");
@@ -150,6 +161,11 @@ void	error_check(t_error *error, t_data *data)
 	if (error->walls)
 	{
 		ft_printf("La carte doit être fermée en étant encadrée par des murs.\n");
+		flag = TRUE;
+	}
+	if (error->overflow)
+	{
+		ft_printf("Les dimentions des la carte sont trop grandes.\n");
 		flag = TRUE;
 	}
 	if (error->v_path)
@@ -168,14 +184,14 @@ void	error_check(t_error *error, t_data *data)
 		ft_printf("La carte ne dispoe pas des éléments minimums.\n");
 		flag = TRUE;
 	}
-	ft_printf("\n[%d][%d][%d][%d][%d][%d]\n",	error->empty, 
-											error->square,
-											error->walls,
-											error->v_path,
-											error->bad_char,
-											error->bad_map);
+	ft_printf("\n[%d][%d][%d][%d][%d][%d][%d]\n",	error->empty, 
+													error->square,
+													error->walls,
+													error->overflow,
+													error->v_path,
+													error->bad_char,
+													error->bad_map);
 	if (flag == TRUE)
-		execl("/usr/bin/afplay", "afplay", "mp3/27.mp3", (char *)0);
-//		off_destroy(data);
-											
+//		off_destroy(data);								
+		ft_printf("\n");
 }
