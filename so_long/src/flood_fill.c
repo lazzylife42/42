@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:58:47 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/30 20:39:04 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/30 23:28:52 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void    flood(t_data *data, int x, int y, char old_char, char new_char)
 
 void	error_path(t_error *error, t_data *data)
 {
+	int		i;
 	int		x;
 	int		y;
 
@@ -55,27 +56,29 @@ void	error_path(t_error *error, t_data *data)
 		x = 0;
 		while (x < data->map_width)
 		{
-			if (data->map[y][x] == '0')
+			if (data->map[y][x] == 'P')
 				break ;
-//			ft_printf("[%d:%d]\n", y, x);
 			x++;
 		}
-		if (data->map[y][x] == '0')
+		if (data->map[y][x] == 'P')
 			break ;
 		y++;
 	}
-	ft_printf("\n[%d:%d]\n", y, x);
-	
-	flood(data, x, y, '0', 'C');
-	flood(data, x, y, 'C', 'P');
-	flood(data, x, y, 'P', 'E');
+	i = 0;
+	flood(data, x, y, 'P', '0');
+	while (i++ < data->map_height)
+	{
+		flood(data, x, y, 'C', '0');
+		flood(data, x, y, '0', 'C');	
+	}
+	flood(data, x, y, 'C', 'E');
 	y = 0;
 	while (y < data->map_height)
 	{
 		x = 0;
 		while (x < data->map_width)
 		{
-			if (data->map[y][x] != '1' && data->map[y][x] != 'E')
+			if (data->map[y][x] != '1' && data->map[y][x] != 'E' && data->map[y][x] != 'B')
 			{
 				error->v_path = TRUE;
 			}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:57:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/30 21:13:31 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/30 22:55:42 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,15 +139,15 @@ void error_square(t_error *error, t_data *data)
 void	error_check(t_error *error, t_data *data)
 {
 	int flag = FALSE;
-//	t_data *cp;
+	t_data *cp;
 
-//	cp = copy_data(data);
+	cp = copy_data(data);
 	error_init(error);
 	error_square(error, data);
 	error_elements(error, data);
 	error_size(error, data);
-	error_path(error, data);
-//	free_data(data);
+	error_path(error, cp);
+	free_data(cp);
 	if (error->empty)
 	{
 		ft_printf("La carte ne peut etre vide.\n");

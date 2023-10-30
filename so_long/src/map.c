@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 20:47:56 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/27 11:05:08 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/31 00:11:06 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,22 @@ void map_to_tab(int fd, t_data *data)
 	}
 }
 
-void	map_renderer_init(t_data *data, char **argv)
+void map_renderer_init(t_data *data, char **argv)
 {
-	int fd;
+    int fd;
 
-	fd = open(argv[1], O_RDONLY);
-	map_init(fd, data);
-	map_sprit_init(data);
-	close(fd);
-	fd = open(argv[1], O_RDONLY);
-	map_to_tab(fd, data);
-	close(fd);
+    fd = open(argv[1], O_RDONLY);
+    if (fd == -1)
+    {
+        perror("Error\nErreur lors de l'ouverture du fichier de carte.\n");
+        exit(EXIT_FAILURE);
+    }
+    map_init(fd, data);
+    map_sprit_init(data);
+    close(fd);
+    fd = open(argv[1], O_RDONLY);
+    map_to_tab(fd, data);
+    close(fd);
 }
 
 void	map_sprit_init(t_data *data)
