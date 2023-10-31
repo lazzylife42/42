@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 20:47:56 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/31 16:59:27 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/31 22:54:49 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	map_init(int fd, t_data *data)
 		j = 0;
 		while (j < data->map_width)
 		{
-			data->map[i][j] = '#';
+			data->map[i][j] = '\0';
 			j++;
 		}
 		i++;
@@ -36,21 +36,27 @@ void	map_init(int fd, t_data *data)
 void	map_dim(int fd, t_data *data)
 {
 	int		y;
-	size_t	check;
+	size_t	max_width;
+	size_t	line_width;
 	char	*buff;
 
 	y = 0;
-	check = 0;
+	max_width = 0;
 	data->map_width = 0;
 	data->map_height = 0;
-	while ((buff = get_next_line(fd)))
+	while (TRUE)
 	{
+		buff = get_next_line(fd);
+		if (buff == NULL)
+			break ;
 		y++;
-		check = ft_strlen(buff);
+		line_width = ft_strlen(buff);
+		if (line_width > max_width)
+			max_width = line_width;
 		free(buff);
 	}
 	data->map_height = y;
-	data->map_width = check;
+	data->map_width = max_width - 1;
 }
 
 void	map_to_tab(int fd, t_data *data)
@@ -74,6 +80,7 @@ void	map_to_tab(int fd, t_data *data)
 		ft_printf("\n");
 		free(buff);
 	}
+	ft_printf("\n");
 }
 
 void	map_renderer_init(t_data *data, char **argv)
@@ -83,7 +90,7 @@ void	map_renderer_init(t_data *data, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Error\nErreur lors de l'ouverture du fichier de carte.\n");
+		write(2, "Error\nLa carte est introvable.\n", 31);
 		exit(EXIT_FAILURE);
 	}
 	map_init(fd, data);

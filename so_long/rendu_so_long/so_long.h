@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/31 17:16:35 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/31 22:08:22 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <errno.h>
 # include "libft/libft.h"
 # include "minilibx/mlx.h"
 
@@ -85,6 +86,7 @@ void	move_booba(t_data *data);
 int		on_destroy(t_data *data);
 int		off_destroy(t_data *data);
 void	free_map(t_data *data);
+void	free_sprite(t_data *data);
 
 /*	FLOOD FILL	*/
 
@@ -102,5 +104,6 @@ void	error_elements(t_error *error, t_data *data);
 void	error_square(t_error *error, t_data *data);
 void	error_path(t_error *error, t_data *data);
 void	error_empty(t_error *error, t_data *data);
+void	error_exit(t_error *error, t_data *data);
 
 #endif

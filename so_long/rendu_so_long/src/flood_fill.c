@@ -6,31 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:58:47 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/31 17:08:53 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/31 21:16:59 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-static	void	print_array(t_data *data)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	ft_printf("\n");
-	while (y < data->map_height)
-	{
-		x = 0;
-		while (x < data->map_width)
-		{
-			ft_printf("[%c]", data->map[y][x]);
-			x++;
-		}
-		ft_printf("\n");
-		y++;
-	}
-}
 
 void   	flood(t_data *data, int x, int y, char old_char, char new_char)
 {
@@ -86,7 +66,6 @@ void	error_path(t_error *error, t_data *data)
 		}
 		y++;
 	}
-	print_array(data);
 }
 
 t_data	*copy_data(const t_data *source)
@@ -126,12 +105,3 @@ t_data	*copy_data(const t_data *source)
     return copy;
 }
 
-void free_data(t_data *copy) 
-{
-    for (int y = 0; y < copy->map_height; y++)
-	{
-        free(copy->map[y]);
-    }
-    free(copy->map);
-    free(copy);
-}
