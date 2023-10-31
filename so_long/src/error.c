@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:57:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/30 22:55:42 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:25:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,6 @@ void	error_check(t_error *error, t_data *data)
 	{
 		ft_printf("Il néxiste pas de chemin valide.\n");
 		flag = TRUE;
-		
 	}
 	if (error->bad_char)
 	{
