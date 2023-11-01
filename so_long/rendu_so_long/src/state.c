@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 09:21:11 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/01 15:35:46 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 19:03:32 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,40 +78,20 @@ void	check_e(t_data *data)
 	else
 		data->finish = FALSE;
 }
-/*
-void	move_booba(t_data *data)
-{
-	int	x;
-	int	y;
 
-	y = 0;
-	while (y < data->map_height)
+void	find_player(t_data *data, int *x, int *y)
+{
+	*x = 0;
+	*y = 0;
+	while (*y < data->map_height)
 	{
-		x = 0;
-		while (x < data->map_width)
+		*x = 0;
+		while (*x < data->map_width)
 		{
-			if (data->map[y][x] == 'B')
-			{
-				if ((data->moves % 2) == 0)
-				{
-					if (x < data->map_width - 1 && data->map[y][x + 1] == '0')
-					{
-						data->map[y][x + 1] = 'B';
-						data->map[y][x] = '0';
-					}
-				}
-				else
-				{
-					if (x > 0 && data->map[y][x - 1] == '0')
-					{
-						data->map[y][x - 1] = 'B';
-						data->map[y][x] = '0';
-					}
-				}
-			}
-			x++;
+			if (data->map[*y][*x] == 'P')
+				return ;
+			(*x)++;
 		}
-		y++;
+		(*y)++;
 	}
 }
-*/

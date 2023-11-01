@@ -6,13 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:53:58 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/01 19:09:21 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 14:57:02 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static void	init_counts(int *p, int *e, int *c)
+static	void	init_counts(int *p, int *e, int *c)
 {
 	*p = 0;
 	*e = 0;

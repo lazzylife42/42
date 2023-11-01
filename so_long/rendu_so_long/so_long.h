@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/01 10:56:48 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 19:03:55 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	game_state(t_data *data);
 void	check_c(t_data *data);
 void	check_e(t_data *data);
 void	check_b(t_data *data);
+void	find_player(t_data *data, int *x, int *y);
 void	move_booba(t_data *data);
 
 /*	EXIT 		*/
@@ -92,7 +93,9 @@ void	free_sprite(t_data *data);
 
 t_data	*copy_data(const t_data *source);
 void	free_data(t_data *copy);
-void	flood(t_data *data, int x, int y, char old_char, char new_char);
+void	flood_p(t_data *data, int x, int y, char new_char);
+void	flood_c(t_data *data, int x, int y, char new_char);
+void	flood_z(t_data *data, int x, int y, char new_char);
 
 /*	ERRORS		*/
 
