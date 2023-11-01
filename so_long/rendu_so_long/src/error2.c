@@ -6,17 +6,51 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:53:58 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/01 11:11:40 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:38:50 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	error_empty(t_error *error, t_data *data)
+static void	init_counts(int *p, int *e, int *c)
 {
-	if (data->map_width == 0 || data->map_height == 0
-		|| data->map_width == 1 || data->map_height == 1)
-		error->empty = TRUE;
+	*p = 0;
+	*e = 0;
+	*c = 0;
+}
+
+static	void	count_elements(int *p, int *e, int *c, char cell)
+{
+	if (cell == 'P')
+		(*p) = 1;
+	else if (cell == 'E')
+		(*e) = 1;
+	else if (cell == 'C')
+		(*c) = 1;
+}
+
+void	error_elements(t_error *error, t_data *data)
+{
+	int	x;
+	int	y;
+	int	p;
+	int	e;
+	int	c;
+
+	init_counts(&p, &e, &c);
+	y = 0;
+	while (y < data->map_height)
+	{
+		x = 0;
+		while (x < data->map_width)
+		{
+			count_elements(&p, &e, &c, data->map[y][x]);
+			x++;
+		}
+		y++;
+	}
+	if (p == 0 || e == 0 || c == 0)
+		error->bad_map = TRUE;
 }
 
 void	error_check(t_error *error, t_data *data)
@@ -50,18 +84,10 @@ void	error_check(t_error *error, t_data *data)
 
 void	error_exit(t_error *error, t_data *data)
 {
-	int	i;
-
 	if (error->empty || error->square || error->walls
 		|| error->overflow || error->v_path || error->bad_char
 		|| error->bad_map)
 	{
-		if (error->square)
-		{
-			i = 0;
-			while (i++ < data->map_height)
-				ft_printf("[%s]\n", (char *)data->map[i]);
-		}	
 		ft_printf("\n\n[%d][%d][%d][%d][%d][%d][%d]\n",
 			error->empty, error->square, error->walls,
 			error->overflow, error->bad_char,

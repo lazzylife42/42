@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 09:21:11 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/31 17:05:58 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:35:46 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	check_e(t_data *data)
 	else
 		data->finish = FALSE;
 }
-
+/*
 void	move_booba(t_data *data)
 {
 	int	x;
@@ -114,3 +114,4 @@ void	move_booba(t_data *data)
 		y++;
 	}
 }
+*/

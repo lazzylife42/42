@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:57:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/01 10:56:39 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:33:27 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,38 +71,14 @@ void	error_char(t_error *error, char c)
 		error->bad_char = TRUE;
 }
 
-void	error_elements(t_error *error, t_data *data)
+void	error_empty(t_error *error, t_data *data)
 {
-	int	x;
-	int	y;
-	int	p;
-	int	e;
-	int	c;
-
-	p = 0;
-	e = 0;
-	c = 0;
-	y = 0;
-	while (y < data->map_height)
-	{
-		x = 0;
-		while (x < data->map_width)
-		{
-			if (data->map[y][x] == 'P')
-				p = 1;
-			else if (data->map[y][x] == 'E')
-				e = 1;
-			else if (data->map[y][x] == 'C')
-				c = 1;
-			x++;
-		}
-		y++;
-	}
-	if (p == 0 || e == 0 || c == 0)
-		error->bad_map = TRUE;
+	if (data->map_width == 0 || data->map_height == 0
+		|| data->map_width == 1 || data->map_height == 1)
+		error->empty = TRUE;
 }
 
-void	error_square( t_error *error, t_data *data)
+void	error_square(t_error *error, t_data *data)
 {
 	int	y;
 	int	expected_width;

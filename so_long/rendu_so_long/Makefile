@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 15:31:24 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/01 09:28:53 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/11/01 15:47:55 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ INCLUDES = -I/opt/X11/include -Imlx
 SRC = 	src/main.c \
 		src/map.c \
 		src/map2.c \
+		src/copy_map.c \
 		src/player.c \
+		src/booba.c \
 		src/state.c \
 		src/error.c \
 		src/error2.c \
