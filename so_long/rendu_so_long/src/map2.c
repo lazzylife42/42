@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:59:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/31 22:16:48 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 10:09:29 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,7 @@ void	map_renderer(t_data *data)
 
 void	free_sprite(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (i < 6)
-	{
-		mlx_destroy_image(data->win_ptr, data->textures[i]);
-		i++;
-	}
+	mlx_destroy_image(data->mlx_ptr, data->img);
 }
 
 void	free_map(t_data *data)

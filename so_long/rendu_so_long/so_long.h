@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/31 22:08:22 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 10:56:48 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ typedef struct s_error
 	int		square;
 	int		walls;
 	int		overflow;
-	int		v_path;
 	int		bad_char;
 	int		bad_map;
+	int		v_path;
 }	t_error;
 
 typedef struct s_data

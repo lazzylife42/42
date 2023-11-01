@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:58:47 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/31 21:16:59 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 11:55:49 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	error_path(t_error *error, t_data *data)
 	int		x;
 	int		y;
 
+	if (error->empty || error->square || error->walls
+		|| error-> bad_char || error->bad_char)
+		return ;
 	y = 0;
 	while (y < data->map_height)
 	{
@@ -47,7 +50,7 @@ void	error_path(t_error *error, t_data *data)
 	}
 	i = 0;
 	flood(data, x, y, 'P', '0');
-	while (i++ < data->map_height)
+	while (i++ < data->map_height * data->map_width)
 	{
 		flood(data, x, y, 'C', '0');
 		flood(data, x, y, '0', 'C');

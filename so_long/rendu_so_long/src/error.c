@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:57:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/31 23:09:16 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 10:56:39 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	error_init(t_error *error)
 	error->square = FALSE;
 	error->walls = FALSE;
 	error->overflow = FALSE;
-	error->v_path = FALSE;
 	error->bad_char = FALSE;
 	error->bad_map = FALSE;
+	error->v_path = FALSE;
 }
 
 void	error_size(t_error *error, t_data *data)
@@ -99,34 +99,28 @@ void	error_elements(t_error *error, t_data *data)
 		y++;
 	}
 	if (p == 0 || e == 0 || c == 0)
-	{
 		error->bad_map = TRUE;
-		ft_printf("%d|%d|%d\n", p, e, c);
-	}
 }
 
-void	error_square(t_error *error, t_data *data)
+void	error_square( t_error *error, t_data *data)
 {
 	int	y;
 	int	expected_width;
 
 	y = 0;
-	expected_width = -1;
-	if (data->map_width >= 30 || data->map_height >= 20)
-		error->overflow = TRUE;
+	expected_width = data->map_width;
+	if (expected_width <= 0)
+	{
+		error->square = TRUE;
+		return ;
+	}
 	while (y < data->map_height)
 	{
-		if (data->map[y] == NULL)
+		if (data->map[y] == 0
+			|| (int)ft_strlen(data->map[y]) != expected_width)
 		{
 			error->square = TRUE;
-			ft_printf("WARNING: NULL line at [%d]\n", y);
-		}
-		else if (expected_width == -1)
-			expected_width = (int)ft_strlen((char *)data->map[y]);
-		else if ((int)ft_strlen((char *)data->map[y]) != expected_width)
-		{
-			error->square = TRUE;
-			ft_printf("WARNING: Line width mismatch at [%d]\n", y);
+			return ;
 		}
 		y++;
 	}

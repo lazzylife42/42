@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 20:47:56 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/31 22:54:49 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 11:53:48 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,21 @@ void	map_init(int fd, t_data *data)
 
 	i = 0;
 	map_dim(fd, data);
-	data->map = (char **)malloc(data->map_height * sizeof(char *));
+	data->map = (char **)ft_calloc(data->map_height, sizeof(char *));
+	if (!data->map)
+		return ;
 	while (i < data->map_height)
 	{
-		data->map[i] = (char *)malloc(data->map_width * sizeof(char));
 		j = 0;
+		data->map[i] = (char *)ft_calloc(data->map_width, sizeof(char));
+		if (!data->map[i])
+			return ;
 		while (j < data->map_width)
 		{
-			data->map[i][j] = '\0';
+			data->map[i][j] = '@';
 			j++;
 		}
+		data->map[i][j] = '\0';
 		i++;
 	}
 }

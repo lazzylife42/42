@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:53:58 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/10/31 22:53:16 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 11:11:40 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	error_check(t_error *error, t_data *data)
 	t_data	*cp;
 
 	error_init(error);
+	error_elements(error, data);
+	if (error->bad_map)
+		write(2, "Error\nLa carte ne dispose pas des éléments minimums.\n", 55);
 	error_empty(error, data);
 	if (error->empty)
 		write(2, "Error\nLa carte ne peut etre vide.\n", 34);
@@ -35,29 +38,34 @@ void	error_check(t_error *error, t_data *data)
 		write(2, "Error\nLa carte doit être encadrée par des murs.\n", 50);
 	if (error->overflow)
 		write(2, "Error\nLes dimentions des la carte sont trop grandes.\n", 53);
+	if (error->bad_char)
+		write(2, "Error\nLa carte est corrompue.\n", 30);
 	cp = copy_data(data);
 	error_path(error, cp);
 	if (error->v_path)
 		write(2, "Error\nIl néxiste pas de chemin valide.\n", 40);
 	free_map(cp);
-	error_elements(error, data);
-	if (error->bad_char)
-		write(2, "Error\nLa carte est corrompue.\n", 30);
-	if (error->bad_map)
-		write(2, "Error\nLa carte ne dispose pas des éléments minimums.\n", 54);
 	error_exit(error, data);
 }
 
 void	error_exit(t_error *error, t_data *data)
 {
+	int	i;
+
 	if (error->empty || error->square || error->walls
 		|| error->overflow || error->v_path || error->bad_char
 		|| error->bad_map)
 	{
+		if (error->square)
+		{
+			i = 0;
+			while (i++ < data->map_height)
+				ft_printf("[%s]\n", (char *)data->map[i]);
+		}	
 		ft_printf("\n\n[%d][%d][%d][%d][%d][%d][%d]\n",
 			error->empty, error->square, error->walls,
-			error->overflow, error->v_path, error->bad_char,
-			error->bad_map);
+			error->overflow, error->bad_char,
+			error->bad_map, error->v_path);
 		off_destroy(data);
 	}
 }
