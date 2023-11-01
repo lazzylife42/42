@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:38:22 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/01 19:10:44 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 19:35:47 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	on_destroy(t_data *data)
 {
+	mlx_destroy_image(data->mlx_ptr, data->img);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	free_map(data);
 	exit(EXIT_SUCCESS);

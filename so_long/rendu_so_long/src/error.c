@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:57:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/01 15:33:27 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/01 19:45:49 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	error_empty(t_error *error, t_data *data)
 	if (data->map_width == 0 || data->map_height == 0
 		|| data->map_width == 1 || data->map_height == 1)
 		error->empty = TRUE;
+	if (data->map_width > 41 || data->map_height > 22)
+		error->overflow = TRUE;
 }
 
 void	error_square(t_error *error, t_data *data)
