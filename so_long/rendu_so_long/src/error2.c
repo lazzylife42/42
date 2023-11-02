@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:53:58 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/01 20:08:59 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:11:52 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,12 @@ void	error_check(t_error *error, t_data *data)
 	if (error->v_path)
 		write(2, "Error\nIl néxiste pas de chemin valide.\n", 40);
 	free_map(cp);
-	error_exit(error, data);
+	error_exit(error, data, cp);
 }
 
-void	error_exit(t_error *error, t_data *data)
+void	error_exit(t_error *error, t_data *data, t_data *cp)
 {
+	free(cp);
 	if (error->empty || error->square || error->walls
 		|| error->overflow || error->v_path || error->bad_char
 		|| error->bad_map)

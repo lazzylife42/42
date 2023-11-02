@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/01 19:03:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:12:00 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	free_sprite(t_data *data);
 
 t_data	*copy_data(const t_data *source);
 void	free_data(t_data *copy);
+void	p_data(t_data *data);
 void	flood_p(t_data *data, int x, int y, char new_char);
 void	flood_c(t_data *data, int x, int y, char new_char);
 void	flood_z(t_data *data, int x, int y, char new_char);
@@ -107,6 +108,6 @@ void	error_elements(t_error *error, t_data *data);
 void	error_square(t_error *error, t_data *data);
 void	error_path(t_error *error, t_data *data);
 void	error_empty(t_error *error, t_data *data);
-void	error_exit(t_error *error, t_data *data);
+void	error_exit(t_error *error, t_data *data, t_data *cp);
 
 #endif
