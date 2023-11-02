@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:53:58 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/02 16:10:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:18:27 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	error_elements(t_error *error, t_data *data)
 		}
 		y++;
 	}
-	if (p == 0 || e == 0 || c == 0 || p > 1)
+	if (p != 1 || e != 1 || c == 0)
 		error->bad_map = TRUE;
 }
 
