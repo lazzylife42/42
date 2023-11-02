@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 15:31:24 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/02 14:59:40 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/11/02 15:39:05 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,22 @@ SRC = 	src/main.c \
 		src/state.c \
 		src/error.c \
 		src/error2.c \
-		src/flood_fill.c \
+		src/flood_fill.c
+
+SRC_BONUS = 	src/main.c \
+src/map.c \
+src/map2.c \
+src/copy_map.c \
+src/player.c \
+src/booba.c \
+src/error.c \
+src/error2.c \
+src/flood_fill.c \
+src/state_bonus.c
 
 OBJS = $(SRC:.c=.o)
+
+OBJS_BONUS = $(SRC_BONUS:.c=.o)
 
 all: $(NAME)
 
@@ -47,6 +60,11 @@ $(LIBFT):
 
 $(MLX):
 	$(MAKE) -sC $(@D)
+
+bonus: fclean $(OBJS_BONUS)
+	$(MAKE) -C $(LIBFT)
+	$(MAKE) -sC $(MLX)
+	gcc $(CFLAGS) $(OBJS_BONUS) -L./$(LIBFT) -lft -L./$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
 	$(MAKE) -C $(LIBFT) clean

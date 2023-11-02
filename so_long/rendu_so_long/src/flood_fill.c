@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:58:47 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/01 19:07:14 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:59:01 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	error_path(t_error *error, t_data *data)
 	if (error->empty || error->square || error->walls
 		|| error->bad_char || error->bad_char)
 		return ;
+	fill_zero(data);
 	find_player(data, &x, &y);
 	i = 0;
 	flood_p(data, x, y, '0');

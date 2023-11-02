@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 09:21:11 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/01 19:03:32 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:00:20 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,28 @@ void	find_player(t_data *data, int *x, int *y)
 			(*x)++;
 		}
 		(*y)++;
+	}
+}
+
+void	fill_zero(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < data->map_height)
+	{
+		x = 0;
+		while (x < data->map_width)
+		{
+			if (data->map[y][x] == '0')
+			{
+				if (data->map[y + 1][x] == '1' && data->map[y][x + 1] == '1'
+					&& data->map[y - 1][x] == '1' && data->map[y][x - 1] == '1')
+						data->map[y][x] = '1';
+			}
+			x++;
+		}
+		y++;
 	}
 }

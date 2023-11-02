@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:25:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/02 13:12:00 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:12:14 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	check_c(t_data *data);
 void	check_e(t_data *data);
 void	check_b(t_data *data);
 void	find_player(t_data *data, int *x, int *y);
+void	fill_zero(t_data *data);
 void	move_booba(t_data *data);
 
 /*	EXIT 		*/

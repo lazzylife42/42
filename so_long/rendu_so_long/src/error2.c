@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:53:58 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/02 13:11:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:10:52 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static void	init_counts(int *p, int *e, int *c)
 static	void	count_elements(int *p, int *e, int *c, char cell)
 {
 	if (cell == 'P')
-		(*p) = 1;
+		(*p) += 1;
 	else if (cell == 'E')
-		(*e) = 1;
+		(*e) += 1;
 	else if (cell == 'C')
-		(*c) = 1;
+		(*c) += 1;
 }
 
 void	error_elements(t_error *error, t_data *data)
@@ -49,7 +49,7 @@ void	error_elements(t_error *error, t_data *data)
 		}
 		y++;
 	}
-	if (p == 0 || e == 0 || c == 0)
+	if (p == 0 || e == 0 || c == 0 || p > 1)
 		error->bad_map = TRUE;
 }
 
@@ -60,7 +60,7 @@ void	error_check(t_error *error, t_data *data)
 	error_init(error);
 	error_elements(error, data);
 	if (error->bad_map)
-		write(2, "Error\nLa carte ne dispose pas des éléments minimums.\n", 55);
+		write(2, "Error\nLa carte ne dispose pas des éléments correctes.\n", 55);
 	error_empty(error, data);
 	if (error->empty)
 		write(2, "Error\nLa carte ne peut etre vide.\n", 34);
