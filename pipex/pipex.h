@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:33:43 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/04 17:51:27 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/04 23:22:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include "libft/libft.h"
 
-# define TRUE 1
-# define FALSE 0
+int		get_next_line(char **line);
+char	*find_path(char *cmd, char **envp);
+void	error(void);
+void	execute(char *argv, char **envp);
 
 #endif

@@ -6,53 +6,59 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:33:11 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/04 18:58:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/04 23:20:29 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int main(int argc, char const **argv)
+void	child_process(char **argv, char **envp, int *fd)
 {
-	pid_t	father;
-	int		file0;
-	int		file1;
-	char	*cmd0;
-	char 	*cmd1 = NULL;
-	
-	(void)argc;
-	file0 = open(argv[1], O_RDWR);
-	file1 = open(argv[4], O_RDWR);
-	cmd0 = (char *)malloc((ft_strlen(argv[2]) + 6) * sizeof(char));
-	cmd1 = (char *)malloc((ft_strlen(argv[3]) + 6) * sizeof(char));
-	
-	ft_strcat(cmd0, "/bin/");
-	ft_strcat(cmd1, "/bin/");
-	ft_strcat(cmd0, argv[2]);
-	ft_strcat(cmd1, argv[3]);
+	int		input_file;
 
-	char *const c0[] = {cmd0, NULL};
-	char *const c1[] = {cmd1, NULL};
-	
-	if (file0 == -1 || file1 == -1)
-	{
-		write(2, "Error\nCan't open file(s).\n", 27);
-		exit(EXIT_FAILURE);
-	}
-	father = fork();
-	if (father > 0)
-	{
-		wait(0);
-		ft_printf("cmd 1 : '%s'\n", cmd1);
-		execve(cmd1, c1, NULL);
-	}
-	else if (father == 0)
-	{
-		ft_printf("cmd 0 : '%s'\n", cmd0);
-		execve(cmd0, c0, NULL);
-	}
-	free(cmd0);
-	free(cmd1);
-	return 0;
+	input_file = open(argv[1], O_RDONLY, 0777);
+	if (input_file == -1)
+		error();
+	dup2(fd[1], STDOUT_FILENO);
+	dup2(input_file, STDIN_FILENO);
+	close(fd[0]);
+	execute(argv[2], envp);
 }
 
+void	parent_process(char **argv, char **envp, int *fd)
+{
+	int		output_file;
+
+	output_file = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (output_file == -1)
+		error();
+	dup2(fd[0], STDIN_FILENO);
+	dup2(output_file, STDOUT_FILENO);
+	close(fd[1]);
+	execute(argv[3], envp);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	int		fd[2];
+	pid_t	pid1;
+
+	if (argc == 5)
+	{
+		if (pipe(fd) == -1)
+			error();
+		pid1 = fork();
+		if (pid1 == -1)
+			error();
+		if (pid1 == 0)
+			child_process(argv, envp, fd);
+		waitpid(pid1, NULL, 0);
+		parent_process(argv, envp, fd);
+	}
+	else
+	{
+		ft_putstr_fd("Error: Bad arguments\n", 2);
+		ft_putstr_fd("Try: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
+	}
+	return (0);
+}
