@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:33:43 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/04 23:22:54 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:28:02 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@
 # include <sys/wait.h>
 # include "libft/libft.h"
 
-int		get_next_line(char **line);
-char	*find_path(char *cmd, char **envp);
 void	error(void);
+char	*find_path(char *cmd, char **envp);
 void	execute(char *argv, char **envp);
 
 #endif

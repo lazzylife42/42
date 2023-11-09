@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 18:18:41 by sab               #+#    #+#             */
-/*   Updated: 2023/11/01 19:14:46 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/11/09 15:19:01 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/11/09 15:20:02 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../pipex.h"
 
-int	ft_strcmp(char *s1, char *s2)
+void	error(void)
 {
-	int	i;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
+	perror("Error\n");
+	exit(EXIT_FAILURE);
 }

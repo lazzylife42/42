@@ -6,13 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:53:58 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/01 14:57:02 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:18:27 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static	void	init_counts(int *p, int *e, int *c)
+static void	init_counts(int *p, int *e, int *c)
 {
 	*p = 0;
 	*e = 0;
@@ -22,11 +22,11 @@ static	void	init_counts(int *p, int *e, int *c)
 static	void	count_elements(int *p, int *e, int *c, char cell)
 {
 	if (cell == 'P')
-		(*p) = 1;
+		(*p) += 1;
 	else if (cell == 'E')
-		(*e) = 1;
+		(*e) += 1;
 	else if (cell == 'C')
-		(*c) = 1;
+		(*c) += 1;
 }
 
 void	error_elements(t_error *error, t_data *data)
@@ -49,7 +49,7 @@ void	error_elements(t_error *error, t_data *data)
 		}
 		y++;
 	}
-	if (p == 0 || e == 0 || c == 0)
+	if (p != 1 || e != 1 || c == 0)
 		error->bad_map = TRUE;
 }
 
@@ -60,7 +60,7 @@ void	error_check(t_error *error, t_data *data)
 	error_init(error);
 	error_elements(error, data);
 	if (error->bad_map)
-		write(2, "Error\nLa carte ne dispose pas des éléments minimums.\n", 55);
+		write(2, "Error\nLa carte ne dispose pas des éléments correctes.\n", 55);
 	error_empty(error, data);
 	if (error->empty)
 		write(2, "Error\nLa carte ne peut etre vide.\n", 34);
@@ -79,11 +79,12 @@ void	error_check(t_error *error, t_data *data)
 	if (error->v_path)
 		write(2, "Error\nIl néxiste pas de chemin valide.\n", 40);
 	free_map(cp);
-	error_exit(error, data);
+	error_exit(error, data, cp);
 }
 
-void	error_exit(t_error *error, t_data *data)
+void	error_exit(t_error *error, t_data *data, t_data *cp)
 {
+	free(cp);
 	if (error->empty || error->square || error->walls
 		|| error->overflow || error->v_path || error->bad_char
 		|| error->bad_map)

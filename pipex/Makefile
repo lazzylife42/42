@@ -3,25 +3,12 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/04 17:48:04 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/04 23:21:42 by smonte-e         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:50:47 by sab               #+#    #+#              #
-#    Updated: 2023/10/06 22:58:52 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/11/09 15:24:39 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME = pipex
 DIR_SRC = src/
@@ -30,7 +17,7 @@ LIBFT = libft
 RM = rm -f
 OPTIONS = -I
 
-SRC = 	src/main.c \
+SRC = 	src/pipex.c src/pipex_utils.c
 
 OBJS = $(SRC:.c=.o)
 
