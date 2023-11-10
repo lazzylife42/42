@@ -1,0 +1,9 @@
+total 3240
+-rw-r--r--   1 smonte-e  2022_lausanne     1397 Nov  9 15:24 Makefile
+-rw-r--r--   1 smonte-e  2022_lausanne       43 Nov 10 11:04 file0.txt
+-rw-r--r--   1 smonte-e  2022_lausanne       78 Nov 10 15:22 file1.txt
+-rw-r--r--   1 smonte-e  2022_lausanne  1585760 Nov  8 17:20 fr.subject.pdf
+drwxr-xr-x  88 smonte-e  2022_lausanne     2992 Nov 10 14:43 libft
+-rwxr-xr-x   1 smonte-e  2022_lausanne    51088 Nov 10 15:21 pipex
+-rw-r--r--   1 smonte-e  2022_lausanne     1360 Nov 10 14:40 pipex.h
+drwxr-xr-x   6 smonte-e  2022_lausanne      204 Nov 10 15:21 src
