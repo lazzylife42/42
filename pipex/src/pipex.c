@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:23:57 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/10 17:09:49 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/10 18:04:29 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	child_process(char **argv, char **cmd, char **envp, int *fd)
 {
 	int		input_file;
 
-	ft_printf("[Child]\n");
 	input_file = open(argv[1], O_RDONLY);
 	if (input_file == -1)
 	{
@@ -33,7 +32,6 @@ void	parent_process(char **argv, char **cmd, char **envp, int *fd)
 {
 	int		output_file;
 
-	ft_printf("[Parent]\n");
 	output_file = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (output_file == -1)
 	{

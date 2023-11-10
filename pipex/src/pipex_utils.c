@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:19:01 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/10 17:58:28 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/10 18:16:32 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	execute(char **cmd, char **envp)
 {
 	char *tmp;
 	tmp = find_path(cmd, envp);
-	if(!tmp)
+	if(tmp == NULL)
 	{
-		perror("<Cmd> not found\n");
+		ft_putstr_fd("Error: <cmd> not found\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	execve(tmp, cmd, envp);
