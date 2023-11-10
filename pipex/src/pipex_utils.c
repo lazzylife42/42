@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:19:01 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/10 15:21:51 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/10 17:43:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,21 @@ char ***parse_cmd(char **argv)
 	split[1][0] = cmd2[0];
 	split[1][1] = cmd2[1];
 	split[1][2] = NULL;
+	free(cmd1);
+	free(cmd2);
 	return split;
 }
 
 void	execute(char **cmd, char **envp)
 {
 	char *tmp;
-	
-//	if (cmd[1] != NULL)
-//		ft_strcpy(cmd[1], cmd[1] + 1);
-	tmp = (char *)malloc(ft_strlen("/bin/") + ft_strlen(cmd[0]) + 1);
-	ft_strcpy(tmp, "/bin/");
-	ft_strcat(tmp, cmd[0]);
-	ft_strcpy(cmd[0], tmp);
-	free(tmp);
-	execve(cmd[0], cmd, envp);
+	tmp = find_path(cmd, envp);
+	if(!tmp)
+	{
+		perror("<Cmd> not found\n");
+		exit(EXIT_FAILURE);
+	}
+	execve(tmp, cmd, envp);
 }
 
 void free_cmd(char ***cmd)
@@ -66,4 +66,30 @@ void free_cmd(char ***cmd)
 	free(cmd[1][1]);
 	free(cmd[1]);
 	free(cmd);
+}
+
+char	*find_path(char **cmd, char **envp)
+{
+	int i = 0;
+	int v_access = 0;
+	char **split;
+	char *return_cmd;
+	
+	split = ft_split(envp[13], ':');
+	split[0] = split[0] + 5;
+	return_cmd = (char *)malloc(ft_strlen(envp[13]) + 1);
+	while (split[i])
+	{
+		ft_strcat(return_cmd, split[i]);
+		ft_strcat(return_cmd, "/");
+		ft_strcat(return_cmd, cmd[0]);
+		v_access = access(return_cmd, X_OK);
+		if(v_access == 0)
+			return (return_cmd);
+		ft_memset(return_cmd, '\0',ft_strlen(return_cmd));
+		i++;
+	}
+	free(split);
+	free(return_cmd);
+	return(NULL);
 }
