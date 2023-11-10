@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:19:01 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/10 17:43:54 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/10 17:58:28 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,16 @@ char	*find_path(char **cmd, char **envp)
 {
 	int i = 0;
 	int v_access = 0;
+	int p_val = 0;
 	char **split;
 	char *return_cmd;
 	
+	while (ft_strncmp(envp[p_val], "PATH=", 5) != 0)
+		p_val++;
+		
 	split = ft_split(envp[13], ':');
 	split[0] = split[0] + 5;
+	
 	return_cmd = (char *)malloc(ft_strlen(envp[13]) + 1);
 	while (split[i])
 	{

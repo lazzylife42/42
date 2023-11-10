@@ -1,1 +1,11 @@
-       2
+total 3240$
+drwxr-xr-x  10 smonte-e  2022_lausanne      340 Nov 10 17:58 .$
+drwxr-xr-x  13 smonte-e  2022_lausanne      442 Nov 10 09:52 ..$
+-rw-r--r--   1 smonte-e  2022_lausanne     1397 Nov  9 15:24 Makefile$
+-rw-r--r--   1 smonte-e  2022_lausanne       43 Nov 10 11:04 file0.txt$
+-rw-r--r--   1 smonte-e  2022_lausanne       30 Nov 10 17:59 file1.txt$
+-rw-r--r--   1 smonte-e  2022_lausanne  1585760 Nov  8 17:20 fr.subject.pdf$
+drwxr-xr-x  88 smonte-e  2022_lausanne     2992 Nov 10 17:38 libft$
+-rwxr-xr-x   1 smonte-e  2022_lausanne    51224 Nov 10 17:58 pipex$
+-rw-r--r--   1 smonte-e  2022_lausanne     1361 Nov 10 16:38 pipex.h$
+drwxr-xr-x   6 smonte-e  2022_lausanne      204 Nov 10 17:58 src$
