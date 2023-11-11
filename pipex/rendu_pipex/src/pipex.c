@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:23:57 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/11 17:49:33 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/11 18:17:33 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		ft_putstr_fd("\033[31mError: Bad arguments\n\e[0m", 2);
 		ft_putstr_fd("Try: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
-		error();
+		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

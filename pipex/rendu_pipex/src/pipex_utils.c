@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:19:01 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/11 17:46:44 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:56:49 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ char	*find_path(char *argv, char **envp)
 			return (path);
 		free(path);
 		i++;
-		ft_printf("[%s]\n", path);
 	}
 	i = -1;
 	while (split[++i])
