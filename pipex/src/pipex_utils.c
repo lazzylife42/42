@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:19:01 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/10 18:16:32 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:11:00 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,26 +71,23 @@ void free_cmd(char ***cmd)
 char	*find_path(char **cmd, char **envp)
 {
 	int i = 0;
-	int v_access = 0;
-	int p_val = 0;
 	char **split;
 	char *return_cmd;
 	
-	while (ft_strncmp(envp[p_val], "PATH=", 5) != 0)
-		p_val++;
-		
-	split = ft_split(envp[13], ':');
+	while (ft_strncmp(envp[i], "PATH=", 5) != 0)
+		i++;
+	split = ft_split(envp[i], ':');
 	split[0] = split[0] + 5;
-	
-	return_cmd = (char *)malloc(ft_strlen(envp[13]) + 1);
+	return_cmd = (char *)malloc(ft_strlen(envp[i]) + 1);
+	i = 0;
 	while (split[i])
 	{
 		ft_strcat(return_cmd, split[i]);
 		ft_strcat(return_cmd, "/");
 		ft_strcat(return_cmd, cmd[0]);
-		v_access = access(return_cmd, X_OK);
-		if(v_access == 0)
+		if(access(return_cmd, X_OK | W_OK | R_OK) == 0)
 			return (return_cmd);
+		ft_printf("[%s]\n", return_cmd);
 		ft_memset(return_cmd, '\0',ft_strlen(return_cmd));
 		i++;
 	}
