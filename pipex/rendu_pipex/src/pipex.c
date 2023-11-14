@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:23:57 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/11 18:17:33 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:25:09 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	parent_process(char **argv, char **envp, int *fd)
 {
 	int		output_file;
 
-	output_file = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	output_file = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (output_file == -1)
 		error();
 	dup2(fd[0], STDIN_FILENO);
@@ -51,15 +51,13 @@ int	main(int argc, char **argv, char **envp)
 		if (pid1 == -1)
 			error();
 		if (pid1 == 0)
+		{
 			child_process(argv, envp, fd);
-		waitpid(pid1, NULL, 0);
+			waitpid(pid1, NULL, 0);
+		}
 		parent_process(argv, envp, fd);
 	}
 	else
-	{
-		ft_putstr_fd("\033[31mError: Bad arguments\n\e[0m", 2);
-		ft_putstr_fd("Try: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
-		return (EXIT_FAILURE);
-	}
+		error();
 	return (EXIT_SUCCESS);
 }
