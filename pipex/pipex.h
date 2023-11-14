@@ -6,12 +6,12 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:33:43 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/10 16:38:07 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:45:49 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX
-# define PIPEX
+#ifndef PIPEX_H
+# define PIPEX_H
 
 # include <unistd.h>
 # include <stdio.h>
@@ -20,12 +20,15 @@
 # include <sys/wait.h>
 # include "libft/libft.h"
 
+/*	PIPEX	*/
+
+void	child_process(char **argv, char **envp, int *fd);
+void	parent_process(char **argv, char **envp, int *fd);
+
+/*	UTILS	*/
+
 void	error(void);
-char	*find_path(char **cmd, char **envp);
-char    ***parse_cmd(char **argv);
-void    free_cmd(char ***cmd);
-void	execute(char **cmd, char **envp);
-void	child_process(char **argv, char **cmd, char **envp, int *fd);
-void	parent_process(char **argv, char **cmd, char **envp, int *fd);
+char	*find_path(char *argv, char **envp);
+void	execute(char *argv, char **envp);
 
 #endif

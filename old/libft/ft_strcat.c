@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 17:17:09 by sab               #+#    #+#             */
-/*   Updated: 2023/11/11 17:50:37 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/11/04 18:16:48 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/11/04 18:17:09 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_atol(const char *str)
+char	*ft_strcat(char *dest, const char *src)
 {
-	int		i;
-	int		signe;
-	long	cache;
+	int i;
+	int j;
 
 	i = 0;
-	signe = 1;
-	cache = 0;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\f'
-		|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
+	j = 0;
+	while (dest[i] != '\0')
 		i++;
-	while (str[i] == '-' || str[i] == '+')
+	while (src[j] != '\0')
 	{
-		if (str[i] == '-')
-			signe *= -1;
+		dest[i] = src[j];
 		i++;
-		if (str[i] == '+' || str[i] == '-')
-			return (0);
-	}	
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		cache = cache * 10 + (str[i] - 48);
-		i++;
-	}	
-	return (signe * cache);
+		j++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

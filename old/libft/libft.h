@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 12:58:34 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/11 17:50:59 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/04 18:17:45 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ t_List	*add_at(t_List *list, int data, int pos);
 t_List	*add_end(t_List *list, int data);
 t_List	*free_at(t_List *list, int pos);
 t_List	*free_list(t_List *list);
+
 
 //	get_next_line
 
