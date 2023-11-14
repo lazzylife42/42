@@ -6,17 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:19:01 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/14 13:14:17 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:49:57 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
-
-void	error(void)
-{
-	perror("\033[31mError");
-	exit(EXIT_FAILURE);
-}
 
 void	execute(char *argv, char **envp)
 {
@@ -32,10 +26,14 @@ void	execute(char *argv, char **envp)
 		while (cmd[++i])
 			free(cmd[i]);
 		free(cmd);
-		error();
+		perror("Command not found.\n");
+		exit(127);
 	}
 	if (execve(path, cmd, envp) == -1)
-		error();
+	{
+		perror("Can't execute the command.\n");
+		exit(127);
+	}
 }
 
 char	*find_path(char *argv, char **envp)
@@ -55,7 +53,7 @@ char	*find_path(char *argv, char **envp)
 		path_tmp = ft_strjoin(split[i], "/");
 		path = ft_strjoin(path_tmp, argv);
 		free(path_tmp);
-		if (access(path, F_OK) == 0)
+		if (access(path, X_OK) == 0)
 			return (path);
 		free(path);
 		i++;
