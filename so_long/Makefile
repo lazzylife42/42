@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 15:31:24 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/02 15:39:05 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/11/21 14:07:54 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,27 +19,27 @@ RM = rm -f
 OPTIONS = -Imlx -Ilibft
 INCLUDES = -I/opt/X11/include -Imlx
 
-SRC = 	src/main.c \
-		src/map.c \
-		src/map2.c \
-		src/copy_map.c \
-		src/player.c \
-		src/booba.c \
-		src/state.c \
-		src/error.c \
-		src/error2.c \
-		src/flood_fill.c
+SRC =		 src/main.c \
+			src/map.c \
+			src/map2.c \
+			src/copy_map.c \
+			src/player.c \
+			src/booba.c \
+			src/state.c \
+			src/error.c \
+			src/error2.c \
+			src/flood_fill.c
 
-SRC_BONUS = 	src/main.c \
-src/map.c \
-src/map2.c \
-src/copy_map.c \
-src/player.c \
-src/booba.c \
-src/error.c \
-src/error2.c \
-src/flood_fill.c \
-src/state_bonus.c
+SRC_BONUS = src/main.c \
+			src/map.c \
+			src/map2.c \
+			src/copy_map.c \
+			src/player.c \
+			src/booba.c \
+			src/error.c \
+			src/error2.c \
+			src/flood_fill.c \
+			src/state_bonus.c
 
 OBJS = $(SRC:.c=.o)
 
