@@ -3,7 +3,6 @@
 Ce référentiel contient plusieurs projets réalisés dans le cadre de mon cursus à 42lausanne :
 
 - [`libft`](./libft): Ma bibliothèque de fonctions en C.
-- [`old`](./old): Anciens fichiers ou projets archivés.
 - [`philosophers`](./philosophers): Implémentation de la problématique des philosophes.
 - [`pipex`](./pipex): Programme de manipulation de flux entre deux commandes.
 - [`push_swap`](./push_swap): Algorithme de tri pour un jeu de piles.

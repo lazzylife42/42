@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 14:10:04 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/21 14:10:59 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/11/23 13:44:18 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,10 @@ DIR_SRC = src/
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = libft
 RM = rm -f
-OPTIONS = -I
+OPTIONS = -I -pthread
 
-SRC = 	src/pipex.c src/pipex_utils.c
+SRC = 	src/main.c \
+		src/utils.c
 
 OBJS = $(SRC:.c=.o)
 

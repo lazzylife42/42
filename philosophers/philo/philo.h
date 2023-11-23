@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/21 16:58:39 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:41:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@
 
 # define TRUE	1
 # define FALSE	0
+
+// Define ANSI escape sequences for text color
+
+# define RST	"\033[0m"    
+# define RED	"\033[31m"      
+# define G 		"\033[32m"      
+# define Y		"\033[33m"      
+# define B		"\033[34m"      
+# define M		"\033[35m"      
+# define C		"\033[36m"      
+# define W		"\033[37m"      
+
 
 /*	TYPEDEF			*/
 
@@ -71,5 +83,9 @@ struct s_table
 /*
 ////	FONCTIONS	////
 */
+
+/*	ERROR		*/
+
+void    error_exit(const char *error);
 
 #endif
