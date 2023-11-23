@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/23 13:41:30 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/23 16:40:03 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 /*	TYPEDEF			*/
 
 typedef 		pthread_mutex_t t_mtx;
-typedef struct	s_table t_tables;
+/*typedef struct	s_table t_table;*/
 
 /*	STRUCT	FORK	*/
 
@@ -67,7 +67,7 @@ typedef struct s_philo
 
 /*	STRUCT	TABLE	*/
 
-struct s_table
+typedef struct s_table
 {
 	long		philo_nbr;
 	long		time_to_die;
