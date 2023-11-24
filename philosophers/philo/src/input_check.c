@@ -6,17 +6,17 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:45:41 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/24 12:57:44 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:25:53 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-static	int	ft_atoi(const char *str)
+static	long	long	ft_atoll(const char *str)
 {
-	int	i;
-	int	signe;
-	int	cache;
+	int				i;
+	int				signe;
+	long	long	cache;
 
 	i = 0;
 	signe = 1;
@@ -57,17 +57,17 @@ void check_input(int argc, char **argv)
 		}
 		i++;
 	}
-	if (ft_atoi(argv[1]) < 1)
-		error_exit("Number of philosopher(s) too low\n"G"Try one or more."RST);
-	if (ft_atoi(argv[2]) < 1)
-		error_exit("Simulation time too low\n"G"Try 1ms or more."RST);
-	if (ft_atoi(argv[3]) < 1)
-		error_exit("Eat time too low\n"G"Try 1ms or more."RST);
-	if (ft_atoi(argv[4]) < 1)
-		error_exit("Sleep time too low\n"G"Try 1ms or more."RST);
+	if (ft_atoll(argv[1]) < 1 || ft_atoll(argv[1]) > LONG_MAX)
+		error_exit("Number of philosopher(s) too low or to big\n"G"Try one or more (But less than LONG_MAX)."RST);
+	if (ft_atoll(argv[2]) < 1 || ft_atoll(argv[2]) > LONG_MAX)
+		error_exit("Simulation time too low or to big\n"G"Try 1ms or more (But less than LONG_MAX)."RST);
+	if (ft_atoll(argv[3]) < 1 || ft_atoll(argv[2]) > LONG_MAX)
+		error_exit("Eat time too low or to big\n"G"Try 1ms or more (But less than LONG_MAX)."RST);
+	if (ft_atoll(argv[4]) < 1 || ft_atoll(argv[3]) > LONG_MAX)
+		error_exit("Sleep time too low or to big\n"G"Try 1ms or more (But less than LONG_MAX)."RST);
 	if (argc == 6)
 	{
-		if (ft_atoi(argv[5]) < 1)
-			error_exit("Each philosopher must eat at least 1 time\n"G"Try one or more."RST);
+		if (ft_atoll(argv[5]) < 1 || ft_atoll(argv[5]) > INT_MAX)
+			error_exit("Each philosopher must eat at least 1 time\n"G"Try one or more (But less than INT_MAX)."RST);
 	}
 }
