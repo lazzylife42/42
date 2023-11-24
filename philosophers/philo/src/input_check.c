@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 19:55:27 by smonte-e          #+#    #+#             */
-/*   Updated: 2022/12/20 12:21:25 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/11/24 11:45:41 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/11/24 12:57:44 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../philo.h"
 
-int	ft_atoi(const char *str)
+static	int	ft_atoi(const char *str)
 {
 	int	i;
 	int	signe;
@@ -40,9 +40,34 @@ int	ft_atoi(const char *str)
 	return (signe * cache);
 }
 
-/*
-#include <stdio.h>
-int main(int argc, char *argv[])
+void check_input(int argc, char **argv)
 {
-	printf("%d", ft_atoi(argv[1]));
-}*/
+	int i;
+	int j;
+
+	i = 1;
+	while (i < argc)
+	{
+		j = 0;
+		while (argv[i][j] != '\0')
+		{
+			if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
+				error_exit("One of your inputs is not a valid number\n"G"Try numbers only."RST);
+			j++;
+		}
+		i++;
+	}
+	if (ft_atoi(argv[1]) < 1)
+		error_exit("Number of philosopher(s) too low\n"G"Try one or more."RST);
+	if (ft_atoi(argv[2]) < 1)
+		error_exit("Simulation time too low\n"G"Try 1ms or more."RST);
+	if (ft_atoi(argv[3]) < 1)
+		error_exit("Eat time too low\n"G"Try 1ms or more."RST);
+	if (ft_atoi(argv[4]) < 1)
+		error_exit("Sleep time too low\n"G"Try 1ms or more."RST);
+	if (argc == 6)
+	{
+		if (ft_atoi(argv[5]) < 1)
+			error_exit("Each philosopher must eat at least 1 time\n"G"Try one or more."RST);
+	}
+}

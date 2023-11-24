@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/23 16:40:03 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:21:09 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 /*	INCLUDES		*/
 
 # include <unistd.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
 # include <limits.h>
-# include "libft/libft.h"
 
 /*	DEFINES			*/
 
@@ -84,8 +84,13 @@ typedef struct s_table
 ////	FONCTIONS	////
 */
 
-/*	ERROR		*/
+/*	ERROR			*/
 
 void    error_exit(const char *error);
+
+/*	INPUT CHECK		*/
+
+void	check_input(int argc, char **argv);
+
 
 #endif

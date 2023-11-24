@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:25:29 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/23 13:37:40 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:19:12 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void    error_exit(const char *error)
 {
-    ft_printf(RED"%s\n"RST, error);
+    printf(RED"%s\n"RST, error);
     exit(EXIT_FAILURE);
 }
