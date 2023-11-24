@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 14:10:04 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/24 11:46:14 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/11/24 16:00:38 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ OPTIONS = -pthread
 
 SRC = 	src/main.c \
 		src/utils.c \
-		src/input_check.c
+		src/input_check.c \
+		src/init.c
 
 OBJS = $(SRC:.c=.o)
 

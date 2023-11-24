@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/24 14:16:29 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:59:09 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,20 @@ typedef struct s_table
 }				t_table;
 
 /*
-////	FONCTIONS	////
+////////////////	FONCTIONS		////////////////
 */
 
-/*	ERROR			*/
+/*	UTILS			*/
 
-void    error_exit(const char *error);
+void	    error_exit(const char *error);
+long long	ft_atoll(const char *str);
 
 /*	INPUT CHECK		*/
 
-void	check_input(int argc, char **argv);
+void		check_input(int argc, char **argv);
 
+/*	INIT			*/
+
+void		init_simulation(int argc, char **argv, t_table *table);
 
 #endif
