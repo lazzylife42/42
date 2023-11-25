@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 14:10:04 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/24 16:00:38 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/11/25 11:40:31 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ OPTIONS = -pthread
 SRC = 	src/main.c \
 		src/utils.c \
 		src/input_check.c \
-		src/init.c
+		src/init.c \
+		src/thread.c
 
 OBJS = $(SRC:.c=.o)
 

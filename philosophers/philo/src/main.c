@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:12:35 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/24 16:20:25 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/25 11:38:22 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 		table = malloc(sizeof(t_table));
 		if (!table)
 			error_exit("Malloc error");
-		init_simulation(argc, argv, &table);
+		init_simulation(argc, argv, table);
 	}
 	else
 	{

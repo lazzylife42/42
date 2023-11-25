@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/24 15:59:09 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/25 13:14:35 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 # define RST	"\033[0m"    
 # define RED	"\033[31m"      
 # define G 		"\033[32m"      
-# define Y		"\033[33m"      
+# define Y		"\033[33m"
+# define YL		"\033[1;33m"     
 # define B		"\033[34m"      
 # define M		"\033[35m"      
 # define C		"\033[36m"      
@@ -61,6 +62,7 @@ typedef struct s_philo
 	int			full;
 	long		meals_count;
 	long		last_meal_time;
+	long		meal_limit_nbr;
 	t_fork		*fork_left;
 	t_fork		*fork_right;
 	pthread_t	thread_id;
@@ -97,5 +99,9 @@ void		check_input(int argc, char **argv);
 /*	INIT			*/
 
 void		init_simulation(int argc, char **argv, t_table *table);
+
+/*	THEAD FONCTIONS	*/
+
+void	*philosopher_thread_function(void *arg);
 
 #endif
