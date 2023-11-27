@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:56:04 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/25 11:40:07 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/25 16:41:02 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void philo_init(t_philo *philo, int id, t_table *table)
 	philo->fork_left = &(table->forks[id]);
 	philo->fork_right = &(table->forks[(id + 1) % table->philo_nbr]);
 	philo->meal_limit_nbr = table->meal_limit_nbr;
-    pthread_create(&(philo->thread_id), NULL, philosopher_thread_function(philo, table), philo);
+    pthread_create(&(philo->thread_id), NULL, philosopher_thread_function(philo), philo);
 }
 
 // static void init_fork(t_fork *fork)

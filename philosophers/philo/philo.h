@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/25 13:14:35 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/25 19:17:47 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 
 /*	DEFINES			*/
 
-# define TRUE	1
-# define FALSE	0
+# define TRUE		1
+# define FALSE		0
+# define MIN_TIME	6e4
 
 // Define ANSI escape sequences for text color
 
@@ -90,11 +91,10 @@ typedef struct s_table
 /*	UTILS			*/
 
 void	    error_exit(const char *error);
-long long	ft_atoll(const char *str);
 
 /*	INPUT CHECK		*/
 
-void		check_input(int argc, char **argv);
+void		parse_input(int argc, char **argv, t_table *table);
 
 /*	INIT			*/
 

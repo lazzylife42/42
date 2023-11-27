@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: sab <sab@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 14:10:04 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/25 11:40:31 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/11/25 19:38:09 by sab              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OPTIONS = -pthread
 
 SRC = 	src/main.c \
 		src/utils.c \
-		src/input_check.c \
+		src/parsing.c \
 		src/init.c \
 		src/thread.c
 

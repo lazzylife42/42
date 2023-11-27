@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:45:41 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/24 15:12:11 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:36:35 by sab              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void check_input(int argc, char **argv)
 		while (argv[i][j] != '\0')
 		{
 			if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
-				error_exit("One of your inputs is not a valid number\n"G"Try numbers only."RST);
+				error_exit("One of your inputs is not a valid number\n"G"Try positive numbers only."RST);
 			j++;
 		}
 		i++;
