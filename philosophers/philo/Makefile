@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sab <sab@student.42.fr>                    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 14:10:04 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/25 19:38:09 by sab              ###   ########.fr        #
+#    Updated: 2023/11/28 23:13:59 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OPTIONS = -pthread
 SRC = 	src/main.c \
 		src/utils.c \
 		src/parsing.c \
-		src/init.c \
+		src/data_init.c \
 		src/thread.c
 
 OBJS = $(SRC:.c=.o)

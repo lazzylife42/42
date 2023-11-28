@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/25 19:17:47 by sab              ###   ########.fr       */
+/*   Updated: 2023/11/29 00:24:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <limits.h>
 # include <sys/time.h>
 # include <limits.h>
+# include <errno.h>
 
 /*	DEFINES			*/
 
@@ -41,6 +42,18 @@
 # define C		"\033[36m"      
 # define W		"\033[37m"      
 
+/*	OPCODE MUTEX	 */
+
+typedef enum e_opcode
+{
+	LOCK,
+	UNLOCK,
+	INIT,
+	DESTROY,
+	CREATE,
+	JOIN,
+	DETACH,
+}				t_opcode;
 
 /*	TYPEDEF			*/
 
@@ -92,6 +105,12 @@ typedef struct s_table
 
 void	    error_exit(const char *error);
 
+/*	SAFE FONCTIONS	*/
+
+void		*s_malloc(size_t bytes);
+void		*s_mutex(t_mtx *mutex, t_opcode opcode);
+void		*s_thread(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
+
 /*	INPUT CHECK		*/
 
 void		parse_input(int argc, char **argv, t_table *table);
@@ -99,9 +118,10 @@ void		parse_input(int argc, char **argv, t_table *table);
 /*	INIT			*/
 
 void		init_simulation(int argc, char **argv, t_table *table);
+void		data_init(t_table *table);
 
 /*	THEAD FONCTIONS	*/
 
-void	*philosopher_thread_function(void *arg);
+void		*philosopher_thread_function(void *arg);
 
 #endif
