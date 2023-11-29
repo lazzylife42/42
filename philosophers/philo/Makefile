@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 14:10:04 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/28 23:13:59 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/11/29 11:27:38 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ SRC = 	src/main.c \
 		src/utils.c \
 		src/parsing.c \
 		src/data_init.c \
-		src/thread.c
+		src/dinner.c \
+		src/getters_setters.c \
+		src/sync_utils.c
 
 OBJS = $(SRC:.c=.o)
 

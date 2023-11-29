@@ -3,18 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:12:49 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/28 23:21:44 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 10:48:16 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
+static	void	assign_fork(t_philo *philo, t_fork *forks, int pos)
+{
+	int	philo_nbr;
+
+	philo_nbr = table->philo_nbr;
+	philo->frist_fork = &forks[(pos + 1) % philo_nbr];
+	philo->second_fork = &forks[pos];
+	if ((philo->id % 2) == 0)
+	{
+		philo->first_fork = &forks[pos];
+		philo->second_fork = &forks[(pos + 1) % philo_nbr];
+	}
+}
+
+static	void	philo_init(t_table *table)
+{
+	int		i;
+	t_philo	*philo;
+	
+	i = -1;
+	while (++i < table->philo_nbr)
+	{
+		philo = table->philos + i;
+		philo->id = i + 1;
+		philo->full = FALSE;
+		philo->meals_count = 0;
+		philo->table = table;
+	}
+	assign_fork(philo, table->fork, i);
+}
+
 void	data_init(t_table *table)
 {
-	table->simulation_end = FALSE;
-	table->philos = s_malloc(table->philo_nbr);
+	int	i;
 	
+	i = -1;
+	table->simulation_end = FALSE;
+	table->all_thread_reday = FALSE;
+	table->philos = s_malloc(sizeof(t_philo) * table->philo_nbr);
+	s_mutex(table->table_mutex, INIT);
+	table->forks = s_malloc(sizeof(t_fork) * table->philo_nbr);
+	while (++i < table->philo_nbr)
+	{
+		s_mutex(&table->forks[i].fork, INIT);
+		table->forks[i].fork_id = i;
+	}
+	philo_init(table);
 }

@@ -6,42 +6,31 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:25:29 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/24 15:12:20 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:55:00 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-long	long	ft_atoll(const char *str)
-{
-	int				i;
-	int				signe;
-	long	long	cache;
-
-	i = 0;
-	signe = 1;
-	cache = 0;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\f'
-		|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
-		i++;
-	while (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			signe *= -1;
-		i++;
-		if (str[i] == '+' || str[i] == '-')
-			return (0);
-	}	
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		cache = cache * 10 + (str[i] - 48);
-		i++;
-	}	
-	return (signe * cache);
-}
-
 void    error_exit(const char *error)
 {
     printf(RED"%s\n"RST, error);
     exit(EXIT_FAILURE);
+}
+
+long	gettime(t_time_code time_code)
+{
+	struct timeval tv;
+
+	if (gettimeofday(&tv, NULL))
+		error_exit("gettimeofday() failed.");
+	if (time_code == SECOND)
+		return (tv.tv_sec + ((tv.tv_usec) / 1e6))
+	else if (time_code == MILLISECOND)
+		return ((tv.tv_sec * 1e3) + ((tv.tv_usec) / 1e3))
+	else if (time_code == MICROSECOND)
+		return ((tv.tv_sec * 1e6) + tv.tv_usec);
+	else
+		error_exit("Wrong input on gettime().")
+	return (42);
 }

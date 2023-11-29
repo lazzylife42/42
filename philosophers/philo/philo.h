@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 00:24:31 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:54:53 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@ typedef enum e_opcode
 	DETACH,
 }				t_opcode;
 
+/*	CODEs for time	*/
+
+enum e_time_code
+{
+	SECOND,
+	MILLISECONDE,
+	MICROSECOND,
+}				t_time_code;
+
 /*	TYPEDEF			*/
 
 typedef 		pthread_mutex_t t_mtx;
@@ -77,8 +86,8 @@ typedef struct s_philo
 	long		meals_count;
 	long		last_meal_time;
 	long		meal_limit_nbr;
-	t_fork		*fork_left;
-	t_fork		*fork_right;
+	t_fork		*first_fork;
+	t_fork		*second_fork;
 	pthread_t	thread_id;
 }				t_philo;
 
@@ -93,6 +102,8 @@ typedef struct s_table
 	long		meal_limit_nbr;
 	long		simulation_start;
 	int			simulation_end;
+	int			all_threads_ready;
+	t_mtx		table_mutex;
 	t_fork		*forks;
 	t_philo		*philos;
 }				t_table;
@@ -101,26 +112,38 @@ typedef struct s_table
 ////////////////	FONCTIONS		////////////////
 */
 
-/*	UTILS			*/
+/*	UTILS				*/
 
 void	    error_exit(const char *error);
 
-/*	SAFE FONCTIONS	*/
+/*	SYNC UTILS			*/
+
+void		wait_all_threads(t_table *table);
+
+/*	SAFE FONCTIONS		*/
 
 void		*s_malloc(size_t bytes);
 void		*s_mutex(t_mtx *mutex, t_opcode opcode);
 void		*s_thread(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
 
-/*	INPUT CHECK		*/
+/*	INPUT CHECK			*/
 
 void		parse_input(int argc, char **argv, t_table *table);
 
-/*	INIT			*/
+/*	INIT				*/
 
 void		init_simulation(int argc, char **argv, t_table *table);
 void		data_init(t_table *table);
 
-/*	THEAD FONCTIONS	*/
+/*	GETTERS AND SETTERS	*/
+
+void	set_int(t_mtmx *mutex, int *dest, int value);
+void	set_long(t_mtmx *mutex, long *dest, long value);
+int		get_int(t_mtx *mutex, int *value);
+long	get_long(t_mtx *mutex, long *value);
+int		simulation_finished(t_table *table);
+
+/*	THEAD FONCTIONS		*/
 
 void		*philosopher_thread_function(void *arg);
 
