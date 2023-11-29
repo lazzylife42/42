@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 19:05:24 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 23:34:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TRUE		1
 # define FALSE		0
 # define MIN_TIME	6e4
-# define DEBUG_MODE FALSE
+# define DEBUG_MODE 1
 
 // Define ANSI escape sequences for text color
 
@@ -118,6 +118,8 @@ struct s_table
 	long		simulation_start;
 	int			simulation_end;
 	int			all_threads_ready;
+	long		threads_running_nbr;
+	pthread_t	monitor;
 	t_mtx		table_mutex;
 	t_mtx		write_mutex;
 	t_fork		*forks;
@@ -137,6 +139,8 @@ void		precise_usleep(long usec, t_table *table);
 /*	SYNC UTILS			*/
 
 void		wait_all_threads(t_table *table);
+void		increase_long(t_mtx *mutex, long *value);
+int			all_threads_running(t_mtx *mutex, long *threads, long philo_nbr);
 
 /*	SAFE FONCTIONS		*/
 
@@ -150,7 +154,6 @@ void		parse_input(int argc, char **argv, t_table *table);
 
 /*	INIT				*/
 
-void		init_simulation(int argc, char **argv, t_table *table);
 void		data_init(t_table *table);
 
 /*	GETTERS AND SETTERS	*/
@@ -161,18 +164,15 @@ int		get_int(t_mtx *mutex, int *value);
 long	get_long(t_mtx *mutex, long *value);
 int		simulation_finished(t_table *table);
 
-/*	THEAD FONCTIONS		*/
-
-void		*philosopher_thread_function(void *arg);
-
-/*	WRITE				*/
+/*	WRITE STATUS		*/
 
 void		write_status(t_philo_status status, t_philo *philo, int debug);
 
-/*	DINNER				*/
+/*	DINNER AND MONITOR	*/
 
 void		dinner_start(t_table *table);
 void		*dinner_simulation(void *data);
-
+void		*monitor_dinner(void *data);
+void		*lone_philo(void *arg);
 
 #endif

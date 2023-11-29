@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:12:49 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 19:02:34 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 23:16:20 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static	void	philo_init(t_table *table)
 		philo->id = i + 1;
 		philo->full = FALSE;
 		philo->meals_count = 0;
-		philo->table = table;
 		s_mutex(&philo->philo_mutex, INIT);
+		philo->table = table;
 		assign_fork(philo, table->forks, i);
 	}
 }
@@ -51,10 +51,11 @@ void	data_init(t_table *table)
 	i = -1;
 	table->simulation_end = FALSE;
 	table->all_threads_ready = FALSE;
+	table->threads_running_nbr = 0;
 	table->philos = s_malloc(sizeof(t_philo) * table->philo_nbr);
-	s_mutex(&table->table_mutex, INIT);
-	s_mutex(&table->write_mutex, INIT);
 	table->forks = s_malloc(sizeof(t_fork) * table->philo_nbr);
+	s_mutex(&table->write_mutex, INIT);
+	s_mutex(&table->table_mutex, INIT);
 	while (++i < table->philo_nbr)
 	{
 		s_mutex(&table->forks[i].fork, INIT);

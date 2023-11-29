@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 14:10:04 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/29 18:01:26 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/11/29 22:33:00 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC = 	src/main.c \
 		src/getters_setters.c \
 		src/sync_utils.c \
 		src/safe_functions.c \
+		src/monitor.c \
 		src/write.c
 
 OBJS = $(SRC:.c=.o)
