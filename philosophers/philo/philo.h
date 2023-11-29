@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 11:54:53 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:31:53 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,29 @@ typedef enum e_opcode
 
 /*	CODEs for time	*/
 
-enum e_time_code
+typedef enum e_time_code
 {
 	SECOND,
-	MILLISECONDE,
+	MILLISECOND,
 	MICROSECOND,
 }				t_time_code;
+
+/*	PHILO STATE		*/
+
+typedef enum e_status
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	TAKE_FIRST_FORK,
+	TAKE_SECOND_FORK,
+	DIED,
+}				t_philo_status;
 
 /*	TYPEDEF			*/
 
 typedef 		pthread_mutex_t t_mtx;
-/*typedef struct	s_table t_table;*/
+typedef struct 	s_table	t_table;
 
 /*	STRUCT	FORK	*/
 
@@ -89,11 +101,12 @@ typedef struct s_philo
 	t_fork		*first_fork;
 	t_fork		*second_fork;
 	pthread_t	thread_id;
+	t_table		*table;
 }				t_philo;
 
 /*	STRUCT	TABLE	*/
 
-typedef struct s_table
+struct s_table
 {
 	long		philo_nbr;
 	long		time_to_die;
@@ -104,9 +117,10 @@ typedef struct s_table
 	int			simulation_end;
 	int			all_threads_ready;
 	t_mtx		table_mutex;
+	t_mtx		write_mutex;
 	t_fork		*forks;
 	t_philo		*philos;
-}				t_table;
+};
 
 /*
 ////////////////	FONCTIONS		////////////////
@@ -115,6 +129,8 @@ typedef struct s_table
 /*	UTILS				*/
 
 void	    error_exit(const char *error);
+long		gettime(t_time_code time_code);
+void		precise_usleep(long usec, t_table *table);
 
 /*	SYNC UTILS			*/
 
@@ -137,8 +153,8 @@ void		data_init(t_table *table);
 
 /*	GETTERS AND SETTERS	*/
 
-void	set_int(t_mtmx *mutex, int *dest, int value);
-void	set_long(t_mtmx *mutex, long *dest, long value);
+void	set_int(t_mtx *mutex, int *dest, int value);
+void	set_long(t_mtx *mutex, long *dest, long value);
 int		get_int(t_mtx *mutex, int *value);
 long	get_long(t_mtx *mutex, long *value);
 int		simulation_finished(t_table *table);
@@ -146,5 +162,11 @@ int		simulation_finished(t_table *table);
 /*	THEAD FONCTIONS		*/
 
 void		*philosopher_thread_function(void *arg);
+
+/*	DINNER				*/
+
+void		dinner_start(t_table *table);
+void		*dinner_simulation(void *data);
+
 
 #endif

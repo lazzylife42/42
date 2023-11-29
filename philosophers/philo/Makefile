@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 14:10:04 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/29 11:27:38 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/11/29 14:27:50 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC = 	src/main.c \
 		src/data_init.c \
 		src/dinner.c \
 		src/getters_setters.c \
-		src/sync_utils.c
+		src/sync_utils.c \
+		src/write.c
 
 OBJS = $(SRC:.c=.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sab <sab@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:12:35 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/25 18:43:20 by sab              ###   ########.fr       */
+/*   Updated: 2023/11/29 13:46:48 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int main(int argc, char **argv)
 {
-	t_table *table;
+	t_table table;
 	
 	if (argc == 5 || argc == 6)
 	{
 		parse_input(argc, argv, &table);
 		data_init(&table);
-		dinner_start(&table);
-		clean(&table);
+//		dinner_start(&table);
+//		clean(&table);
 	}
 	else
 	{

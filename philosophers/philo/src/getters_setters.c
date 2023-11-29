@@ -6,13 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:51:47 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 11:03:12 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:45:07 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	set_int(t_mtmx *mutex, int *dest, int value)
+void	set_int(t_mtx *mutex, int *dest, int value)
 {
 	s_mutex(mutex, LOCK);
 	*dest = value;
@@ -29,7 +29,7 @@ int	get_int(t_mtx *mutex, int *value)
 	return (ret);
 }
 
-void	set_long(t_mtmx *mutex, long *dest, long value)
+void	set_long(t_mtx *mutex, long *dest, long value)
 {
 	s_mutex(mutex, LOCK);
 	*dest = value;

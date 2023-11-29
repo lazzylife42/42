@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:12:49 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 10:48:16 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:29:46 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static	void	assign_fork(t_philo *philo, t_fork *forks, int pos)
 {
 	int	philo_nbr;
 
-	philo_nbr = table->philo_nbr;
-	philo->frist_fork = &forks[(pos + 1) % philo_nbr];
+	philo_nbr = philo->table->philo_nbr;
+	philo->first_fork = &forks[(pos + 1) % philo_nbr];
 	philo->second_fork = &forks[pos];
 	if ((philo->id % 2) == 0)
 	{
@@ -40,7 +40,7 @@ static	void	philo_init(t_table *table)
 		philo->meals_count = 0;
 		philo->table = table;
 	}
-	assign_fork(philo, table->fork, i);
+	assign_fork(philo, table->forks, i);
 }
 
 void	data_init(t_table *table)
@@ -49,9 +49,10 @@ void	data_init(t_table *table)
 	
 	i = -1;
 	table->simulation_end = FALSE;
-	table->all_thread_reday = FALSE;
+	table->all_threads_ready = FALSE;
 	table->philos = s_malloc(sizeof(t_philo) * table->philo_nbr);
-	s_mutex(table->table_mutex, INIT);
+	s_mutex(&table->table_mutex, INIT);
+	s_mutex(&table->write_mutex, INIT);
 	table->forks = s_malloc(sizeof(t_fork) * table->philo_nbr);
 	while (++i < table->philo_nbr)
 	{
