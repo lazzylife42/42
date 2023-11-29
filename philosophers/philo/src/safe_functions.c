@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:16:58 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 00:23:31 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:02:20 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	*s_mutex(t_mtx *mutex, t_opcode opcode)
 		handle_mutex_error(pthread_mutex_destroy(mutex), opcode);
 	else
 		error_exit("Bad mutex opcode in s_mutex().");
+	return (NULL);
 }
 
 static	void	handle_thread_error(int status, t_opcode opcode)
@@ -86,5 +87,6 @@ void	*s_thread(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opc
 	else
 		error_exit("Wrond opcode for s_thread():\n"
 			G"use <CREATE> <JOIN> <DETACH>."RST);
+	return (NULL);
 }
 

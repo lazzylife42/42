@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:12:49 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 14:29:46 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:02:34 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ static	void	philo_init(t_table *table)
 		philo->full = FALSE;
 		philo->meals_count = 0;
 		philo->table = table;
+		s_mutex(&philo->philo_mutex, INIT);
+		assign_fork(philo, table->forks, i);
 	}
-	assign_fork(philo, table->forks, i);
 }
 
 void	data_init(t_table *table)

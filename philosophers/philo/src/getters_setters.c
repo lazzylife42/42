@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getters_setters.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:51:47 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 13:45:07 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:54:23 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ long	get_long(t_mtx *mutex, long *value)
 
 int	simulation_finished(t_table *table)
 {
-	return (get_int(table->table_mutex, table->simulation_end));
+	return (get_int(&table->table_mutex, &table->simulation_end));
 }

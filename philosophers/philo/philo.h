@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 14:31:53 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:05:24 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define TRUE		1
 # define FALSE		0
 # define MIN_TIME	6e4
+# define DEBUG_MODE FALSE
 
 // Define ANSI escape sequences for text color
 
@@ -101,6 +102,7 @@ typedef struct s_philo
 	t_fork		*first_fork;
 	t_fork		*second_fork;
 	pthread_t	thread_id;
+	t_mtx		philo_mutex;
 	t_table		*table;
 }				t_philo;
 
@@ -162,6 +164,10 @@ int		simulation_finished(t_table *table);
 /*	THEAD FONCTIONS		*/
 
 void		*philosopher_thread_function(void *arg);
+
+/*	WRITE				*/
+
+void		write_status(t_philo_status status, t_philo *philo, int debug);
 
 /*	DINNER				*/
 

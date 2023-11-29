@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:12:35 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 13:46:48 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:07:34 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	{
 		parse_input(argc, argv, &table);
 		data_init(&table);
-//		dinner_start(&table);
+		dinner_start(&table);
 //		clean(&table);
 	}
 	else
