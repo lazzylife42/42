@@ -6,13 +6,13 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 14:10:04 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/30 11:32:40 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/12/01 16:21:04 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 DIR_SRC = src/
-CFLAGS = -Wall -Werror -Wextra -fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
 OPTIONS = -pthread
 

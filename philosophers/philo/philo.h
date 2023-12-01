@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/01 15:14:08 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:24:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define TRUE 1
 # define FALSE 0
 # define MIN_TIME 6e4
-# define DEBUG_MODE 0
+# define DEBUG_MODE FALSE
 
 // Define ANSI escape sequences for text color
 
