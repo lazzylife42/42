@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:12:49 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 23:16:20 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:08:03 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-static	void	assign_fork(t_philo *philo, t_fork *forks, int pos)
+static void	assign_fork(t_philo *philo, t_fork *forks, int pos)
 {
 	int	philo_nbr;
 
@@ -26,11 +26,11 @@ static	void	assign_fork(t_philo *philo, t_fork *forks, int pos)
 	}
 }
 
-static	void	philo_init(t_table *table)
+static void	philo_init(t_table *table)
 {
 	int		i;
 	t_philo	*philo;
-	
+
 	i = -1;
 	while (++i < table->philo_nbr)
 	{
@@ -47,7 +47,7 @@ static	void	philo_init(t_table *table)
 void	data_init(t_table *table)
 {
 	int	i;
-	
+
 	i = -1;
 	table->simulation_end = FALSE;
 	table->all_threads_ready = FALSE;

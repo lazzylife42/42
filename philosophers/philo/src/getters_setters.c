@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getters_setters.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:51:47 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 17:54:23 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:14:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	set_int(t_mtx *mutex, int *dest, int value)
 int	get_int(t_mtx *mutex, int *value)
 {
 	int	ret;
-	
+
 	s_mutex(mutex, LOCK);
 	ret = *value;
 	s_mutex(mutex, UNLOCK);
@@ -39,7 +39,7 @@ void	set_long(t_mtx *mutex, long *dest, long value)
 long	get_long(t_mtx *mutex, long *value)
 {
 	long	ret;
-	
+
 	s_mutex(mutex, LOCK);
 	ret = *value;
 	s_mutex(mutex, UNLOCK);

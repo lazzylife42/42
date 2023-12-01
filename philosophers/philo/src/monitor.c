@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 22:18:52 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 23:11:27 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:14:39 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-static	int	philo_died(t_philo *philo)
+static int	philo_died(t_philo *philo)
 {
 	long	elapsed;
 	long	t_to_die;
 
 	if (get_int(&philo->philo_mutex, &philo->full))
 		return (FALSE);
-	elapsed = gettime(MILLISECOND) - get_long(&philo->philo_mutex, &philo->last_meal_time);
+	elapsed = gettime(MILLISECOND) - get_long(&philo->philo_mutex,
+			&philo->last_meal_time);
 	t_to_die = philo->table->time_to_die / 1e3;
 	if (elapsed > t_to_die)
 		return (TRUE);
@@ -32,8 +33,8 @@ void	*monitor_dinner(void *data)
 	t_table	*table;
 
 	table = (t_table *)data;
-	while (!all_threads_running(&table->table_mutex, &table->threads_running_nbr,
-		table->philo_nbr))
+	while (!all_threads_running(&table->table_mutex,
+			&table->threads_running_nbr, table->philo_nbr))
 		;
 	while (!simulation_finished(table))
 	{

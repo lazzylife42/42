@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:22:55 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/01 11:44:17 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:12:55 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	wait_all_threads(t_table *table)
 {
-    while (!get_int(&table->table_mutex, &table->all_threads_ready))
+	while (!get_int(&table->table_mutex, &table->all_threads_ready))
 		;
 }
 
@@ -28,14 +28,15 @@ void	increase_long(t_mtx *mutex, long *value)
 int	all_threads_running(t_mtx *mutex, long *threads, long philo_nbr)
 {
 	int	ret;
-	
+
 	ret = FALSE;
-	s_mutex(mutex, LOCK);	
+	s_mutex(mutex, LOCK);
 	if (*threads == philo_nbr)
 		ret = TRUE;
 	s_mutex(mutex, UNLOCK);
 	return (ret);
 }
+
 void	un_sync(t_philo *philo)
 {
 	if (philo->table->philo_nbr % 2 == 0)
@@ -47,5 +48,5 @@ void	un_sync(t_philo *philo)
 	{
 		if (philo->id % 2 == 0)
 			think(philo, TRUE);
-	}	
+	}
 }
