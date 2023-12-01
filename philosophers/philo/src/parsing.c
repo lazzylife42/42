@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 18:19:51 by sab               #+#    #+#             */
-/*   Updated: 2023/11/29 18:06:35 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:11:02 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void	parse_input(int argc, char **argv, t_table *table)
 {
 	check_input(argc, argv);
 	table->philo_nbr = ft_atol(argv[1]);
-	table->time_to_die = ft_atol(argv[2]) * 10e3;
-	table->time_to_eat = ft_atol(argv[3]) * 10e3;
-	table->time_to_sleep = ft_atol(argv[4]) * 10e3;
+	table->time_to_die = ft_atol(argv[2]) * 1e3;
+	table->time_to_eat = ft_atol(argv[3]) * 1e3;
+	table->time_to_sleep = ft_atol(argv[4]) * 1e3;
 	if (table->time_to_die < MIN_TIME
 		|| table->time_to_eat < MIN_TIME
 		|| table->time_to_sleep < MIN_TIME)

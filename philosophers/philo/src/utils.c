@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:25:29 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 17:48:57 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:18:34 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,28 @@ void	precise_usleep(long usec, t_table *table)
 		elapsed = gettime(MICROSECOND) - start;
 		rem = usec - elapsed;
 		if (rem > 1e3)
-			usleep(usec / 2);
+			usleep(rem / 2);
 		else
 		{
 			while (gettime(MICROSECOND) - start < usec)
 				;
 		}
 	}
+}
+
+void	clean(t_table *table)
+{
+	t_philo	*philo;
+	int		i;
+
+	i = -1;
+	while (++i < table->philo_nbr)
+	{
+		philo = table->philos + i;
+		s_mutex(&philo->philo_mutex, DESTROY);
+	}
+	s_mutex(&table->write_mutex, DESTROY);
+	s_mutex(&table->table_mutex, DESTROY);
+	free(table->forks);
+	free(table->philos);
 }

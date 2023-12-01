@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sync_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:22:55 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 22:38:25 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:44:17 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,17 @@ int	all_threads_running(t_mtx *mutex, long *threads, long philo_nbr)
 		ret = TRUE;
 	s_mutex(mutex, UNLOCK);
 	return (ret);
+}
+void	un_sync(t_philo *philo)
+{
+	if (philo->table->philo_nbr % 2 == 0)
+	{
+		if (philo->id % 2 == 0)
+			precise_usleep(3e4, philo->table);
+	}
+	else
+	{
+		if (philo->id % 2 == 0)
+			think(philo, TRUE);
+	}	
 }

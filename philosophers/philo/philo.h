@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 23:34:31 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:46:56 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TRUE		1
 # define FALSE		0
 # define MIN_TIME	6e4
-# define DEBUG_MODE 1
+# define DEBUG_MODE 0
 
 // Define ANSI escape sequences for text color
 
@@ -135,12 +135,14 @@ struct s_table
 void	    error_exit(const char *error);
 long		gettime(t_time_code time_code);
 void		precise_usleep(long usec, t_table *table);
+void		clean(t_table *table);
 
 /*	SYNC UTILS			*/
 
 void		wait_all_threads(t_table *table);
 void		increase_long(t_mtx *mutex, long *value);
 int			all_threads_running(t_mtx *mutex, long *threads, long philo_nbr);
+void		un_sync(t_philo *philo);
 
 /*	SAFE FONCTIONS		*/
 
@@ -158,11 +160,11 @@ void		data_init(t_table *table);
 
 /*	GETTERS AND SETTERS	*/
 
-void	set_int(t_mtx *mutex, int *dest, int value);
-void	set_long(t_mtx *mutex, long *dest, long value);
-int		get_int(t_mtx *mutex, int *value);
-long	get_long(t_mtx *mutex, long *value);
-int		simulation_finished(t_table *table);
+void		set_int(t_mtx *mutex, int *dest, int value);
+void		set_long(t_mtx *mutex, long *dest, long value);
+int			get_int(t_mtx *mutex, int *value);
+long		get_long(t_mtx *mutex, long *value);
+int			simulation_finished(t_table *table);
 
 /*	WRITE STATUS		*/
 
@@ -174,5 +176,6 @@ void		dinner_start(t_table *table);
 void		*dinner_simulation(void *data);
 void		*monitor_dinner(void *data);
 void		*lone_philo(void *arg);
+void		think(t_philo *philo, int pre_simulation);
 
 #endif

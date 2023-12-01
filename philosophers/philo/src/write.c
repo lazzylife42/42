@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:27:07 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/29 19:08:02 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:25:15 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	write_status(t_philo_status status, t_philo *philo, int debug)
 			printf(W"%-6ld"RST" %d is sleeping\n", elapsed, philo->id);
 		else if (status == THINKING && !simulation_finished(philo->table))
 			printf(W"%-6ld"RST" %d is thinking\n", elapsed, philo->id);
-		else if (status == DIED && !simulation_finished(philo->table))
+		else if (status == DIED)
 			printf(W"%-6ld"RED" %d died\n"RST, elapsed, philo->id);
 	}
 	s_mutex(&philo->table->write_mutex, UNLOCK);
