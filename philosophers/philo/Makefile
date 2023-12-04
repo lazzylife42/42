@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 14:10:04 by smonte-e          #+#    #+#              #
-#    Updated: 2023/12/01 16:21:04 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/12/04 20:41:24 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,16 +16,16 @@ CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
 OPTIONS = -pthread
 
-SRC = 	src/main.c \
-		src/utils.c \
-		src/parsing.c \
-		src/data_init.c \
-		src/dinner.c \
-		src/getters_setters.c \
-		src/sync_utils.c \
-		src/safe_functions.c \
-		src/monitor.c \
-		src/write.c
+SRC = 	main.c \
+		utils.c \
+		parsing.c \
+		data_init.c \
+		dinner.c \
+		getters_setters.c \
+		sync_utils.c \
+		safe_functions.c \
+		monitor.c \
+		write.c
 
 OBJS = $(SRC:.c=.o)
 

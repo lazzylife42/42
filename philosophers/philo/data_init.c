@@ -6,11 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:12:49 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/01 15:08:03 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/04 20:41:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 static void	assign_fork(t_philo *philo, t_fork *forks, int pos)
 {

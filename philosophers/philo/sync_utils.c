@@ -1,52 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getters_setters.c                                  :+:      :+:    :+:   */
+/*   sync_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 10:51:47 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/01 15:14:30 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/11/29 11:22:55 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/12/04 20:42:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
-void	set_int(t_mtx *mutex, int *dest, int value)
+void	wait_all_threads(t_table *table)
+{
+	while (!get_int(&table->table_mutex, &table->all_threads_ready))
+		;
+}
+
+void	increase_long(t_mtx *mutex, long *value)
 {
 	s_mutex(mutex, LOCK);
-	*dest = value;
+	(*value)++;
 	s_mutex(mutex, UNLOCK);
 }
 
-int	get_int(t_mtx *mutex, int *value)
+int	all_threads_running(t_mtx *mutex, long *threads, long philo_nbr)
 {
 	int	ret;
 
+	ret = FALSE;
 	s_mutex(mutex, LOCK);
-	ret = *value;
+	if (*threads == philo_nbr)
+		ret = TRUE;
 	s_mutex(mutex, UNLOCK);
 	return (ret);
 }
 
-void	set_long(t_mtx *mutex, long *dest, long value)
+void	un_sync(t_philo *philo)
 {
-	s_mutex(mutex, LOCK);
-	*dest = value;
-	s_mutex(mutex, UNLOCK);
-}
-
-long	get_long(t_mtx *mutex, long *value)
-{
-	long	ret;
-
-	s_mutex(mutex, LOCK);
-	ret = *value;
-	s_mutex(mutex, UNLOCK);
-	return (ret);
-}
-
-int	simulation_finished(t_table *table)
-{
-	return (get_int(&table->table_mutex, &table->simulation_end));
+	if (philo->table->philo_nbr % 2 == 0)
+	{
+		if (philo->id % 2 == 0)
+			precise_usleep(3e4, philo->table);
+	}
+	else
+	{
+		if (philo->id % 2 == 0)
+			think(philo, TRUE);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:13:09 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/01 16:24:30 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/04 20:53:57 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define TRUE 1
 # define FALSE 0
 # define MIN_TIME 6e4
-# define DEBUG_MODE FALSE
+# define DEBUG_MODE 0
 
 // Define ANSI escape sequences for text color
 
@@ -131,7 +131,7 @@ struct					s_table
 
 /*	UTILS				*/
 
-void					error_exit(const char *error);
+int						error_exit(const char *error);
 long					gettime(t_time_code time_code);
 void					precise_usleep(long usec, t_table *table);
 void					clean(t_table *table);
@@ -153,7 +153,7 @@ void					*s_thread(pthread_t *thread, void *(*foo)(void *),
 
 /*	INPUT CHECK			*/
 
-void					parse_input(int argc, char **argv, t_table *table);
+int						parse_input(int argc, char **argv, t_table *table);
 
 /*	INIT				*/
 

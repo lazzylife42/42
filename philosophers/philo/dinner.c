@@ -6,11 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:36:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/01 15:09:26 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/04 20:41:35 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 static void	eat(t_philo *philo)
 {

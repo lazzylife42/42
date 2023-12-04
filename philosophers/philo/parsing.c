@@ -6,11 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 18:19:51 by sab               #+#    #+#             */
-/*   Updated: 2023/12/01 15:11:13 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/04 21:08:04 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 static long	ft_atol(const char *str)
 {
@@ -40,7 +40,7 @@ static long	ft_atol(const char *str)
 	return (signe * cache);
 }
 
-static void	check_input(int argc, char **argv)
+static int	check_input(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -52,29 +52,41 @@ static void	check_input(int argc, char **argv)
 		while (argv[i][j] != '\0')
 		{
 			if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
-				error_exit("One of your inputs is not a valid number\n"
-					G"Try positive numbers only." RST);
+			{
+				printf(RED "Bad arg\n" G "Try int only.\n" RST);
+				return (-1);
+			}
 			j++;
 		}
 		if (ft_atol(argv[i]) > INT_MAX)
-			error_exit("Some input(s) may be too big\n"
-				G "Try only " B "int" G "." RST);
+		{
+			printf(RED "Bad arg\n" G "Try int only.\n" RST);
+			return (-1);
+		}
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
 
-void	parse_input(int argc, char **argv, t_table *table)
+int	parse_input(int argc, char **argv, t_table *table)
 {
-	check_input(argc, argv);
+	if (check_input(argc, argv) == -1)
+	{
+		return (-1);
+	}
 	table->philo_nbr = ft_atol(argv[1]);
 	table->time_to_die = ft_atol(argv[2]) * 1e3;
 	table->time_to_eat = ft_atol(argv[3]) * 1e3;
 	table->time_to_sleep = ft_atol(argv[4]) * 1e3;
 	if (table->time_to_die < MIN_TIME || table->time_to_eat < MIN_TIME
 		|| table->time_to_sleep < MIN_TIME)
-		error_exit("Try more than 60ms.");
+	{
+		printf(RED "Try more than 60ms.\n" RST);
+		return (-1);
+	}
 	if (argc == 6)
 		table->meal_limit_nbr = ft_atol(argv[5]);
 	else
 		table->meal_limit_nbr = -1;
+	return (EXIT_SUCCESS);
 }

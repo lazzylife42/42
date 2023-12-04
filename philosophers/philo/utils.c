@@ -6,16 +6,16 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:25:29 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/01 15:13:11 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/04 21:03:17 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
-void	error_exit(const char *error)
+int	error_exit(const char *error)
 {
 	printf(RED "%s\n" RST, error);
-	exit(EXIT_FAILURE);
+	return (EXIT_FAILURE);
 }
 
 long	gettime(t_time_code time_code)

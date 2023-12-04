@@ -6,11 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:12:35 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/01 15:14:59 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/04 21:03:01 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 int	main(int argc, char **argv)
 {
@@ -18,7 +18,8 @@ int	main(int argc, char **argv)
 
 	if (argc == 5 || argc == 6)
 	{
-		parse_input(argc, argv, &table);
+		if (parse_input(argc, argv, &table) == -1)
+			return (EXIT_FAILURE);
 		data_init(&table);
 		dinner_start(&table);
 		clean(&table);

@@ -6,11 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:16:58 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/01 15:12:27 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/04 20:41:59 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 void	*s_malloc(size_t bytes)
 {
