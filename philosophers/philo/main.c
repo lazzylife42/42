@@ -28,6 +28,7 @@ int	main(int argc, char **argv)
 	{
 		error_exit("Bad input\n" G "Try \"./philo "
 			B"long long long long"G" [" B "int" G "]\"" RST);
+		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
