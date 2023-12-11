@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/11 20:59:23 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/11 23:22:08 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,18 @@ void	free_double_str(char **str);
 
 void	display_double_str(char **str);//test
 
-/*  EXECUTE */
+/*  EXECUTE			*/
 
 int     exec_cmd(char **input, char **env);
-void	execute_pipe(char **command1, char **command2, char **env);
+int		is_next_op(char **input, int pos);
 void	execute(char *argv, char **envp);
 char	*find_path(char *argv, char **envp);
+
+/*	EXEC OPERATORS	*/
+
+void	execute_pipe(char *command1, char *command2, char **env);
+void	execute_redir_out(char *command1, char *command2, char **env);
+void	execute_redir_append(char *command1, char *command2, char **env);
+void	execute_redir_in(char *command1, char *command2, char **env);
 
 #endif

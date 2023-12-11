@@ -6,107 +6,72 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 14:09:37 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/11 21:02:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/11 23:30:42 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-typedef enum  
+typedef enum
 {
-	REDIRECT_OUT,   // >
-	REDIRECT_APPEND,// >>
-	REDIRECT_IN,    // <
-	PIPE,           // |
+	REDIRECT_OUT,    // >
+	REDIRECT_APPEND, // >>
+	REDIRECT_IN,     // <
+	PIPE,            // |
 	NEXT,
 	UNDEF,
-}	t_operator;
+}		t_operator;
 
-void	child_process(char *argv, char **envp)
+int	is_next_op(char **input, int pos)
 {
-	pid_t	pid;
-	int		fd[2];
-
-	if (pipe(fd) == -1)
-		return ;
-	pid = fork();
-	if (pid == -1)
-		return ;
-	if (pid == 0)
+	if (input[pos + 1])
 	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		execute(argv, envp);
+		if (ft_strncmp(input[pos + 1], ">>", 2) == 0)
+			return (REDIRECT_APPEND);
+		else if (ft_strncmp(input[pos + 1], ">", 1) == 0)
+			return (REDIRECT_OUT);
+		else if (ft_strncmp(input[pos + 1], "<", 1) == 0)
+			return (REDIRECT_IN);
+		else if (ft_strncmp(input[pos + 1], "|", 1) == 0)
+			return (PIPE);
 	}
-	else
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		waitpid(pid, NULL, 0);
-	}
+	return (-1);
 }
-int	find_operator(char **input)
+
+int	exec_cmd(char **input, char **env)
 {
-	static int i;
+	int			i;
+	int			id;
+	int			fd[2];
+	t_operator	operator;
 
 	i = 0;
 	while (input[i])
 	{
-		if (ft_strncmp(input[i], "> ", 2) == 0)
-			return (REDIRECT_OUT);
-		else if (ft_strncmp(input[i], ">>", 2) == 0)
-			return (REDIRECT_APPEND);
-		else if (ft_strncmp(input[i], "< ", 2) == 0)
-			return (REDIRECT_IN);
-		else if (ft_strncmp(input[i], "| ", 2) == 0)
-			return (PIPE);
-		else
-			return(NEXT);
-		i++;
-	}
-	return (0);
-}
-
-int exec_cmd(char **input, char **env)
-{
-	int			i = 0;
-	int			fd[2];
-	pid_t		pid;
-	t_operator	operator;
-
-	while (input[i])
-	{
-		if (ft_strncmp(input[i], "pwd", 4) == 0
-			|| ft_strncmp(input[i], "echo", 5) == 0
-			|| ft_strncmp(input[i], "cd", 3) == 0)
-			{
-		}
+		if (ft_strncmp(input[i], "pwd", 4) == 0 || ft_strncmp(input[i], "echo",
+				5) == 0 || ft_strncmp(input[i], "cd", 3) == 0)
+				i++;
 		else
 		{
-			operator = find_operator(input + i);
-			if (operator == REDIRECT_OUT)
+			if (is_next_op(input, i) !=  -1)
 			{
-				printf(">\n");
-			}
-			else if (operator == REDIRECT_APPEND)
-			{
-				printf(">>\n");	
-			}
-			else if (operator == REDIRECT_IN)
-			{
-				printf("<\n");
-			}
-			else if (operator == PIPE)
-			{
-				printf("coucou\n");
-				execute_pipe(&input[i], &input[i + 2], env);
-			}
-			else
-			{
-				pid = fork();
-				if (pid == 0)
-					execute(input[i], env);
-				else if (pid > 0)
+				pipe(fd);
+				id = fork();
+				if (id == 0)
+				{
+					operator = is_next_op(input, i);
+					if (operator == REDIRECT_OUT)
+						execute_redir_out(input[i], input[i + 2], env);
+					else if (operator == REDIRECT_APPEND)
+						execute_redir_append(input[i], input[i + 2], env);
+					else if (operator == REDIRECT_IN)
+						execute_redir_in(input[i], input[i + 2], env);
+					else if (operator == PIPE)
+						execute_pipe(input[i], input[i + 2], env);
+					else
+						execute(input[i], env);
+				}
+				else
 					wait(NULL);
 			}
 		}
@@ -142,10 +107,10 @@ void	execute(char *argv, char **envp)
 
 char	*find_path(char *argv, char **envp)
 {
-	int		i;
-	char	**split;
-	char	*path;
-	char	*path_tmp;
+	int i;
+	char **split;
+	char *path;
+	char *path_tmp;
 
 	i = 0;
 	while (ft_strncmp(envp[i], "PATH=", 5) != 0)
