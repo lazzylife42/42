@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_null.c                                     :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 12:53:38 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/12 12:54:41 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/10/12 14:08:57 by nreichel          #+#    #+#             */
+/*   Updated: 2023/10/16 10:02:02 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_free_null(char *buff)
+t_list	*ft_lstlast(t_list *lst)
 {
-	free(buff);
-	return (NULL);
+	if (lst)
+	{
+		while (lst->next != NULL)
+		{
+			lst = lst->next;
+		}
+	}
+	return (lst);
 }

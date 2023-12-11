@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 18:16:48 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/11 17:51:25 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/10/12 14:21:19 by nreichel          #+#    #+#             */
+/*   Updated: 2023/10/16 09:55:12 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcat(char *dest, const char *src)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (dest[i] != '\0')
-		i++;
-	while (src[j] != '\0')
+	if (lst && del)
 	{
-		dest[i] = src[j];
-		i++;
-		j++;
+		del(lst->content);
+		free(lst);
 	}
-	dest[i] = '\0';
-	return (dest);
 }

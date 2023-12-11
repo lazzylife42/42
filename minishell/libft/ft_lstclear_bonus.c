@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 18:16:48 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/11 17:51:25 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/10/12 14:40:00 by nreichel          #+#    #+#             */
+/*   Updated: 2023/10/16 10:30:04 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcat(char *dest, const char *src)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	int	i;
-	int	j;
+	t_list	*temp1;
+	t_list	*temp2;
 
-	i = 0;
-	j = 0;
-	while (dest[i] != '\0')
-		i++;
-	while (src[j] != '\0')
+	if (lst)
 	{
-		dest[i] = src[j];
-		i++;
-		j++;
+		temp1 = *lst;
+		if (*lst)
+		{
+			while (temp1)
+			{
+				temp2 = temp1->next;
+				del(temp1->content);
+				free(temp1);
+				temp1 = temp2;
+			}
+			*lst = NULL;
+		}
 	}
-	dest[i] = '\0';
-	return (dest);
 }

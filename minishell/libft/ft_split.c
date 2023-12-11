@@ -3,93 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 18:10:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2022/12/13 15:47:38 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/10/10 14:40:17 by nreichel          #+#    #+#             */
+/*   Updated: 2023/10/18 09:54:04 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	**free_arr(char **tab)
+static int	get_entry_nbr(char const *str, char chr)
+{
+	int	res;
+	int	val;
+
+	val = 1;
+	res = 0;
+	while (*str)
+	{
+		if (*str != chr)
+		{
+			if (val)
+			{
+				res += 1;
+				val = 0;
+			}
+		}
+		else
+			val = 1;
+		str += 1;
+	}
+	return (res);
+}
+
+static char	*return_str(char const *str, int nbr)
+{
+	char	*res;
+	int		i;
+
+	i = 0;
+	res = malloc(nbr + 1);
+	if (!res)
+		return (0);
+	while (i < nbr)
+	{
+		res[i] = str[i];
+		i += 1;
+	}
+	res[i] = '\0';
+	return (res);
+}
+
+static int	clear(char **res)
 {
 	int	i;
 
 	i = 0;
-	while ((char *)tab[i] != NULL)
+	while (res[i])
 	{
-		free(tab[i]);
-		i++;
+		free(res[i]);
+		i += 1;
 	}
-	free(tab[i]);
-	free(tab);
-	return (NULL);
+	free(res);
+	return (1);
 }
 
-static int	word_numb(const char *str, char c)
+static char	**ft_split2(char const *str, char chr, int count, int i)
 {
-	char	last;
-	int		i;
-	int		w_count;
+	char	**res;
 
-	last = c;
-	i = 0;
-	w_count = 0;
-	while (str[i] != '\0')
-	{
-		if (last == c && str[i] != c)
-			w_count++;
-		last = str[i];
-		i++;
-	}
-	return (w_count);
-}
-
-static char	*word_dup(const char *str, size_t start, size_t end)
-{
-	int		i;
-	char	*word;
-
-	i = 0;
-	word = (char *)malloc((end - start + 1) * sizeof(char));
-	if (!word)
+	res = malloc((get_entry_nbr(str, chr) + 1) * sizeof(char *));
+	if (!res)
 		return (NULL);
-	while (start < end)
+	while (*str)
 	{
-		word[i] = (char)str[start];
-		i++;
-		start++;
-	}
-	word[i] = '\0';
-	return (word);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**split;
-	size_t	i;
-	size_t	j;
-	int		w_start;
-
-	split = (char **)malloc((word_numb(s, c) + 1) * sizeof(char *));
-	if (!s || !split)
-		return (NULL);
-	i = -1;
-	j = 0;
-	w_start = -1;
-	while (++i <= ft_strlen(s))
-	{
-		if (s[i] != c && w_start < 0)
-			w_start = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && w_start >= 0)
+		i = 0;
+		while (str[i] != chr && str[i] != '\0')
+			i += 1;
+		if (i > 0)
 		{
-			split[j] = word_dup(s, w_start, i);
-			if (!(split[j++]))
-				return (free_arr(split));
-			w_start = -1;
-		}	
+			res[count] = return_str(str, i);
+			if (!res[count])
+				if (clear(res))
+					return (NULL);
+			count += 1;
+			str += i;
+		}
+		else
+			str += 1;
 	}
-	split[j] = NULL;
-	return (split);
+	res[count] = 0;
+	return (res);
 }
+
+char	**ft_split(char const *str, char chr)
+{
+	return (ft_split2(str, chr, 0, 0));
+}
+
+/*
+int main(void)
+{
+	char ma[] = "je1suis111ici1merci";
+	int i = 0;
+	
+	char **res = ft_split(ma, '1');
+	while (res[i] != 0)
+	{
+		prinf("/%s/", res[i]);	
+		i += 1;
+	}
+
+}*/

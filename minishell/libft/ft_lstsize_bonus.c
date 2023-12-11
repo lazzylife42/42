@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 16:23:48 by sab               #+#    #+#             */
-/*   Updated: 2023/08/12 12:55:14 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/10/12 14:01:42 by nreichel          #+#    #+#             */
+/*   Updated: 2023/10/16 10:29:07 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, const char *src)
-{
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	while (src[i])
+int	ft_lstsize(t_list *lst)
+{
+	int	res;
+
+	res = 0;
+	while (lst)
 	{
-		dest[i] = src[i];
-		i++;
+		res += 1;
+		lst = lst->next;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (res);
 }

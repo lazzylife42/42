@@ -3,29 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 22:37:05 by smonte-e          #+#    #+#             */
-/*   Updated: 2022/11/29 01:39:12 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/10/10 13:13:03 by nreichel          #+#    #+#             */
+/*   Updated: 2023/10/18 09:54:00 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup( const char *src )
 {
-	char	*new;
-	size_t	i;
+	int		len;
+	int		i;
+	char	*res;
 
+	len = 0;
 	i = 0;
-	new = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
-	if (!new)
+	while (src[len])
+		len += 1;
+	res = malloc((len + 1) * sizeof(char));
+	if (res == NULL)
 		return (NULL);
-	while (src[i] != '\0')
+	while (src[i])
 	{
-		new[i] = src[i];
-		i++;
+		res[i] = src[i];
+		i += 1;
 	}
-	new[i] = '\0';
-	return (new);
+	res[i] = '\0';
+	return (res);
 }
+/*
+int main(void)
+{
+	char a[] = "sakl";
+	pintf("%s", ft_strdup(a));
+
+}*/

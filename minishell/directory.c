@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   directory.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 13:19:16 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/11 13:23:46 by nreichel         ###   ########.fr       */
+/*   Created: 2023/12/11 12:33:16 by nreichel          #+#    #+#             */
+/*   Updated: 2023/12/11 12:41:25 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_putstr_fd( char *s, int fd)
+void	set_new_directory(char **directory, char *str)
 {
-	while (*s)
+	if (chdir(str) != 0)
 	{
-		write(fd, &*s, 1);
-		s += 1;
+		perror("chdir() error()");
+		return ;
 	}
+	if (getcwd(*directory, 256) == NULL) // magic number for now...
+		perror("getcwd() error");
 }

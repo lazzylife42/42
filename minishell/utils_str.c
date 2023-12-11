@@ -1,36 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   utils_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 12:57:12 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/17 15:43:47 by nreichel         ###   ########.fr       */
+/*   Created: 2023/12/11 11:27:32 by nreichel          #+#    #+#             */
+/*   Updated: 2023/12/11 11:31:47 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	*ft_calloc( size_t count, size_t size )
+int	double_str_len(char **str)
 {
-	void	*res;
-	size_t	i;
+	int	res;
 
-	i = 0;
-	res = malloc(count * size);
-	if (res == NULL)
-		return (NULL);
-	while (i < count * size)
-	{
-		((char *)res)[i] = 0;
-		i += 1;
-	}
+	res = 0;
+	while(str[res])
+		res += 1;
 	return (res);
 }
-/*
-int main(void)
+
+char	**duplicate_env(char **env)
+/* duplicate environment variables*/
 {
-	char *str = (char *) ft_calloc(5,4);
-	*str = 'a';
-}*/
+	int		len;
+	int		i;
+	char	**res;
+
+	i = 0;
+	len = double_str_len(env);
+	res = malloc((len + 1) * sizeof(char *));
+	if (!res)
+		return (NULL);
+	while (i < len)
+	{
+		res[i] = ft_strdup(env[i]);
+		i += 1;
+	}
+	res[i] = NULL;
+	return (res);
+}

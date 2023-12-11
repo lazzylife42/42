@@ -5,43 +5,38 @@
 #                                                     +:+ +:+         +:+      #
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/08 14:41:30 by smonte-e          #+#    #+#              #
-#    Updated: 2023/12/08 15:15:09 by smonte-e         ###   ########.fr        #
+#    Created: 2023/10/11 13:40:48 by nreichel          #+#    #+#              #
+#    Updated: 2023/12/11 14:17:48 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-DIR_SRC = parser
-DIR_INCLUDE = includes
-CFLAGS = -Wall -Werror -Wextra
-LIBFT = libft
-RM = rm -f
-OPTIONS = -I$(DIR_INCLUDE)
 
-SRC = parser.c
+SRCS = main.c utils_str.c free.c directory.c execute.c
 
-OBJS = $(addprefix $(DIR_SRC)/,$(SRC:.c=.o))
+OBJS = ${SRCS:.c=.o}
 
-all: $(NAME)
+RM		= rm -f
+
+CFLAGS = -Wall -Wextra -Werror
+
+LIBFT_LIB = libft/libft.a
+
+
+all: compile_other $(NAME)
+
+compile_other:
+	make -C libft/ all
 
 $(NAME): $(OBJS)
-	$(MAKE) -C $(LIBFT)
-	gcc $(CFLAGS) $(OBJS) -L./$(LIBFT) -lft -o $(NAME)
-
-$(DIR_SRC)/%.o : $(DIR_SRC)/%.c
-	gcc $(CFLAGS) $(OPTIONS) -c $< -o $@
-
-$(LIBFT):
-	$(MAKE) -C $(LIBFT)
+		gcc -o ${NAME} ${CFLAGS} $(SRCS) $(LIBFT_LIB) -lreadline
 
 clean:
-	$(MAKE) -C $(LIBFT) clean
-	$(RM) $(OBJS)
+		${RM} ${OBJS}
+		make -C libft/ clean
 
-fclean: clean
-	$(RM) $(NAME)
-	$(MAKE) -C $(LIBFT) fclean
+fclean:	clean
+		${RM} ${NAME}
+		make -C libft/ fclean
 
-re: fclean all
-
-.PHONY: clean fclean all re
+re:		fclean all

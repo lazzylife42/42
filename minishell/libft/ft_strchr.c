@@ -3,27 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 20:25:49 by smonte-e          #+#    #+#             */
-/*   Updated: 2022/12/07 22:43:03 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/10/10 10:52:51 by nreichel          #+#    #+#             */
+/*   Updated: 2023/10/18 09:54:31 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr( const char *str, int chr )
 {
-	size_t	i;
-	char	*ptr;
+	char	*tstr;
+	char	c_chr;
 
-	i = 0;
-	ptr = (char *)s;
-	while (ptr[i] != (char)c)
+	c_chr = (char)chr;
+	tstr = (char *)str;
+	while (*tstr || c_chr == '\0')
 	{
-		if (ptr[i] == '\0')
-			return (NULL);
-		i++;
+		if (*tstr == c_chr)
+			return (tstr);
+		tstr += 1;
 	}
-	return (&ptr[i]);
+	return (NULL);
 }
+/*
+int main(void)
+{
+	//char *src = "there is so \0ma\0ny \0 \\0 in t\0his stri\0ng !\0\0\0\0";
+	//char *d1 = strhr(src, '4');
+	char *d2 = ft_strchr("teste",'e' + 256);
+	pritf("%s",d2);
+}*/

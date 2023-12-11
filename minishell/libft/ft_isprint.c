@@ -3,27 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 14:48:46 by smonte-e          #+#    #+#             */
-/*   Updated: 2022/11/04 12:53:38 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/10/09 16:18:58 by nreichel          #+#    #+#             */
+/*   Updated: 2023/10/11 14:16:55 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isprint(int c)
+int	ft_isprint(int ch)
 {
-	if (c >= 32 && c <= 126)
+	if (ch >= 32 && ch <= 126)
+	{
 		return (1);
+	}
 	else
+	{
 		return (0);
+	}
 }
-
-/*
-int	main(int argc, char **argv)
-{
-	printf("out : %i\n",ft_isalnum(atoi(argv[1])));
-	return 0;
-}
-*/

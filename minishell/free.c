@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 12:51:51 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/08/12 12:55:36 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/12/11 11:28:18 by nreichel          #+#    #+#             */
+/*   Updated: 2023/12/11 11:31:44 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strndup(char *buff, size_t end)
+void	free_double_str(char **str)
+/* used to free double pointer string */
 {
-	char	*str;
-	size_t	i;
+	int i;
 
-	str = (char *)ft_calloc(end + 2, sizeof(char));
-	if (!str)
-		return (NULL);
 	i = 0;
-	while (i <= end && buff[i])
+	while (str[i])
 	{
-		str[i] = buff[i];
-		i++;
+		free(str[i]);
+		i += 1;
 	}
-	str[i] = '\0';
-	return (str);
+	free(str);
 }

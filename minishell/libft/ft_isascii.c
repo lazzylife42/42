@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 14:27:18 by smonte-e          #+#    #+#             */
-/*   Updated: 2022/11/04 12:52:34 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/10/09 16:19:06 by nreichel          #+#    #+#             */
+/*   Updated: 2023/10/10 13:58:15 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,5 @@
 
 int	ft_isascii(int c)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	else
-		return (0);
+	return (c >= 0 && c <= 127);
 }
-
-/*
-int	main(int argc, char **argv)
-{
-	printf("out : %i\n",ft_isalnum(atoi(argv[1])));
-	return 0;
-}
-*/
