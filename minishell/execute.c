@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 14:09:37 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/11 14:36:07 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:50:41 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,22 @@
 
 int exec_cmd(char **input, char **env)
 {
-    
+	int i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (ft_strncmp(input[i], "<", 1) == 0)
+			printf("<\n");
+		else if (ft_strncmp(input[i], ">", 1) == 0)
+			printf(">\n");
+		else if (ft_strncmp(input[i], "|", 1) == 0)
+			printf("|\n");
+		else
+			execute(input[i], env);
+		i++;
+	}
+	return (1);
 }
 
 void	execute(char *argv, char **envp)

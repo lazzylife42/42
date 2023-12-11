@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:15:43 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/11 14:31:15 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:19:44 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ keep it in memory, will ft_split it and return it*/
 	if (line_read && *line_read)
 	{
 		add_history(line_read);
-		res = ft_split(line_read, ' ');
-		// ft_split should also split at '|' (you don't need space when using pipes)
+		res = minishell_split(line_read);
 		free(line_read);
-		printf(": %s", line_read);
 		return (res); 
 	}
 	return (NULL);
@@ -74,6 +72,18 @@ void	parse_input(char **input, char **directory, char ***env)
 		i += 1;
 	}
 }
+
+void	display_double_str(char **str)
+{
+	int	i = 0;
+
+	while (str[i])
+	{
+		printf("- %s\n", str[i]);
+		i += 1;
+	}
+}
+
 
 extern char **environ;
 

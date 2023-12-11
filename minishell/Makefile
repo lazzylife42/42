@@ -6,13 +6,13 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 13:40:48 by nreichel          #+#    #+#              #
-#    Updated: 2023/12/11 14:17:48 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/12/11 15:48:34 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = main.c utils_str.c free.c directory.c execute.c
+SRCS = main.c utils_str.c free.c directory.c minishell_split.c execute.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -29,7 +29,7 @@ compile_other:
 	make -C libft/ all
 
 $(NAME): $(OBJS)
-		gcc -o ${NAME} ${CFLAGS} $(SRCS) $(LIBFT_LIB) -lreadline
+		gcc -o ${NAME} ${CFLAGS} $(SRCS) $(LIBFT_LIB) -lreadline -fsanitize=address
 
 clean:
 		${RM} ${OBJS}

@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:40:17 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/18 09:54:04 by nreichel         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:31:57 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,18 +100,3 @@ char	**ft_split(char const *str, char chr)
 {
 	return (ft_split2(str, chr, 0, 0));
 }
-
-/*
-int main(void)
-{
-	char ma[] = "je1suis111ici1merci";
-	int i = 0;
-	
-	char **res = ft_split(ma, '1');
-	while (res[i] != 0)
-	{
-		prinf("/%s/", res[i]);	
-		i += 1;
-	}
-
-}*/
