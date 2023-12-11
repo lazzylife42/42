@@ -6,30 +6,66 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 14:09:37 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/11 15:50:41 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:14:16 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	child_process(char *argv, char **envp)
+{
+	pid_t	pid;
+	int		fd[2];
+
+	if (pipe(fd) == -1)
+		return ;
+	pid = fork();
+	if (pid == -1)
+		return ;
+	if (pid == 0)
+	{
+		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
+		execute(argv, envp);
+	}
+	else
+	{
+		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+		waitpid(pid, NULL, 0);
+	}
+}
+
 int exec_cmd(char **input, char **env)
 {
-	int i;
-
-	i = 0;
+	int 	i = 0;
+	pid_t	pid;
+	
 	while (input[i])
 	{
-		if (ft_strncmp(input[i], "<", 1) == 0)
-			printf("<\n");
-		else if (ft_strncmp(input[i], ">", 1) == 0)
-			printf(">\n");
-		else if (ft_strncmp(input[i], "|", 1) == 0)
-			printf("|\n");
+		if (ft_strncmp(input[i], "pwd", 4) == 0
+			|| ft_strncmp(input[i], "echo", 5) == 0
+			|| ft_strncmp(input[i], "cd", 3) == 0)
+			{
+		}
 		else
-			execute(input[i], env);
+		{
+			if (ft_strncmp(input[i + 1], "|", 1) == 0)
+			{
+				pid = fork();
+				if (pid == 0)
+				{
+					child_process(input[i], env);
+				}
+				else 
+				{
+					wait(NULL);
+				}
+			}
+		}
 		i++;
 	}
-	return (1);
+	return 1;
 }
 
 void	execute(char *argv, char **envp)
@@ -41,6 +77,7 @@ void	execute(char *argv, char **envp)
 	i = -1;
 	cmd = ft_split(argv, ' ');
 	path = find_path(cmd[0], envp);
+	printf("%s\n", path);
 	if (!path)
 	{
 		while (cmd[++i])

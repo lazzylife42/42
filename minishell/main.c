@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:15:43 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/11 15:19:44 by nreichel         ###   ########.fr       */
+/*   Updated: 2023/12/11 16:36:12 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,12 @@ void	display_double_str(char **str)
 
 extern char **environ;
 
-int main(void)
+int main(int argc, char **argv, char **env)
 {
-	char	**env;
+	// char	**env;
+	(void)argc;
+	(void)argv;
+	
 	char 	**input;
 	char	*directory;
 
@@ -105,6 +108,7 @@ int main(void)
 	{
 		input = get_prompt("");
 		parse_input(input, &directory, &env);
+		exec_cmd(input, env);
 		free_double_str(input);
 	}
 	free_double_str(env);
