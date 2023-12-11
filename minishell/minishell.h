@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/11 15:52:10 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/11 20:59:23 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	display_double_str(char **str);//test
 /*  EXECUTE */
 
 int     exec_cmd(char **input, char **env);
+void	execute_pipe(char **command1, char **command2, char **env);
 void	execute(char *argv, char **envp);
 char	*find_path(char *argv, char **envp);
 

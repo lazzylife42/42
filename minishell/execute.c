@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 14:09:37 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/11 17:14:16 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/11 21:02:55 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+typedef enum  
+{
+	REDIRECT_OUT,   // >
+	REDIRECT_APPEND,// >>
+	REDIRECT_IN,    // <
+	PIPE,           // |
+	NEXT,
+	UNDEF,
+}	t_operator;
 
 void	child_process(char *argv, char **envp)
 {
@@ -35,12 +45,35 @@ void	child_process(char *argv, char **envp)
 		waitpid(pid, NULL, 0);
 	}
 }
+int	find_operator(char **input)
+{
+	static int i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (ft_strncmp(input[i], "> ", 2) == 0)
+			return (REDIRECT_OUT);
+		else if (ft_strncmp(input[i], ">>", 2) == 0)
+			return (REDIRECT_APPEND);
+		else if (ft_strncmp(input[i], "< ", 2) == 0)
+			return (REDIRECT_IN);
+		else if (ft_strncmp(input[i], "| ", 2) == 0)
+			return (PIPE);
+		else
+			return(NEXT);
+		i++;
+	}
+	return (0);
+}
 
 int exec_cmd(char **input, char **env)
 {
-	int 	i = 0;
-	pid_t	pid;
-	
+	int			i = 0;
+	int			fd[2];
+	pid_t		pid;
+	t_operator	operator;
+
 	while (input[i])
 	{
 		if (ft_strncmp(input[i], "pwd", 4) == 0
@@ -50,22 +83,36 @@ int exec_cmd(char **input, char **env)
 		}
 		else
 		{
-			if (ft_strncmp(input[i + 1], "|", 1) == 0)
+			operator = find_operator(input + i);
+			if (operator == REDIRECT_OUT)
+			{
+				printf(">\n");
+			}
+			else if (operator == REDIRECT_APPEND)
+			{
+				printf(">>\n");	
+			}
+			else if (operator == REDIRECT_IN)
+			{
+				printf("<\n");
+			}
+			else if (operator == PIPE)
+			{
+				printf("coucou\n");
+				execute_pipe(&input[i], &input[i + 2], env);
+			}
+			else
 			{
 				pid = fork();
 				if (pid == 0)
-				{
-					child_process(input[i], env);
-				}
-				else 
-				{
+					execute(input[i], env);
+				else if (pid > 0)
 					wait(NULL);
-				}
 			}
 		}
 		i++;
 	}
-	return 1;
+	return (1);
 }
 
 void	execute(char *argv, char **envp)

@@ -3,22 +3,22 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 13:40:48 by nreichel          #+#    #+#              #
-#    Updated: 2023/12/11 15:48:34 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/12/11 20:54:58 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = main.c utils_str.c free.c directory.c minishell_split.c execute.c
+SRCS = main.c utils_str.c free.c directory.c minishell_split.c execute.c exec_pipe.c
 
 OBJS = ${SRCS:.c=.o}
 
 RM		= rm -f
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = 
 
 LIBFT_LIB = libft/libft.a
 
