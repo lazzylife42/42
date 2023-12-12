@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 13:40:48 by nreichel          #+#    #+#              #
-#    Updated: 2023/12/11 23:25:18 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/12/12 17:34:12 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = main.c utils_str.c free.c directory.c minishell_split.c execute.c exec_operators.c
+SRCS = main.c utils_str.c free.c directory.c minishell_split.c exec.c exec_operators.c
 
 OBJS = ${SRCS:.c=.o}
 
