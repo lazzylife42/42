@@ -1,30 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 11:28:18 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/13 14:58:50 by nreichel         ###   ########.fr       */
+/*   Created: 2023/12/12 09:29:55 by nreichel          #+#    #+#             */
+/*   Updated: 2023/12/13 14:14:54 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_double_str(char **str)
-/* used to free double pointer string */
+void	display_env(char **env)
 {
 	int	i;
 
 	i = 0;
-	if (str)
+	while (env[i])
 	{
-		while (str[i])
-		{
-			free(str[i]);
-			i += 1;
-		}
-		free(str);
+		printf("%s\n", env[i]);
+		i += 1;
 	}
+}
+
+void	echo(char **input, char ***env)
+{
+	int		i;
+	int		backslash;
+	char	*txt;
+
+	i = 0;
+	backslash = true;
+	if (ft_strncmp(input[i], "-n", 3) == 0)
+	{
+		backslash = false;
+		i += 1;
+	}
+	txt = translate_quote(input[i], env);
+	if (!txt)
+		return ;
+	printf("%s", txt);
+	free(txt);
+	if (backslash)
+		printf("\n");
 }

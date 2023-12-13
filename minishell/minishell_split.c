@@ -6,16 +6,11 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:37:41 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/11 15:19:32 by nreichel         ###   ########.fr       */
+/*   Updated: 2023/12/13 14:23:25 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-bool	is_sep(char c)
-{
-	return (c == ' ' || c == '|');
-}
 
 int	next_end(char *str)
 {
@@ -23,18 +18,15 @@ int	next_end(char *str)
 	int	type;
 
 	i = 0;
-	type = 0;
-	if (str[0] == '"')
-		type = 1;
-	if (str[0] == '\'')
-		type = 2;
+	type = (str[0] == '"') * 1 + (str[0] == '\'') * 2;
 	if (str[0] == '|')
 		return (1);
 	if (type != 0)
 	{
-		while(str[i])
+		while (str[i])
 		{
-			if ((i > 0) && ((type == 1 && str[i] == '"') || (type == 2 && str[i] == '\'')))
+			if ((i > 0) && ((type == 1 && str[i] == '"')
+					|| (type == 2 && str[i] == '\'')))
 			{
 				i += 1;
 				break ;
@@ -43,7 +35,7 @@ int	next_end(char *str)
 		}
 	}
 	else
-		while(str[i] && !is_sep(str[i]))
+		while (str[i] && !(str[i] == ' ' || str[i] == '|'))
 			i += 1;
 	return (i);
 }
@@ -66,7 +58,7 @@ static char	*return_str(char const *str, int nbr)
 	return (res);
 }
 
-char **ralloc(char **res)
+char	**ralloc(char **res)
 {
 	char	**new_res;
 	int		len;
@@ -76,7 +68,10 @@ char **ralloc(char **res)
 	len = double_str_len(res);
 	new_res = malloc((len + 2) * sizeof(char *));
 	if (!new_res)
+	{
+		free_double_str(res);
 		return (NULL);
+	}
 	while (res[i])
 	{
 		new_res[i] = res[i];
@@ -85,7 +80,7 @@ char **ralloc(char **res)
 	new_res[i] = NULL;
 	new_res[i + 1] = NULL;
 	free(res);
-	return(new_res);
+	return (new_res);
 }
 
 char	**add_word(char **res, char *str, int end)
@@ -99,21 +94,17 @@ char	**add_word(char **res, char *str, int end)
 			return (NULL);
 		res[0] = return_str(str, end);
 		if (!res[0])
-		{
-			free(res);
-			return (NULL);
-		}
+			exit(1);
 		res[1] = NULL;
 	}
 	else
 	{
 		res = ralloc(res);
+		if (!res)
+			return (NULL);
 		res[double_str_len(res)] = return_str(str, end);
 		if (!res[double_str_len(res) - 1])
-		{
-			free_double_str(res);
-			return (NULL);
-		}
+			exit(1);
 	}
 	return (res);
 }
@@ -124,7 +115,7 @@ char	**minishell_split(char *str)
 	int		len;
 
 	res = NULL;
-	while(*str)
+	while (*str)
 	{
 		while (*str == ' ')
 			str += 1;

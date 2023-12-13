@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 12:45:57 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/11 20:48:27 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/10/18 09:54:18 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi( const char *str )
 {
 	int	res;
 	int	sign;
@@ -35,7 +35,7 @@ int	ft_atoi(const char *str)
 	return (res * sign);
 }
 /*
-int	main(void)
+int main(void)
 {
 	prinf("%d", ft_atoi("      -245jasf"));
 }*/
