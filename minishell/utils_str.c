@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:27:32 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/13 14:32:05 by nreichel         ###   ########.fr       */
+/*   Updated: 2023/12/11 11:31:47 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	double_str_len(char **str)
 	int	res;
 
 	res = 0;
-	while (str[res])
+	while(str[res])
 		res += 1;
 	return (res);
 }
@@ -37,8 +37,6 @@ char	**duplicate_env(char **env)
 	while (i < len)
 	{
 		res[i] = ft_strdup(env[i]);
-		if (!res)
-			exit(1);
 		i += 1;
 	}
 	res[i] = NULL;

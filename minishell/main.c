@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:15:43 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/13 14:58:25 by nreichel         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:18:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,51 +30,49 @@ keep it in memory, will ft_split it and return it*/
 	return (NULL);
 }
 
+
+void	echo(char **input)
+{
+	int	i;
+	int	backslash;
+
+	i = 0;
+	backslash = true;
+	if (ft_strncmp(input[i], "-n", 3) == 0)
+	{
+		backslash = false;
+		i += 1;
+	}
+	
+}
+
 void	parse_input(char **input, char **directory, char ***env)
 /*directory and env are modifiable*/
 {
+	env = NULL;
 	int	i;
 	int	len;
-	char	*txt;
+
 	i = 0;
 	len = double_str_len(input);
 	while (i < len)
 	{
-		txt = translate_quote(input[i], env);
-		if (ft_strncmp(txt, "pwd", 4) == 0)
+		if (ft_strncmp(input[i], "pwd", 4) == 0)
 			printf("%s\n", *directory);
-		else if (ft_strncmp(txt, "echo", 5) == 0)
-		{
-			if (input[i + 1])
-				echo(input + i + 1, env); // careful is -n
-		}
+		else if (ft_strncmp(input[i], "echo", 5) == 0)
+			echo(input + i + 1);
 		else if (ft_strncmp(input[i], "cd", 3) == 0)
 		{
 			if (input[i + 1])
-				set_new_directory(directory, input[i + 1], env);
+				set_new_directory(directory, input[i + 1]);
 			else
-				set_new_directory(directory, check_env(*env, "HOME", 4), env);
+				set_new_directory(directory, "/Users");// where to go if no value?
 			i += 1;
 		}
-		else if (ft_strncmp(txt, "env", 4) == 0)
-			display_env(*env);
-		else if (ft_strncmp(txt, "unset", 6) == 0)
-		{
-			if (input[i + 1])
-				unset(env, input[i + 1]);
-		}
-		else if (ft_strncmp(txt, "export", 7) == 0)
-		{
-			if (input[i + 1])
-				export(env, input[i + 1]);
-		}
-		else if (ft_strncmp(txt, "exit", 5) == 0)
-			exit(1);
 		i += 1;
-		free(txt);
 	}
 }
-///////////// for testing
+
 void	display_double_str(char **str)
 {
 	int	i = 0;
@@ -86,16 +84,18 @@ void	display_double_str(char **str)
 	}
 }
 
+
 extern char **environ;
 
-int main(void)
+int main(int argc, char **argv, char **env)
 {
-	char	**env;
+	// char	**env;
+	(void)argc;
+	(void)argv;
+	
 	char 	**input;
 	char	*directory;
 
-	signal(SIGINT, sighandler);
-	signal(SIGQUIT, sighandler);
 	directory = malloc(256);
 	if (!directory)
 		exit(1);
@@ -107,8 +107,10 @@ int main(void)
 	while (1)
 	{
 		input = get_prompt("");
-		if (input)
-			parse_input(input, &directory, &env);
+		parse_input(input, &directory, &env);
+		t_exec *exec = parse_separators(input, env);
+		print_separator(exec);
+		free(exec);
 		free_double_str(input);
 	}
 	free_double_str(env);
