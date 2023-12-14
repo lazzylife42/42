@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/14 19:34:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/14 19:38:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 		}
 	}
 	if (is_agrument(tokens[i - 1]))
-		new_sep = create_sep_node(tokens[i - 2], tokens[i - 1], tokens[i],
-				NULL);
+		new_sep = create_sep_node(tokens[i - 2], tokens[i - 1], tokens[i], NULL);
 	else
 		new_sep = create_sep_node(tokens[i - 1], NULL, tokens[i], NULL);
 	return (to_run = add_to_exec_list(to_run, new_sep));
