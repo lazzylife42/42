@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/14 19:38:54 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/15 13:07:11 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ int	is_agrument(char *token)
 {
 	return (ft_strncmp(token, "-", 1) == 0);
 }
+int	is_cmd(char *token, char **env)
+{
+	if (find_path(token, env))
+		return (1);
+	return (0);
+}
+
 
 int	count_separators(char **tokens)
 {
@@ -56,9 +63,39 @@ char	*get_redirected_file(char **tokens, int index)
 	return (NULL);
 }
 
+char	*find_path(char *argv, char **envp)
+{
+	int		i;
+	char	**split;
+	char	*path;
+	char	*path_tmp;
+
+	i = 0;
+	while (ft_strncmp(envp[i], "PATH=", 5) != 0)
+		i++;
+	split = ft_split(envp[i] + 5, ':');
+	i = 0;
+	while (split[i])
+	{
+		path_tmp = ft_strjoin(split[i], "/");
+		path = ft_strjoin(path_tmp, argv);
+		// printf("PATH :%s\n", path);
+		free(path_tmp);
+		if (access(path, X_OK) == 0)
+			return (path);
+		free(path);
+		i++;
+	}
+	i = -1;
+	while (split[++i])
+		free(split[i]);
+	return (NULL);
+}
+
 t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 {
 	int		i;
+	int		offset;
 	int		separators;
 	char	*file;
 	t_sep	*new_sep;
@@ -67,7 +104,7 @@ t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 		return (NULL);
 	separators = count_separators(tokens);
 	to_run = (t_exec *)malloc(sizeof(t_exec) * (separators + 1));
-	i = 0;
+	i = -1;
 	while (tokens[++i])
 	{
 		if (is_separator(tokens[i]))
@@ -81,18 +118,44 @@ t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 			}
 			else
 			{
-				if (is_agrument(tokens[i - 1]))
-					new_sep = create_sep_node(tokens[i - 2], tokens[i - 1], tokens[i], NULL);
-				else
-					new_sep = create_sep_node(tokens[i - 1], NULL, tokens[i], NULL);
+				offset = 0;
+				while (!is_cmd(tokens[i - 1], env))
+				{
+					i--;
+					offset++;
+					if (offset > i)
+					{
+						printf("path not found !\n");
+						exit(EXIT_FAILURE);
+					}
+				}
+				new_sep = create_sep_node(tokens[i - 1], tokens[i], tokens[i + offset], NULL);
+				i += offset;
+				// if (is_agrument(tokens[i - 1]))
+				// 	new_sep = create_sep_node(tokens[i - 2], tokens[i - 1], tokens[i], NULL);
+				// else
+				// 	new_sep = create_sep_node(tokens[i - 1], NULL, tokens[i], NULL);
 			}
 			to_run = add_to_exec_list(to_run, new_sep);
 		}
 	}
-	if (is_agrument(tokens[i - 1]))
-		new_sep = create_sep_node(tokens[i - 2], tokens[i - 1], tokens[i], NULL);
-	else
-		new_sep = create_sep_node(tokens[i - 1], NULL, tokens[i], NULL);
+	offset = 0;
+	while (!is_cmd(tokens[i - 1], env))
+	{
+		i--;
+		offset++;
+		if (offset > i)
+		{
+			printf("path not found !\n");
+			exit(EXIT_FAILURE);
+		}
+	}
+	new_sep = create_sep_node(tokens[i - 1], tokens[i], tokens[i + offset], NULL);
+	i += offset;
+	// if (is_agrument(tokens[i - 1]))
+	// 	new_sep = create_sep_node(tokens[i - 2], tokens[i - 1], tokens[i], NULL);
+	// else
+	// 	new_sep = create_sep_node(tokens[i - 1], NULL, tokens[i], NULL);
 	return (to_run = add_to_exec_list(to_run, new_sep));
 }
 
