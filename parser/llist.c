@@ -6,13 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:38:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/14 19:13:41 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:25:16 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_sep	*create_sep_node(char *cmd, char *arg, char *token, char *file)
+t_sep	*create_sep_node(char *cmd, char **arg, char *token, char *file)
 {
 	t_sep	*new_node;
 

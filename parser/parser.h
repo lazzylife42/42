@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:41:14 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/15 12:46:13 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/15 16:22:35 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_pipe
 typedef struct s_sep
 {
 	char			*cmd;
-	char			*arg;
+	char			**arg;
 	t_pipe			*pipe;
 }					t_sep;
 
@@ -47,12 +47,14 @@ int					is_separator(char *token);
 int					is_agrument(char *token);
 int					is_cmd(char *token, char **env);
 int					count_separators(char **tokens);
+char				**parse_arg(char **tokens, int pos, int offset);
 t_exec				*parse(t_exec *to_run, char **tokens, char **env);
 
 /*		UTILS			*/
 
-t_sep				*create_sep_node(char *cmd, char *arg, char *token, char *file);
+t_sep				*create_sep_node(char *cmd, char **arg, char *token, char *file);
 t_exec				*add_to_exec_list(t_exec *head, t_sep *new_node);
+void				keep_symbol(t_sep *current_sep);
 void				print_to_run(t_exec *to_run);
 char				*find_path(char *argv, char **envp);
 
