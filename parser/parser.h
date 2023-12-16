@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:41:14 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/15 16:22:35 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/16 16:12:15 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,28 @@ typedef struct s_exec
 	struct s_exec	*next;
 }					t_exec;
 
-/*		FUNC			*/
+/*		PARSER				*/
 
-int					is_separator(char *token);
-int					is_agrument(char *token);
-int					is_cmd(char *token, char **env);
-int					count_separators(char **tokens);
-char				**parse_arg(char **tokens, int pos, int offset);
+char				*get_file(char **tokens, int index);
+char				*find_path(char *argv, char **env);
+char				**parse_arg(char **tokens, char **env, int pos);
 t_exec				*parse(t_exec *to_run, char **tokens, char **env);
 
-/*		UTILS			*/
+/*		PARSER UTILS		*/
 
-t_sep				*create_sep_node(char *cmd, char **arg, char *token, char *file);
+int					is_cmd(char *token, char **env);
+int					is_semicon(char *token);
+int					is_separator(char *token);
+int					count_cmd(char **tokens, char **env);
+int					count_separators(char **tokens);
+
+/*		LINKED LIST			*/
+
+t_sep				*create_sep_node(char *cmd, char **arg, char *token,
+						char *file);
 t_exec				*add_to_exec_list(t_exec *head, t_sep *new_node);
-void				keep_symbol(t_sep *current_sep);
+void				free_exec_list(t_exec *head);
+void				ft_free_split(char **arr);
 void				print_to_run(t_exec *to_run);
-char				*find_path(char *argv, char **envp);
 
 #endif

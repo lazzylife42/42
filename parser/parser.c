@@ -3,53 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/16 01:02:02 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/16 16:29:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	is_separator(char *token)
-{
-	return (ft_strncmp(token, "<", 1) == 0 || ft_strncmp(token, ">", 1) == 0
-		|| ft_strncmp(token, "|", 1) == 0 || ft_strncmp(token, ";", 1) == 0);
-}
-
-int	is_agrument(char *token)
-{
-	return (ft_strncmp(token, "-", 1) == 0);
-}
-int	is_cmd(char *token, char **env)
-{
-	if (find_path(token, env))
-		return (1);
-	return (0);
-}
-int	is_semicon(char *token)
-{
-	return (ft_strncmp(token, ";", 1) == 0);
-}
-
-int	count_separators(char **tokens)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (tokens[i])
-	{
-		if (is_separator(tokens[i]))
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-char	*get_redirected_file(char **tokens, int index)
+char	*get_file(char **tokens, int index)
 {
 	if (tokens == NULL || tokens[index] == NULL)
 		return (NULL);
@@ -62,7 +25,7 @@ char	*get_redirected_file(char **tokens, int index)
 	return (NULL);
 }
 
-char	*find_path(char *argv, char **envp)
+char	*find_path(char *argv, char **env)
 {
 	int		i;
 	char	**split;
@@ -70,161 +33,83 @@ char	*find_path(char *argv, char **envp)
 	char	*path_tmp;
 
 	i = 0;
-	while (ft_strncmp(envp[i], "PATH=", 5) != 0)
+	while (ft_strncmp(env[i], "PATH=", 5) != 0)
 		i++;
-	split = ft_split(envp[i] + 5, ':');
+	split = ft_split(env[i] + 5, ':');
 	i = 0;
 	while (split[i])
 	{
 		path_tmp = ft_strjoin(split[i], "/");
 		path = ft_strjoin(path_tmp, argv);
 		free(path_tmp);
-		// printf("PATH:%s\n", path);
 		if (access(path, X_OK) == 0)
+		{
+			ft_free_split(split);
 			return (path);
+		}
 		free(path);
 		i++;
 	}
-	i = -1;
-	while (split[++i])
-		free(split[i]);
+	ft_free_split(split);
 	return (NULL);
 }
 
-char	**parse_arg(char **tokens, int pos, int offset)
+char	**parse_arg(char **tokens, char **env, int pos)
 {
 	int		i;
+	int		count;
 	char	**args;
 
-	i = 0;
-	if (offset == 0)
-		return (NULL);
-	args = (char **)malloc(sizeof(char *) * (offset + 1));
-	if (args == NULL)
-		return (NULL);
-	while (offset > 0)
+	i = pos;
+	count = 0;
+	while (tokens[i] && !is_separator(tokens[i]) && !is_cmd(tokens[i], env))
 	{
-		args[i] = ft_strdup(tokens[pos]);
-		if (args[i] == NULL)
-			return (NULL);
+		count++;
 		i++;
-		pos++;
-		offset--;
+	}
+	args = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!args)
+		return (NULL);
+	i = 0;
+	while (count > 0)
+	{
+		if (tokens[pos][0] == '-' && tokens[pos][1] != '\0')
+			args[i++] = ft_strdup(tokens[pos++] + 1);
+		else
+			args[i++] = ft_strdup(tokens[pos++]);
+		count--;
 	}
 	args[i] = NULL;
 	return (args);
 }
 
-int	find_cmd_offset(char **tokens, int current_index, char **env)
-{
-	int	offset;
-
-	offset = 0;
-	while (current_index > 0 && !is_cmd(tokens[current_index], env))
-	{
-		current_index--;
-		offset++;
-	}
-	if (is_cmd(tokens[current_index], env))
-		return (offset);
-	else
-	{
-		printf("path not found !\n");
-		printf("Stopped at \"%s\"\n", tokens[current_index]);
-		exit(EXIT_FAILURE);
-	}
-	return (-1);
-}
-
 t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 {
 	int		i;
-	int		offset;
-	int		separators;
-	char	*file;
+	int		j;
 	t_sep	*new_sep;
 
-	if (tokens == NULL || tokens[0] == NULL)
-		return (NULL);
-	separators = count_separators(tokens);
-	to_run = (t_exec *)malloc(sizeof(t_exec) * (separators + 1));
+	to_run = (t_exec *)malloc(sizeof(t_exec) * (count_cmd(tokens, env) + 1));
+	to_run = NULL;
 	i = -1;
 	while (tokens[++i])
 	{
-		if (is_separator(tokens[i]))
+		if (is_cmd(tokens[i], env))
 		{
-			file = get_redirected_file(tokens, i);
-			if (file != NULL)
-			{
-				offset = find_cmd_offset(tokens, i, env);
-				new_sep = create_sep_node(tokens[i - offset], parse_arg(tokens - offset + 1, i, offset - 1), tokens[i], file);
-				i += offset + 1;
-			}
-			else if (is_semicon(tokens[i]))
-			{
-				new_sep = create_sep_node(NULL, NULL, tokens[i], NULL);
-				i++;
-			}
+			j = i;
+			while (tokens[j] && !is_separator(tokens[j]))
+				j++;
+			if (tokens[j] && is_separator(tokens[j]))
+				new_sep = create_sep_node(tokens[i], parse_arg(tokens, env, i
+							+ 1), ft_strdup(tokens[j]), get_file(tokens, j));
 			else
-			{
-				offset = find_cmd_offset(tokens, i, env);
-				new_sep = create_sep_node(tokens[i - offset], parse_arg(tokens - offset + 1, i, offset - 1), tokens[i], NULL);
-				i += offset + 1;
-			}
+				new_sep = create_sep_node(tokens[i], parse_arg(tokens, env, i
+							+ 1), NULL, get_file(tokens, i - 1));
 			to_run = add_to_exec_list(to_run, new_sep);
+			i = j;
 		}
 	}
-	offset = find_cmd_offset(tokens, i, env);
-	// new_sep = create_sep_node(tokens[i - offset], parse_arg(tokens - offset + 1, i, offset - 1), NULL, NULL);
-	return (add_to_exec_list(to_run, new_sep));
-}
-
-void	print_to_run(t_exec *to_run)
-{
-	t_sep	*current_sep;
-	int		i;
-	char	**args;
-
-	if (to_run == NULL)
-	{
-		printf("Nothing to execute...\n");
-		return ;
-	}
-	while (to_run != NULL)
-	{
-		i = 0;
-		current_sep = to_run->separator;
-		if (current_sep != NULL)
-		{
-			if (current_sep->cmd != NULL)
-				printf("Command :  [%s]\n", current_sep->cmd);
-			else
-				printf("Command is [null]\n");
-			if (current_sep->arg != NULL)
-			{
-				args = current_sep->arg;
-				while (args[i] != NULL)
-				{
-					printf("Argument:  [%s]\n", args[i]);
-					i++;
-				}
-			}
-			else
-			{
-				printf("Argument:  [null]\n");
-			}
-			if (current_sep->pipe != NULL && current_sep->pipe->symbol != NULL)
-				printf("Operator:  [%s]\n", current_sep->pipe->symbol);
-			else
-				printf("Operator:  [null]\n");
-			if (current_sep->pipe != NULL && current_sep->pipe->file != NULL)
-				printf("File    :  [%s]\n", current_sep->pipe->file);
-			else
-				printf("File    :  [null]\n");
-		}
-		printf("---------\n");
-		to_run = to_run->next;
-	}
+	return (to_run);
 }
 
 int	main(int ac, char **av, char **env)
@@ -233,5 +118,7 @@ int	main(int ac, char **av, char **env)
 
 	to_run = parse(to_run, (av + 1), env);
 	print_to_run(to_run);
+	free_exec_list(to_run);
+	// free(to_run);
 	return (0);
 }
