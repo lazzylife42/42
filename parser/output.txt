@@ -1,5 +1,0 @@
----------
-Command :  [ls]
-Argument:  [-la]
-Operator:  [null]
----------

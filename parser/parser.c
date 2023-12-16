@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/15 16:33:30 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/16 01:02:02 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,6 @@ int	is_semicon(char *token)
 {
 	return (ft_strncmp(token, ";", 1) == 0);
 }
-void	keep_symbol(t_sep *current_sep)
-{
-	if (current_sep == NULL || current_sep->pipe == NULL)
-		return ;
-	free(current_sep->cmd);
-	current_sep->cmd = NULL;
-	free(current_sep->arg);
-	current_sep->arg = NULL;
-}
 
 int	count_separators(char **tokens)
 {
@@ -61,16 +52,12 @@ int	count_separators(char **tokens)
 char	*get_redirected_file(char **tokens, int index)
 {
 	if (tokens == NULL || tokens[index] == NULL)
-	{
 		return (NULL);
-	}
 	if (ft_strncmp(tokens[index], ">", 1) == 0 || ft_strncmp(tokens[index], "<",
 			1) == 0)
 	{
 		if (tokens[index + 1] != NULL)
-		{
 			return (tokens[index + 1]);
-		}
 	}
 	return (NULL);
 }
@@ -91,8 +78,8 @@ char	*find_path(char *argv, char **envp)
 	{
 		path_tmp = ft_strjoin(split[i], "/");
 		path = ft_strjoin(path_tmp, argv);
-		// printf("PATH :%s\n", path);
 		free(path_tmp);
+		// printf("PATH:%s\n", path);
 		if (access(path, X_OK) == 0)
 			return (path);
 		free(path);
@@ -128,6 +115,27 @@ char	**parse_arg(char **tokens, int pos, int offset)
 	return (args);
 }
 
+int	find_cmd_offset(char **tokens, int current_index, char **env)
+{
+	int	offset;
+
+	offset = 0;
+	while (current_index > 0 && !is_cmd(tokens[current_index], env))
+	{
+		current_index--;
+		offset++;
+	}
+	if (is_cmd(tokens[current_index], env))
+		return (offset);
+	else
+	{
+		printf("path not found !\n");
+		printf("Stopped at \"%s\"\n", tokens[current_index]);
+		exit(EXIT_FAILURE);
+	}
+	return (-1);
+}
+
 t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 {
 	int		i;
@@ -148,19 +156,8 @@ t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 			file = get_redirected_file(tokens, i);
 			if (file != NULL)
 			{
-				offset = 0;
-				while (!is_cmd(tokens[i - 1], env))
-				{
-					i--;
-					offset++;
-					if (offset > i)
-					{
-						printf("path not found !\n");
-						exit(EXIT_FAILURE);
-					}
-				}
-				new_sep = create_sep_node(tokens[i - 1], parse_arg(tokens, i,
-							offset), tokens[i + offset], file);
+				offset = find_cmd_offset(tokens, i, env);
+				new_sep = create_sep_node(tokens[i - offset], parse_arg(tokens - offset + 1, i, offset - 1), tokens[i], file);
 				i += offset + 1;
 			}
 			else if (is_semicon(tokens[i]))
@@ -170,39 +167,16 @@ t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 			}
 			else
 			{
-				offset = 0;
-				while (!is_cmd(tokens[i - 1], env))
-				{
-					i--;
-					offset++;
-					if (offset > i)
-					{
-						printf("path not found !\n");
-						exit(EXIT_FAILURE);
-					}
-				}
-				new_sep = create_sep_node(tokens[i - 1], parse_arg(tokens, i,
-							offset), tokens[i + offset], NULL);
-				i += offset;
+				offset = find_cmd_offset(tokens, i, env);
+				new_sep = create_sep_node(tokens[i - offset], parse_arg(tokens - offset + 1, i, offset - 1), tokens[i], NULL);
+				i += offset + 1;
 			}
 			to_run = add_to_exec_list(to_run, new_sep);
 		}
 	}
-	offset = 0;
-	while (!is_cmd(tokens[i - 1], env))
-	{
-		i--;
-		offset++;
-		if (offset > i)
-		{
-			printf("path not found !\n");
-			exit(EXIT_FAILURE);
-		}
-	}
-	new_sep = create_sep_node(tokens[i - 1], parse_arg(tokens, i, offset),
-			tokens[i + offset], NULL);
-	i += offset;
-	return (to_run = add_to_exec_list(to_run, new_sep));
+	offset = find_cmd_offset(tokens, i, env);
+	// new_sep = create_sep_node(tokens[i - offset], parse_arg(tokens - offset + 1, i, offset - 1), NULL, NULL);
+	return (add_to_exec_list(to_run, new_sep));
 }
 
 void	print_to_run(t_exec *to_run)
