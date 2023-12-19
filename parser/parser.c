@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/16 16:29:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:06:56 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@ char	*get_file(char **tokens, int index)
 {
 	if (tokens == NULL || tokens[index] == NULL)
 		return (NULL);
-	if (ft_strncmp(tokens[index], ">", 1) == 0 || ft_strncmp(tokens[index], "<",
-			1) == 0)
+	if (ft_strncmp(tokens[index], ">", 1) == 0)
 	{
 		if (tokens[index + 1] != NULL)
 			return (tokens[index + 1]);
+	}
+	else if (ft_strncmp(tokens[index], "<", 1) == 0)
+	{
+		if (tokens[index + 1] != NULL)
+			return (tokens[index - 1]);
 	}
 	return (NULL);
 }
@@ -61,8 +65,8 @@ char	**parse_arg(char **tokens, char **env, int pos)
 	char	**args;
 
 	i = pos;
-	count = 0;
-	while (tokens[i] && !is_separator(tokens[i]) && !is_cmd(tokens[i], env))
+	count = 1;
+	while (tokens[i + 1] && !is_separator(tokens[i + 1]) && !is_cmd(tokens[i + 1], env))
 	{
 		count++;
 		i++;
@@ -100,11 +104,9 @@ t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 			while (tokens[j] && !is_separator(tokens[j]))
 				j++;
 			if (tokens[j] && is_separator(tokens[j]))
-				new_sep = create_sep_node(tokens[i], parse_arg(tokens, env, i
-							+ 1), ft_strdup(tokens[j]), get_file(tokens, j));
+				new_sep = create_sep_node(parse_arg(tokens, env, i), ft_strdup(tokens[j]), get_file(tokens, j));
 			else
-				new_sep = create_sep_node(tokens[i], parse_arg(tokens, env, i
-							+ 1), NULL, get_file(tokens, i - 1));
+				new_sep = create_sep_node(parse_arg(tokens, env, i), NULL, get_file(tokens, i - 1));
 			to_run = add_to_exec_list(to_run, new_sep);
 			i = j;
 		}
@@ -118,7 +120,7 @@ int	main(int ac, char **av, char **env)
 
 	to_run = parse(to_run, (av + 1), env);
 	print_to_run(to_run);
-	free_exec_list(to_run);
+	// free_exec_list(to_run);
 	// free(to_run);
 	return (0);
 }

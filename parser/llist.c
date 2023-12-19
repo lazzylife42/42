@@ -6,21 +6,22 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:38:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/16 16:30:12 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:37:10 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_sep	*create_sep_node(char *cmd, char **arg, char *token, char *file)
+t_sep	*create_sep_node(char **arg, char *token, char *file)
 {
 	t_sep	*new_node;
 
 	new_node = (t_sep *)malloc(sizeof(t_sep));
 	if (new_node)
 	{
-		new_node->cmd = cmd;
 		new_node->arg = arg;
+		new_node->in_file = 0;
+		new_node->out_file = 0;
 		new_node->pipe = (t_pipe *)malloc(sizeof(t_pipe));
 		if (new_node->pipe)
 		{
@@ -54,36 +55,37 @@ t_exec	*add_to_exec_list(t_exec *head, t_sep *new_node)
 	return (head);
 }
 
-void	free_exec_list(t_exec *head)
-{
-	t_exec	*temp;
-	int		i;
+// void	free_exec_list(t_exec *head)
+// {
+// 	t_exec	*temp;
+// 	int		i;
 
-	while (head != NULL)
-	{
-		temp = head;
-		head = head->next;
-		if (temp->separator->pipe->symbol)
-			free(temp->separator->pipe->symbol);
-		if (temp->separator->pipe->file)
-			free(temp->separator->pipe->file);
-		if (temp->separator->pipe)
-			free(temp->separator->pipe);
-		i = 0;
-		while (temp->separator->arg[i] != NULL)
-		{
-			free(temp->separator->arg[i]);
-			i++;
-		}
-		if (temp->separator->arg)
-			free(temp->separator->arg);
-		// if (temp->separator->cmd)
-		// 	free(temp->separator->cmd);
-		// if (temp->separator)
-		// 	free(temp->separator);
-		free(temp);
-	}
-}
+// 	while (head != NULL)
+// 	{
+// 		temp = head;
+// 		head = head->next;
+// 		if (temp->separator->pipe->symbol)
+// 			free(temp->separator->pipe->symbol);
+// 		printf("coucou\n");
+// 		if (temp->separator->pipe->file)
+// 			free(temp->separator->pipe->file);
+// 		if (temp->separator->pipe)
+// 			free(temp->separator->pipe);
+// 		i = 0;
+// 		while (temp->separator->arg[i] != NULL)
+// 		{
+// 			free(temp->separator->arg[i]);
+// 			i++;
+// 		}
+// 		if (temp->separator->arg)
+// 			free(temp->separator->arg);
+// 		if (temp->separator->cmd)
+// 			free(temp->separator->cmd);
+// 		if (temp->separator)
+// 			free(temp->separator);
+// 		free(temp);
+// 	}
+// }
 
 void	ft_free_split(char **arr)
 {
@@ -117,10 +119,6 @@ void	print_to_run(t_exec *to_run)
 		current_sep = to_run->separator;
 		if (current_sep != NULL)
 		{
-			if (current_sep->cmd != NULL)
-				printf("Command :  [%s]\n", current_sep->cmd);
-			else
-				printf("Command is [null]\n");
 			if (current_sep->arg != NULL)
 			{
 				args = current_sep->arg;

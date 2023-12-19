@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:48:04 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/16 16:11:20 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:07:24 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,10 @@ int	is_cmd(char *token, char **env)
 	return (0);
 }
 
-int	is_semicon(char *token)
-{
-	return (ft_strncmp(token, ";", 1) == 0);
-}
-
 int	is_separator(char *token)
 {
 	return (ft_strncmp(token, "<", 1) == 0 || ft_strncmp(token, ">", 1) == 0
-		|| ft_strncmp(token, "|", 1) == 0 || ft_strncmp(token, ";", 1) == 0);
+		|| ft_strncmp(token, "|", 1) == 0);
 }
 
 int	count_separators(char **tokens)
