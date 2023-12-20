@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 11:28:18 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/13 14:58:50 by nreichel         ###   ########.fr       */
+/*   Created: 2023/12/13 10:50:04 by nreichel          #+#    #+#             */
+/*   Updated: 2023/12/13 14:59:40 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_double_str(char **str)
-/* used to free double pointer string */
+void	sighandler(int signum)
 {
-	int	i;
-
-	i = 0;
-	if (str)
+	if (signum == SIGINT)
 	{
-		while (str[i])
-		{
-			free(str[i]);
-			i += 1;
-		}
-		free(str);
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }

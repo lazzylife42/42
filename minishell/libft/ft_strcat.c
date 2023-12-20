@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 11:28:18 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/13 14:58:50 by nreichel         ###   ########.fr       */
+/*   Created: 2023/11/04 18:16:48 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/11/11 17:51:25 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	free_double_str(char **str)
-/* used to free double pointer string */
+char	*ft_strcat(char *dest, const char *src)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	if (str)
+	j = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0')
 	{
-		while (str[i])
-		{
-			free(str[i]);
-			i += 1;
-		}
-		free(str);
+		dest[i] = src[j];
+		i++;
+		j++;
 	}
+	dest[i] = '\0';
+	return (dest);
 }
