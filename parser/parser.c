@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/20 01:09:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/20 11:23:58 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ char	**parse_arg(char **tokens, char **env, int pos)
 
 	i = pos;
 	count = 1;
-	while (tokens[i + 1] && !is_separator(tokens[i + 1]) && !is_cmd(tokens[i + 1], env))
+	while (tokens[i + 1] && !is_separator(tokens[i + 1]) && !is_cmd(tokens[i
+			+ 1], env))
 	{
 		count++;
 		i++;
@@ -93,7 +94,6 @@ t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 	int		j;
 	t_sep	*new_sep;
 
-	to_run = (t_exec *)malloc(sizeof(t_exec) * (count_cmd(tokens, env) + 1));
 	i = -1;
 	while (tokens[++i])
 	{
@@ -117,9 +117,10 @@ t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 
 int	main(int ac, char **av, char **env)
 {
-	t_exec	*to_run;
+	t_exec	*to_run = NULL;
+	(void)ac;
 
-	to_run = parse(NULL, (av + 1), env);
+	to_run = parse(to_run, (av + 1), env);
 	print_to_run(to_run);
 	free_exec_list(to_run);
 	return (0);
