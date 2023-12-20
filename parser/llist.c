@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   llist.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:38:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/19 16:37:10 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/20 01:06:59 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,37 +55,35 @@ t_exec	*add_to_exec_list(t_exec *head, t_sep *new_node)
 	return (head);
 }
 
-// void	free_exec_list(t_exec *head)
-// {
-// 	t_exec	*temp;
-// 	int		i;
+void	free_exec_list(t_exec *head)
+{
+	t_exec	*temp;
+	int		i;
 
-// 	while (head != NULL)
-// 	{
-// 		temp = head;
-// 		head = head->next;
-// 		if (temp->separator->pipe->symbol)
-// 			free(temp->separator->pipe->symbol);
-// 		printf("coucou\n");
-// 		if (temp->separator->pipe->file)
-// 			free(temp->separator->pipe->file);
-// 		if (temp->separator->pipe)
-// 			free(temp->separator->pipe);
-// 		i = 0;
-// 		while (temp->separator->arg[i] != NULL)
-// 		{
-// 			free(temp->separator->arg[i]);
-// 			i++;
-// 		}
-// 		if (temp->separator->arg)
-// 			free(temp->separator->arg);
-// 		if (temp->separator->cmd)
-// 			free(temp->separator->cmd);
-// 		if (temp->separator)
-// 			free(temp->separator);
-// 		free(temp);
-// 	}
-// }
+	while (head)
+	{
+		temp = head;
+		head = head->next;
+		if (temp->separator)
+		{
+			if (temp->separator->pipe)
+			{
+				if (temp->separator->pipe->symbol)
+					free(temp->separator->pipe->symbol);
+				free(temp->separator->pipe);
+			}
+			i = 0;
+			if (temp->separator->arg)
+			{
+				while (temp->separator->arg[i])
+					free(temp->separator->arg[i++]);
+				free(temp->separator->arg);
+			}
+			free(temp->separator);
+		}
+		free(temp);
+	}
+}
 
 void	ft_free_split(char **arr)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:41:14 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/19 16:35:12 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/19 23:57:17 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// gcc *.c *.h -lft -L../libft
+// gcc -g *.c *.h -lft -L../libft
 
 #ifndef PARSER_H
 # define PARSER_H
@@ -53,7 +53,6 @@ t_exec				*parse(t_exec *to_run, char **tokens, char **env);
 /*		PARSER UTILS		*/
 
 int					is_cmd(char *token, char **env);
-int					is_semicon(char *token);
 int					is_separator(char *token);
 int					count_cmd(char **tokens, char **env);
 int					count_separators(char **tokens);

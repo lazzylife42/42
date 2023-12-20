@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/19 17:06:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/20 01:09:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_file(char **tokens, int index)
 	}
 	else if (ft_strncmp(tokens[index], "<", 1) == 0)
 	{
-		if (tokens[index + 1] != NULL)
+		if (tokens[index - 1] != NULL)
 			return (tokens[index - 1]);
 	}
 	return (NULL);
@@ -94,7 +94,6 @@ t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 	t_sep	*new_sep;
 
 	to_run = (t_exec *)malloc(sizeof(t_exec) * (count_cmd(tokens, env) + 1));
-	to_run = NULL;
 	i = -1;
 	while (tokens[++i])
 	{
@@ -104,9 +103,11 @@ t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 			while (tokens[j] && !is_separator(tokens[j]))
 				j++;
 			if (tokens[j] && is_separator(tokens[j]))
-				new_sep = create_sep_node(parse_arg(tokens, env, i), ft_strdup(tokens[j]), get_file(tokens, j));
+				new_sep = create_sep_node(parse_arg(tokens, env, i),
+						ft_strdup(tokens[j]), get_file(tokens, j));
 			else
-				new_sep = create_sep_node(parse_arg(tokens, env, i), NULL, get_file(tokens, i - 1));
+				new_sep = create_sep_node(parse_arg(tokens, env, i), NULL,
+						get_file(tokens, i - 1));
 			to_run = add_to_exec_list(to_run, new_sep);
 			i = j;
 		}
@@ -118,9 +119,8 @@ int	main(int ac, char **av, char **env)
 {
 	t_exec	*to_run;
 
-	to_run = parse(to_run, (av + 1), env);
+	to_run = parse(NULL, (av + 1), env);
 	print_to_run(to_run);
-	// free_exec_list(to_run);
-	// free(to_run);
+	free_exec_list(to_run);
 	return (0);
 }
