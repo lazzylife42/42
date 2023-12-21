@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/20 19:03:59 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/21 15:49:20 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
-
+# include "parser/parser.h"
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
-# include <stdbool.h>
-# include <string.h> 
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "parser/parser.h"
 
 // Define ANSI escape sequences for text color
 
@@ -54,12 +53,15 @@ void	sighandler(int signum);
 char	*alloc_first(char *str, int len);
 char	*alloc_re(char *res, char *str, int len);
 char	*ralloc_str(char *res, char *str, int len);
-void	display_double_str(char **str);//test
+void	display_double_str(char **str); // test
 
-///EXECUTE
+/// EXECUTE
 
 void	execute_all(t_exec *to_run, char **directory, char ***env);
 void	execute(char **input, char **directory, char ***env);
 char	*heredoc(const char *delimiter);
+void	child_process(char **cmd1_arg, char **env, int *fd, char **directory);
+void	parent_process(char **cmd2_arg, char **env, int *fd, char **directory);
+int		exec_pipe(char **cmd1_arg, char **cmd2_arg, char **env, char **directory);
 
 #endif
