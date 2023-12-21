@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:17:48 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/20 18:41:45 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/21 10:43:50 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // gcc -g heredoc.c ../minishell.h -lft -L../libft -lreadline
-#define MAX_LEN 10000
-
-#include "../minishell.h"
+#include "minishell.h"
+//#define MAX_LEN 10000
 
 char	*heredoc(const char *delimiter)
 {
 	char	*line;
 	char	*heredoc_txt;
 
-	heredoc_txt = (char *)malloc(sizeof(char) * MAX_LEN);
+	heredoc_txt = NULL;
 	while (1)
 	{
 		line = readline("> ");
@@ -31,8 +30,12 @@ char	*heredoc(const char *delimiter)
 			free(line);
 			break ;
 		}
-		ft_strcat(heredoc_txt, line);
-		ft_strcat(heredoc_txt, "\n");
+		heredoc_txt = ralloc_str(heredoc_txt, line, ft_strlen(line));
+		if (!heredoc_txt)
+			exit (1);
+		heredoc_txt = ralloc_str(heredoc_txt, "\n", 1);
+		if (!heredoc_txt)
+			exit (1);
 		add_history(line);
 		free(line);
 	}

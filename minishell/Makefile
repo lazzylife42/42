@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
+#    By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 13:40:48 by nreichel          #+#    #+#              #
-#    Updated: 2023/12/20 17:18:38 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/12/21 10:23:26 by nreichel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = main.c utils_str.c free.c directory.c minishell_split.c display.c env.c translate.c signal.c alloc.c execute.c parser/llist.c parser/parser.c parser/parser_utils.c parser/heredoc.c 
+SRCS = main.c utils_str.c free.c directory.c minishell_split.c display.c env.c translate.c signal.c alloc.c execute.c parser/llist.c parser/parser.c parser/parser_utils.c heredoc.c 
 
 OBJS = ${SRCS:.c=.o}
 
@@ -20,7 +20,7 @@ RM	= rm -f
 
 CFLAGS = -Wall -Wextra -Werror
 
-USER = smonte-e
+USER := $(shell whoami)
 
 LIBFT_LIB = libft/libft.a
 
