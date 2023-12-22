@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:15:43 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/21 13:42:02 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/22 09:15:22 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int main(int argc, char **argv, char **envp)
 		{
 			// display_double_str(input);
 			to_run = parse(to_run, input, env);
-			// print_to_run(to_run);
+			print_to_run(to_run);
 			execute_all(to_run, &directory, &env);
 			free_exec_list(to_run);
 			to_run = NULL;

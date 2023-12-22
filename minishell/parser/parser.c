@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/20 14:52:51 by nreichel         ###   ########.fr       */
+/*   Updated: 2023/12/22 09:20:20 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char	*get_file(char **tokens, int index)
 		}
 		else if (ft_strncmp(tokens[index], "<", 1) == 0)
 		{
-			if (index >= 1 && tokens[index - 1] != NULL)
-				return (tokens[index - 1]);
+			if (tokens[index + 1] != NULL)
+				return (tokens[index + 1]);
 		}
 	}
 	return (NULL);
