@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/08 21:10:04 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/08 21:51:23 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	execute(char **input, char **directory, char ***env, t_pipe *pipe)
 		display_env(*env);
 	else if (ft_strncmp(txt, "cd", 3) == 0)
 		set_new_directory(directory, input[1], env);
-	else if (pipe->file)
+	else if (pipe->file && ft_strncmp(pipe->symbol, ">", 1) == 0)
 		exec_redir_out(pipe, find_path(txt, *env), input, *env);
 	else
 		execve_to_child(find_path(txt, *env), input, *env);
