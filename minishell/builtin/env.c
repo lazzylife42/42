@@ -6,11 +6,11 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:08:50 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/20 15:15:19 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:47:49 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	env_ralloc_del(char ***env, int pos)
 {
@@ -77,6 +77,12 @@ bool	env_var_valid(char *var)
 			return (false);
 		}
 		var += 1;
+		step += 1;
+	}
+	if (step == 0)
+	{
+		printf("export: '%s': not a valid identifier\n", var);
+		return (false);
 	}
 	if (*var == '=')
 		if (*(var + 1))

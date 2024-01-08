@@ -6,11 +6,18 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:15:43 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/22 09:15:22 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:33:19 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// ctrl D
+// redirection, normal and with pipes
+// $?
+// can launch executable 
+// minishell in minishell (SHLVL + 1)
+
 
 ///////////// for testing
 void	display_double_str(char **str)
@@ -37,6 +44,8 @@ keep it in memory, will ft_split it and return it*/
 	char	**res;
 
 	line_read = readline(prompt);
+	if (line_read == NULL)
+		exit(1);
 	if (line_read && *line_read)
 	{
 		add_history(line_read);
@@ -72,7 +81,7 @@ int main(int argc, char **argv, char **envp)
 		input = get_prompt(M"minishell> "RST);
 		if (input)
 		{
-			// display_double_str(input);
+			display_double_str(input);
 			to_run = parse(to_run, input, env);
 			print_to_run(to_run);
 			execute_all(to_run, &directory, &env);

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/20 19:03:59 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:53:45 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include "libft/libft.h"
 
 # include <stdio.h>
+# include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
 # include <string.h> 
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "parser/parser.h"
 
 // Define ANSI escape sequences for text color
 
@@ -35,6 +35,30 @@
 # define M "\033[1;35m"
 # define C "\033[1;36m"
 # define W "\033[37m"
+
+/*		STRUCTURES		*/
+
+typedef struct s_pipe
+{
+	char			*symbol;
+	char			*file;
+}					t_pipe;
+
+typedef struct s_sep
+{
+	int				fd[2];
+	int				in_file;
+	int				out_file;
+	char			**arg;
+	t_pipe			*pipe;
+}					t_sep;
+
+typedef struct s_exec
+{
+	t_sep			*separator;
+	struct s_exec	*next;
+}					t_exec;
+
 
 /*  FUNCTIONS       */
 
@@ -59,7 +83,30 @@ void	display_double_str(char **str);//test
 ///EXECUTE
 
 void	execute_all(t_exec *to_run, char **directory, char ***env);
-void	execute(char **input, char **directory, char ***env);
+void	execute(char **input, char **directory, char ***env, t_pipe *pip);
+void	exec_redir_out(t_pipe *pip, char *pathname, char **argv, char **env);
 char	*heredoc(const char *delimiter);
+
+/*		PARSER				*/
+
+char				*get_file(char **tokens, int index);
+char				*find_path(char *argv, char **env);
+char				**parse_arg(char **tokens, char **env, int pos);
+t_exec				*parse(t_exec *to_run, char **tokens, char **env);
+
+/*		PARSER UTILS		*/
+
+int					is_cmd(char *token, char **env);
+int					is_separator(char *token);
+int					count_cmd(char **tokens, char **env);
+int					count_separators(char **tokens);
+
+/*		LINKED LIST			*/
+
+t_sep				*create_sep_node(char **arg, char *token, char *file);
+t_exec				*add_to_exec_list(t_exec *head, t_sep *new_node);
+void				free_exec_list(t_exec *head);
+void				ft_free_split(char **arr);
+void				print_to_run(t_exec *to_run);
 
 #endif

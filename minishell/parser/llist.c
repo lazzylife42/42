@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   llist.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:38:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/20 19:12:26 by smonte-e         ###   ########.fr       */
+/*   Updated: 2023/12/22 13:09:08 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "minishell.h"
+#include "../minishell.h"
 
 t_sep	*create_sep_node(char **arg, char *token, char *file)
 {

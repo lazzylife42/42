@@ -6,13 +6,15 @@
 #    By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 13:40:48 by nreichel          #+#    #+#              #
-#    Updated: 2023/12/21 10:23:26 by nreichel         ###   ########.fr        #
+#    Updated: 2023/12/22 13:09:56 by nreichel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = main.c utils_str.c free.c directory.c minishell_split.c display.c env.c translate.c signal.c alloc.c execute.c parser/llist.c parser/parser.c parser/parser_utils.c heredoc.c 
+SRCS = main.c utils_str.c free.c  minishell_split.c translate.c signal.c alloc.c execute.c\
+	builtin/directory.c builtin/display.c builtin/env.c\
+	parser/llist.c parser/parser.c parser/parser_utils.c parser/heredoc.c 
 
 OBJS = ${SRCS:.c=.o}
 

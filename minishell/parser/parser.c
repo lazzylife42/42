@@ -6,11 +6,11 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/22 09:20:20 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:12:08 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 char	*get_file(char **tokens, int index)
 {
@@ -40,24 +40,27 @@ char	*find_path(char *argv, char **env)
 	char	*path_tmp;
 
 	i = 0;
-	while (ft_strncmp(env[i], "PATH=", 5) != 0)
-		i++;
-	split = ft_split(env[i] + 5, ':');
-	i = 0;
-	while (split[i])
+	if (argv)
 	{
-		path_tmp = ft_strjoin(split[i], "/");
-		path = ft_strjoin(path_tmp, argv);
-		free(path_tmp);
-		if (access(path, X_OK) == 0)
+		while (ft_strncmp(env[i], "PATH=", 5) != 0)
+			i++;
+		split = ft_split(env[i] + 5, ':');
+		i = 0;
+		while (split[i])
 		{
-			ft_free_split(split);
-			return (path);
+			path_tmp = ft_strjoin(split[i], "/");
+			path = ft_strjoin(path_tmp, argv);
+			free(path_tmp);
+			if (access(path, X_OK) == 0)
+			{
+				ft_free_split(split);
+				return (path);
+			}
+			free(path);
+			i++;
 		}
-		free(path);
-		i++;
+		ft_free_split(split);
 	}
-	ft_free_split(split);
 	return (NULL);
 }
 

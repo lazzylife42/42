@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:17:48 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/21 10:43:50 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:46:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // gcc -g heredoc.c ../minishell.h -lft -L../libft -lreadline
-#include "minishell.h"
-//#define MAX_LEN 10000
+#include "../minishell.h"
 
 char	*heredoc(const char *delimiter)
 {

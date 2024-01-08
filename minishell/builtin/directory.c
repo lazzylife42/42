@@ -6,11 +6,11 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:33:16 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/20 14:55:39 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:47:13 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	set_new_directory(char **directory, char *str, char ***env)
 {
@@ -21,7 +21,7 @@ void	set_new_directory(char **directory, char *str, char ***env)
 		str = translate_quote(str, *env);
 		if (chdir(str) != 0)
 		{
-			perror("chdir() error()");
+			perror("chdir() error");
 			free(str);
 			return ;
 		}

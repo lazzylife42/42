@@ -6,11 +6,11 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:48:04 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/20 14:51:59 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:47:26 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../minishell.h"
 
 int	is_builtin(char *tok)
 {
@@ -28,13 +28,21 @@ int	is_builtin(char *tok)
 int	is_cmd(char *token, char **env)
 {
 	char	*path;
+	char	*txt;
 
-	path = find_path(token, env);
-	if (path || is_builtin(token))
+	txt = translate_quote(token, env);
+	path = find_path(txt, env);
+	if ((path && access(path, X_OK) == 0) || is_builtin(token))
 	{
-		free(path);
-		return (1);
+		if (ft_strncmp(txt, ".", 2) != 0 && ft_strncmp(txt, "..", 3) != 0)
+		{
+			free(path);
+			free(txt);
+			return (1);
+		}
 	}
+	free(path);
+	free(txt);
 	return (0);
 }
 

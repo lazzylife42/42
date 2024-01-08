@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/22 11:57:42 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:53:49 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execve_to_child(char *pathname, char **argv, char **env)
+void	execve_to_child(char *pathname, char **argv, char **env) // a virer (mais pour l'instant est appelé par le parent)
 {
 	pid_t	pid;
 
@@ -28,7 +28,47 @@ void	execve_to_child(char *pathname, char **argv, char **env)
 		waitpid(pid, NULL, 0);
 }
 
-void	execute(char **input, char **directory, char ***env)
+void	exec_redir_out(t_pipe *pip, char *pathname, char **argv, char **env)
+{
+    pid_t pid;
+    int fd;
+
+
+    if (strncmp(pip->symbol, ">>", 2) == 0)
+	{
+        if ((fd = open(pip->file, O_WRONLY | O_CREAT | O_APPEND, 0644)) == -1)
+		{
+            perror("open");
+            exit(EXIT_FAILURE);
+        }
+    }
+	else if (strncmp(pip->symbol, ">", 1) == 0)
+	{
+        if ((fd = open(pip->file, O_WRONLY | O_CREAT | O_TRUNC, 0644)) == -1)
+		{
+            perror("open");
+            exit(EXIT_FAILURE);
+        }
+    }
+    pid = fork();
+    if (pid == -1)
+	{
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+    if (pid == 0)
+	{
+        dup2(fd, STDOUT_FILENO);
+        close(fd);
+        execve(pathname, argv, env);
+        perror("execve");
+        exit(EXIT_FAILURE);
+    }
+	else
+        waitpid(pid, NULL, 0);
+}
+
+void	execute(char **input, char **directory, char ***env, t_pipe *pipe)
 {
 	char	*txt;
 
@@ -49,61 +89,12 @@ void	execute(char **input, char **directory, char ***env)
 		display_env(*env);
 	else if (ft_strncmp(txt, "cd", 3) == 0)
 		set_new_directory(directory, input[1], env);
+	else if (pipe->file)
+		exec_redir_out(pipe, find_path(txt, *env), input, *env);
 	else
 		execve_to_child(find_path(txt, *env), input, *env);
 	free(txt);
 }
-
-/*int	execute_pipe(t_sep *cmd1, t_sep *cmd2, char **directory, char ***env)
-{
-	int		pipefd[2];
-	pid_t	pid1;
-	pid_t	pid2;
-
-	if (pipe(pipefd) == -1)
-	{
-		perror("pipe");
-		return (-1);
-	}
-	pid1 = fork();
-	if (pid1 == -1)
-	{
-		perror("fork");
-		return (-1);
-	}
-	if (pid1 == 0)
-	{
-		close(pipefd[0]);
-		dup2(pipefd[1], STDOUT_FILENO);
-		close(pipefd[1]);
-		execute(cmd1->arg, directory, env);
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		close(pipefd[1]);
-		pid2 = fork();
-		if (pid2 == -1)
-		{
-			perror("fork");
-			return (-1);
-		}
-		if (pid2 == 0)
-		{
-			dup2(pipefd[0], STDIN_FILENO);
-			close(pipefd[0]);
-			execute(cmd2->arg, directory, env);
-			exit(EXIT_FAILURE);
-		}
-		else
-		{
-			close(pipefd[0]);
-			waitpid(pid1, NULL, 0);
-			waitpid(pid2, NULL, 0);
-		}
-	}
-	return (0);
-}*/
 
 int get_pipe_nbr(t_exec *to_run)
 {
@@ -158,7 +149,7 @@ t_exec *execute_pipe(t_exec *to_run, char **directory, char ***env)
 			j = -1;
 			while (++j < count * 2)
 				close(fd[j]);
-			execute(to_run->separator->arg, directory, env);
+			execute(to_run->separator->arg, directory, env, to_run->separator->pipe);
 			exit(EXIT_FAILURE);
 		}
 		i += 1;
@@ -178,14 +169,16 @@ void	execute_all(t_exec *to_run, char **directory, char ***env)
 	while (to_run)
 	{
 		if (to_run->separator->pipe->symbol == NULL)
-			execute(to_run->separator->arg, directory, env);
+			execute(to_run->separator->arg, directory, env, to_run->separator->pipe);
 		else if (ft_strncmp(to_run->separator->pipe->symbol, "|", 1) == 0)
 		{
 			if (to_run->next)
 				to_run = execute_pipe(to_run, directory, env);
 			else
-				execute(to_run->separator->arg, directory, env);
+				execute(to_run->separator->arg, directory, env, to_run->separator->pipe);
 		}
+		else
+			execute(to_run->separator->arg, directory, env, to_run->separator->pipe);
 		if (to_run)
 			to_run = to_run->next;
 	}
