@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:48:04 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/08 15:47:26 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/10 20:18:07 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,14 @@ int	is_cmd(char *token, char **env)
 
 int	is_separator(char *token)
 {
-	return (ft_strncmp(token, "<", 1) == 0 || ft_strncmp(token, ">", 1) == 0
-		|| ft_strncmp(token, "|", 1) == 0);
+	return (ft_strncmp(token, "|", 1) == 0);
 }
+int	is_redir(char *token)
+{
+	return (ft_strncmp(token, "<", 1) == 0
+		|| ft_strncmp(token, ">", 1) == 0);
+}
+
 
 int	count_separators(char **tokens)
 {

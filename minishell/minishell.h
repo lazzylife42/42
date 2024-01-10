@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/08 17:53:45 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:22:27 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,14 @@
 
 /*		STRUCTURES		*/
 
-typedef struct s_pipe
-{
-	char			*symbol;
-	char			*file;
-}					t_pipe;
-
 typedef struct s_sep
 {
-	int				fd[2];
-	int				in_file;
-	int				out_file;
 	char			**arg;
-	t_pipe			*pipe;
+	char			*rd_in;
+	char			*rd_out;
+	char			*file_in;
+	char			*file_out;
+	char			*pipe;
 }					t_sep;
 
 typedef struct s_exec
@@ -83,8 +78,8 @@ void	display_double_str(char **str);//test
 ///EXECUTE
 
 void	execute_all(t_exec *to_run, char **directory, char ***env);
-void	execute(char **input, char **directory, char ***env, t_pipe *pip);
-void	exec_redir_out(t_pipe *pip, char *pathname, char **argv, char **env);
+void	execute(char **input, char **directory, char ***env, t_sep *sep);
+void	exec_redir_out(t_sep *sep, char *pathname, char **argv, char **env);
 char	*heredoc(const char *delimiter);
 
 /*		PARSER				*/
@@ -98,12 +93,13 @@ t_exec				*parse(t_exec *to_run, char **tokens, char **env);
 
 int					is_cmd(char *token, char **env);
 int					is_separator(char *token);
+int					is_redir(char *token);
 int					count_cmd(char **tokens, char **env);
 int					count_separators(char **tokens);
 
 /*		LINKED LIST			*/
 
-t_sep				*create_sep_node(char **arg, char *token, char *file);
+t_sep				*create_sep_node(char **arg, char **input, char *pipe, int pos);
 t_exec				*add_to_exec_list(t_exec *head, t_sep *new_node);
 void				free_exec_list(t_exec *head);
 void				ft_free_split(char **arr);

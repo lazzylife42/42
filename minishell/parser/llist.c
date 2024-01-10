@@ -3,16 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   llist.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:38:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/12/22 13:09:08 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/10 20:12:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_sep	*create_sep_node(char **arg, char *token, char *file)
+void	get_rdin(char **input, t_sep *sep, int pos)
+{
+	int	i;
+
+	i = pos;
+	sep->rd_in = NULL;
+	sep->file_in = NULL;
+	while (input[i] && ft_strncmp(input[i], "|", 1) != 0)
+	{
+		if (ft_strncmp(input[i], "<", 1) == 0 && input[i + 1])
+		{
+			sep->rd_in = input[i];
+			sep->file_in = input[i + 1];
+			return ;
+		}
+		i++;
+	}
+}
+
+void	get_rdout(char **input, t_sep *sep, int pos)
+{
+	int	i;
+
+	i = pos;
+	sep->rd_out = NULL;
+	sep->file_out = NULL;
+	while (input[i] && ft_strncmp(input[i], "|", 1) != 0)
+	{
+		if (ft_strncmp(input[i], ">", 1) == 0 && input[i + 1])
+		{
+			sep->rd_out = input[i];
+			sep->file_out = input[i + 1];
+			return ;
+		}
+		i++;
+	}
+}
+
+t_sep	*create_sep_node(char **arg, char **input, char *pipe, int pos)
 {
 	t_sep	*new_node;
 
@@ -20,14 +58,9 @@ t_sep	*create_sep_node(char **arg, char *token, char *file)
 	if (new_node)
 	{
 		new_node->arg = arg;
-		new_node->in_file = 0;
-		new_node->out_file = 0;
-		new_node->pipe = (t_pipe *)malloc(sizeof(t_pipe));
-		if (new_node->pipe)
-		{
-			new_node->pipe->symbol = token;
-			new_node->pipe->file = file;
-		}
+		get_rdin(input, new_node, pos);
+		get_rdout(input, new_node, pos);
+		new_node->pipe = pipe;
 	}
 	return (new_node);
 }
@@ -57,8 +90,9 @@ t_exec	*add_to_exec_list(t_exec *head, t_sep *new_node)
 
 void	free_exec_list(t_exec *head)
 {
-	t_exec	*temp;
 	int		i;
+	t_exec	*temp;
+	t_sep	*current_sep;
 
 	while (head)
 	{
@@ -66,20 +100,20 @@ void	free_exec_list(t_exec *head)
 		head = head->next;
 		if (temp->separator)
 		{
-			if (temp->separator->pipe)
+			current_sep = temp->separator;
+			// if (current_sep->pipe)
+			// 	free(current_sep->pipe);
+			if (current_sep->arg)
 			{
-				if (temp->separator->pipe->symbol)
-					free(temp->separator->pipe->symbol);
-				free(temp->separator->pipe);
+				i = 0;
+				while (current_sep->arg[i])
+				{
+					free(current_sep->arg[i]);
+					i++;
+				}
+				free(current_sep->arg);
 			}
-			i = 0;
-			if (temp->separator->arg)
-			{
-				while (temp->separator->arg[i])
-					free(temp->separator->arg[i++]);
-				free(temp->separator->arg);
-			}
-			free(temp->separator);
+			free(current_sep);
 		}
 		free(temp);
 	}
@@ -113,33 +147,63 @@ void	print_to_run(t_exec *to_run)
 	}
 	while (to_run != NULL)
 	{
-		i = 0;
 		current_sep = to_run->separator;
 		if (current_sep != NULL)
 		{
-			if (current_sep->arg != NULL)
+			i = 0;
+			args = current_sep->arg;
+			while (args && args[i] != NULL)
 			{
-				args = current_sep->arg;
-				while (args[i] != NULL)
-				{
-					printf("Argument:  [%s]\n", args[i]);
-					i++;
-				}
+				printf("Argument: [%s]\n", args[i]);
+				i++;
+			}
+			printf("Input Redirect: ");
+			if (current_sep->rd_in != NULL)
+			{
+				printf("[%s]\n", current_sep->rd_in);
 			}
 			else
 			{
-				printf("Argument:  [null]\n");
+				printf("[None]\n");
 			}
-			if (current_sep->pipe != NULL && current_sep->pipe->symbol != NULL)
-				printf("Operator:  [%s]\n", current_sep->pipe->symbol);
+			printf("Output Redirect: ");
+			if (current_sep->rd_out != NULL)
+			{
+				printf("[%s]\n", current_sep->rd_out);
+			}
 			else
-				printf("Operator:  [null]\n");
-			if (current_sep->pipe != NULL && current_sep->pipe->file != NULL)
-				printf("File    :  [%s]\n", current_sep->pipe->file);
+			{
+				printf("[None]\n");
+			}
+			printf("Input File: ");
+			if (current_sep->file_in != NULL)
+			{
+				printf("[%s]\n", current_sep->file_in);
+			}
 			else
-				printf("File    :  [null]\n");
+			{
+				printf("[None]\n");
+			}
+			printf("Output File: ");
+			if (current_sep->file_out != NULL)
+			{
+				printf("[%s]\n", current_sep->file_out);
+			}
+			else
+			{
+				printf("[None]\n");
+			}
+			printf("Pipe Operator: ");
+			if (current_sep->pipe != NULL)
+			{
+				printf("[%s]\n", current_sep->pipe);
+			}
+			else
+			{
+				printf("[None]\n");
+			}
+			printf("---------\n");
 		}
-		printf("---------\n");
 		to_run = to_run->next;
 	}
 }
