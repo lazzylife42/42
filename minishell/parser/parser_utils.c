@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:48:04 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/10 20:18:07 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/11 11:31:10 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	is_builtin(char *tok)
+/*int	is_builtin(char *tok)
 {
 	if (ft_strncmp(tok, "exit", 5) == 0)
 		return (1);
@@ -23,9 +23,9 @@ int	is_builtin(char *tok)
 		|| (ft_strncmp(tok, "unsetenv", 9) == 0))
 		return (1);
 	return (0);
-}
+}*/
 
-int	is_cmd(char *token, char **env)
+/*int	is_cmd(char *token, char **env)
 {
 	char	*path;
 	char	*txt;
@@ -44,18 +44,18 @@ int	is_cmd(char *token, char **env)
 	free(path);
 	free(txt);
 	return (0);
-}
+}*/
 
 int	is_separator(char *token)
 {
 	return (ft_strncmp(token, "|", 1) == 0);
 }
+
 int	is_redir(char *token)
 {
 	return (ft_strncmp(token, "<", 1) == 0
 		|| ft_strncmp(token, ">", 1) == 0);
 }
-
 
 int	count_separators(char **tokens)
 {
@@ -73,7 +73,7 @@ int	count_separators(char **tokens)
 	return (count);
 }
 
-int	count_cmd(char **tokens, char **env)
+/*int	count_cmd(char **tokens, char **env)
 {
 	int	i;
 	int	count;
@@ -87,4 +87,4 @@ int	count_cmd(char **tokens, char **env)
 		i++;
 	}
 	return (count);
-}
+}*/

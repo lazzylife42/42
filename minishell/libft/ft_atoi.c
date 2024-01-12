@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 12:45:57 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/18 09:54:18 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:03:17 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_atoi( const char *str )
 
 	res = 0;
 	sign = 1;
+	if (!str)
+		return (0);
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str += 1;
 	if (*str == '+' || *str == '-')

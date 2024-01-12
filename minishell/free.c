@@ -6,11 +6,17 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:28:18 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/13 14:58:50 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/11 09:42:49 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_two(char *a, char *b)
+{
+	free(a);
+	free(b);
+}
 
 void	free_double_str(char **str)
 /* used to free double pointer string */

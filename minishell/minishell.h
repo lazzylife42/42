@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/10 15:22:27 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/11 11:35:20 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
-# include <string.h> 
+# include <string.h>
+# include <termios.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -61,40 +63,53 @@ void	echo(char **input, char ***inv);
 void	export(char ***env, char **var);
 void	unset(char ***env, char **var);
 void	set_new_directory(char **directory, char *str, char ***env);
-void	display_env(char **env);
 char	*translate_quote(char *str, char **env);
 char	**minishell_split(char *str);
 int		double_str_len(char **str);
-char	**duplicate_env(char **env);
-void	free_double_str(char **str);
 char	**ralloc(char **res);
-char	*check_env(char **env, char *str, int len);
 void	sighandler(int signum);
 char	*alloc_first(char *str, int len);
 char	*alloc_re(char *res, char *str, int len);
 char	*ralloc_str(char *res, char *str, int len);
 void	display_double_str(char **str);//test
+bool	sigactive(int arg);
+
+/// FREE
+void	free_two(char *a, char *b);
+void	free_double_str(char **str);
+
+/// ENV
+void	export_one(char ***env, char *str);
+void	update_env(char ***env, char *var, int len);
+void	add_env(char *txt, char ***env);
+void	display_env(char **env);
+char	**duplicate_env(char **env);
+
+/// ENV2
+char	*check_env(char **env, char *str, int len);
+void	env_ralloc_del(char ***env, int pos);
+bool	env_var_valid(char *var);
 
 ///EXECUTE
 
 void	execute_all(t_exec *to_run, char **directory, char ***env);
+void	execve_to_child(char *pathname, char **argv, char **env);
 void	execute(char **input, char **directory, char ***env, t_sep *sep);
 void	exec_redir_out(t_sep *sep, char *pathname, char **argv, char **env);
 char	*heredoc(const char *delimiter);
 
 /*		PARSER				*/
-
 char				*get_file(char **tokens, int index);
 char				*find_path(char *argv, char **env);
-char				**parse_arg(char **tokens, char **env, int pos);
-t_exec				*parse(t_exec *to_run, char **tokens, char **env);
+char				**parse_arg(char **tokens, int pos);
+t_exec				*parse(t_exec *to_run, char **tokens);
 
 /*		PARSER UTILS		*/
 
-int					is_cmd(char *token, char **env);
+//int					is_cmd(char *token, char **env);
 int					is_separator(char *token);
 int					is_redir(char *token);
-int					count_cmd(char **tokens, char **env);
+//int					count_cmd(char **tokens, char **env);
 int					count_separators(char **tokens);
 
 /*		LINKED LIST			*/

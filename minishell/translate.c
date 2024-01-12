@@ -6,25 +6,11 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:14:35 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/08 15:47:08 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/11 09:27:27 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*check_env(char **env, char *str, int len)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], str, len) == 0 && env[i][len] == '=')
-			return (env[i] + len + 1);
-		i += 1;
-	}
-	return (NULL);
-}
 
 char	*translate_single_quote(char *str)
 {
@@ -115,7 +101,7 @@ char	*translate_quote(char *str, char **env)
 		res = translate_double_quote(str, env, 0, NULL);
 	else
 		res = translate_single_quote(str);
-	if (access(res, X_OK) == 0)
-		res = depath(res, 0);
+	//if (access(res, X_OK) == 0)
+	//	res = depath(res, 0);
 	return (res);
 }

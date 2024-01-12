@@ -6,38 +6,11 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:08:50 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/08 15:47:49 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/11 09:27:19 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	env_ralloc_del(char ***env, int pos)
-{
-	char	**res;
-	int		i;
-	int		off;
-
-	i = 0;
-	off = 0;
-	res = malloc(double_str_len(*env) * sizeof(char *));
-	if (!res)
-		return ;
-	while ((*env)[i])
-	{
-		if (i != pos)
-			res[i - off] = (*env)[i];
-		else
-		{
-			free((*env)[i]);
-			off = 1;
-		}
-		i += 1;
-	}
-	res[i - off] = NULL;
-	free(*env);
-	*env = res;
-}
 
 void	unset(char ***env, char **var)
 {
@@ -62,32 +35,6 @@ void	unset(char ***env, char **var)
 		free(txt);
 		i += 1;
 	}
-}
-
-bool	env_var_valid(char *var)
-{
-	int	step;
-
-	step = 0;
-	while (*var && *var != '=')
-	{
-		if (!(ft_isalpha(*var) || *var == '_'))
-		{
-			printf("export: '%s': not a valid identifier\n", var);
-			return (false);
-		}
-		var += 1;
-		step += 1;
-	}
-	if (step == 0)
-	{
-		printf("export: '%s': not a valid identifier\n", var);
-		return (false);
-	}
-	if (*var == '=')
-		if (*(var + 1))
-			return (true);
-	return (false);
 }
 
 void	update_env(char ***env, char *var, int len)
@@ -119,29 +66,35 @@ void	add_env(char *txt, char ***env)
 		exit(1);
 }
 
+void	export_one(char ***env, char *str)
+{
+	int		len;
+	char	*check;
+	char	*txt;
+
+	len = 0;
+	txt = translate_quote(str, *env);
+	while (txt[len] && txt[len] != '=')
+		len += 1;
+	if (env_var_valid(txt))
+	{
+		check = check_env(*env, txt, len);
+		if (check == NULL)
+			add_env(txt, env);
+		else
+			update_env(env, txt, len);
+	}
+	free(txt);
+}
+
 void	export(char ***env, char **var)
 {
-	char	*check;
-	int		len;
 	int		i;
-	char	*txt;
 
 	i = 0;
 	while (var[i])
 	{
-		len = 0;
-		txt = translate_quote(var[i], *env);
-		while (txt[len] && txt[len] != '=')
-			len += 1;
-		if (env_var_valid(txt))
-		{
-			check = check_env(*env, txt, len);
-			if (check == NULL)
-				add_env(txt, env);
-			else
-				update_env(env, txt, len);
-		}
-		free(txt);
+		export_one(env, var[i]);
 		i += 1;
 	}
 }

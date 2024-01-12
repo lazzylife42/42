@@ -6,31 +6,31 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/10 20:17:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:27:03 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// char	*get_file(char **tokens, int index)
-// {
-// 	if (index >= 0)
-// 	{
-// 		if (tokens == NULL || tokens[index] == NULL)
-// 			return (NULL);
-// 		if (ft_strncmp(tokens[index], ">", 1) == 0)
-// 		{
-// 			if (tokens[index + 1] != NULL)
-// 				return (tokens[index + 1]);
-// 		}
-// 		else if (ft_strncmp(tokens[index], "<", 1) == 0)
-// 		{
-// 			if (tokens[index + 1] != NULL)
-// 				return (tokens[index + 1]);
-// 		}
-// 	}
-// 	return (NULL);
-// }
+/*char	*get_file(char **tokens, int index)
+{
+	if (index >= 0)
+	{
+		if (tokens == NULL || tokens[index] == NULL)
+			return (NULL);
+		if (ft_strncmp(tokens[index], ">", 1) == 0)
+		{
+			if (tokens[index + 1] != NULL)
+				return (tokens[index + 1]);
+		}
+		else if (ft_strncmp(tokens[index], "<", 1) == 0)
+		{
+			if (tokens[index + 1] != NULL)
+				return (tokens[index + 1]);
+		}
+	}
+	return (NULL);
+}*/
 
 char	*find_path(char *argv, char **env)
 {
@@ -39,6 +39,8 @@ char	*find_path(char *argv, char **env)
 	char	*path;
 	char	*path_tmp;
 
+	if (access(argv, X_OK) == 0)
+		return (ft_strdup(argv));
 	i = 0;
 	if (argv)
 	{
@@ -64,7 +66,7 @@ char	*find_path(char *argv, char **env)
 	return (NULL);
 }
 
-char	**parse_arg(char **tokens, char **env, int pos)
+char	**parse_arg(char **tokens, int pos)
 {
 	int		i;
 	int		count;
@@ -72,8 +74,7 @@ char	**parse_arg(char **tokens, char **env, int pos)
 
 	i = pos;
 	count = 1;
-	while (tokens[i + 1] && !is_separator(tokens[i + 1]) && !is_cmd(tokens[i
-			+ 1], env) && !is_redir(tokens[i + 1]))
+	while (tokens[i + 1] && !is_separator(tokens[i + 1]) && !is_redir(tokens[i + 1]))
 	{
 		count++;
 		i++;
@@ -99,15 +100,11 @@ int		count_tok(char **input)
 	i = -1;
 	count = 0;
 	while (input[++i])
-	{
-		// printf("count : %d\n", count);	
 		count++;
-	}
 	return (count);
 }
 
-
-t_exec	*parse(t_exec *to_run, char **tokens, char **env)
+t_exec	*parse(t_exec *to_run, char **tokens)
 {
 	int		i;
 	int		j;
@@ -120,18 +117,18 @@ t_exec	*parse(t_exec *to_run, char **tokens, char **env)
 		if (is_separator(tokens[i]))
 		{
 			if (ft_strncmp(tokens[j], "<", 1) == 0)
-				new_sep = create_sep_node(parse_arg(tokens, env, j + 2), tokens, tokens[i], j);
+				new_sep = create_sep_node(parse_arg(tokens, j + 2), tokens, tokens[i], j);
 			else
-				new_sep = create_sep_node(parse_arg(tokens, env, j), tokens, tokens[i], j);
+				new_sep = create_sep_node(parse_arg(tokens, j), tokens, tokens[i], j);
 			to_run = add_to_exec_list(to_run, new_sep);
 			j = i + 1;
 		}
 		else if (i == count_tok(tokens) - 1)
 		{
 			if (ft_strncmp(tokens[j], "<", 1) == 0)
-				new_sep = create_sep_node(parse_arg(tokens, env, j + 2), tokens, NULL, j);
+				new_sep = create_sep_node(parse_arg(tokens, j + 2), tokens, NULL, j);
 			else
-				new_sep = create_sep_node(parse_arg(tokens, env, j), tokens, NULL, j);
+				new_sep = create_sep_node(parse_arg(tokens, j), tokens, NULL, j);
 			to_run = add_to_exec_list(to_run, new_sep);
 			break ;
 		}

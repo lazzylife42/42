@@ -3,21 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:15:43 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/10 20:09:18 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:54:08 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// ctrl D
+// resetting signal
 // redirection, normal and with pipes
 // $?
-// can launch executable 
-// minishell in minishell (SHLVL + 1)
-
 
 ///////////// for testing
 void	display_double_str(char **str)
@@ -56,18 +53,33 @@ keep it in memory, will ft_split it and return it*/
 	return (NULL);
 }
 
+struct termios	set_signal()
+{
+	struct termios old_termios;
+	struct termios new_termios;
+
+	tcgetattr(0,&old_termios);
+	new_termios = old_termios;
+  	new_termios.c_cc[VEOF] = -1; //default 4
+	new_termios.c_cc[VQUIT] = 4; //default 28
+  	tcsetattr(0,TCSANOW,&new_termios);
+	signal(SIGINT, sighandler);
+	signal(SIGQUIT, sighandler);
+	return(old_termios);
+}
+
 int main(int argc, char **argv, char **envp)
 {
 	char	**env;
 	char 	**input;
 	char	*directory;
 	t_exec	*to_run;
+	struct termios termios;
 
+	termios = set_signal();
 	to_run = NULL;
 	(void)argc;
 	(void)argv;
-	signal(SIGINT, sighandler);
-	signal(SIGQUIT, sighandler);
 	directory = malloc(256);
 	if (!directory)
 		exit(1);
@@ -82,7 +94,7 @@ int main(int argc, char **argv, char **envp)
 		if (input)
 		{
 			display_double_str(input);
-			to_run = parse(to_run, input, env);
+			to_run = parse(to_run, input);
 			print_to_run(to_run);
 			execute_all(to_run, &directory, &env);
 			free_exec_list(to_run);
@@ -91,4 +103,6 @@ int main(int argc, char **argv, char **envp)
 		free_double_str(input);
 	}
 	free_double_str(env);
+	tcsetattr(0,TCSANOW,&termios);/////is never called, should always be called (and correct)
+	exit(0);
 }
