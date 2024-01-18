@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:17:48 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/08 17:46:54 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:58:00 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*heredoc(const char *delimiter)
 	heredoc_txt = NULL;
 	while (1)
 	{
-		line = readline("> ");
+		line = readline(YL"heredoc> "RST);
 		if (!line)
 			break ;
 		if (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0)
@@ -40,6 +40,18 @@ char	*heredoc(const char *delimiter)
 	}
 	return (heredoc_txt);
 }
+void	exec_heredoc(char **input, char ***env)
+{
+	char *heredoc_txt;
+
+	heredoc_txt = heredoc(input[1]);
+	free(input[1]);
+	input = malloc(sizeof(heredoc_txt));
+	ft_strlcpy(input[1], heredoc_txt, ft_strlen(heredoc_txt));
+	free(heredoc_txt);
+	echo(input + 1, env);
+}
+
 
 // int	main(void)
 // {

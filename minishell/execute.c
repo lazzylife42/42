@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 16:37:12 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:50:20 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	is_builtin(char *txt)
 		|| ft_strncmp(txt, "exit", 5) == 0 || ft_strncmp(txt, "export", 7) == 0
 		|| (ft_strncmp(txt, "setenv", 7) == 0) || ft_strncmp(txt, "unset",
 			6) == 0 || (ft_strncmp(txt, "unsetenv", 9) == 0) || ft_strncmp(txt,
-			"env", 4) == 0 || ft_strncmp(txt, "cd", 3) == 0);
+			"env", 4) == 0 || ft_strncmp(txt, "cd", 3) == 0 || ft_strncmp(txt,
+			"<<", 3) == 0);
 }
 
 void	exec_builtin(char **input, char **directory, char ***env, char *txt)
@@ -70,6 +71,8 @@ void	exec_builtin(char **input, char **directory, char ***env, char *txt)
 		display_env(env);
 	else if (ft_strncmp(txt, "cd", 3) == 0)
 		set_new_directory(directory, input[1], env);
+	else if (ft_strncmp(txt, "<<", 3) == 0)
+		exec_heredoc(input, env);
 }
 
 void	execute(char **input, char **directory, char ***env, t_sep *sep)

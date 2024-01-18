@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 16:25:21 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:41:03 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void				exec_redir_out(t_sep *sep, char *pathname, char **argv,
 t_exec				*execute_pipe(t_exec *to_run, char **directory,
 						char ***env);
 char				*heredoc(const char *delimiter);
+void				exec_heredoc(char **input, char ***env);
 
 /// EXEC_REDIR
 int					append_outfile(t_sep *sep);

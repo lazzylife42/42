@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/18 16:47:46 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:20:42 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_exec	*parse(t_exec *to_run, char **tk)
 	{
 		if (is_separator(tk[i]))
 		{
-			if (ft_strncmp(tk[j], "<", 1) == 0)
+			if (ft_strncmp(tk[j], "<", 2) == 0)
 				n_sep = create_sep_node(parse_arg(tk, j + 2), tk, tk[i], j);		
 			else
 				n_sep = create_sep_node(parse_arg(tk, j), tk, tk[i], j);
@@ -114,7 +114,7 @@ t_exec	*parse(t_exec *to_run, char **tk)
 		}
 		else if (i == count_tok(tk) - 1)
 		{
-			if (ft_strncmp(tk[j], "<", 1) == 0)
+			if (ft_strncmp(tk[j], "<", 2) == 0)
 				n_sep = create_sep_node(parse_arg(tk, j + 2), tk, NULL, j);
 			else
 				n_sep = create_sep_node(parse_arg(tk, j), tk, NULL, j);
