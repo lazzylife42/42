@@ -6,22 +6,23 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:29:55 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/08 15:47:16 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:15:31 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	display_env(char **env)
+void	display_env(char ***env)
 {
 	int	i;
 
 	i = 0;
-	while (env[i])
+	while ((*env)[i])
 	{
-		printf("%s\n", env[i]);
+		printf("%s\n", (*env)[i]);
 		i += 1;
 	}
+	set_dollar(env, 0);
 }
 
 void	echo(char **input, char ***env)
@@ -50,4 +51,5 @@ void	echo(char **input, char ***env)
 	}
 	if (backslash)
 		printf("\n");
+	set_dollar(env, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:38:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/11 20:30:31 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:54:17 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ void	free_exec_list(t_exec *head)
 		if (temp->separator)
 		{
 			current_sep = temp->separator;
-			// if (current_sep->pipe)
-			// 	free(current_sep->pipe);
 			if (current_sep->arg)
 			{
 				i = 0;
@@ -117,21 +115,6 @@ void	free_exec_list(t_exec *head)
 		}
 		free(temp);
 	}
-}
-
-void	ft_free_split(char **arr)
-{
-	int	i;
-
-	if (arr == NULL)
-		return ;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
 }
 
 void	print_to_run(t_exec *to_run)
@@ -159,49 +142,29 @@ void	print_to_run(t_exec *to_run)
 			}
 			printf("Input Redirect: ");
 			if (current_sep->rd_in != NULL)
-			{
 				printf("[%s]\n", current_sep->rd_in);
-			}
 			else
-			{
 				printf("[None]\n");
-			}
 			printf("Output Redirect: ");
 			if (current_sep->rd_out != NULL)
-			{
 				printf("[%s]\n", current_sep->rd_out);
-			}
 			else
-			{
 				printf("[None]\n");
-			}
 			printf("Input File: ");
 			if (current_sep->file_in != NULL)
-			{
 				printf("[%s]\n", current_sep->file_in);
-			}
 			else
-			{
 				printf("[None]\n");
-			}
 			printf("Output File: ");
 			if (current_sep->file_out != NULL)
-			{
 				printf("[%s]\n", current_sep->file_out);
-			}
 			else
-			{
 				printf("[None]\n");
-			}
 			printf("Pipe Operator: ");
 			if (current_sep->pipe != NULL)
-			{
 				printf("[%s]\n", current_sep->pipe);
-			}
 			else
-			{
 				printf("[None]\n");
-			}
 			printf("---------\n");
 		}
 		to_run = to_run->next;

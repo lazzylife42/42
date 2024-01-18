@@ -6,11 +6,11 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:27:32 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/11 09:24:40 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/18 11:20:16 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	double_str_len(char **str)
 {
@@ -33,10 +33,10 @@ void	set_shlvl(char **res, char **env)
 	shlvl = ft_atoi(check_env(env, "SHLVL", 5)) + 1;
 	str = ft_itoa(shlvl);
 	if (!str)
-		exit(1);
+		shell_exit(1);
 	new = ft_strjoin("SHLVL=", str);
 	if (!new)
-		exit(1);
+		shell_exit(1);
 	free(str);
 	while (res[i] && ft_strncmp(res[i], "SHLVL=", 6) != 0)
 		i += 1;
@@ -51,11 +51,10 @@ void	set_minimum(char ***res)
 
 	pwd = ft_strjoin("PWD=", getcwd(dir, 256));
 	if (!pwd)
-		exit(1);
-	export_one(res, pwd);
+		shell_exit(1);
+	export_one(res, pwd, true);
 	free(pwd);
-	export_one(res, "SHLVL=1");
-	//path?
+	export_one(res, "SHLVL=1", true);
 }
 
 char	**duplicate_env(char **env)
@@ -74,7 +73,7 @@ char	**duplicate_env(char **env)
 	{
 		res[i] = ft_strdup(env[i]);
 		if (!res)
-			exit(1);
+			shell_exit(1);
 		i += 1;
 	}
 	res[i] = NULL;
@@ -82,7 +81,6 @@ char	**duplicate_env(char **env)
 		set_minimum(&res);
 	else
 		set_shlvl(res, env);
-	//export_one(&res, "---");
-	//export_one(&res, "?=0");
+	export_one(&res, "?=0", true);
 	return (res);
 }

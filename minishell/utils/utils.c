@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 11:28:18 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 10:36:31 by nreichel         ###   ########.fr       */
+/*   Created: 2024/01/16 10:05:14 by nreichel          #+#    #+#             */
+/*   Updated: 2024/01/18 13:09:55 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	free_two(char *a, char *b)
+void	set_dollar(char ***env, int n)
 {
-	free(a);
-	free(b);
-}
+	char	*str;
+	char	*itoa;
 
-void	free_double_str(char **str)
-/* used to free double pointer string */
-{
-	int	i;
-
-	i = 0;
-	if (str)
-	{
-		while (str[i])
-		{
-			free(str[i]);
-			i += 1;
-		}
-		free(str);
-	}
+	itoa = ft_itoa(n);
+	if (!itoa)
+		shell_exit(1);
+	str = ft_strjoin("?=", itoa);
+	free(itoa);
+	export_one(env, str, true);
 }

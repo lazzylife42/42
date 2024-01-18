@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/11 11:35:20 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:52:01 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
-
-# include <stdio.h>
+# include <errno.h>
 # include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <signal.h>
 # include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
 # include <string.h>
 # include <termios.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include <unistd.h>
 
 // Define ANSI escape sequences for text color
 
@@ -56,49 +56,84 @@ typedef struct s_exec
 	struct s_exec	*next;
 }					t_exec;
 
-
 /*  FUNCTIONS       */
 
-void	echo(char **input, char ***inv);
-void	export(char ***env, char **var);
-void	unset(char ***env, char **var);
-void	set_new_directory(char **directory, char *str, char ***env);
-char	*translate_quote(char *str, char **env);
-char	**minishell_split(char *str);
-int		double_str_len(char **str);
-char	**ralloc(char **res);
-void	sighandler(int signum);
-char	*alloc_first(char *str, int len);
-char	*alloc_re(char *res, char *str, int len);
-char	*ralloc_str(char *res, char *str, int len);
-void	display_double_str(char **str);//test
-bool	sigactive(int arg);
+void				echo(char **input, char ***inv);
+void				export(char ***env, char **var, bool admin);
+void				unset(char ***env, char **var);
+void				set_new_directory(char **directory, char *str, char ***env);
+char				*translate_quote(char *str, char **env);
+char				**minishell_split(char *str);
+int					double_str_len(char **str);
+char				**ralloc(char **res);
+char				*alloc_first(char *str, int len);
+char				*alloc_re(char *res, char *str, int len);
+char				*ralloc_str(char *res, char *str, int len);
+void	display_double_str(char **str); // test
+void				set_dollar(char ***env, int n);
+void				perror_set(int err, char *str);
+
+/// EXIT
+
+void				exit_cmd(char **var, char ***env);
+void				shell_exit(int n);
+
+/// SIGNAL
+
+struct termios		mem_termios(int n);
+void				set_signal(void);
+void				sighandler(int signum);
+bool				sigactive(int arg);
+void				update_lastsig(char ***env);
 
 /// FREE
-void	free_two(char *a, char *b);
-void	free_double_str(char **str);
+
+void				free_two(char *a, char *b);
+void				free_double_str(char **str);
 
 /// ENV
-void	export_one(char ***env, char *str);
-void	update_env(char ***env, char *var, int len);
-void	add_env(char *txt, char ***env);
-void	display_env(char **env);
-char	**duplicate_env(char **env);
+
+int					export_one(char ***env, char *str, bool admin);
+void				update_env(char ***env, char *var, int len);
+void				add_env(char *txt, char ***env);
+void				display_env(char ***env);
+char				**duplicate_env(char **env);
 
 /// ENV2
-char	*check_env(char **env, char *str, int len);
-void	env_ralloc_del(char ***env, int pos);
-bool	env_var_valid(char *var);
 
-///EXECUTE
+char				*check_env(char **env, char *str, int len);
+void				env_ralloc_del(char ***env, int pos);
+bool				env_var_valid(char *var, bool admin);
+void				set_env_us(char ***env, char *txt);
+int					unset_valid(char *var);
 
-void	execute_all(t_exec *to_run, char **directory, char ***env);
-void	execve_to_child(char *pathname, char **argv, char **env);
-void	execute(char **input, char **directory, char ***env, t_sep *sep);
-void	exec_redir_out(t_sep *sep, char *pathname, char **argv, char **env);
-char	*heredoc(const char *delimiter);
+/// EXECUTE
+
+void				execute_all(t_exec *to_run, char **directory, char ***env);
+void				execve_to_child(char *pathname, char **argv, char ***env);
+void				execute(char **input, char **directory, char ***env,
+						t_sep *sep);
+void				exec_redir_out(t_sep *sep, char *pathname, char **argv,
+						char **env);
+t_exec				*execute_pipe(t_exec *to_run, char **directory,
+						char ***env);
+char				*heredoc(const char *delimiter);
+
+/// EXEC_REDIR
+int					append_outfile(t_sep *sep);
+void				exec_redir_out_pipe(t_sep *sep, char *pathname, char **argv,
+						char **env);
+void				exec_redir_in_child(t_sep *sep, char *pathname, char **argv,
+						char **env);
+void				exec_redir_in(t_sep *sep, char *pathname, char **argv,
+						char **env);
+
+/*		REDIR				*/
+
+int					handle_outfile(t_sep *sep);
 
 /*		PARSER				*/
+
 char				*get_file(char **tokens, int index);
 char				*find_path(char *argv, char **env);
 char				**parse_arg(char **tokens, int pos);
@@ -106,15 +141,14 @@ t_exec				*parse(t_exec *to_run, char **tokens);
 
 /*		PARSER UTILS		*/
 
-//int					is_cmd(char *token, char **env);
 int					is_separator(char *token);
 int					is_redir(char *token);
-//int					count_cmd(char **tokens, char **env);
 int					count_separators(char **tokens);
 
 /*		LINKED LIST			*/
 
-t_sep				*create_sep_node(char **arg, char **input, char *pipe, int pos);
+t_sep				*create_sep_node(char **arg, char **input, char *pipe,
+						int pos);
 t_exec				*add_to_exec_list(t_exec *head, t_sep *new_node);
 void				free_exec_list(t_exec *head);
 void				ft_free_split(char **arr);

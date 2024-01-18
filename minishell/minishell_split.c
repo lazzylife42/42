@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:37:41 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/14 09:57:41 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/11 12:31:27 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	**add_word(char **res, char *str, int end)
 			return (NULL);
 		res[0] = return_str(str, end);
 		if (!res[0])
-			exit(1);
+			shell_exit(1);
 		res[1] = NULL;
 	}
 	else
@@ -104,7 +104,7 @@ char	**add_word(char **res, char *str, int end)
 			return (NULL);
 		res[double_str_len(res)] = return_str(str, end);
 		if (!res[double_str_len(res) - 1])
-			exit(1);
+			shell_exit(1);
 	}
 	return (res);
 }

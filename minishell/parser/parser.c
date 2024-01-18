@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/11 16:27:03 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:37:52 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,37 +32,45 @@
 	return (NULL);
 }*/
 
+char	*path_test(char *str, char *argv)
+{
+	char	*path_tmp;
+	char	*path;
+
+	if (argv)
+	{
+		path_tmp = ft_strjoin(str, "/");
+		path = ft_strjoin(path_tmp, argv);
+		free(path_tmp);
+		return (path);
+	}
+	return (NULL);
+}
+
 char	*find_path(char *argv, char **env)
 {
 	int		i;
 	char	**split;
 	char	*path;
-	char	*path_tmp;
 
+	if (argv == NULL || env == NULL || env[0] == NULL)
+		return (NULL);
 	if (access(argv, X_OK) == 0)
 		return (ft_strdup(argv));
-	i = 0;
-	if (argv)
+	i = -1;
+	while (ft_strncmp(env[++i], "PATH=", 5) != 0)
+		if (env[i + 1] == NULL)
+			return (NULL);
+	split = ft_split(env[i] + 5, ':');
+	i = -1;
+	while (split[++i])
 	{
-		while (ft_strncmp(env[i], "PATH=", 5) != 0)
-			i++;
-		split = ft_split(env[i] + 5, ':');
-		i = 0;
-		while (split[i])
-		{
-			path_tmp = ft_strjoin(split[i], "/");
-			path = ft_strjoin(path_tmp, argv);
-			free(path_tmp);
-			if (access(path, X_OK) == 0)
-			{
-				ft_free_split(split);
-				return (path);
-			}
-			free(path);
-			i++;
-		}
-		ft_free_split(split);
+		path = path_test(split[i], argv);
+		if (access(path, X_OK) == 0)
+			return (free_double_str(split), path);
+		free(path);
 	}
+	free_double_str(split);
 	return (NULL);
 }
 
@@ -74,7 +82,8 @@ char	**parse_arg(char **tokens, int pos)
 
 	i = pos;
 	count = 1;
-	while (tokens[i + 1] && !is_separator(tokens[i + 1]) && !is_redir(tokens[i + 1]))
+	while (tokens[i + 1] && !is_separator(tokens[i + 1])
+		&& !is_redir(tokens[i + 1]))
 	{
 		count++;
 		i++;
@@ -92,11 +101,11 @@ char	**parse_arg(char **tokens, int pos)
 	return (args);
 }
 
-int		count_tok(char **input)
+int	count_tok(char **input)
 {
 	int	i;
 	int	count;
-	
+
 	i = -1;
 	count = 0;
 	while (input[++i])
@@ -104,32 +113,28 @@ int		count_tok(char **input)
 	return (count);
 }
 
-t_exec	*parse(t_exec *to_run, char **tokens)
+t_exec	*parse(t_exec *to_run, char **tk)
 {
 	int		i;
 	int		j;
-	t_sep	*new_sep;
+	t_sep	*n_sep;
 
 	i = -1;
 	j = 0;
-	while (tokens[++i])
+	while (tk[++i])
 	{
-		if (is_separator(tokens[i]))
+		if (is_separator(tk[i]))
 		{
-			if (ft_strncmp(tokens[j], "<", 1) == 0)
-				new_sep = create_sep_node(parse_arg(tokens, j + 2), tokens, tokens[i], j);
-			else
-				new_sep = create_sep_node(parse_arg(tokens, j), tokens, tokens[i], j);
-			to_run = add_to_exec_list(to_run, new_sep);
+			n_sep = create_sep_node(parse_arg(tk, j
+						+ (ft_strncmp(tk[j], "<", 1) == 0 * 2)), tk, tk[i], j);
+			to_run = add_to_exec_list(to_run, n_sep);
 			j = i + 1;
 		}
-		else if (i == count_tok(tokens) - 1)
+		else if (i == count_tok(tk) - 1)
 		{
-			if (ft_strncmp(tokens[j], "<", 1) == 0)
-				new_sep = create_sep_node(parse_arg(tokens, j + 2), tokens, NULL, j);
-			else
-				new_sep = create_sep_node(parse_arg(tokens, j), tokens, NULL, j);
-			to_run = add_to_exec_list(to_run, new_sep);
+			n_sep = create_sep_node(parse_arg(tk, j
+						+ (ft_strncmp(tk[j], "<", 1) == 0 * 2)), tk, NULL, j);
+			to_run = add_to_exec_list(to_run, n_sep);
 			break ;
 		}
 	}
