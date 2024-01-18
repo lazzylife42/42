@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:15:43 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 13:52:04 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:29:11 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	minishell(char ***env, char **directory)
 		//display_double_str(input);
 		set_env_us(env, input[double_str_len(input) - 1]);
 		to_run = parse(to_run, input);
-		//print_to_run(to_run);
+		print_to_run(to_run);
 		execute_all(to_run, directory, env);
 		free_exec_list(to_run);
 		to_run = NULL;

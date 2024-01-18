@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 14:52:01 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:25:21 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char				**ralloc(char **res);
 char				*alloc_first(char *str, int len);
 char				*alloc_re(char *res, char *str, int len);
 char				*ralloc_str(char *res, char *str, int len);
-void	display_double_str(char **str); // test
+void				display_double_str(char **str); // test
 void				set_dollar(char ***env, int n);
 void				perror_set(int err, char *str);
 
@@ -110,7 +110,8 @@ int					unset_valid(char *var);
 /// EXECUTE
 
 void				execute_all(t_exec *to_run, char **directory, char ***env);
-void				execve_to_child(char *pathname, char **argv, char ***env);
+void				execve_to_child(char *pathname, char **argv, char ***env,
+						t_sep *sep);
 void				execute(char **input, char **directory, char ***env,
 						t_sep *sep);
 void				exec_redir_out(t_sep *sep, char *pathname, char **argv,
@@ -131,6 +132,7 @@ void				exec_redir_in(t_sep *sep, char *pathname, char **argv,
 /*		REDIR				*/
 
 int					handle_outfile(t_sep *sep);
+int					handle_infile(t_sep *sep);
 
 /*		PARSER				*/
 

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:55:05 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 14:55:42 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:31:17 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,38 @@ int	append_outfile(t_sep *sep)
 		fd_out = open(sep->file_out, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd_out == -1)
 	{
-		perror(RED"Failed to open output file"RST);
+		perror(RED "Failed to open output file" RST);
 		shell_exit(EXIT_FAILURE);
 	}
 	if (dup2(fd_out, STDOUT_FILENO) == -1)
 	{
-		perror(RED"Failed to duplicate file descriptor"RST);
+		perror(RED "Failed to duplicate file descriptor" RST);
 		shell_exit(EXIT_FAILURE);
 	}
 	close(fd_out);
+	return (EXIT_SUCCESS);
+}
+int	append_infile(t_sep *sep)
+{
+	int	fd_in;
+
+	fd_in = -1;
+	if (sep->rd_in != NULL)
+	{
+		fd_in = open(sep->file_in, O_RDONLY);
+		if (fd_in == -1)
+		{
+			perror(RED "Failed to open input file" RST);
+			shell_exit(EXIT_FAILURE);
+		}
+		if (dup2(fd_in, STDIN_FILENO) == -1)
+		{
+			perror(RED "Failed to duplicate input file descriptor" RST);
+			close(fd_in);
+			shell_exit(EXIT_FAILURE);
+		}
+		close(fd_in);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -59,14 +82,14 @@ void	exec_redir_out_pipe(t_sep *sep, char *pathname, char **argv, char **env)
 	pid = fork();
 	if (pid == -1)
 	{
-		perror(RED"Failed to fork"RST);
+		perror(RED "Failed to fork" RST);
 		shell_exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
 	{
 		if (execve(pathname, argv, env) == -1)
 		{
-			perror(RED"Failed to execute command"RST);
+			perror(RED "Failed to execute command" RST);
 			shell_exit(EXIT_FAILURE);
 		}
 	}
@@ -83,8 +106,9 @@ void	exec_redir_in_child(t_sep *sep, char *pathname, char **argv, char **env)
 	fd_in = STDIN_FILENO;
 	if (sep->file_in)
 	{
-		if ((fd_in = open(sep->file_in, O_RDONLY)) == -1)
-			exit(EXIT_FAILURE);
+		// if ((fd_in = open(sep->file_in, O_RDONLY)) == -1)
+		// 	exit(EXIT_FAILURE);
+		append_infile(sep);
 	}
 	fd_out = STDOUT_FILENO;
 	if (sep->file_out)

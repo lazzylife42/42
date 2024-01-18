@@ -6,13 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 14:55:23 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:37:12 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execve_to_child(char *pathname, char **argv, char ***env)
+void	execve_to_child(char *pathname, char **argv, char ***env, t_sep *sep)
 {
 	pid_t	pid;
 	int		status;
@@ -34,7 +34,13 @@ void	execve_to_child(char *pathname, char **argv, char ***env)
 			set_dollar(env, 1);
 	}
 	else
+	{
+		if (sep->file_out)
+			handle_outfile(sep);
+		if (sep->file_in)
+			handle_infile(sep);
 		execve(pathname, argv, *env);
+	}
 }
 
 int	is_builtin(char *txt)
@@ -76,15 +82,11 @@ void	execute(char **input, char **directory, char ***env, t_sep *sep)
 		exec_builtin(input, directory, env, txt);
 	else if (sep->pipe && ((sep->file_in && sep->file_out) || sep->file_out))
 		exec_redir_in_child(sep, find_path(txt, *env), input, *env);
-	else if (!sep->pipe && (sep->file_in && !sep->file_out))
-		exec_redir_in(sep, find_path(txt, *env), input, *env);
-	else if (sep->file_out && sep->pipe != NULL)
-		exec_redir_out_pipe(sep, find_path(txt, *env), input, *env);
 	else
 	{
 		path = find_path(txt, *env);
 		if (path)
-			execve_to_child(path, input, env);
+			execve_to_child(path, input, env, sep);
 		else
 			set_dollar(env, 127);
 	}
@@ -95,9 +97,7 @@ void	execute_all(t_exec *to_run, char **directory, char ***env)
 {
 	while (to_run)
 	{
-		if (to_run->separator->pipe == NULL)
-			execute(to_run->separator->arg, directory, env, to_run->separator);
-		else if (ft_strncmp(to_run->separator->pipe, "|", 1) == 0)
+		if (ft_strncmp(to_run->separator->pipe, "|", 1) == 0)
 		{
 			if (to_run->next)
 				to_run = execute_pipe(to_run, directory, env);

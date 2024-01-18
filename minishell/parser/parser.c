@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/18 10:37:52 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:47:46 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-/*char	*get_file(char **tokens, int index)
-{
-	if (index >= 0)
-	{
-		if (tokens == NULL || tokens[index] == NULL)
-			return (NULL);
-		if (ft_strncmp(tokens[index], ">", 1) == 0)
-		{
-			if (tokens[index + 1] != NULL)
-				return (tokens[index + 1]);
-		}
-		else if (ft_strncmp(tokens[index], "<", 1) == 0)
-		{
-			if (tokens[index + 1] != NULL)
-				return (tokens[index + 1]);
-		}
-	}
-	return (NULL);
-}*/
 
 char	*path_test(char *str, char *argv)
 {
@@ -125,15 +105,19 @@ t_exec	*parse(t_exec *to_run, char **tk)
 	{
 		if (is_separator(tk[i]))
 		{
-			n_sep = create_sep_node(parse_arg(tk, j
-						+ (ft_strncmp(tk[j], "<", 1) == 0 * 2)), tk, tk[i], j);
+			if (ft_strncmp(tk[j], "<", 1) == 0)
+				n_sep = create_sep_node(parse_arg(tk, j + 2), tk, tk[i], j);		
+			else
+				n_sep = create_sep_node(parse_arg(tk, j), tk, tk[i], j);
 			to_run = add_to_exec_list(to_run, n_sep);
 			j = i + 1;
 		}
 		else if (i == count_tok(tk) - 1)
 		{
-			n_sep = create_sep_node(parse_arg(tk, j
-						+ (ft_strncmp(tk[j], "<", 1) == 0 * 2)), tk, NULL, j);
+			if (ft_strncmp(tk[j], "<", 1) == 0)
+				n_sep = create_sep_node(parse_arg(tk, j + 2), tk, NULL, j);
+			else
+				n_sep = create_sep_node(parse_arg(tk, j), tk, NULL, j);
 			to_run = add_to_exec_list(to_run, n_sep);
 			break ;
 		}

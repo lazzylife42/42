@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:38:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/18 14:54:17 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:01:48 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	get_rdout(char **input, t_sep *sep, int pos)
 		{
 			sep->rd_out = input[i];
 			sep->file_out = input[i + 1];
-			return ;
 		}
 		i++;
 	}

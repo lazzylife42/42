@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:49:59 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/18 14:53:38 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:04:36 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static int	get_pipe_nbr(t_exec *to_run)
 
 t_exec	*execute_pipe(t_exec *to_run, char **directory, char ***env)
 {
-	int *fd;
-	pid_t pid;
-	int i;
-	int j;
-	int count;
+	int		*fd;
+	pid_t	pid;
+	int		i;
+	int		j;
+	int		count;
 
 	count = get_pipe_nbr(to_run) + 1;
 	fd = malloc(count * 2 * sizeof(int));
