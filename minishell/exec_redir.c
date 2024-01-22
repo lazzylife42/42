@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:55:05 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 16:31:17 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:42:18 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	append_outfile(t_sep *sep)
 	close(fd_out);
 	return (EXIT_SUCCESS);
 }
+
 int	append_infile(t_sep *sep)
 {
 	int	fd_in;
@@ -102,14 +103,12 @@ void	exec_redir_in_child(t_sep *sep, char *pathname, char **argv, char **env)
 	pid_t	pid;
 	int		fd_in;
 	int		fd_out;
+	char 	*txt;
 
+	txt = translate_quote(argv[0], env);
 	fd_in = STDIN_FILENO;
 	if (sep->file_in)
-	{
-		// if ((fd_in = open(sep->file_in, O_RDONLY)) == -1)
-		// 	exit(EXIT_FAILURE);
 		append_infile(sep);
-	}
 	fd_out = STDOUT_FILENO;
 	if (sep->file_out)
 	{
@@ -129,11 +128,15 @@ void	exec_redir_in_child(t_sep *sep, char *pathname, char **argv, char **env)
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_in);
 		close(fd_out);
-		execve(pathname, argv, env);
+		if (is_builtin(txt))
+			exec_builtin(sep, &pathname, &env, txt);
+		else
+			execve(pathname, argv, env);
 		exit(EXIT_FAILURE);
 	}
 	else
 		waitpid(pid, NULL, 0);
+	free(txt);
 }
 
 void	exec_redir_in(t_sep *sep, char *pathname, char **argv, char **env)

@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 09:26:32 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 13:35:48 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:13:00 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	set_env_us(char ***env, char *txt)
 	if (!str)
 		shell_exit(1);
 	export_one(env, str, true);
+	free(path);
 	free(str);
 }
 

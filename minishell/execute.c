@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 17:50:20 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:42:55 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,17 @@ void	execve_to_child(char *pathname, char **argv, char ***env, t_sep *sep)
 		sigactive(-1);
 		waitpid(pid, &status, 0);
 		sigactive(1);
-		if (WIFEXITED(status))
+		if (WIFEXITED(status)) ////////
 			set_dollar(env, WEXITSTATUS(status));
 		else
 			set_dollar(env, 1);
+		return ;
 	}
-	else
-	{
-		if (sep->file_out)
-			handle_outfile(sep);
-		if (sep->file_in)
-			handle_infile(sep);
-		execve(pathname, argv, *env);
-	}
+	if (sep->file_out)
+		handle_outfile(sep);
+	if (sep->file_in)
+		handle_infile(sep);
+	execve(pathname, argv, *env);
 }
 
 int	is_builtin(char *txt)
@@ -49,30 +47,27 @@ int	is_builtin(char *txt)
 		|| ft_strncmp(txt, "exit", 5) == 0 || ft_strncmp(txt, "export", 7) == 0
 		|| (ft_strncmp(txt, "setenv", 7) == 0) || ft_strncmp(txt, "unset",
 			6) == 0 || (ft_strncmp(txt, "unsetenv", 9) == 0) || ft_strncmp(txt,
-			"env", 4) == 0 || ft_strncmp(txt, "cd", 3) == 0 || ft_strncmp(txt,
-			"<<", 3) == 0);
+			"env", 4) == 0 || ft_strncmp(txt, "cd", 3) == 0);
 }
 
-void	exec_builtin(char **input, char **directory, char ***env, char *txt)
+void	exec_builtin(t_sep *sep, char **directory, char ***env, char *txt)
 {
 	if (ft_strncmp(txt, "echo", 5) == 0)
-		echo(input + 1, env);
+		echo(&sep->arg[1], env);
 	else if (ft_strncmp(txt, "pwd", 4) == 0)
 		printf("%s\n", *directory);
 	else if (ft_strncmp(txt, "exit", 5) == 0)
-		exit_cmd(input + 1, env);
+		exit_cmd(&sep->arg[1], env);
 	else if (ft_strncmp(txt, "export", 7) == 0 || (ft_strncmp(txt, "setenv",
 				7) == 0))
-		export(env, input + 1, false);
+		export(env, &sep->arg[1], false);
 	else if (ft_strncmp(txt, "unset", 6) == 0 || (ft_strncmp(txt, "unsetenv",
 				9) == 0))
-		unset(env, input + 1);
+		unset(env, &sep->arg[1]);
 	else if (ft_strncmp(txt, "env", 4) == 0)
 		display_env(env);
 	else if (ft_strncmp(txt, "cd", 3) == 0)
-		set_new_directory(directory, input[1], env);
-	else if (ft_strncmp(txt, "<<", 3) == 0)
-		exec_heredoc(input, env);
+		set_new_directory(directory, sep->arg[1], env);
 }
 
 void	execute(char **input, char **directory, char ***env, t_sep *sep)
@@ -81,8 +76,11 @@ void	execute(char **input, char **directory, char ***env, t_sep *sep)
 	char	*path;
 
 	txt = translate_quote(input[0], *env);
-	if (is_builtin(txt))
-		exec_builtin(input, directory, env, txt);
+	if (is_builtin(txt) && !sep->file_out && !sep->pipe)
+		exec_builtin(sep, directory, env, txt);
+	else if (ft_strncmp(sep->arg[0], "<<", 3) == 0 && ft_strncmp(sep->pipe, "|",
+			2) != 0)
+		exec_heredoc(input);
 	else if (sep->pipe && ((sep->file_in && sep->file_out) || sep->file_out))
 		exec_redir_in_child(sep, find_path(txt, *env), input, *env);
 	else
@@ -92,6 +90,7 @@ void	execute(char **input, char **directory, char ***env, t_sep *sep)
 			execve_to_child(path, input, env, sep);
 		else
 			set_dollar(env, 127);
+		free(path);
 	}
 	free(txt);
 }
@@ -102,6 +101,8 @@ void	execute_all(t_exec *to_run, char **directory, char ***env)
 	{
 		if (ft_strncmp(to_run->separator->pipe, "|", 1) == 0)
 		{
+			if (ft_strncmp(to_run->separator->arg[0], "<<", 3) == 0)
+				handle_heredoc(&to_run);
 			if (to_run->next)
 				to_run = execute_pipe(to_run, directory, env);
 			else

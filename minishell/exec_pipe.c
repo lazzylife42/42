@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:49:59 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/18 16:04:36 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/22 10:53:07 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	get_pipe_nbr(t_exec *to_run)
+int	get_pipe_nbr(t_exec *to_run)
 {
 	int	res;
 
@@ -69,7 +69,7 @@ t_exec	*execute_pipe(t_exec *to_run, char **directory, char ***env)
 				if (handle_outfile(to_run->separator))
 					perror(RED "Error handleling outfile" RST);
 			execute(to_run->separator->arg, directory, env, to_run->separator);
-			shell_exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
 		i += 1;
 		to_run = to_run->next;

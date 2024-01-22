@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:33:16 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 11:00:59 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:57:15 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	set_new_directory(char **directory, char *str, char ***env)
 	char	*oldpwd;
 	char	dir[256];
 
-	if (!str)
+	if (!str || ft_strncmp(str, "~", 2) == 0)
 		str = check_env(*env, "HOME", 4);
 	if (str)
 	{

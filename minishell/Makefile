@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
+#    By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 13:40:48 by nreichel          #+#    #+#              #
-#    Updated: 2024/01/18 17:17:36 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/01/22 14:18:17 by nreichel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ $(NAME): $(OBJS)
 
 clean:
 		${RM} ${OBJS}
+		${RM} heredoc.tmp
 		make -C libft/ clean
 
 fclean:	clean

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:17:48 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/18 17:58:00 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:38:17 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*heredoc(const char *delimiter)
 	heredoc_txt = NULL;
 	while (1)
 	{
-		line = readline(YL"heredoc> "RST);
+		line = readline(YL "heredoc> " RST);
 		if (!line)
 			break ;
 		if (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0)
@@ -31,27 +31,66 @@ char	*heredoc(const char *delimiter)
 		}
 		heredoc_txt = ralloc_str(heredoc_txt, line, ft_strlen(line));
 		if (!heredoc_txt)
-			exit (1);
+			shell_exit(1);
 		heredoc_txt = ralloc_str(heredoc_txt, "\n", 1);
 		if (!heredoc_txt)
-			exit (1);
+			shell_exit(1);
 		add_history(line);
 		free(line);
 	}
 	return (heredoc_txt);
 }
-void	exec_heredoc(char **input, char ***env)
+
+void	exec_heredoc(char **input)
 {
-	char *heredoc_txt;
+	char	*heredoc_txt;
 
 	heredoc_txt = heredoc(input[1]);
-	free(input[1]);
-	input = malloc(sizeof(heredoc_txt));
-	ft_strlcpy(input[1], heredoc_txt, ft_strlen(heredoc_txt));
+	if (!heredoc_txt)
+		return ;
+	ft_putstr_fd(heredoc_txt, 1);
 	free(heredoc_txt);
-	echo(input + 1, env);
 }
 
+void	handle_heredoc(t_exec **to_run)
+{
+	char	*heredoc_txt;
+	int		heredoc_fd;
+
+	if (!(*to_run)->next || !(*to_run)->next->separator
+		|| !(*to_run)->separator->arg[1])
+	{
+		perror("Error: separator not properly initialized.\n");
+		return ;
+	}
+	if (!(*to_run)->next->separator->file_in)
+		(*to_run)->next->separator->file_in = "heredoc.tmp";
+	heredoc_txt = heredoc((*to_run)->separator->arg[1]);
+	if (!heredoc_txt)
+		return ;
+	heredoc_fd = open((*to_run)->next->separator->file_in,
+			O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	if (heredoc_fd == -1)
+	{
+		perror("Open");
+		free(heredoc_txt);
+		return ;
+	}
+	ft_putstr_fd(heredoc_txt, heredoc_fd);
+	close(heredoc_fd);
+	free(heredoc_txt);
+}
+
+// void	rm_heredoc(const char *file_in)
+// {
+// 	if (file_in == NULL || file_in[0] == '\0')
+// 		return ;
+// 	if (unlink(file_in) == -1)
+// 	{
+// 		perror("Unlink");
+// 		shell_exit(1);
+// 	}
+// }
 
 // int	main(void)
 // {

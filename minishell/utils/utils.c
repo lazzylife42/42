@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:05:14 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 13:09:55 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:09:02 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ void	set_dollar(char ***env, int n)
 	str = ft_strjoin("?=", itoa);
 	free(itoa);
 	export_one(env, str, true);
+	free(str);
 }

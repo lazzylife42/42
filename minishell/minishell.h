@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 17:41:03 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:11:17 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,13 @@ void				execute(char **input, char **directory, char ***env,
 						t_sep *sep);
 void				exec_redir_out(t_sep *sep, char *pathname, char **argv,
 						char **env);
+int					get_pipe_nbr(t_exec *to_run);
 t_exec				*execute_pipe(t_exec *to_run, char **directory,
 						char ***env);
 char				*heredoc(const char *delimiter);
-void				exec_heredoc(char **input, char ***env);
+void				exec_heredoc(char **input);
+int					is_builtin(char *txt);
+void				exec_builtin(t_sep *sep, char **directory, char ***env, char *txt);
 
 /// EXEC_REDIR
 int					append_outfile(t_sep *sep);
@@ -134,6 +137,8 @@ void				exec_redir_in(t_sep *sep, char *pathname, char **argv,
 
 int					handle_outfile(t_sep *sep);
 int					handle_infile(t_sep *sep);
+void				handle_heredoc(t_exec **to_run);
+void				rm_heredoc(const char *file_in);
 
 /*		PARSER				*/
 
