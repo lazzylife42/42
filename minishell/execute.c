@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/22 15:42:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:32:01 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	execve_to_child(char *pathname, char **argv, char ***env, t_sep *sep)
 		sigactive(-1);
 		waitpid(pid, &status, 0);
 		sigactive(1);
-		if (WIFEXITED(status)) ////////
+		if (WIFEXITED(status))
 			set_dollar(env, WEXITSTATUS(status));
 		else
 			set_dollar(env, 1);

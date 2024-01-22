@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:48:04 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/18 16:00:49 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:53:26 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,21 @@ int	count_separators(char **tokens)
 		i++;
 	}
 	return (count);
+}
+t_sep	*create(char **tk, int index, char *separator, int j)
+{
+	if (tk[index][0] == '|')
+	{
+		if (ft_strncmp(tk[j], "<", 2) == 0)
+			return (create_sep_node(parse_arg(tk, j + 2), tk, tk[index], j));
+		else
+			return (create_sep_node(parse_arg(tk, j), tk, separator, j));
+	}
+	else
+	{
+		if (ft_strncmp(tk[j], "<", 2) == 0)
+			return (create_sep_node(parse_arg(tk, j + 2), tk, NULL, j));
+		else
+			return (create_sep_node(parse_arg(tk, j), tk, NULL, j));
+	}
 }

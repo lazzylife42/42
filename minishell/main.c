@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:15:43 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/22 10:46:35 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:47:01 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	display_double_str(char **str)
 	}
 }
 
-char	**get_prompt(char *prompt)
 /*Give the prompt to the user, will wait for it to write something, will
 keep it in memory, will ft_split it and return it*/
+char	**get_prompt(char *prompt)
 {
 	char	*line_read;
 	char	**res;
@@ -88,7 +88,7 @@ int	main(int argc, char **argv, char **envp)
 	env = duplicate_env(envp);
 	if (!env)
 		shell_exit(1);
-	if (getcwd(directory, 256) == NULL) // magic number for now...
+	if (getcwd(directory, 256) == NULL)
 		perror("getcwd() error");
 	while (1)
 		minishell(&env, &directory);

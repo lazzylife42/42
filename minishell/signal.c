@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:50:04 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 11:51:12 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:32:51 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ struct termios	mem_termios(int n)
 	return (old_termios);
 }
 
+//default 4, new -1
+//default 28, new 4
 void	set_signal(void)
 {
 	struct termios	old_termios;
@@ -39,8 +41,8 @@ void	set_signal(void)
 
 	old_termios = mem_termios(0);
 	new_termios = old_termios;
-	new_termios.c_cc[VEOF] = -1;//default 4, new -1
-	new_termios.c_cc[VQUIT] = 4;//default 28, new 4
+	new_termios.c_cc[VEOF] = -1;
+	new_termios.c_cc[VQUIT] = 4;
 	tcsetattr(0, TCSANOW, &new_termios);
 	signal(SIGINT, sighandler);
 	signal(SIGQUIT, sighandler);

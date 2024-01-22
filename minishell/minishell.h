@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/22 15:11:17 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:53:41 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char				**ralloc(char **res);
 char				*alloc_first(char *str, int len);
 char				*alloc_re(char *res, char *str, int len);
 char				*ralloc_str(char *res, char *str, int len);
-void				display_double_str(char **str); // test
+void	display_double_str(char **str); // test
 void				set_dollar(char ***env, int n);
 void				perror_set(int err, char *str);
 
@@ -122,10 +122,12 @@ t_exec				*execute_pipe(t_exec *to_run, char **directory,
 char				*heredoc(const char *delimiter);
 void				exec_heredoc(char **input);
 int					is_builtin(char *txt);
-void				exec_builtin(t_sep *sep, char **directory, char ***env, char *txt);
+void				exec_builtin(t_sep *sep, char **directory, char ***env,
+						char *txt);
 
 /// EXEC_REDIR
 int					append_outfile(t_sep *sep);
+void				redirect_stdin_stdout(int fd_in, int fd_out);
 void				exec_redir_out_pipe(t_sep *sep, char *pathname, char **argv,
 						char **env);
 void				exec_redir_in_child(t_sep *sep, char *pathname, char **argv,
@@ -146,6 +148,7 @@ char				*get_file(char **tokens, int index);
 char				*find_path(char *argv, char **env);
 char				**parse_arg(char **tokens, int pos);
 t_exec				*parse(t_exec *to_run, char **tokens);
+t_sep				*create(char **tk, int index, char *separator, int j);
 
 /*		PARSER UTILS		*/
 

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:49:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/18 17:20:42 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:52:59 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ char	**parse_arg(char **tokens, int pos)
 
 	i = pos;
 	count = 1;
-	while (tokens[i + 1] && !is_separator(tokens[i + 1])
-		&& !is_redir(tokens[i + 1]))
+	while (tokens[i + 1] && !is_separator(tokens[i + 1]) && !is_redir(tokens[i
+				+ 1]))
 	{
 		count++;
 		i++;
@@ -105,19 +105,13 @@ t_exec	*parse(t_exec *to_run, char **tk)
 	{
 		if (is_separator(tk[i]))
 		{
-			if (ft_strncmp(tk[j], "<", 2) == 0)
-				n_sep = create_sep_node(parse_arg(tk, j + 2), tk, tk[i], j);		
-			else
-				n_sep = create_sep_node(parse_arg(tk, j), tk, tk[i], j);
+			n_sep = create(tk, i, tk[i], j);
 			to_run = add_to_exec_list(to_run, n_sep);
 			j = i + 1;
 		}
 		else if (i == count_tok(tk) - 1)
 		{
-			if (ft_strncmp(tk[j], "<", 2) == 0)
-				n_sep = create_sep_node(parse_arg(tk, j + 2), tk, NULL, j);
-			else
-				n_sep = create_sep_node(parse_arg(tk, j), tk, NULL, j);
+			n_sep = create(tk, i, tk[i], j);
 			to_run = add_to_exec_list(to_run, n_sep);
 			break ;
 		}
