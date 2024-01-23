@@ -6,11 +6,16 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:37:41 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/11 12:31:27 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:49:48 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int is_kw(char c)
+{
+	return (c == ' ' || c == '|' || c == '<' || c == '>');
+}
 
 int	next_end(char *str)
 {
@@ -18,25 +23,28 @@ int	next_end(char *str)
 	int	type;
 
 	i = 0;
-	type = (str[0] == '"') * 1 + (str[0] == '\'') * 2;
+	type = 0;
 	if (str[0] == '|')
 		return (1);
-	if (type != 0)
+	if (str[0] == '<' || str[0] == '>')
+		return (1 + (str[1] == str[0]));
+	while (str[i])
 	{
-		while (str[i])
+		if (type == 0)
 		{
-			if ((i > 0) && ((type == 1 && str[i] == '"')
-					|| (type == 2 && str[i] == '\'')))
-			{
-				i += 1;
-				break ;
-			}
-			i += 1;
+			if (is_kw(str[i]))
+				return (i);
+			if (str[i] == '"')
+				type = 1;
+			if (str[i] == '\'')
+				type = 2;
 		}
+		else if (type == 1 && str[i] == '"')
+				type = 0;
+		else if (type == 2 && str[i] == '\'')
+				type = 0;
+		i += 1;
 	}
-	else
-		while (str[i] && !(str[i] == ' ' || str[i] == '|'))
-			i += 1;
 	return (i);
 }
 
@@ -94,7 +102,7 @@ char	**add_word(char **res, char *str, int end)
 			return (NULL);
 		res[0] = return_str(str, end);
 		if (!res[0])
-			shell_exit(1);
+			shell_exit(1, NULL);
 		res[1] = NULL;
 	}
 	else
@@ -104,7 +112,7 @@ char	**add_word(char **res, char *str, int end)
 			return (NULL);
 		res[double_str_len(res)] = return_str(str, end);
 		if (!res[double_str_len(res) - 1])
-			shell_exit(1);
+			shell_exit(1, NULL);
 	}
 	return (res);
 }

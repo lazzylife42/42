@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:26:29 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 10:48:11 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/23 09:46:10 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*alloc_first(char *str, int len)
 	i = 0;
 	res = malloc((len + 1) * sizeof(char));
 	if (!res)
-		shell_exit(1);
+		shell_exit(1, NULL);
 	while (i < len)
 	{
 		res[i] = str[i];
@@ -41,7 +41,7 @@ char	*alloc_re(char *res, char *str, int len)
 	y = 0;
 	new_res = malloc((ft_strlen(res) + len + 1) * sizeof(char));
 	if (!new_res)
-		shell_exit(1);
+		shell_exit(1, NULL);
 	while (i < (int)ft_strlen(res))
 	{
 		new_res[i] = res[i];
@@ -65,7 +65,7 @@ char	*ralloc_str(char *res, char *str, int len)
 	else
 		new_res = alloc_re(res, str, len);
 	if (!new_res)
-		shell_exit(1);
+		shell_exit(1, NULL);
 	free(res);
 	return (new_res);
 }

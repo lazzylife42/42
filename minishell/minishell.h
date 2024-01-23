@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/22 16:53:41 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:47:41 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,21 @@ char				**ralloc(char **res);
 char				*alloc_first(char *str, int len);
 char				*alloc_re(char *res, char *str, int len);
 char				*ralloc_str(char *res, char *str, int len);
-void	display_double_str(char **str); // test
+void				display_double_str(char **str); // test
 void				set_dollar(char ***env, int n);
 void				perror_set(int err, char *str);
 
 /// EXIT
 
 void				exit_cmd(char **var, char ***env);
-void				shell_exit(int n);
+void				shell_exit(int n, char *perrorm);
 
 /// SIGNAL
 
 struct termios		mem_termios(int n);
 void				set_signal(void);
 void				sighandler(int signum);
-bool				sigactive(int arg);
+int					sigactive(int arg);
 void				update_lastsig(char ***env);
 
 /// FREE
@@ -96,7 +96,7 @@ void				free_double_str(char **str);
 int					export_one(char ***env, char *str, bool admin);
 void				update_env(char ***env, char *var, int len);
 void				add_env(char *txt, char ***env);
-void				display_env(char ***env);
+void				display_env(char ***env, bool extra);
 char				**duplicate_env(char **env);
 
 /// ENV2

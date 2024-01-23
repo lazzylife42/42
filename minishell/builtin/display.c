@@ -6,20 +6,25 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:29:55 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/15 09:15:31 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:00:08 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	display_env(char ***env)
+void	display_env(char ***env, bool extra)
 {
 	int	i;
 
 	i = 0;
 	while ((*env)[i])
 	{
-		printf("%s\n", (*env)[i]);
+		if (ft_strncmp((*env)[i], "?=", 2) != 0)
+		{
+			if (extra)
+				printf("declare -x ");
+			printf("%s\n", (*env)[i]);
+		}
 		i += 1;
 	}
 	set_dollar(env, 0);

@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:33:16 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/22 13:57:15 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/23 09:42:58 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	set_pwd_env(char *oldpwd, char ***env)
 
 	pwd = ft_strjoin("PWD=", getcwd(dir, 256));
 	if (!pwd)
-		shell_exit(1);
+		shell_exit(1, NULL);
 	export_one(env, pwd, true);
 	export_one(env, oldpwd, true);
 	free_two(pwd, oldpwd);
@@ -38,7 +38,7 @@ void	set_new_directory(char **directory, char *str, char ***env)
 		{
 			oldpwd = ft_strjoin("OLDPWD=", dir);
 			if (!oldpwd)
-				shell_exit(1);
+				shell_exit(1, NULL);
 		}
 		str = translate_quote(str, *env);
 		if (chdir(str) != 0)

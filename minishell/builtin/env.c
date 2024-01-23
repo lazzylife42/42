@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:08:50 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 13:35:28 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:00:23 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	update_env(char ***env, char *var, int len)
 			free((*env)[i]);
 			(*env)[i] = ft_strdup(var);
 			if (!(*env)[i])
-				shell_exit(1);
+				shell_exit(1, NULL);
 			return ;
 		}
 		i += 1;
@@ -67,7 +67,7 @@ void	add_env(char *txt, char ***env)
 		exit (1);
 	(*env)[double_str_len(*env)] = ft_strdup(txt);
 	if (!(*env)[double_str_len(*env) - 1])
-		shell_exit(1);
+		shell_exit(1, NULL);
 }
 
 int	export_one(char ***env, char *str, bool admin)
@@ -106,5 +106,5 @@ void	export(char ***env, char **var, bool admin)
 		while (var[i] && export_one(env, var[i], admin))
 			i += 1;
 	else
-		display_env(env);
+		display_env(env, true);
 }

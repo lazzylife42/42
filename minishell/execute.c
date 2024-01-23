@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/22 16:32:01 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:03:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,12 @@ void	execve_to_child(char *pathname, char **argv, char ***env, t_sep *sep)
 
 	pid = fork();
 	if (pid == -1)
-	{
-		perror("fork");
-		shell_exit(EXIT_FAILURE);
-	}
+		shell_exit(EXIT_FAILURE, "fork");
 	if (pid != 0)
 	{
-		sigactive(-1);
-		waitpid(pid, &status, 0);
 		sigactive(1);
+		waitpid(pid, &status, 0);
+		sigactive(0);
 		if (WIFEXITED(status))
 			set_dollar(env, WEXITSTATUS(status));
 		else
@@ -65,7 +62,7 @@ void	exec_builtin(t_sep *sep, char **directory, char ***env, char *txt)
 				9) == 0))
 		unset(env, &sep->arg[1]);
 	else if (ft_strncmp(txt, "env", 4) == 0)
-		display_env(env);
+		display_env(env, false);
 	else if (ft_strncmp(txt, "cd", 3) == 0)
 		set_new_directory(directory, sep->arg[1], env);
 }
@@ -88,8 +85,11 @@ void	execute(char **input, char **directory, char ***env, t_sep *sep)
 		path = find_path(txt, *env);
 		if (path)
 			execve_to_child(path, input, env, sep);
-		else
+		else if (!(ft_strncmp(txt, "<<", 3) == 0))
+		{
+			ft_putstr_fd(RED"minishell: command not found\n"RST, STDERR_FILENO);
 			set_dollar(env, 127);
+		}
 		free(path);
 	}
 	free(txt);

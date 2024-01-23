@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:15:43 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/22 16:47:01 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:19:37 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	minishell(char ***env, char **directory)
 	update_lastsig(env);
 	if (input)
 	{
-		//display_double_str(input);
 		set_env_us(env, input[double_str_len(input) - 1]);
 		to_run = parse(to_run, input);
 		print_to_run(to_run);
@@ -84,14 +83,14 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	directory = malloc(256);
 	if (!directory)
-		shell_exit(1);
+		shell_exit(1, NULL);
 	env = duplicate_env(envp);
 	if (!env)
-		shell_exit(1);
+		shell_exit(1, NULL);
 	if (getcwd(directory, 256) == NULL)
 		perror("getcwd() error");
 	while (1)
 		minishell(&env, &directory);
 	free_double_str(env);
-	shell_exit(0);
+	shell_exit(0, NULL);
 }

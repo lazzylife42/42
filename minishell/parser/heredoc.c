@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:17:48 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/22 14:38:17 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:05:20 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ char	*heredoc(const char *delimiter)
 		}
 		heredoc_txt = ralloc_str(heredoc_txt, line, ft_strlen(line));
 		if (!heredoc_txt)
-			shell_exit(1);
+			shell_exit(1, NULL);
 		heredoc_txt = ralloc_str(heredoc_txt, "\n", 1);
 		if (!heredoc_txt)
-			shell_exit(1);
+			shell_exit(1, NULL);
 		add_history(line);
 		free(line);
 	}
@@ -60,7 +60,7 @@ void	handle_heredoc(t_exec **to_run)
 	if (!(*to_run)->next || !(*to_run)->next->separator
 		|| !(*to_run)->separator->arg[1])
 	{
-		perror("Error: separator not properly initialized.\n");
+		perror(RED"Error: separator not properly initialized.\n"RST);
 		return ;
 	}
 	if (!(*to_run)->next->separator->file_in)
@@ -72,7 +72,7 @@ void	handle_heredoc(t_exec **to_run)
 			O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (heredoc_fd == -1)
 	{
-		perror("Open");
+		perror(RED"Open"RST);
 		free(heredoc_txt);
 		return ;
 	}

@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:22:39 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 13:31:32 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/23 09:41:54 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exit_cmd(char **var, char ***env)
 	while (var[count])
 		count += 1;
 	if (count == 0)
-		shell_exit(0);
+		shell_exit(0, NULL);
 	else if (count > 1)
 		return (ft_putstr_fd("exit: too many arguments\n",
 				STDERR_FILENO), set_dollar(env, 1));
@@ -32,17 +32,19 @@ void	exit_cmd(char **var, char ***env)
 			|| var[0][i] == '+'))
 		{
 			ft_putstr_fd("exit: numeric argument required\n", STDERR_FILENO);
-			shell_exit(255);
+			shell_exit(255, NULL);
 		}
 		i += 1;
 	}
-	shell_exit(ft_atoi(var[0]));
+	shell_exit(ft_atoi(var[0]), NULL);
 }
 
-void	shell_exit(int n)
+void	shell_exit(int n, char *perrorm)
 {
 	struct termios	old_termios;
 
+	if (perrorm)
+		perror(perrorm);
 	old_termios = mem_termios(1);
 	tcsetattr(0, TCSANOW, &old_termios);
 	exit(n);

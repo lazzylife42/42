@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:55:05 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/22 16:26:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/23 09:45:07 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	append_outfile(t_sep *sep)
 	if (fd_out == -1)
 	{
 		perror(RED "Failed to open output file" RST);
-		shell_exit(EXIT_FAILURE);
+		shell_exit(EXIT_FAILURE, NULL);
 	}
 	if (dup2(fd_out, STDOUT_FILENO) == -1)
 	{
 		perror(RED "Failed to duplicate file descriptor" RST);
-		shell_exit(EXIT_FAILURE);
+		shell_exit(EXIT_FAILURE, NULL);
 	}
 	close(fd_out);
 	return (EXIT_SUCCESS);
@@ -46,57 +46,19 @@ int	append_infile(t_sep *sep)
 		if (fd_in == -1)
 		{
 			perror(RED "Failed to open input file" RST);
-			shell_exit(EXIT_FAILURE);
+			shell_exit(EXIT_FAILURE, NULL);
 		}
 		if (dup2(fd_in, STDIN_FILENO) == -1)
 		{
 			perror(RED "Failed to duplicate input file descriptor" RST);
 			close(fd_in);
-			shell_exit(EXIT_FAILURE);
+			shell_exit(EXIT_FAILURE, NULL);
 		}
 		close(fd_in);
 	}
 	return (EXIT_SUCCESS);
 }
 
-// void	exec_redir_out_pipe(t_sep *sep, char *pathname, char **argv, char **env)
-// {
-// 	pid_t	pid;
-// 	int		fd_in;
-
-// 	if (sep->file_in)
-// 	{
-// 		if ((fd_in = open(sep->file_in, O_RDONLY)) == -1)
-// 			shell_exit(EXIT_FAILURE);
-// 		if (dup2(fd_in, STDIN_FILENO) == -1)
-// 			shell_exit(EXIT_FAILURE);
-// 		close(fd_in);
-// 	}
-// 	if (sep->file_out)
-// 	{
-// 		if (ft_strncmp(sep->rd_out, ">>", 2) == 0)
-// 			append_outfile(sep);
-// 		else if (ft_strncmp(sep->rd_out, ">", 1) == 0)
-// 			if (handle_outfile(sep) != EXIT_SUCCESS)
-// 				shell_exit(EXIT_FAILURE);
-// 	}
-// 	pid = fork();
-// 	if (pid == -1)
-// 	{
-// 		perror(RED "Failed to fork" RST);
-// 		shell_exit(EXIT_FAILURE);
-// 	}
-// 	if (pid == 0)
-// 	{
-// 		if (execve(pathname, argv, env) == -1)
-// 		{
-// 			perror(RED "Failed to execute command" RST);
-// 			shell_exit(EXIT_FAILURE);
-// 		}
-// 	}
-// 	else
-// 		waitpid(pid, NULL, 0);
-// }
 void	redirect_stdin_stdout(int fd_in, int fd_out)
 {
 	if (dup2(fd_in, STDIN_FILENO) == -1)
@@ -119,6 +81,16 @@ void	redirect_stdin_stdout(int fd_in, int fd_out)
 	}
 }
 
+void	process_files(t_sep *sep, int *fd_in, int *fd_out)
+{
+	*fd_in = STDIN_FILENO;
+	*fd_out = STDOUT_FILENO;
+	if (sep->file_in)
+		append_infile(sep);
+	if (sep->file_out)
+		append_outfile(sep);
+}
+
 void	exec_redir_in_child(t_sep *sep, char *pathname, char **argv, char **env)
 {
 	pid_t	pid;
@@ -127,12 +99,7 @@ void	exec_redir_in_child(t_sep *sep, char *pathname, char **argv, char **env)
 	char	*txt;
 
 	txt = translate_quote(argv[0], env);
-	fd_in = STDIN_FILENO;
-	if (sep->file_in)
-		append_infile(sep);
-	fd_out = STDOUT_FILENO;
-	if (sep->file_out)
-		append_outfile(sep);
+	process_files(sep, &fd_in, &fd_out);
 	pid = fork();
 	if (pid == -1)
 		exit(EXIT_FAILURE);
@@ -168,6 +135,45 @@ void	exec_redir_in_child(t_sep *sep, char *pathname, char **argv, char **env)
 // 		execve(pathname, argv, env);
 // 		perror("execve");
 // 		shell_exit(EXIT_FAILURE);
+// 	}
+// 	else
+// 		waitpid(pid, NULL, 0);
+// }
+
+// void	exec_redir_out_pipe(t_sep *sep, char *pathname, char **argv, char **env)
+// {
+// 	pid_t	pid;
+// 	int		fd_in;
+
+// 	if (sep->file_in)
+// 	{
+// 		if ((fd_in = open(sep->file_in, O_RDONLY)) == -1)
+// 			shell_exit(EXIT_FAILURE);
+// 		if (dup2(fd_in, STDIN_FILENO) == -1)
+// 			shell_exit(EXIT_FAILURE);
+// 		close(fd_in);
+// 	}
+// 	if (sep->file_out)
+// 	{
+// 		if (ft_strncmp(sep->rd_out, ">>", 2) == 0)
+// 			append_outfile(sep);
+// 		else if (ft_strncmp(sep->rd_out, ">", 1) == 0)
+// 			if (handle_outfile(sep) != EXIT_SUCCESS)
+// 				shell_exit(EXIT_FAILURE);
+// 	}
+// 	pid = fork();
+// 	if (pid == -1)
+// 	{
+// 		perror(RED "Failed to fork" RST);
+// 		shell_exit(EXIT_FAILURE);
+// 	}
+// 	if (pid == 0)
+// 	{
+// 		if (execve(pathname, argv, env) == -1)
+// 		{
+// 			perror(RED "Failed to execute command" RST);
+// 			shell_exit(EXIT_FAILURE);
+// 		}
 // 	}
 // 	else
 // 		waitpid(pid, NULL, 0);

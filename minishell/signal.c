@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:50:04 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/22 16:32:51 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:08:40 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,23 @@ void	set_signal(void)
 	signal(SIGQUIT, sighandler);
 }
 
-bool	sigactive(int arg)
+// 0 = normal
+// 1 = desactivated
+// 2 = heredoc
+int	sigactive(int arg)
 {
-	static bool	active = true;
+	static int	state = 0;
 
-	if (arg == 1)
-		active = true;
-	else if (arg == -1)
-		active = false;
-	return (active);
+	if (arg == -1)
+		return (state);
+	else
+		state = arg;
+	return (state);
 }
 
 void	sighandler(int signum)
 {
-	if (sigactive(0))
+	if (sigactive(-1) == 0)
 	{
 		if (signum == SIGINT)
 		{
@@ -74,7 +77,7 @@ void	sighandler(int signum)
 		else if (signum == SIGQUIT)
 		{
 			printf("\n");
-			shell_exit(0);
+			shell_exit(0, NULL);
 		}
 	}
 }

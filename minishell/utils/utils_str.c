@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:27:32 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 11:20:16 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:32:50 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	double_str_len(char **str)
 	return (res);
 }
 
-void	set_shlvl(char **res, char **env)
+void	set_shlvl(char ***res, char **env)
 {
 	int		shlvl;
 	char	*str;
@@ -33,15 +33,20 @@ void	set_shlvl(char **res, char **env)
 	shlvl = ft_atoi(check_env(env, "SHLVL", 5)) + 1;
 	str = ft_itoa(shlvl);
 	if (!str)
-		shell_exit(1);
+		shell_exit(1, NULL);
 	new = ft_strjoin("SHLVL=", str);
 	if (!new)
-		shell_exit(1);
+		shell_exit(1, NULL);
 	free(str);
-	while (res[i] && ft_strncmp(res[i], "SHLVL=", 6) != 0)
+	while ((*res)[i] && ft_strncmp((*res)[i], "SHLVL=", 6) != 0)
 		i += 1;
-	free(res[i]);
-	res[i] = new;
+	if (!(*res)[i])
+		export_one(res, new, true);
+	else
+	{
+		free((*res)[i]);
+		(*res)[i] = new;
+	}
 }
 
 void	set_minimum(char ***res)
@@ -51,7 +56,7 @@ void	set_minimum(char ***res)
 
 	pwd = ft_strjoin("PWD=", getcwd(dir, 256));
 	if (!pwd)
-		shell_exit(1);
+		shell_exit(1, NULL);
 	export_one(res, pwd, true);
 	free(pwd);
 	export_one(res, "SHLVL=1", true);
@@ -73,14 +78,14 @@ char	**duplicate_env(char **env)
 	{
 		res[i] = ft_strdup(env[i]);
 		if (!res)
-			shell_exit(1);
+			shell_exit(1, NULL);
 		i += 1;
 	}
 	res[i] = NULL;
 	if (res[0] == NULL)
 		set_minimum(&res);
 	else
-		set_shlvl(res, env);
+		set_shlvl(&res, env);
 	export_one(&res, "?=0", true);
 	return (res);
 }
