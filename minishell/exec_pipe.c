@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:49:59 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/23 15:54:14 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:58:19 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	wait_for_child(int **fd, pid_t pid, int n)
 
 	i = -1;
 	close_fd(fd, n);
-	while (++i < n)
+	while (++i < n - 2)
 		waitpid(pid, NULL, 0);
 }
 
@@ -91,8 +91,11 @@ t_exec	*execute_pipe(t_exec *to_run, char **directory, char ***env)
 			execute(to_run->separator->arg, directory, env, to_run->separator);
 			exit(EXIT_FAILURE);
 		}
-		if (i != count - 1)
-			waitpid(pid, NULL, 0);
+		// if (i != count - 1)
+		// {
+		// 	printf(B"coucou\n"RST);
+		// 	waitpid(pid, NULL, 0);
+		// }
 		to_run = to_run->next;
 	}
 	wait_for_child(&fd, pid, count * 2);
