@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:27:32 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/24 11:00:30 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:16:16 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	set_shlvl(char ***res, char **env)
 		free((*res)[i]);
 		(*res)[i] = new;
 	}
+	free(new);
 }
 
 void	set_minimum(char ***res)

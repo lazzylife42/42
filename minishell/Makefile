@@ -6,7 +6,7 @@
 #    By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 13:40:48 by nreichel          #+#    #+#              #
-#    Updated: 2024/01/23 14:01:18 by nreichel         ###   ########.fr        #
+#    Updated: 2024/01/24 11:10:50 by nreichel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ compile_other:
 	make -C libft/ all
 
 $(NAME): $(OBJS)
-		gcc -o ${NAME} ${CFLAGS} $(SRCS) $(LIBFT_LIB) -lreadline -L/Users/${USER}/.brew/opt/readline/lib -I/Users/${USER}/.brew/opt/readline/include -fsanitize=address
+		gcc -o ${NAME} ${CFLAGS} $(SRCS) $(LIBFT_LIB) -lreadline -L/Users/${USER}/.brew/opt/readline/lib -I/Users/${USER}/.brew/opt/readline/include
 
 clean:
 		${RM} ${OBJS}
