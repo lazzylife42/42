@@ -6,11 +6,19 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:27:32 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/23 10:32:50 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:00:30 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	no_cmd(char *txt, char ***env)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(txt, STDERR_FILENO);
+	ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	set_dollar(env, 127);
+}
 
 int	double_str_len(char **str)
 {

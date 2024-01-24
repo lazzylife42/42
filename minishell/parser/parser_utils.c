@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:48:04 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/22 20:13:13 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/24 10:14:39 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int	is_separator(char *token)
 
 int	is_redir(char *token)
 {
-	return (ft_strncmp(token, "<", 1) == 0
-		|| ft_strncmp(token, ">", 1) == 0);
+	return (ft_strncmp(token, "<", 1) == 0 || ft_strncmp(token, ">", 1) == 0);
 }
 
 int	count_separators(char **tokens)
@@ -41,6 +40,9 @@ int	count_separators(char **tokens)
 
 t_sep	*create(char **tk, int index, char *separator, int j)
 {
+	int	offset;
+
+	offset = 0;
 	if (tk[index][0] == '|')
 	{
 		if (ft_strncmp(tk[j], "<", 2) == 0)
@@ -51,7 +53,12 @@ t_sep	*create(char **tk, int index, char *separator, int j)
 	else
 	{
 		if (ft_strncmp(tk[j], "<", 2) == 0)
-			return (create_sep_node(parse_arg(tk, j + 2), tk, NULL, j));
+		{
+			while (ft_strncmp(tk[j + offset], "<", 2) == 0 && tk[j + offset
+					+ 2])
+				offset += 2;
+			return (create_sep_node(parse_arg(tk, j + offset), tk, NULL, j));
+		}
 		else
 			return (create_sep_node(parse_arg(tk, j), tk, NULL, j));
 	}

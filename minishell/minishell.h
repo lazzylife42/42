@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/23 12:47:41 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:04:35 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void				display_double_str(char **str); // test
 void				set_dollar(char ***env, int n);
 void				perror_set(int err, char *str);
 
+void				no_cmd(char *txt, char ***env);
 /// EXIT
 
 void				exit_cmd(char **var, char ***env);
@@ -102,7 +103,7 @@ char				**duplicate_env(char **env);
 /// ENV2
 
 char				*check_env(char **env, char *str, int len);
-void				env_ralloc_del(char ***env, int pos);
+void				env_ralloc_del(char ***env, int *pos);
 bool				env_var_valid(char *var, bool admin);
 void				set_env_us(char ***env, char *txt);
 int					unset_valid(char *var);
@@ -120,7 +121,7 @@ int					get_pipe_nbr(t_exec *to_run);
 t_exec				*execute_pipe(t_exec *to_run, char **directory,
 						char ***env);
 char				*heredoc(const char *delimiter);
-void				exec_heredoc(char **input);
+void				exec_heredoc(char **input, char ***env);
 int					is_builtin(char *txt);
 void				exec_builtin(t_sep *sep, char **directory, char ***env,
 						char *txt);
@@ -135,11 +136,18 @@ void				exec_redir_in_child(t_sep *sep, char *pathname, char **argv,
 void				exec_redir_in(t_sep *sep, char *pathname, char **argv,
 						char **env);
 
+/// EXEC_PIPE2
+void				close_fd(int **fd, int num);
+void				pipe_init(t_exec *to_run, int *count, int **fd);
+void				wait_for_child(int **fd, pid_t pid, int n, char ***env);
+void				set_and_close(int i, int count, int	**fd);
+void				pipe_next(int i, int count, pid_t pid, t_exec **to_run);
+
 /*		REDIR				*/
 
 int					handle_outfile(t_sep *sep);
 int					handle_infile(t_sep *sep);
-void				handle_heredoc(t_exec **to_run);
+void				handle_heredoc(t_exec **to_run, char ***env);
 void				rm_heredoc(const char *file_in);
 
 /*		PARSER				*/

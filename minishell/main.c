@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:15:43 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/23 15:19:37 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/24 10:57:19 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// redirection without pipe
-// heredoc
-// $? should be good, maybe i missed some special cases
-// execve exit status good?
 
 ///////////// for testing
 void	display_double_str(char **str)
@@ -65,7 +60,6 @@ void	minishell(char ***env, char **directory)
 	{
 		set_env_us(env, input[double_str_len(input) - 1]);
 		to_run = parse(to_run, input);
-		print_to_run(to_run);
 		execute_all(to_run, directory, env);
 		free_exec_list(to_run);
 		to_run = NULL;

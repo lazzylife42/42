@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/23 15:03:30 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/24 10:59:45 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	execute(char **input, char **directory, char ***env, t_sep *sep)
 		exec_builtin(sep, directory, env, txt);
 	else if (ft_strncmp(sep->arg[0], "<<", 3) == 0 && ft_strncmp(sep->pipe, "|",
 			2) != 0)
-		exec_heredoc(input);
+		exec_heredoc(input, env);
 	else if (sep->pipe && ((sep->file_in && sep->file_out) || sep->file_out))
 		exec_redir_in_child(sep, find_path(txt, *env), input, *env);
 	else
@@ -86,10 +86,7 @@ void	execute(char **input, char **directory, char ***env, t_sep *sep)
 		if (path)
 			execve_to_child(path, input, env, sep);
 		else if (!(ft_strncmp(txt, "<<", 3) == 0))
-		{
-			ft_putstr_fd(RED"minishell: command not found\n"RST, STDERR_FILENO);
-			set_dollar(env, 127);
-		}
+			no_cmd(txt, env);
 		free(path);
 	}
 	free(txt);
@@ -102,7 +99,7 @@ void	execute_all(t_exec *to_run, char **directory, char ***env)
 		if (ft_strncmp(to_run->separator->pipe, "|", 1) == 0)
 		{
 			if (ft_strncmp(to_run->separator->arg[0], "<<", 3) == 0)
-				handle_heredoc(&to_run);
+				handle_heredoc(&to_run, env);
 			if (to_run->next)
 				to_run = execute_pipe(to_run, directory, env);
 			else

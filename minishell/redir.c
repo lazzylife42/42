@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 23:47:55 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/23 15:07:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:51:12 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	handle_infile(t_sep *sep)
 	fd = open(sep->file_in, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd(RED"minishell: infile: No such file or directory\n"RST,
+		ft_putstr_fd("minishell: infile: No such file or directory\n",
 			STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	if (fd > 0 && dup2(fd, STDIN_FILENO) < 0)
 	{
-		ft_putstr_fd(RED"minishell: pipe error\n"RST, STDERR_FILENO);
+		ft_putstr_fd("minishell: pipe error\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	if (fd > 0)
@@ -52,12 +52,12 @@ int	handle_outfile(t_sep *sep)
 	fd = check_append_outfile(sep);
 	if (fd < 0)
 	{
-		ft_putstr_fd(RED"minishell: outfile: Error\n"RST, STDERR_FILENO);
+		ft_putstr_fd("minishell: outfile: Error\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	if (fd > 0 && dup2(fd, STDOUT_FILENO) < 0)
 	{
-		ft_putstr_fd(RED"minishell: pipe error\n"RST, STDERR_FILENO);
+		ft_putstr_fd("minishell: pipe error\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	if (fd > 0)

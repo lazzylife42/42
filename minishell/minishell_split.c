@@ -6,22 +6,14 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:37:41 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/23 13:49:48 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:54:07 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_kw(char c)
+int	next_end(char *str, int i, int type)
 {
-	return (c == ' ' || c == '|' || c == '<' || c == '>');
-}
-
-int	next_end(char *str)
-{
-	int	i;
-	int	type;
-
 	i = 0;
 	type = 0;
 	if (str[0] == '|')
@@ -32,7 +24,8 @@ int	next_end(char *str)
 	{
 		if (type == 0)
 		{
-			if (is_kw(str[i]))
+			if (str[i] == ' ' || str[i] == '|'
+				|| str[i] == '<' || str[i] == '>')
 				return (i);
 			if (str[i] == '"')
 				type = 1;
@@ -127,7 +120,7 @@ char	**minishell_split(char *str)
 	{
 		while (*str == ' ')
 			str += 1;
-		len = next_end(str);
+		len = next_end(str, 0, 0);
 		res = add_word(res, str, len);
 		if (!res)
 			return (NULL);

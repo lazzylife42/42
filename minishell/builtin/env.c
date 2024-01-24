@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:08:50 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/23 11:00:23 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:03:58 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	unset(char ***env, char **var)
 				len = ft_strlen(txt);
 				if (ft_strncmp((*env)[step], txt, len) == 0
 						&& (*env)[step][len] == '=')
-					env_ralloc_del(env, step);
+					env_ralloc_del(env, &step);
 			}
 			free(txt);
 		}

@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 09:26:32 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/23 11:10:22 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:04:20 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	set_env_us(char ***env, char *txt)
 	free(str);
 }
 
-void	env_ralloc_del(char ***env, int pos)
+void	env_ralloc_del(char ***env, int *pos)
 {
 	char	**res;
 	int		i;
@@ -76,7 +76,7 @@ void	env_ralloc_del(char ***env, int pos)
 		return ;
 	while ((*env)[i])
 	{
-		if (i != pos)
+		if (i != *pos)
 			res[i - off] = (*env)[i];
 		else
 		{
@@ -88,6 +88,7 @@ void	env_ralloc_del(char ***env, int pos)
 	res[i - off] = NULL;
 	free(*env);
 	*env = res;
+	*pos -= 1;
 }
 
 bool	env_var_valid(char *var, bool admin)
