@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/24 10:59:45 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:13:37 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,23 +92,31 @@ void	execute(char **input, char **directory, char ***env, t_sep *sep)
 	free(txt);
 }
 
+// void	execute_all(t_exec *to_run, char **directory, char ***env)
+// {
+// 	while (to_run)
+// 	{
+// 		if (ft_strncmp(to_run->separator->pipe, "|", 1) == 0)
+// 		{
+// 			if (ft_strncmp(to_run->separator->arg[0], "<<", 3) == 0)
+// 				handle_heredoc(&to_run, env);
+// 			if (to_run->next)
+// 				to_run = execute_pipe(to_run, directory, env);
+// 			else
+// 				execute(to_run->separator->arg, directory, env,
+// 					to_run->separator);
+// 		}
+// 		else
+// 			execute(to_run->separator->arg, directory, env, to_run->separator);
+// 		if (to_run)
+// 			to_run = to_run->next;
+// 	}
+// }
+
 void	execute_all(t_exec *to_run, char **directory, char ***env)
 {
-	while (to_run)
-	{
-		if (ft_strncmp(to_run->separator->pipe, "|", 1) == 0)
-		{
-			if (ft_strncmp(to_run->separator->arg[0], "<<", 3) == 0)
-				handle_heredoc(&to_run, env);
-			if (to_run->next)
-				to_run = execute_pipe(to_run, directory, env);
-			else
-				execute(to_run->separator->arg, directory, env,
-					to_run->separator);
-		}
-		else
-			execute(to_run->separator->arg, directory, env, to_run->separator);
-		if (to_run)
-			to_run = to_run->next;
-	}
+	if (ft_strncmp(to_run->separator->pipe, "|", 1) == 0)
+		execute_pipe(to_run, directory, env);
+	else
+		execute(to_run->separator->arg, directory, env, to_run->separator);
 }

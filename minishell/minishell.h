@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/24 11:04:35 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:13:23 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,10 @@ void				execve_to_child(char *pathname, char **argv, char ***env,
 						t_sep *sep);
 void				execute(char **input, char **directory, char ***env,
 						t_sep *sep);
-void				exec_redir_out(t_sep *sep, char *pathname, char **argv,
-						char **env);
-int					get_pipe_nbr(t_exec *to_run);
-t_exec				*execute_pipe(t_exec *to_run, char **directory,
-						char ***env);
+// void				exec_redir_out(t_sep *sep, char *pathname, char **argv,
+// 						char **env);
+// int					get_pipe_nbr(t_exec *to_run);
+void				execute_pipe(t_exec *to_run, char **directory, char ***env);
 char				*heredoc(const char *delimiter);
 void				exec_heredoc(char **input, char ***env);
 int					is_builtin(char *txt);
@@ -129,11 +128,7 @@ void				exec_builtin(t_sep *sep, char **directory, char ***env,
 /// EXEC_REDIR
 int					append_outfile(t_sep *sep);
 void				redirect_stdin_stdout(int fd_in, int fd_out);
-void				exec_redir_out_pipe(t_sep *sep, char *pathname, char **argv,
-						char **env);
 void				exec_redir_in_child(t_sep *sep, char *pathname, char **argv,
-						char **env);
-void				exec_redir_in(t_sep *sep, char *pathname, char **argv,
 						char **env);
 
 /// EXEC_PIPE2
@@ -148,11 +143,9 @@ void				pipe_next(int i, int count, pid_t pid, t_exec **to_run);
 int					handle_outfile(t_sep *sep);
 int					handle_infile(t_sep *sep);
 void				handle_heredoc(t_exec **to_run, char ***env);
-void				rm_heredoc(const char *file_in);
 
 /*		PARSER				*/
 
-char				*get_file(char **tokens, int index);
 char				*find_path(char *argv, char **env);
 char				**parse_arg(char **tokens, int pos);
 t_exec				*parse(t_exec *to_run, char **tokens);
