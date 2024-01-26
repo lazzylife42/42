@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:54:59 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/26 16:55:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:05:57 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	count(char ***cmd)
 
 int	count_pipe(t_exec *to_run)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (to_run)
@@ -34,14 +34,30 @@ int	count_pipe(t_exec *to_run)
 	}
 	return (i);
 }
-
-void	pipeline(t_exec *to_run, char **directory, char ***env, t_sep *sep)
+t_exec	*handle_redir(t_exec *to_run)
 {
-	int i, j = 0;
-	pid_t pid;
-	int cmd_len = count_pipe(to_run);
-	int fd[2 * cmd_len];
+	t_exec	*current;
 
+	current = to_run;
+	while (current)
+	{
+		if (current->separator->file_out)
+			handle_outfile(current->separator);
+		if (current->separator->file_in)
+			handle_infile(current->separator);
+		current = current->next;
+	}
+	return (to_run);
+}
+
+void	pipeline(t_exec *to_run, char **directory, char ***env)
+{
+	pid_t	pid;
+	int		cmd_len;
+	cmd_len = count_pipe(to_run);
+	int		fd[2 * cmd_len];
+
+	int i, j = 0;
 	i = -1;
 	while (++i < cmd_len)
 		if (pipe(fd + i * 2) < 0)
@@ -59,10 +75,10 @@ void	pipeline(t_exec *to_run, char **directory, char ***env, t_sep *sep)
 				if (dup2(fd[j - 2], 0) < 0)
 					shell_exit(1, "dup2");
 			i = -1;
-			while (++i < 2 * cmd_len)
+			while (++i < 2 * cmd_len - 1)
 				close(fd[i]);
-			execute(to_run->separator->arg, directory, env, sep);
-			exit(EXIT_FAILURE);
+			execute(to_run->separator->arg, directory, env, to_run->separator);
+			exit(0);
 		}
 		else if (pid < 0)
 			shell_exit(1, "error");

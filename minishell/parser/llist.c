@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:38:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/26 16:56:35 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:42:18 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	get_rdin(char **input, t_sep *sep, int pos)
 	sep->file_in = NULL;
 	while (input[i] && ft_strncmp(input[i], "|", 1) != 0)
 	{
-		if (ft_strncmp(input[i], "<", 2) == 0 && input[i + 1])
+		if (ft_strncmp(input[i], "<", 1) == 0 && input[i + 1])
 		{
 			sep->rd_in = input[i];
 			sep->file_in = input[i + 1];

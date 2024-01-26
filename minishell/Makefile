@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 13:40:48 by nreichel          #+#    #+#              #
-#    Updated: 2024/01/26 14:26:05 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/01/26 21:30:13 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ $(NAME): $(OBJS)
 
 clean:
 		${RM} ${OBJS}
-		${RM} heredoc.tmp
 		make -C libft/ clean
 
 fclean:	clean

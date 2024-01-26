@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/26 14:44:02 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:15:07 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,9 @@ char				**ralloc(char **res);
 char				*alloc_first(char *str, int len);
 char				*alloc_re(char *res, char *str, int len);
 char				*ralloc_str(char *res, char *str, int len);
-void				display_double_str(char **str); // test
+void				display_double_str(char **str);
 void				set_dollar(char ***env, int n);
 void				perror_set(int err, char *str);
-
 void				no_cmd(char *txt, char ***env);
 /// EXIT
 
@@ -115,11 +114,6 @@ void				execve_to_child(char *pathname, char **argv, char ***env,
 						t_sep *sep);
 void				execute(char **input, char **directory, char ***env,
 						t_sep *sep);
-void				exec_redir_out(t_sep *sep, char *pathname, char **argv,
-						char **env);
-int					get_pipe_nbr(t_exec *to_run);
-t_exec				*execute_pipe(t_exec *to_run, char **directory,
-						char ***env);
 char				*heredoc(const char *delimiter);
 void				exec_heredoc(char **input, char ***env);
 int					is_builtin(char *txt);
@@ -127,34 +121,22 @@ void				exec_builtin(t_sep *sep, char **directory, char ***env,
 						char *txt);
 
 /// EXEC_REDIR
+
 int					append_outfile(t_sep *sep);
 void				redirect_stdin_stdout(int fd_in, int fd_out);
-void				exec_redir_out_pipe(t_sep *sep, char *pathname, char **argv,
-						char **env);
-void				exec_redir_in_child(t_sep *sep, char *pathname, char **argv,
-						char **env);
-void				exec_redir_in(t_sep *sep, char *pathname, char **argv,
-						char **env);
 
-/// EXEC_PIPE2
-void				close_fd(int **fd, int num);
-void				pipe_init(t_exec *to_run, int *count, int **fd);
-void				wait_for_child(int **fd, pid_t pid, int n, char ***env);
-void				set_and_close(int i, int count, int	**fd);
-void				pipe_next(int i, int count, pid_t pid, t_exec **to_run);
+/// PIPELINE
 
-void				pipeline(t_exec *to_run, char **directory, char ***env, t_sep *sep);
+void				pipeline(t_exec *to_run, char **directory, char ***env);
 
 /*		REDIR				*/
 
 int					handle_outfile(t_sep *sep);
 int					handle_infile(t_sep *sep);
 void				handle_heredoc(t_exec **to_run, char ***env);
-void				rm_heredoc(const char *file_in);
 
 /*		PARSER				*/
 
-char				*get_file(char **tokens, int index);
 char				*find_path(char *argv, char **env);
 char				**parse_arg(char **tokens, int pos);
 t_exec				*parse(t_exec *to_run, char **tokens);
@@ -170,6 +152,8 @@ int					count_separators(char **tokens);
 
 t_sep				*create_sep_node(char **arg, char **input, char *pipe,
 						int pos);
+t_exec				*handle_redir(t_exec *to_run);
+
 t_exec				*add_to_exec_list(t_exec *head, t_sep *new_node);
 void				free_exec_list(t_exec *head);
 void				ft_free_split(char **arr);
