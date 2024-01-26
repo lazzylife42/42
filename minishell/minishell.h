@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/26 22:15:07 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:41:17 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ char				**ralloc(char **res);
 char				*alloc_first(char *str, int len);
 char				*alloc_re(char *res, char *str, int len);
 char				*ralloc_str(char *res, char *str, int len);
-void				display_double_str(char **str);
+void				display_double_str(char **str); // test
 void				set_dollar(char ***env, int n);
 void				perror_set(int err, char *str);
+
 void				no_cmd(char *txt, char ***env);
 /// EXIT
 
@@ -109,6 +110,7 @@ int					unset_valid(char *var);
 
 /// EXECUTE
 
+char				**translate_for_exec(char **argv, char ***env);
 void				execute_all(t_exec *to_run, char **directory, char ***env);
 void				execve_to_child(char *pathname, char **argv, char ***env,
 						t_sep *sep);
@@ -120,12 +122,12 @@ int					is_builtin(char *txt);
 void				exec_builtin(t_sep *sep, char **directory, char ***env,
 						char *txt);
 
-/// EXEC_REDIR
+/*		EXEC REDIR			*/
 
 int					append_outfile(t_sep *sep);
 void				redirect_stdin_stdout(int fd_in, int fd_out);
 
-/// PIPELINE
+/*		PIPELINE			*/
 
 void				pipeline(t_exec *to_run, char **directory, char ***env);
 
@@ -152,8 +154,6 @@ int					count_separators(char **tokens);
 
 t_sep				*create_sep_node(char **arg, char **input, char *pipe,
 						int pos);
-t_exec				*handle_redir(t_exec *to_run);
-
 t_exec				*add_to_exec_list(t_exec *head, t_sep *new_node);
 void				free_exec_list(t_exec *head);
 void				ft_free_split(char **arr);

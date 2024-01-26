@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:08:50 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/24 11:03:58 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:30:41 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	unset(char ***env, char **var)
 			{
 				len = ft_strlen(txt);
 				if (ft_strncmp((*env)[step], txt, len) == 0
-						&& (*env)[step][len] == '=')
+						&& ((*env)[step][len] == '=' || !(*env)[step][len]))
 					env_ralloc_del(env, &step);
 			}
 			free(txt);
@@ -48,7 +48,8 @@ void	update_env(char ***env, char *var, int len)
 	i = 0;
 	while ((*env)[i])
 	{
-		if (ft_strncmp((*env)[i], var, len) == 0 && (*env)[i][len] == '=')
+		if (ft_strncmp((*env)[i], var, len) == 0
+			&& ((*env)[i][len] == '=' || (*env)[i][len] == '\0'))
 		{
 			free((*env)[i]);
 			(*env)[i] = ft_strdup(var);

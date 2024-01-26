@@ -6,13 +6,13 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 13:40:48 by nreichel          #+#    #+#              #
-#    Updated: 2024/01/26 21:30:13 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/01/26 22:42:34 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = main.c free.c minishell_split.c signal.c execute.c exec_redir.c pipeline.c\
+SRCS = main.c free.c minishell_split.c signal.c execute.c execute2.c exec_redir.c pipeline.c\
 	builtin/directory.c builtin/display.c builtin/env.c builtin/env2.c builtin/exit.c\
 	parser/llist.c parser/parser.c parser/parser_utils.c parser/heredoc.c redir.c\
 	utils/alloc.c utils/utils_str.c utils/utils.c utils/translate.c

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/26 22:02:12 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:42:00 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	execve_to_child(char *pathname, char **argv, char ***env, t_sep *sep)
 	pid_t	pid;
 	int		status;
 
-	(void)sep;
 	pid = fork();
 	if (pid == -1)
 		shell_exit(EXIT_FAILURE, "fork");
@@ -36,7 +35,7 @@ void	execve_to_child(char *pathname, char **argv, char ***env, t_sep *sep)
 		handle_outfile(sep);
 	if (sep->file_in)
 		handle_infile(sep);
-	execve(pathname, argv, *env);
+	execve(pathname, translate_for_exec(argv, env), *env);
 }
 
 int	is_builtin(char *txt)

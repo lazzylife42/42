@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:17:48 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/26 21:58:30 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/24 10:09:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,3 +80,22 @@ void	handle_heredoc(t_exec **to_run, char ***env)
 	close(heredoc_fd);
 	free(heredoc_txt);
 }
+
+// void	rm_heredoc(const char *file_in)
+// {
+// 	if (file_in == NULL || file_in[0] == '\0')
+// 		return ;
+// 	if (unlink(file_in) == -1)
+// 	{
+// 		perror("Unlink");
+// 		shell_exit(1);
+// 	}
+// }
+
+// int	main(void)
+// {
+// 	char *heredoc_txt = heredoc("EOF");
+// 	printf("Heredoc Text:\n%s\n", heredoc_txt);
+// 	free(heredoc_txt);
+// 	return (0);
+// }

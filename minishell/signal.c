@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:50:04 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/24 10:56:38 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:18:56 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ void	set_signal(void)
 	new_termios = old_termios;
 	new_termios.c_cc[VEOF] = -1;
 	new_termios.c_cc[VQUIT] = 4;
+	new_termios.c_lflag &= ~ECHOCTL;
 	tcsetattr(0, TCSANOW, &new_termios);
 	signal(SIGINT, sighandler);
 	signal(SIGQUIT, sighandler);
 }
 
 // 0 = normal
-// 1 = desactivated
+// 1 = deactivated
 // 2 = heredoc
 int	sigactive(int arg)
 {

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:15:43 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/26 16:56:46 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:21:57 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// export not working in pipes???????????
 
 ///////////// for testing
 void	display_double_str(char **str)
@@ -60,7 +62,6 @@ void	minishell(char ***env, char **directory)
 	{
 		set_env_us(env, input[double_str_len(input) - 1]);
 		to_run = parse(to_run, input);
-		print_to_run(to_run);
 		execute_all(to_run, directory, env);
 		free_exec_list(to_run);
 		to_run = NULL;

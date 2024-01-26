@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:37:41 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/23 13:54:07 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:41:04 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	next_end(char *str, int i, int type)
 	{
 		if (type == 0)
 		{
-			if (str[i] == ' ' || str[i] == '|'
+			if (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13) || str[i] == '|'
 				|| str[i] == '<' || str[i] == '>')
 				return (i);
 			if (str[i] == '"')
@@ -118,7 +118,7 @@ char	**minishell_split(char *str)
 	res = NULL;
 	while (*str)
 	{
-		while (*str == ' ')
+		while (*str == ' ' || (*str >= 9 && *str <= 13))
 			str += 1;
 		len = next_end(str, 0, 0);
 		res = add_word(res, str, len);

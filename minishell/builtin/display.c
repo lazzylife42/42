@@ -6,25 +6,49 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:29:55 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/23 11:00:08 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:29:55 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+void	display(char *str, bool sing, bool extra)
+{
+	int	j;
+
+	j = -1;
+	if (extra)
+	{
+		printf("declare -x ");
+		if (!sing)
+		{
+			while (str[++j])
+			{
+				printf("%c", str[j]);
+				if (str[j] == '=')
+					printf("\"");
+			}
+			printf("\"\n");
+		}
+		else
+			printf("%s\n", str);
+	}
+	else
+		if (!sing)
+			printf("%s\n", str);
+}
+
 void	display_env(char ***env, bool extra)
 {
-	int	i;
+	int		i;
+	bool	sing;
 
 	i = 0;
+	sing = false;
 	while ((*env)[i])
 	{
 		if (ft_strncmp((*env)[i], "?=", 2) != 0)
-		{
-			if (extra)
-				printf("declare -x ");
-			printf("%s\n", (*env)[i]);
-		}
+			display((*env)[i], ft_strchr((*env)[i], '=') == NULL, extra);
 		i += 1;
 	}
 	set_dollar(env, 0);
