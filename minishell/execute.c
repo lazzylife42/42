@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/26 14:26:59 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:00:19 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	execute(char **input, char **directory, char ***env, t_sep *sep)
 	else if (ft_strncmp(sep->arg[0], "<<", 3) == 0 && ft_strncmp(sep->pipe, "|",
 			2) != 0)
 		exec_heredoc(input, env);
-	else if (sep->pipe && ((sep->file_in && sep->file_out) || sep->file_out))
-		exec_redir_in_child(sep, find_path(txt, *env), input, *env);
+	// else if (sep->pipe && ((sep->file_in && sep->file_out) || sep->file_out))
+	// 	exec_redir_in_child(sep, find_path(txt, *env), input, *env);
 	else
 	{
 		path = find_path(txt, *env);

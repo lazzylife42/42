@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/26 14:25:20 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:44:02 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void				wait_for_child(int **fd, pid_t pid, int n, char ***env);
 void				set_and_close(int i, int count, int	**fd);
 void				pipe_next(int i, int count, pid_t pid, t_exec **to_run);
 
-void	pipeline(/*char ***cmd,*/t_exec *to_run, char **directory, char ***env, t_sep *sep);
+void				pipeline(t_exec *to_run, char **directory, char ***env, t_sep *sep);
 
 /*		REDIR				*/
 
