@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/26 11:13:37 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:26:59 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,12 @@ void	execute(char **input, char **directory, char ***env, t_sep *sep)
 // 			to_run = to_run->next;
 // 	}
 // }
-
 void	execute_all(t_exec *to_run, char **directory, char ***env)
 {
-	if (ft_strncmp(to_run->separator->pipe, "|", 1) == 0)
-		execute_pipe(to_run, directory, env);
-	else
-		execute(to_run->separator->arg, directory, env, to_run->separator);
+
+		if (ft_strncmp(to_run->separator->pipe, "|", 1) == 0)
+			pipeline(to_run, directory, env, to_run->separator);
+		else
+			execute(to_run->separator->arg, directory, env, to_run->separator);
+
 }
