@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/26 22:41:17 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/27 09:51:52 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ void				execve_to_child(char *pathname, char **argv, char ***env,
 						t_sep *sep);
 void				execute(char **input, char **directory, char ***env,
 						t_sep *sep);
-char				*heredoc(const char *delimiter);
-void				exec_heredoc(char **input, char ***env);
 int					is_builtin(char *txt);
 void				exec_builtin(t_sep *sep, char **directory, char ***env,
 						char *txt);
@@ -135,7 +133,14 @@ void				pipeline(t_exec *to_run, char **directory, char ***env);
 
 int					handle_outfile(t_sep *sep);
 int					handle_infile(t_sep *sep);
+
+/*		HEREDOC				*/
+
 void				handle_heredoc(t_exec **to_run, char ***env);
+void				arg_heredoc(t_sep **separator, char ***env);
+void				exec_heredoc(char **input, char ***env);
+char				*heredoc(const char *delimiter);
+int					find_heredoc_position(char **args);
 
 /*		PARSER				*/
 

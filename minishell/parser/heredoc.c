@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:17:48 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/24 10:09:31 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/27 10:17:50 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,57 @@ void	handle_heredoc(t_exec **to_run, char ***env)
 	ft_putstr_fd(heredoc_txt, heredoc_fd);
 	close(heredoc_fd);
 	free(heredoc_txt);
+}
+
+int	find_heredoc_position(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i] != NULL)
+	{
+		if (ft_strncmp(args[i], "<<", 2) == 0)
+		{
+			return (i);
+		}
+		i++;
+	}
+	return (-1);
+}
+
+void	arg_heredoc(t_sep **separator, char ***env)
+{
+	char	**args;
+	char	*heredoc_txt;
+	int		heredoc_pos;
+	int		fd_heredoc;
+
+	args = (*separator)->arg;
+	heredoc_pos = find_heredoc_position(args);
+	if (heredoc_pos == -1 || args[heredoc_pos + 1] == NULL)
+		return ;
+	heredoc_txt = heredoc(args[heredoc_pos + 1]);
+	if (!heredoc_txt)
+	{
+		perror("Erreur lors de la récupération de l'heredoc");
+		return (set_dollar(env, 1));
+	}
+	fd_heredoc = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	if (fd_heredoc == -1)
+	{
+		perror("Erreur lors de la création du fichier heredoc.tmp");
+		free(heredoc_txt);
+		return (set_dollar(env, 1));
+	}
+	write(fd_heredoc, heredoc_txt, ft_strlen(heredoc_txt));
+	close(fd_heredoc);
+	(*separator)->file_in = ft_strdup("heredoc.tmp");
+	free(heredoc_txt);
+	while (args[heredoc_pos])
+	{
+		args[heredoc_pos] = NULL;
+		heredoc_pos++;
+	}
 }
 
 // void	rm_heredoc(const char *file_in)

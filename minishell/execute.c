@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/26 22:42:00 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/27 10:24:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,12 @@ void	execute(char **input, char **directory, char ***env, t_sep *sep)
 
 void	execute_all(t_exec *to_run, char **directory, char ***env)
 {
+	print_to_run(to_run);
+	if (find_heredoc_position(to_run->separator->arg) != -1)
+		arg_heredoc(&to_run->separator, env);
 	if (ft_strncmp(to_run->separator->pipe, "|", 1) == 0)
-	{
-		if (ft_strncmp(to_run->separator->arg[0], "<<", 3) == 0)
-			handle_heredoc(&to_run, env);
 		pipeline(to_run, directory, env);
-		unlink("heredoc.tmp");
-	}
 	else
 		execute(to_run->separator->arg, directory, env, to_run->separator);
+	unlink("heredoc.tmp");
 }
