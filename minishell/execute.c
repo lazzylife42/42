@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/27 10:24:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/30 00:40:53 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,28 +73,25 @@ void	execute(char **input, char **directory, char ***env, t_sep *sep)
 	char	*path;
 
 	txt = translate_quote(input[0], *env);
-	if (is_builtin(txt) && !sep->file_out && !sep->pipe)
-		exec_builtin(sep, directory, env, txt);
-	else if (ft_strncmp(sep->arg[0], "<<", 3) == 0 && ft_strncmp(sep->pipe, "|",
-			2) != 0)
-		exec_heredoc(input, env);
-	else
+	if (txt)
 	{
 		path = find_path(txt, *env);
-		if (path)
+		if (is_builtin(txt))
+			exec_builtin(sep, directory, env, txt);
+		else if (path)
 			execve_to_child(path, input, env, sep);
 		else if (!(ft_strncmp(txt, "<<", 3) == 0))
 			no_cmd(txt, env);
 		free(path);
+		free(txt);
 	}
-	free(txt);
 }
 
 void	execute_all(t_exec *to_run, char **directory, char ***env)
 {
-	print_to_run(to_run);
-	if (find_heredoc_position(to_run->separator->arg) != -1)
-		arg_heredoc(&to_run->separator, env);
+	process_heredocs(to_run, env);
+	if (!to_run->separator->arg[0])
+		return ;
 	if (ft_strncmp(to_run->separator->pipe, "|", 1) == 0)
 		pipeline(to_run, directory, env);
 	else

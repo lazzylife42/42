@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/27 09:51:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/30 00:21:18 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,11 @@ int					handle_infile(t_sep *sep);
 /*		HEREDOC				*/
 
 void				handle_heredoc(t_exec **to_run, char ***env);
-void				arg_heredoc(t_sep **separator, char ***env);
+int					arg_heredoc(t_sep **separator, char ***env);
 void				exec_heredoc(char **input, char ***env);
 char				*heredoc(const char *delimiter);
 int					find_heredoc_position(char **args);
+void				process_heredocs(t_exec *to_run, char ***env);
 
 /*		PARSER				*/
 

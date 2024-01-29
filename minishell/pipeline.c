@@ -6,21 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:54:59 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/27 10:16:41 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/27 11:30:58 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	count(char ***cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i])
-		i++;
-	return (i);
-}
 
 int	count_pipe(t_exec *to_run)
 {
@@ -34,31 +24,20 @@ int	count_pipe(t_exec *to_run)
 	}
 	return (i);
 }
-t_exec	*handle_redir(t_exec *to_run)
-{
-	t_exec	*current;
 
-	current = to_run;
-	while (current)
-	{
-		if (current->separator->file_out)
-			handle_outfile(current->separator);
-		if (current->separator->file_in)
-			handle_infile(current->separator);
-		current = current->next;
-	}
-	return (to_run);
-}
 
 void	pipeline(t_exec *to_run, char **directory, char ***env)
 {
 	pid_t	pid;
 	int		cmd_len;
+	int i; 
+	int j;
 	cmd_len = count_pipe(to_run);
 	int		fd[2 * cmd_len];
 
-	int i, j = 0;
+	
 	i = -1;
+	j = 0;
 	while (++i < cmd_len)
 		if (pipe(fd + i * 2) < 0)
 			shell_exit(1, "couldn't pipe");
