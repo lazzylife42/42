@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:50:04 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/26 11:18:56 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/30 09:40:35 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,10 @@ void	sighandler(int signum)
 				shell_exit(0, NULL);
 			}
 		}
+	}
+	else if (sigactive(-1) == 3)
+	{
+		printf("\n");
+		exit(1);
 	}
 }
