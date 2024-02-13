@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/13 17:20:38 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:16:47 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@
 
 //      STRUCTS         //
 
+typedef struct s_vec
+{
+	int			x;
+	int			y;
+}				t_vec;
+
 typedef struct s_error
 {
 	int			e_empty;
@@ -79,19 +85,24 @@ typedef struct s_map
 
 }				t_map;
 
-typedef struct s_cube
+typedef struct s_data
 {
 	void		*img;
-	char		*addr[6];
-	int			*textures[6];
-	void		*mlx_ptr;
-	void		*win_ptr;
+	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+}				t_data;
+
+typedef struct s_cube
+{
+	// int			*textures[6];
+	void		*mlx_ptr;
+	void		*win_ptr;
 	int			width;
 	int			height;
 	t_map		*map;
+	t_data		*data;
 }				t_cube;
 
 //      FUNCTIONS       //
@@ -116,4 +127,30 @@ void			move_left(t_cube *data);
 void			move_down(t_cube *data);
 void			move_right(t_cube *data);
 
+/*		DRAW			*/
+
+void			mlx_pixel(t_data *data, t_vec pos, int color);
+void			draw_square(t_data data, t_vec pos, int size, int color);
+
 #endif
+
+/*
+
+    Noir:		0x000000
+    Blanc:		0xFFFFFF
+    Rouge:		0xFF0000
+    Vert:		0x008000
+    Bleu:		0x0000FF
+    Jaune:		0xFFFF00
+    Cyan:		0x00FFFF
+    Magenta:	0xFF00FF
+    Argent:		0xC0C0C0
+    Gris: 		0x808080
+    Maroon:		0x800000
+    Olive:		0x808000
+    Vert foncé:	0x008080
+    Pourpre:	0x800080
+    Teal:		0x008080
+    Navy: 		0x000080
+
+*/

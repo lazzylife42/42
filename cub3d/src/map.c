@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:57:31 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/13 17:23:51 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:08:44 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,25 +118,25 @@ void	map_renderer_init(t_cube *data, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	map_init(fd, data);
-	map_sprit_init(data);
+	// map_sprit_init(data);
 	close(fd);
 	fd = open(argv[1], O_RDONLY);
 	map_to_tab(fd, data);
 	close(fd);
 }
 
-void	map_sprit_init(t_cube *data)
-{
-	data->textures[0] = mlx_xpm_file_to_image(data->mlx_ptr, TEX_FLOOR,
-			&data->width, &data->height);
-	data->textures[1] = mlx_xpm_file_to_image(data->mlx_ptr, "xpm/tile03.xpm",
-			&data->width, &data->height);
-	data->textures[2] = mlx_xpm_file_to_image(data->mlx_ptr, TEX_WALL,
-			&data->width, &data->height);
-	data->textures[3] = mlx_xpm_file_to_image(data->mlx_ptr, TEX_PLAYER,
-			&data->width, &data->height);
-	data->textures[4] = mlx_xpm_file_to_image(data->mlx_ptr, "xpm/tile03.xpm",
-			&data->width, &data->height);
-	data->textures[5] = mlx_xpm_file_to_image(data->mlx_ptr, "xpm/tile03.xpm",
-			&data->width, &data->height);
-}
+// void	map_sprit_init(t_cube *data)
+// {
+// 	data->textures[0] = mlx_xpm_file_to_image(data->mlx_ptr, TEX_FLOOR,
+// 			&data->width, &data->height);
+// 	data->textures[1] = mlx_xpm_file_to_image(data->mlx_ptr, "xpm/tile03.xpm",
+// 			&data->width, &data->height);
+// 	data->textures[2] = mlx_xpm_file_to_image(data->mlx_ptr, TEX_WALL,
+// 			&data->width, &data->height);
+// 	data->textures[3] = mlx_xpm_file_to_image(data->mlx_ptr, TEX_PLAYER,
+// 			&data->width, &data->height);
+// 	data->textures[4] = mlx_xpm_file_to_image(data->mlx_ptr, "xpm/tile03.xpm",
+// 			&data->width, &data->height);
+// 	data->textures[5] = mlx_xpm_file_to_image(data->mlx_ptr, "xpm/tile03.xpm",
+// 			&data->width, &data->height);
+// }
