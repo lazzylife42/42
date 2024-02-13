@@ -6,13 +6,11 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:15:43 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/26 11:21:57 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:33:28 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// export not working in pipes???????????
 
 ///////////// for testing
 void	display_double_str(char **str)

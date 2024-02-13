@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:14:35 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/18 11:21:17 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:02:34 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ char	*translate_quote(char *str, char **env)
 	char	*res;
 
 	res = NULL;
+	if (!str)
+		return (NULL);
 	if (str[0] != '\'')
 		res = translate_double_quote(str, env, 0, NULL);
 	else

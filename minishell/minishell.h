@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:23:21 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/30 00:21:18 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:22:07 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void				redirect_stdin_stdout(int fd_in, int fd_out);
 /*		PIPELINE			*/
 
 void				pipeline(t_exec *to_run, char **directory, char ***env);
+int					count_pipe(t_exec *to_run);
 
 /*		REDIR				*/
 
@@ -141,7 +142,8 @@ int					arg_heredoc(t_sep **separator, char ***env);
 void				exec_heredoc(char **input, char ***env);
 char				*heredoc(const char *delimiter);
 int					find_heredoc_position(char **args);
-void				process_heredocs(t_exec *to_run, char ***env);
+int					process_heredocs(t_exec *to_run, char ***env);
+void				check_heredoc(char **tokens);
 
 /*		PARSER				*/
 

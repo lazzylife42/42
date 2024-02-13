@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:24:49 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/30 00:40:53 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:12:35 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	is_builtin(char *txt)
 
 void	exec_builtin(t_sep *sep, char **directory, char ***env, char *txt)
 {
+	if (sep->file_out)
+		handle_outfile(sep);
 	if (ft_strncmp(txt, "echo", 5) == 0)
 		echo(&sep->arg[1], env);
 	else if (ft_strncmp(txt, "pwd", 4) == 0)
@@ -65,6 +67,7 @@ void	exec_builtin(t_sep *sep, char **directory, char ***env, char *txt)
 		display_env(env, false);
 	else if (ft_strncmp(txt, "cd", 3) == 0)
 		set_new_directory(directory, sep->arg[1], env);
+	dup2(0, STDOUT_FILENO);
 }
 
 void	execute(char **input, char **directory, char ***env, t_sep *sep)
@@ -89,8 +92,7 @@ void	execute(char **input, char **directory, char ***env, t_sep *sep)
 
 void	execute_all(t_exec *to_run, char **directory, char ***env)
 {
-	process_heredocs(to_run, env);
-	if (!to_run->separator->arg[0])
+	if (!process_heredocs(to_run, env))
 		return ;
 	if (ft_strncmp(to_run->separator->pipe, "|", 1) == 0)
 		pipeline(to_run, directory, env);

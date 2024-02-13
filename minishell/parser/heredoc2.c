@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 00:42:26 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/30 00:42:45 by smonte-e         ###   ########.fr       */
+/*   Created: 2024/01/29 13:56:18 by nreichel          #+#    #+#             */
+/*   Updated: 2024/01/30 10:17:08 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//"\a" => 'bell' pour éviter le saut de ligne
 char	*heredoc_nl(const char *delimiter)
 {
 	char	*line;

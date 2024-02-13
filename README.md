@@ -7,6 +7,6 @@ Voici la liste de mes différents projets finis ou en cours dans le cadre de mon
 - [`so_long`](./so_long) : Un petit jeu utilisant la bibliothèque graphique mlx.
 - [`pipex`](./pipex) : Programme émulant un pipeline `"|"` entre deux commandes.
 - [`philosophers`](./philosophers) : Implémentation de la problématique des philosophes en utilisant les threads et mutex.
-- [`parser`](./parser) : Petit parseur transformant des tokens en liste chaînée de commandes avec arguments et redirections pour `minishell`.
 - [`minishell`](./minishell) : Recréation d'un simple shell en C gérant les pipes, les redirections ainsi que d'autres fonctionnalités.
-
+- [`cub3d`](./cub3d) : Un clone de Wolfenstein 3D utilisant le ray casting et la MLX.
+- [`net practice`](./net_practice) : Ce projet consiste à résoudre des problèmes liés à la mise en place d’un petit réseau fonctionnel.

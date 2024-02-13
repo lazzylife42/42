@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:37:41 by nreichel          #+#    #+#             */
-/*   Updated: 2024/01/26 11:41:04 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:08:26 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	next_end(char *str, int i, int type)
 				type = 0;
 		i += 1;
 	}
-	return (i);
+	return (i * (type == 0) + -1 * (type != 0));
 }
 
 static char	*return_str(char const *str, int nbr)
@@ -121,6 +121,12 @@ char	**minishell_split(char *str)
 		while (*str == ' ' || (*str >= 9 && *str <= 13))
 			str += 1;
 		len = next_end(str, 0, 0);
+		if (len == -1)
+		{
+			ft_putstr_fd("minishell: unclosed quote\n", STDERR_FILENO);
+			free_double_str(res);
+			return (NULL);
+		}
 		res = add_word(res, str, len);
 		if (!res)
 			return (NULL);

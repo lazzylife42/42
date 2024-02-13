@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   llist.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:38:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/01/27 11:01:03 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/01/31 09:59:52 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_sep	*create_sep_node(char **arg, char **input, char *pipe, int pos)
 	new_node = (t_sep *)malloc(sizeof(t_sep));
 	if (new_node)
 	{
+		check_heredoc(arg);
 		new_node->arg = arg;
 		get_rdin(input, new_node, pos);
 		get_rdout(input, new_node, pos);
@@ -101,12 +102,9 @@ void	free_exec_list(t_exec *head)
 			current_sep = temp->separator;
 			if (current_sep->arg)
 			{
-				i = 0;
-				while (current_sep->arg[i])
-				{
+				i = -1;
+				while (current_sep->arg[++i])
 					free(current_sep->arg[i]);
-					i++;
-				}
 				free(current_sep->arg);
 			}
 			free(current_sep);
@@ -115,56 +113,56 @@ void	free_exec_list(t_exec *head)
 	}
 }
 
-// void	print_to_run(t_exec *to_run)
-// {
-// 	t_sep	*current_sep;
-// 	int		i;
-// 	char	**args;
+/*oid	print_to_run(t_exec *to_run)
+{
+	t_sep	*current_sep;
+	int		i;
+	char	**args;
 
-// 	if (to_run == NULL)
-// 	{
-// 		printf("Nothing to execute...\n");
-// 		return ;
-// 	}
-// 	while (to_run != NULL)
-// 	{
-// 		current_sep = to_run->separator;
-// 		if (current_sep != NULL)
-// 		{
-// 			i = 0;
-// 			args = current_sep->arg;
-// 			while (args && args[i] != NULL)
-// 			{
-// 				printf("Argument: [%s]\n", args[i]);
-// 				i++;
-// 			}
-// 			printf("Input Redirect: ");
-// 			if (current_sep->rd_in != NULL)
-// 				printf("[%s]\n", current_sep->rd_in);
-// 			else
-// 				printf("[None]\n");
-// 			printf("Output Redirect: ");
-// 			if (current_sep->rd_out != NULL)
-// 				printf("[%s]\n", current_sep->rd_out);
-// 			else
-// 				printf("[None]\n");
-// 			printf("Input File: ");
-// 			if (current_sep->file_in != NULL)
-// 				printf("[%s]\n", current_sep->file_in);
-// 			else
-// 				printf("[None]\n");
-// 			printf("Output File: ");
-// 			if (current_sep->file_out != NULL)
-// 				printf("[%s]\n", current_sep->file_out);
-// 			else
-// 				printf("[None]\n");
-// 			printf("Pipe Operator: ");
-// 			if (current_sep->pipe != NULL)
-// 				printf("[%s]\n", current_sep->pipe);
-// 			else
-// 				printf("[None]\n");
-// 			printf("---------\n");
-// 		}
-// 		to_run = to_run->next;
-// 	}
-// }
+	if (to_run == NULL)
+	{
+		printf("Nothing to execute...\n");
+		return ;
+	}
+	while (to_run != NULL)
+	{
+		current_sep = to_run->separator;
+		if (current_sep != NULL)
+		{
+			i = 0;
+			args = current_sep->arg;
+			while (args && args[i] != NULL)
+			{
+				printf("Argument: [%s]\n", args[i]);
+				i++;
+			}
+			printf("Input Redirect: ");
+			if (current_sep->rd_in != NULL)
+				printf("[%s]\n", current_sep->rd_in);
+			else
+				printf("[None]\n");
+			printf("Output Redirect: ");
+			if (current_sep->rd_out != NULL)
+				printf("[%s]\n", current_sep->rd_out);
+			else
+				printf("[None]\n");
+			printf("Input File: ");
+			if (current_sep->file_in != NULL)
+				printf("[%s]\n", current_sep->file_in);
+			else
+				printf("[None]\n");
+			printf("Output File: ");
+			if (current_sep->file_out != NULL)
+				printf("[%s]\n", current_sep->file_out);
+			else
+				printf("[None]\n");
+			printf("Pipe Operator: ");
+			if (current_sep->pipe != NULL)
+				printf("[%s]\n", current_sep->pipe);
+			else
+				printf("[None]\n");
+			printf("---------\n");
+		}
+		to_run = to_run->next;
+	}
+}*/

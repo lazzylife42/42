@@ -6,7 +6,7 @@
 /*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 13:19:16 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/11 13:23:46 by nreichel         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:29:51 by nreichel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	ft_putstr_fd( char *s, int fd)
 {
-	while (*s)
+	if (s)
 	{
-		write(fd, &*s, 1);
-		s += 1;
+		while (*s)
+		{
+			write(fd, &*s, 1);
+			s += 1;
+		}
 	}
 }

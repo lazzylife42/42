@@ -1,6 +1,0 @@
-*.o
-*.a
-*.gch
-*.dYM/
-minishell
-minishell.dSYM/
