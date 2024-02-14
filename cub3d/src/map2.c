@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:55:52 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/13 19:12:27 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:19:37 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,52 @@
 // 		return (0);
 // 	return (0);
 // }
+static	void	player_render(t_cube *data)
+{
+	int		x;
+	int		y;
 
-// void	map_renderer(t_cube *data)
-// {
-// 	// int		x;
-// 	// int		y;
-// 	// int		texture_index;
+	y = 0;
+	while (y < data->map->m_height)
+	{
+		x = 0;
+		while (x < data->map->m_width)
+		{
+			if (data->map->m_mini_map[y][x] == 'P')
+				draw_triangle(data->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE}, MINI_SCALE, 0);
+			x++;
+		}
+		y++;
+	}
+	
+}
 
-// 	// y = 0;
-// 	// while (y < data->map->m_height)
-// 	// {
-// 	// 	x = 0;
-// 	// 	while (x < data->map->m_width)
-// 	// 	{
-// 	// 		texture_index = get_texture_index(data->map->m_mini_map[y][x]);
-// 	// 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-// 	// 			data->textures[texture_index], x * 8, (y * 8) + 540);
-// 	// 		x++;
-// 	// 	}
-// 	// 	y++;
-// 	// }
-// 	// my_mlx_pixel_put(data, (t_vec){0, 540}, 0xFFFFFF);
-// 	draw_square(data, (t_vec){0, 540}, 64, 0xFFFFFF);
-// }
+void	map_renderer(t_cube *data)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < data->map->m_height)
+	{
+		x = 0;
+		while (x < data->map->m_width)
+		{
+			// texture_index = get_texture_index(data->map->m_mini_map[y][x]);
+			// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			// 	data->textures[texture_index], x * 8, (y * 8) + 540);
+			if (data->map->m_mini_map[y][x] == '1')
+				draw_square(data->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE}, MINI_SCALE - 2, 0x909090);
+			else if (data->map->m_mini_map[y][x] == '0')
+				draw_square(data->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE}, MINI_SCALE - 2, 0xFFFFFF);
+			// valeur magique à recalculer !!!
+			x++;
+		}
+		y++;
+	}
+	player_render(data);
+}
+
 
 void	free_map(t_cube *data)
 {

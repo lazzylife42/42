@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:57:31 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/13 19:08:44 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:14:29 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	map_to_tab(int fd, t_cube *data)
 
 	i = 0;
 	y = MAP_LINE;
+	ft_printf(BLU"\n----------- MINI MAP -----------\n\n"RST);
 	while (++i <= MAP_LINE)
 		buff = get_next_line(fd);
 	while (y < data->map->m_height)

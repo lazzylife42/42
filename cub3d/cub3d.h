@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/13 19:16:47 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:15:56 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@
 # define TRUE 1
 # define FALSE 0
 # define DEBUG 0
-# define MAP_LINE 7
+# define MAP_LINE 8
 # define X_RES 1280
 # define Y_RES 720
+# define MINI_SCALE 16 // valeur magique à recalculer !!!
 
 # define TEX_NORTH "xpm/tile02.xpm"
 # define TEX_WEST "xpm/tile02.xpm"
@@ -74,6 +75,7 @@ typedef struct s_player
 {
 	float		p_pos_x;
 	float		p_pos_y;
+	float		p_pos_a;
 }				t_player;
 
 typedef struct s_map
@@ -85,14 +87,14 @@ typedef struct s_map
 
 }				t_map;
 
-typedef struct s_data
+typedef struct s_img
 {
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-}				t_data;
+}				t_img;
 
 typedef struct s_cube
 {
@@ -102,7 +104,7 @@ typedef struct s_cube
 	int			width;
 	int			height;
 	t_map		*map;
-	t_data		*data;
+	t_img		*img;
 }				t_cube;
 
 //      FUNCTIONS       //
@@ -129,28 +131,30 @@ void			move_right(t_cube *data);
 
 /*		DRAW			*/
 
-void			mlx_pixel(t_data *data, t_vec pos, int color);
-void			draw_square(t_data data, t_vec pos, int size, int color);
+void			mlx_pixel(t_img *img, t_vec pos, int color);
+void			draw_line(t_img *img, t_vec start, t_vec end, int color);
+void			draw_square(t_img *img, t_vec pos, int size, int color);
+void			draw_triangle(t_img *img, t_vec center, int size, float angle);
 
 #endif
 
 /*
 
-    Noir:		0x000000
-    Blanc:		0xFFFFFF
-    Rouge:		0xFF0000
-    Vert:		0x008000
-    Bleu:		0x0000FF
-    Jaune:		0xFFFF00
-    Cyan:		0x00FFFF
-    Magenta:	0xFF00FF
-    Argent:		0xC0C0C0
-    Gris: 		0x808080
-    Maroon:		0x800000
-    Olive:		0x808000
-    Vert foncé:	0x008080
-    Pourpre:	0x800080
-    Teal:		0x008080
-    Navy: 		0x000080
+	Noir:		0x000000
+	Blanc:		0xFFFFFF
+	Rouge:		0xFF0000
+	Vert:		0x008000
+	Bleu:		0x0000FF
+	Jaune:		0xFFFF00
+	Cyan:		0x00FFFF
+	Magenta:	0xFF00FF
+	Argent:		0xC0C0C0
+	Gris: 		0x808080
+	Maroon:		0x800000
+	Olive:		0x808000
+	Vert foncé:	0x008080
+	Pourpre:	0x800080
+	Teal:		0x008080
+	Navy: 		0x000080
 
 */
