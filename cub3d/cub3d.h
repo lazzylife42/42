@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/14 19:10:35 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:30:34 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,12 @@ void			free_map(t_cube *cube);
 
 void			init_player(t_cube *cube);
 int				player_move(int keysym, t_cube *cube);
+void			rotate_left(t_cube *cube);
+void			rotate_right(t_cube *cube);
 void			move_up(t_cube *cube);
 void			move_left(t_cube *cube);
 void			move_down(t_cube *cube);
 void			move_right(t_cube *cube);
-
 
 /*		DRAW			*/
 

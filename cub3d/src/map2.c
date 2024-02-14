@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:55:52 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/14 18:23:20 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:33:57 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static	void	player_render(t_cube *cube)
 		while (x < cube->map->m_width)
 		{
 			if (cube->map->m_mini_map[y][x] == 'P')
-				draw_triangle(cube->img, (t_vec){cube->map->player->p_pos_x, cube->map->player->p_pos_y}, MINI_SCALE, 0);
+				draw_triangle(cube->img, (t_vec){cube->map->player->p_pos_x, cube->map->player->p_pos_y},
+					MINI_SCALE, cube->map->player->p_pos_a);
 			x++;
 		}
 		y++;

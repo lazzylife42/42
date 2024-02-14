@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:59:05 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/14 19:09:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:33:02 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,22 @@ int	player_move(int keysym, t_cube *cube)
 {
 	if (keysym == 53)
 		on_destroy(cube);
+	else if (keysym == 123)
+	{
+		rotate_left(cube);
+		// printf("Key : %d\n", keysym);
+	}
+	else if (keysym == 124)
+	{
+		rotate_right(cube);
+		// printf("Key : %d\n", keysym);
+	}
 	else if (keysym == 13 || keysym == 126)
 	{
 		move_up(cube);
 		// printf("Key : %d\n", keysym);
 	}
-	else if (keysym == 0 || keysym == 123)
+	else if (keysym == 0)
 	{
 		move_left(cube);
 		// printf("Key : %d\n", keysym);
@@ -33,13 +43,23 @@ int	player_move(int keysym, t_cube *cube)
 		move_down(cube);
 		// printf("Key : %d\n", keysym);
 	}
-	else if (keysym == 2 || keysym == 124)
+	else if (keysym == 2)
 	{
 		move_right(cube);
 		// printf("Key : %d\n", keysym);
 	}
 	frame_render(cube);
 	return (0);
+}
+
+void rotate_left(t_cube *cube)
+{
+    cube->map->player->p_pos_a -= 90 / MODULO_RATIO;
+}
+
+void rotate_right(t_cube *cube)
+{
+    cube->map->player->p_pos_a += 90 / MODULO_RATIO;
 }
 
 void move_up(t_cube *cube)
