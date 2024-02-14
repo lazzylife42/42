@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:55:52 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/14 14:16:02 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:23:20 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,29 @@
 // 	return (0);
 // }
 
-int frame_render(t_cube *data)
+int frame_render(t_cube *cube)
 {
-	data->img->img = mlx_new_image(data->mlx_ptr, X_RES, Y_RES);
-	data->img->addr = mlx_get_data_addr(data->img->img, &data->img->bits_per_pixel,
-		&data->img->line_length, &data->img->endian);
-	map_renderer(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img, 0, 0);
+	cube->img->img = mlx_new_image(cube->mlx_ptr, X_RES, Y_RES);
+	cube->img->addr = mlx_get_data_addr(cube->img->img, &cube->img->bits_per_pixel,
+		&cube->img->line_length, &cube->img->endian);
+	map_renderer(cube);
+	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0, 0);
 	return (0);
 }
 
-static	void	player_render(t_cube *data)
+static	void	player_render(t_cube *cube)
 {
 	int		x;
 	int		y;
 
 	y = 0;
-	while (y < data->map->m_height)
+	while (y < cube->map->m_height)
 	{
 		x = 0;
-		while (x < data->map->m_width)
+		while (x < cube->map->m_width)
 		{
-			if (data->map->m_mini_map[y][x] == 'P')
-				draw_triangle(data->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE}, MINI_SCALE, 0);
+			if (cube->map->m_mini_map[y][x] == 'P')
+				draw_triangle(cube->img, (t_vec){cube->map->player->p_pos_x, cube->map->player->p_pos_y}, MINI_SCALE, 0);
 			x++;
 		}
 		y++;
@@ -55,44 +55,44 @@ static	void	player_render(t_cube *data)
 	
 }
 
-void	map_renderer(t_cube *data)
+void	map_renderer(t_cube *cube)
 {
 	int		x;
 	int		y;
 
 	y = 0;
-	while (y < data->map->m_height)
+	while (y < cube->map->m_height)
 	{
 		x = 0;
-		while (x < data->map->m_width)
+		while (x < cube->map->m_width)
 		{
-			// texture_index = get_texture_index(data->map->m_mini_map[y][x]);
-			// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			// 	data->textures[texture_index], x * 8, (y * 8) + 540);
-			if (data->map->m_mini_map[y][x] == '1')
-				draw_square(data->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE}, MINI_SCALE - 2, 0x909090);
-			else if (data->map->m_mini_map[y][x] == '0')
-				draw_square(data->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE}, MINI_SCALE - 2, 0xFFFFFF);
+			// texture_index = get_texture_index(cube->map->m_mini_map[y][x]);
+			// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr,
+			// 	cube->textures[texture_index], x * 8, (y * 8) + 540);
+			if (cube->map->m_mini_map[y][x] == '1')
+				draw_square(cube->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE}, MINI_SCALE - 2, 0x909090);
+			else if (cube->map->m_mini_map[y][x] == '0')
+				draw_square(cube->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE}, MINI_SCALE - 2, 0xFFFFFF);
 			// valeur magique à recalculer !!!
 			x++;
 		}
 		y++;
 	}
-	player_render(data);
+	player_render(cube);
 }
 
 
-void	free_map(t_cube *data)
+void	free_map(t_cube *cube)
 {
 	int	i;
 
 	i = 0;
-	while (i < data->map->m_height)
+	while (i < cube->map->m_height)
 	{
-		free(data->map->m_mini_map[i]);
+		free(cube->map->m_mini_map[i]);
 		i++;
 	}
-	free(data->map);
-	data->map = NULL;
-	data = NULL;
+	free(cube->map);
+	cube->map = NULL;
+	cube = NULL;
 }

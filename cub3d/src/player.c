@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:59:05 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/14 14:09:12 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:09:56 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,115 +14,154 @@
 
 
 
-int	player_move(int keysym, t_cube *data)
+int	player_move(int keysym, t_cube *cube)
 {
 	if (keysym == 53)
-		on_destroy(data);
+		on_destroy(cube);
 	else if (keysym == 13 || keysym == 126)
-		move_up(data);
+	{
+		move_up(cube);
+		// printf("Key : %d\n", keysym);
+	}
 	else if (keysym == 0 || keysym == 123)
-		move_left(data);
+	{
+		move_left(cube);
+		// printf("Key : %d\n", keysym);
+	}
 	else if (keysym == 1 || keysym == 125)
-		move_down(data);
+	{
+		move_down(cube);
+		// printf("Key : %d\n", keysym);
+	}
 	else if (keysym == 2 || keysym == 124)
-		move_right(data);
-
-	frame_render(data);
-	// map_renderer(data);
-	// game_state(data);
+	{
+		move_right(cube);
+		// printf("Key : %d\n", keysym);
+	}
+	frame_render(cube);
 	return (0);
 }
 
-void	move_up(t_cube *data)
+void move_up(t_cube *cube)
 {
-	int	x;
-	int	y;
+    int x, y;
+    static int range = MODULO_RATIO;
 
-	y = 0;
-	while (y < data->map->m_height)
-	{
-		x = 0;
-		while (x < data->map->m_width)
-		{
-			if (data->map->m_mini_map[y][x] == 'P' && data->map->m_mini_map[y - 1][x] != '1' && y > 1)
-			{
-				data->map->m_mini_map[y - 1][x] = 'P';
-				data->map->m_mini_map[y][x] = '0';
-				break ;
-			}
-			x++;
-		}
-		y++;
-	}
+    range++;
+    if (range % MODULO_RATIO == 0)
+    {
+        y = 0;
+        while (y < cube->map->m_height)
+        {
+            x = 0;
+            while (x < cube->map->m_width)
+            {
+                if (cube->map->m_mini_map[y][x] == 'P' && cube->map->m_mini_map[y - 1][x] != '1' && y > 1)
+                {
+                    cube->map->m_mini_map[y - 1][x] = 'P';
+                    cube->map->m_mini_map[y][x] = '0';
+					cube->map->player->p_pos_y -= MINI_SCALE / MODULO_RATIO;
+                    printf("pos{%d, %d}\n", cube->map->player->p_pos_x, cube->map->player->p_pos_y);
+                    break;
+                }
+                x++;
+            }
+            y++;
+        }
+        range = 0;
+        return;
+    }
+    cube->map->player->p_pos_y -= MINI_SCALE / MODULO_RATIO;
 }
 
-void	move_left(t_cube *data)
+void move_left(t_cube *cube)
 {
-	int	x;
-	int	y;
+    int x, y;
+    static int range = MODULO_RATIO;
 
-	y = 0;
-	while (y < data->map->m_height)
-	{
-		x = 0;
-		while (x < data->map->m_width)
-		{
-			if (data->map->m_mini_map[y][x] == 'P' && data->map->m_mini_map[y][x - 1] != '1' && x > 1)
-			{
-				data->map->m_mini_map[y][x - 1] = 'P';
-				data->map->m_mini_map[y][x] = '0';
-				break ;
-			}
-			x++;
-		}
-		y++;
-	}
+    range++;
+    if (range % MODULO_RATIO == 0)
+    {
+        y = 0;
+        while (y < cube->map->m_height)
+        {
+            x = 0;
+            while (x < cube->map->m_width)
+            {
+                if (cube->map->m_mini_map[y][x] == 'P' && cube->map->m_mini_map[y][x - 1] != '1' && x > 1)
+                {
+                    cube->map->m_mini_map[y][x - 1] = 'P';
+                    cube->map->m_mini_map[y][x] = '0';
+					cube->map->player->p_pos_x -= MINI_SCALE / MODULO_RATIO;
+                    printf("pos{%d, %d}\n", cube->map->player->p_pos_x, cube->map->player->p_pos_y);
+                    break;
+                }
+                x++;
+            }
+            y++;
+        }
+        range = 0;
+        return;
+    }
+    cube->map->player->p_pos_x -= MINI_SCALE / MODULO_RATIO;
 }
 
-void	move_down(t_cube *data)
+void move_down(t_cube *cube)
 {
-	int	x;
-	int	y;
+    int x, y;
+    static int range = MODULO_RATIO;
 
-	y = 0;
-	while (y < data->map->m_height)
-	{
-		x = 0;
-		while (x < data->map->m_width)
-		{
-			if (data->map->m_mini_map[y][x] == 'P' && y < data->map->m_height - 1
-				&& data->map->m_mini_map[y + 1][x] != '1')
-			{						
-				data->map->m_mini_map[y + 1][x] = 'P';
-				data->map->m_mini_map[y][x] = '0';
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
+    range++;
+    if (range % MODULO_RATIO == 0)
+    {
+        y = cube->map->m_height - 1;
+        while (y >= 0)
+        {
+            x = 0;
+            while (x < cube->map->m_width)
+            {
+                if (cube->map->m_mini_map[y][x] == 'P' && y < cube->map->m_height - 1 && cube->map->m_mini_map[y + 1][x] != '1')
+                {
+                    cube->map->m_mini_map[y + 1][x] = 'P';
+                    cube->map->m_mini_map[y][x] = '0';
+					cube->map->player->p_pos_y += MINI_SCALE / MODULO_RATIO;
+                    printf("pos{%d, %d}\n", cube->map->player->p_pos_x, cube->map->player->p_pos_y);
+                    return;
+                }
+                x++;
+            }
+            y--;
+        }
+    }
+    cube->map->player->p_pos_y += MINI_SCALE / MODULO_RATIO;
 }
 
-void	move_right(t_cube *data)
+void move_right(t_cube *cube)
 {
-	int	x;
-	int	y;
+    int x, y;
+    static int range = MODULO_RATIO;
 
-	y = 0;
-	while (y < data->map->m_height)
-	{
-		x = 0;
-		while (x < data->map->m_width)
-		{
-			if (data->map->m_mini_map[y][x] == 'P' && x < data->map->m_width - 1
-				&& data->map->m_mini_map[y][x + 1] != '1')
-			{
-				data->map->m_mini_map[y][x + 1] = 'P';
-				data->map->m_mini_map[y][x] = '0';
-				break ;
-			}
-			x++;
-		}
-		y++;
-	}
+    range++;
+    if (range % MODULO_RATIO == 0)
+    {
+        y = 0;
+        while (y < cube->map->m_height)
+        {
+            x = cube->map->m_width - 1;
+            while (x >= 0)
+            {
+                if (cube->map->m_mini_map[y][x] == 'P' && x < cube->map->m_width - 1 && cube->map->m_mini_map[y][x + 1] != '1')
+                {
+                    cube->map->m_mini_map[y][x + 1] = 'P';
+                    cube->map->m_mini_map[y][x] = '0';
+					cube->map->player->p_pos_x += MINI_SCALE / MODULO_RATIO;
+                    printf("pos{%d, %d}\n", cube->map->player->p_pos_x, cube->map->player->p_pos_y);
+                    return;
+                }
+                x--;
+            }
+            y++;
+        }
+    }
+    cube->map->player->p_pos_x += MINI_SCALE / MODULO_RATIO;
 }

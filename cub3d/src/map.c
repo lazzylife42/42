@@ -6,49 +6,49 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:57:31 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/14 12:14:29 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:58:17 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	map_init(int fd, t_cube *data)
+void	map_init(int fd, t_cube *cube)
 {
 	int	i;
 	int	j;
 
-	data->map = (t_map *)malloc(sizeof(t_map));
-	if (data->map == NULL)
+	cube->map = (t_map *)malloc(sizeof(t_map));
+	if (cube->map == NULL)
 		return ;
 	i = -1;
-	map_dim(fd, data);
-	data->map->m_mini_map = (char **)malloc(data->map->m_height
+	map_dim(fd, cube);
+	cube->map->m_mini_map = (char **)malloc(cube->map->m_height
 			* sizeof(char *));
-	if (data->map->m_mini_map == NULL)
+	if (cube->map->m_mini_map == NULL)
 	{
-		free(data->map);
-		data->map = NULL;
+		free(cube->map);
+		cube->map = NULL;
 		return ;
 	}
-	while (++i < data->map->m_height)
+	while (++i < cube->map->m_height)
 	{
 		j = -1;
-		data->map->m_mini_map[i] = (char *)malloc((data->map->m_width + 1)
+		cube->map->m_mini_map[i] = (char *)malloc((cube->map->m_width + 1)
 				* sizeof(char));
-		if (data->map->m_mini_map[i] == NULL)
+		if (cube->map->m_mini_map[i] == NULL)
 		{
-			free(data->map->m_mini_map);
-			free(data->map);
-			data->map = NULL;
+			free(cube->map->m_mini_map);
+			free(cube->map);
+			cube->map = NULL;
 			return ;
 		}
-		while (++j < data->map->m_width)
-			data->map->m_mini_map[i][j] = '@';
-		data->map->m_mini_map[i][j] = '\0';
+		while (++j < cube->map->m_width)
+			cube->map->m_mini_map[i][j] = '@';
+		cube->map->m_mini_map[i][j] = '\0';
 	}
 }
 
-void	map_dim(int fd, t_cube *data)
+void	map_dim(int fd, t_cube *cube)
 {
 	int		y;
 	int		max_width;
@@ -57,8 +57,8 @@ void	map_dim(int fd, t_cube *data)
 
 	y = 0;
 	max_width = 0;
-	data->map->m_width = 0;
-	data->map->m_height = 0;
+	cube->map->m_width = 0;
+	cube->map->m_height = 0;
 	while (TRUE)
 	{
 		buff = get_next_line(fd);
@@ -70,11 +70,11 @@ void	map_dim(int fd, t_cube *data)
 			max_width = line_width;
 		free(buff);
 	}
-	data->map->m_height = y;
-	data->map->m_width = max_width - 1;
+	cube->map->m_height = y;
+	cube->map->m_width = max_width - 1;
 }
 
-void	map_to_tab(int fd, t_cube *data)
+void	map_to_tab(int fd, t_cube *cube)
 {
 	char	*buff;
 	int		x;
@@ -86,14 +86,14 @@ void	map_to_tab(int fd, t_cube *data)
 	ft_printf(BLU"\n----------- MINI MAP -----------\n\n"RST);
 	while (++i <= MAP_LINE)
 		buff = get_next_line(fd);
-	while (y < data->map->m_height)
+	while (y < cube->map->m_height)
 	{
 		buff = get_next_line(fd);
 		x = 0;
 		while (buff[x] != '\n' && buff[x] != '\0')
 		{
-			data->map->m_mini_map[y][x] = buff[x];
-			ft_printf(BLU"%c"RST, data->map->m_mini_map[y][x]);
+			cube->map->m_mini_map[y][x] = buff[x];
+			ft_printf(BLU"%c"RST, cube->map->m_mini_map[y][x]);
 			x++;
 		}
 		y++;
@@ -103,7 +103,7 @@ void	map_to_tab(int fd, t_cube *data)
 	ft_printf("\n");
 }
 
-void	map_renderer_init(t_cube *data, char **argv)
+void	map_renderer_init(t_cube *cube, char **argv)
 {
 	int	fd;
 
@@ -118,15 +118,15 @@ void	map_renderer_init(t_cube *data, char **argv)
 		ft_putstr_fd(RED "Error\nLa carte est au mauvais format.\n" RST, 2);
 		exit(EXIT_FAILURE);
 	}
-	map_init(fd, data);
+	map_init(fd, cube);
 	// map_sprit_init(data);
 	close(fd);
 	fd = open(argv[1], O_RDONLY);
-	map_to_tab(fd, data);
+	map_to_tab(fd, cube);
 	close(fd);
 }
 
-// void	map_sprit_init(t_cube *data)
+// void	map_sprit_init(t_cube *cube)
 // {
 // 	data->textures[0] = mlx_xpm_file_to_image(data->mlx_ptr, TEX_FLOOR,
 // 			&data->width, &data->height);
