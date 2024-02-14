@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/14 12:15:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:57:20 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_cube
 //      FUNCTIONS       //
 
 int				on_destroy(t_cube *data);
+int				frame_render(t_cube *data);
 
 /*		MAP				*/
 

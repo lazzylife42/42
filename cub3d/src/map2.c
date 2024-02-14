@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:55:52 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/14 12:19:37 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:16:02 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@
 // 		return (0);
 // 	return (0);
 // }
+
+int frame_render(t_cube *data)
+{
+	data->img->img = mlx_new_image(data->mlx_ptr, X_RES, Y_RES);
+	data->img->addr = mlx_get_data_addr(data->img->img, &data->img->bits_per_pixel,
+		&data->img->line_length, &data->img->endian);
+	map_renderer(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img, 0, 0);
+	return (0);
+}
+
 static	void	player_render(t_cube *data)
 {
 	int		x;

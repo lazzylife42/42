@@ -6,11 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:59:05 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/13 18:36:17 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:09:12 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+
 
 int	player_move(int keysym, t_cube *data)
 {
@@ -25,6 +27,7 @@ int	player_move(int keysym, t_cube *data)
 	else if (keysym == 2 || keysym == 124)
 		move_right(data);
 
+	frame_render(data);
 	// map_renderer(data);
 	// game_state(data);
 	return (0);
