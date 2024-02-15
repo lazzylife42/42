@@ -6,45 +6,20 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:59:05 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/15 14:09:10 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:43:19 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	player_move(int keysym, t_cube *cube)
-{
-	if (keysym == 53)
-		on_destroy(cube);
-	else if (keysym == 123)
-		rotate_left(cube);
-	else if (keysym == 124)
-		rotate_right(cube);
-	else if (keysym == 13)
-		move_up(cube);
-	else if (keysym == 126)
-		move_front(cube);
-	else if (keysym == 125)
-		move_back(cube);
-	else if (keysym == 0)
-		move_left(cube);
-	else if (keysym == 1)
-		move_down(cube);
-	else if (keysym == 2)
-		move_right(cube);
-	// printf("Key : %d\n", keysym);
-	frame_render(cube);
-	return (0);
-}
-
 void	rotate_left(t_cube *cube)
 {
-	cube->map->player->p_pos_a -= 90 / FINE_RATIO;
+	cube->map->player->p_pos_a -= 90 / FINE_RATIO / ROT_RATIO;
 }
 
 void	rotate_right(t_cube *cube)
 {
-	cube->map->player->p_pos_a += 90 / FINE_RATIO;
+	cube->map->player->p_pos_a += 90 / FINE_RATIO / ROT_RATIO;
 }
 
 void	move_front(t_cube *cube)

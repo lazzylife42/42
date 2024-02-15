@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 15:31:24 by smonte-e          #+#    #+#              #
-#    Updated: 2024/02/14 15:00:10 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/02/15 15:16:13 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ RM = rm -f
 OPTIONS = -Imlx -Ilibft
 INCLUDES = -I/opt/X11/include -Imlx
 
-SRC = src/main.c src/map.c src/map2.c src/player.c src/draw.c src/game_map.c
+SRC = src/main.c src/map.c src/map2.c src/player.c src/draw.c src/game_map.c src/keybord.c
 
 SRC_BONUS = src/main.c
 

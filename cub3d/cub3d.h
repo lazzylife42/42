@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/15 12:16:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:42:44 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -43,6 +44,17 @@
 # define Y_RES 720
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
 # define FINE_RATIO 3
+# define ROT_RATIO 5
+
+# define K_ESC 53
+# define K_LEFT_ARROW 123
+# define K_RIGHT_ARROW 124
+# define K_UP_ARROW 126
+# define K_DOWN_ARROW 125
+# define K_W 13
+# define K_A 0
+# define K_S 1
+# define K_D 2
 
 # define TEX_NORTH "xpm/tile02.xpm"
 # define TEX_WEST "xpm/tile02.xpm"
@@ -98,6 +110,19 @@ typedef struct s_img
 	int			endian;
 }				t_img;
 
+typedef struct s_key
+{
+	bool		k_esc;
+	bool		k_a;
+	bool		k_d;
+	bool		k_w;
+	bool		k_s;
+	bool		k_left;
+	bool		k_up;
+	bool		k_down;
+	bool		k_right;
+}				t_key;
+
 typedef struct s_cube
 {
 	// int			*textures[6];
@@ -106,27 +131,37 @@ typedef struct s_cube
 	int			width;
 	int			height;
 	t_map		*map;
+	t_key		*key;
 	t_img		*img;
 }				t_cube;
 
 //      FUNCTIONS       //
 
 int				on_destroy(t_cube *cube);
+int				keypress(int keysym, t_cube *cube);
+int				keyrelease(int keysym, t_cube *cube);
 int				frame_render(t_cube *cube);
+void  			update_player(t_cube *cube);
+
+/*		INIT			*/
+
+void    		key_init(t_cube *cube);
+void			map_init(int fd, t_cube *cube);
+void			map_renderer_init(t_cube *cube, char **argv);
+void			init_player(t_cube *cube);
+void			init_wall(t_cube *cube);
 
 /*		MAP				*/
 
-void			map_init(int fd, t_cube *cube);
+
 void			map_dim(int fd, t_cube *cube);
 void			map_to_tab(int fd, t_cube *cube);
-void			map_renderer_init(t_cube *cube, char **argv);
 void			map_renderer(t_cube *cube);
 void			free_map(t_cube *cube);
 
 /*		PLAYER			*/
 
-void			init_player(t_cube *cube);
-void			init_wall(t_cube *cube);
+
 int				player_move(int keysym, t_cube *cube);
 void			move_front(t_cube *cube);
 void			move_back(t_cube *cube);

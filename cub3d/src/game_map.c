@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:49:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/15 14:09:47 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:14:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	print_wall(t_cube *cube)
 		printf("\n");
 		y++;
 	}
-	
 }
 
 void	init_player(t_cube *cube)

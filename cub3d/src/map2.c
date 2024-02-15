@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:55:52 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/14 19:33:57 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:39:40 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@
 // 	return (0);
 // }
 
-int frame_render(t_cube *cube)
-{
-	cube->img->img = mlx_new_image(cube->mlx_ptr, X_RES, Y_RES);
-	cube->img->addr = mlx_get_data_addr(cube->img->img, &cube->img->bits_per_pixel,
-		&cube->img->line_length, &cube->img->endian);
-	map_renderer(cube);
-	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0, 0);
-	return (0);
-}
+// int frame_render(t_cube *cube)
+// {
+// 	// cube->img->img = mlx_new_image(cube->mlx_ptr, X_RES, Y_RES);
+// 	// cube->img->addr = mlx_get_data_addr(cube->img->img, &cube->img->bits_per_pixel,
+// 	// 	&cube->img->line_length, &cube->img->endian);
+// 	map_renderer(cube);
+// 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0, 0);
+// 	return (0);
+// }
 
 static	void	player_render(t_cube *cube)
 {
