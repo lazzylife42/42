@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/14 19:30:34 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:22:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define X_RES 1280
 # define Y_RES 720
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
-# define MODULO_RATIO 2
+# define FINE_RATIO 5
 
 # define TEX_NORTH "xpm/tile02.xpm"
 # define TEX_WEST "xpm/tile02.xpm"
@@ -126,6 +126,8 @@ void			free_map(t_cube *cube);
 
 void			init_player(t_cube *cube);
 int				player_move(int keysym, t_cube *cube);
+void			move_front(t_cube *cube);
+void			move_back(t_cube *cube);
 void			rotate_left(t_cube *cube);
 void			rotate_right(t_cube *cube);
 void			move_up(t_cube *cube);
