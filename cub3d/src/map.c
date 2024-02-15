@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:57:31 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/15 11:15:07 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:36:51 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	map_to_tab(int fd, t_cube *cube)
 
 	i = 0;
 	y = MAP_LINE;
-	ft_printf(BLU"\n----------- MINI MAP -----------\n\n"RST);
+	printf(BLU"\n----------- MINI MAP -----------\n\n"RST);
 	while (++i <= MAP_LINE)
 		buff = get_next_line(fd);
 	while (y < cube->map->m_height)
@@ -93,14 +93,14 @@ void	map_to_tab(int fd, t_cube *cube)
 		while (buff[x] != '\n' && buff[x] != '\0')
 		{
 			cube->map->m_mini_map[y][x] = buff[x];
-			ft_printf(BLU"%c"RST, cube->map->m_mini_map[y][x]);
+			printf(BLU"%c"RST, cube->map->m_mini_map[y][x]);
 			x++;
 		}
 		y++;
-		ft_printf("\n");
+		printf("\n");
 		free(buff);
 	}
-	ft_printf("\n");
+	printf("\n");
 }
 
 void	map_renderer_init(t_cube *cube, char **argv)

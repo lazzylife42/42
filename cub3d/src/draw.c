@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:52:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/14 12:20:42 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:56:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ void	draw_square(t_img *img, t_vec pos, int size, int color)
 	}
 }
 
+float distance(t_vec p1, t_vec p2)
+{
+    float dx = p2.x - p1.x;
+    float dy = p2.y - p1.y;
+    return sqrt(dx * dx + dy * dy);
+}
+
 void draw_triangle(t_img *img, t_vec center, int size, float angle)
 {
     float angle_rad = angle * M_PI / 180.0;
@@ -102,6 +109,8 @@ void draw_triangle(t_img *img, t_vec center, int size, float angle)
     draw_line(img, rotated_top, rotated_bottom_left, 0xFF0000);
     draw_line(img, rotated_top, rotated_bottom_right, 0xFF0000);
     draw_line(img, rotated_bottom_left, rotated_bottom_right, 0xFF0000);
-	draw_line(img, center, rotated_top, 0x00FF00);
+	draw_line(img, center,
+	(t_vec){center.x + (top.x - center.x) * cos_angle - (top.y - center.y) * sin_angle * 10,
+			center.y + (top.x - center.x) * sin_angle + (top.y - center.y) * cos_angle * 10},
+	0x00FF00);
 }
-

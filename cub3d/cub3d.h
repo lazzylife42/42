@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/15 11:22:31 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:16:52 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define X_RES 1280
 # define Y_RES 720
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
-# define FINE_RATIO 5
+# define FINE_RATIO 3
 
 # define TEX_NORTH "xpm/tile02.xpm"
 # define TEX_WEST "xpm/tile02.xpm"
@@ -83,6 +83,7 @@ typedef struct s_map
 {
 	int			m_width;
 	int			m_height;
+	int			m_wall[X_RES][Y_RES];
 	char		**m_mini_map;
 	t_player	*player;
 
@@ -125,6 +126,7 @@ void			free_map(t_cube *cube);
 /*		PLAYER			*/
 
 void			init_player(t_cube *cube);
+void			init_wall(t_cube *cube);
 int				player_move(int keysym, t_cube *cube);
 void			move_front(t_cube *cube);
 void			move_back(t_cube *cube);
