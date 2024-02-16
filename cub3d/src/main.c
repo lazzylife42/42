@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/15 15:46:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/16 01:21:48 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+#include <time.h>
+
+static int frame_count = 0;
+static time_t start_time = 0;
+
+void	fps_count(void)
+{
+	time_t	current_time;
+	double	elapsed_time;
+	double	fps;
+
+	if (start_time == 0)
+		start_time = time(NULL);
+	frame_count++;
+	current_time = time(NULL);
+	elapsed_time = difftime(current_time, start_time);
+	if (elapsed_time >= 1)
+	{
+		fps = frame_count / elapsed_time;
+		printf("FPS: %.2f\n", fps);
+		frame_count = 0;
+		start_time = current_time;
+	}
+}
 
 int	on_destroy(t_cube *cube)
 {
@@ -22,12 +47,23 @@ int	on_destroy(t_cube *cube)
 
 int	game_loop(t_cube *cube)
 {
-	cube->img->img = mlx_new_image(cube->mlx_ptr, X_RES, Y_RES);
-	cube->img->addr = mlx_get_data_addr(cube->img->img, &cube->img->bits_per_pixel,
-		&cube->img->line_length, &cube->img->endian);	
-	update_player(cube);
-	map_renderer(cube);
-	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0, 0);
+		fps_count();
+	if (cube->loadscreen == false)
+	{
+		loadscreen(cube);
+		update_player(cube);
+	}
+	else
+	{
+		cube->img->img = mlx_new_image(cube->mlx_ptr, X_RES, Y_RES);
+		cube->img->addr = mlx_get_data_addr(cube->img->img,
+				&cube->img->bits_per_pixel, &cube->img->line_length,
+				&cube->img->endian);
+		update_player(cube);
+		map_renderer(cube);
+		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0,
+			0);
+	}
 	return (0);
 }
 
@@ -51,6 +87,7 @@ int	main(int argc, char **argv)
 	if (!cube.img)
 		return (1);
 	cube.win_ptr = mlx_new_window(cube.mlx_ptr, X_RES, Y_RES, "Cub3d");
+	cube.loadscreen = false;
 	mlx_loop_hook(cube.mlx_ptr, game_loop, &cube);
 	mlx_hook(cube.win_ptr, 2, 1L << 0, &keypress, &cube);
 	mlx_hook(cube.win_ptr, 3, 1L << 1, &keyrelease, &cube);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/07 15:31:24 by smonte-e          #+#    #+#              #
-#    Updated: 2024/02/15 15:16:13 by smonte-e         ###   ########.fr        #
+#    Created: 2024/02/15 22:39:15 by smonte-e          #+#    #+#              #
+#    Updated: 2024/02/15 22:40:18 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,12 @@ CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 LIBFT = libft
 MLX = minilibx
 RM = rm -f
-OPTIONS = -Imlx -Ilibft
+OPTIONS = -Iminilibx/mlx -Ilibftsrc/
 INCLUDES = -I/opt/X11/include -Imlx
 
-SRC = src/main.c src/map.c src/map2.c src/player.c src/draw.c src/game_map.c src/keybord.c
-
-SRC_BONUS = src/main.c
+SRC = src/main.c src/map.c src/map2.c src/player.c src/draw.c \
+      src/game_map.c src/keybord.c src/loadscreen.c
+SRC_BONUS = src/main_bonus.c
 
 OBJS = $(SRC:.c=.o)
 
@@ -34,11 +34,6 @@ YELLOW = \033[0;33m
 BLUE = \033[0;34m
 NC = \033[0m
 
-# Silence make
-ifeq ($(SILENT),true)
-.SILENT:
-endif
-
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -47,7 +42,7 @@ $(NAME): $(OBJS)
 	@echo "$(GREEN)Making libft...$(NC)"
 	$(MAKE) -sC $(MLX)
 	@echo "$(GREEN)Making minilibx...$(NC)"
-	gcc $(CFLAGS) $(OBJS) -L./$(LIBFT) -lft -L./$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	gcc $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o : %.c
 	@clear
@@ -61,19 +56,19 @@ $(NAME): $(OBJS)
 	\t\t\t░╚════╝░░╚═════╝░╚═════╝░╚═════╝░╚═════╝░\n\
 	\n$(NC)"
 	@echo "$(YELLOW)Compiling src...$(NC)"
-	gcc $(CFLAGS) $(OPTIONS)$(DIR_SRC) -c $< -o $@ $(INCLUDES)
+	gcc $(CFLAGS) $(OPTIONS) -c $< -o $@ $(INCLUDES)
 
 $(LIBFT):
 	$(MAKE) -sC $(LIBFT)
 
 $(MLX):
-	$(MAKE) -sC $(@D)
+	$(MAKE) -sC $(MLX)
 
 bonus: fclean $(OBJS_BONUS)
 	@echo "$(GREEN)Compiling bonus...$(NC)"
 	$(MAKE) -sC $(LIBFT)
 	$(MAKE) -sC $(MLX)
-	gcc $(CFLAGS) $(OBJS_BONUS) -L./$(LIBFT) -lft -L./$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	gcc $(CFLAGS) $(OBJS_BONUS) -L$(LIBFT) -lft -L$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
 	@clear

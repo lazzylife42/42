@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keybord.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:26 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/15 15:08:15 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/15 22:41:09 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void    key_init(t_cube *cube)
 	cube->key->k_up = false;
 	cube->key->k_down = false;
 	cube->key->k_right = false;
+	cube->key->k_enter = false;
 }
 
 void    update_player(t_cube *cube)
@@ -70,13 +71,19 @@ void    update_player(t_cube *cube)
 		move_down(cube);
 	else if (cube->key->k_right == true)
 		move_right(cube);
+	else if (cube->key->k_enter == true)
+	{
+		cube->loadscreen = true;
+		load_transition(cube);
+	}
 }
-
 
 int keypress(int keysym, t_cube *cube)
 {
 	if (keysym == K_ESC)
 		cube->key->k_esc = true;
+	else if (keysym == K_ENTER)
+		cube->key->k_enter = true;
 	else if (keysym == K_A)
 		cube->key->k_a = true;
 	else if (keysym == K_D)
@@ -100,6 +107,8 @@ int keyrelease(int keysym, t_cube *cube)
 {
 	if (keysym == K_ESC)
 		cube->key->k_esc = false;
+	else if (keysym == K_ENTER)
+		cube->key->k_enter = false;
 	else if (keysym == K_A)
 		cube->key->k_a = false;
 	else if (keysym == K_D)
