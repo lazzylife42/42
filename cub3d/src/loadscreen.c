@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 17:07:23 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/16 01:06:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/19 21:55:10 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	loadscreen(t_cube *cube)
 {
-	cube->load = malloc(sizeof(t_load));
+	
 	cube->img->img = mlx_new_image(cube->mlx_ptr, X_RES, Y_RES);
 	cube->load->l_img = mlx_xpm_file_to_image(cube->mlx_ptr, LOADSCREEN,
 			&cube->load->l_width, &cube->load->l_height);

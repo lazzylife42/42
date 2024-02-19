@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/16 00:46:03 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/19 21:55:41 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,8 @@ int				keyrelease(int keysym, t_cube *cube);
 void			update_player(t_cube *cube);
 void			loadscreen(t_cube *cube);
 void			load_transition(t_cube *cube);
-
+void			load_melt_textures_a(t_cube *cube);
+void			load_melt_textures_b(t_cube *cube);
 /*		INIT			*/
 
 void			key_init(t_cube *cube);

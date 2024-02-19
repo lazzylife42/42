@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/16 01:21:48 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/19 21:56:09 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ int	main(int argc, char **argv)
 		return (1);
 	cube.win_ptr = mlx_new_window(cube.mlx_ptr, X_RES, Y_RES, "Cub3d");
 	cube.loadscreen = false;
+	cube.load = malloc(sizeof(t_load));
+	load_melt_textures_a(&cube);
+	load_melt_textures_b(&cube);
 	mlx_loop_hook(cube.mlx_ptr, game_loop, &cube);
 	mlx_hook(cube.win_ptr, 2, 1L << 0, &keypress, &cube);
 	mlx_hook(cube.win_ptr, 3, 1L << 1, &keyrelease, &cube);
