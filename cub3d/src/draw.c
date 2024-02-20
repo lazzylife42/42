@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:52:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/15 11:56:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/20 10:26:08 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,37 +80,38 @@ float distance(t_vec p1, t_vec p2)
     return sqrt(dx * dx + dy * dy);
 }
 
-void draw_triangle(t_img *img, t_vec center, int size, float angle)
+void draw_triangle(t_cube *cube)
 {
-    float angle_rad = angle * M_PI / 180.0;
+    // Calcul de l'angle de vue en radians
+    float angle_rad = (cube->map->player->p_pos_a) * M_PI / 180;
     float cos_angle = cos(angle_rad);
     float sin_angle = sin(angle_rad);
 
     // Coordonnées des sommets du triangle non-roté
-    t_vec top = {center.x, center.y - size / 2};
-    t_vec bottom_left = {center.x - size / 2, center.y + size / 2};
-    t_vec bottom_right = {center.x + size / 2, center.y + size / 2};
+    t_vec top = {cube->map->player->p_pos_x, cube->map->player->p_pos_y - MINI_SCALE / 2};
+    t_vec bottom_left = {cube->map->player->p_pos_x - MINI_SCALE / 2, cube->map->player->p_pos_y + MINI_SCALE / 2};
+    t_vec bottom_right = {cube->map->player->p_pos_x + MINI_SCALE / 2, cube->map->player->p_pos_y + MINI_SCALE / 2};
 
     // Coordonnées des sommets du triangle roté
     t_vec rotated_top = {
-        center.x + (top.x - center.x) * cos_angle - (top.y - center.y) * sin_angle,
-        center.y + (top.x - center.x) * sin_angle + (top.y - center.y) * cos_angle
+        cube->map->player->p_pos_x + (top.x - cube->map->player->p_pos_x) * cos_angle - (top.y -  cube->map->player->p_pos_y) * sin_angle,
+         cube->map->player->p_pos_y + (top.x - cube->map->player->p_pos_x) * sin_angle + (top.y -  cube->map->player->p_pos_y) * cos_angle
     };
     t_vec rotated_bottom_left = {
-        center.x + (bottom_left.x - center.x) * cos_angle - (bottom_left.y - center.y) * sin_angle,
-        center.y + (bottom_left.x - center.x) * sin_angle + (bottom_left.y - center.y) * cos_angle
+        cube->map->player->p_pos_x + (bottom_left.x - cube->map->player->p_pos_x) * cos_angle - (bottom_left.y -  cube->map->player->p_pos_y) * sin_angle,
+         cube->map->player->p_pos_y + (bottom_left.x - cube->map->player->p_pos_x) * sin_angle + (bottom_left.y -  cube->map->player->p_pos_y) * cos_angle
     };
     t_vec rotated_bottom_right = {
-        center.x + (bottom_right.x - center.x) * cos_angle - (bottom_right.y - center.y) * sin_angle,
-        center.y + (bottom_right.x - center.x) * sin_angle + (bottom_right.y - center.y) * cos_angle
+        cube->map->player->p_pos_x + (bottom_right.x - cube->map->player->p_pos_x) * cos_angle - (bottom_right.y -  cube->map->player->p_pos_y) * sin_angle,
+         cube->map->player->p_pos_y + (bottom_right.x - cube->map->player->p_pos_x) * sin_angle + (bottom_right.y -  cube->map->player->p_pos_y) * cos_angle
     };
 
     // Dessiner les côtés du triangle
-    draw_line(img, rotated_top, rotated_bottom_left, 0xFF0000);
-    draw_line(img, rotated_top, rotated_bottom_right, 0xFF0000);
-    draw_line(img, rotated_bottom_left, rotated_bottom_right, 0xFF0000);
-	draw_line(img, center,
-	(t_vec){center.x + (top.x - center.x) * cos_angle - (top.y - center.y) * sin_angle * 10,
-			center.y + (top.x - center.x) * sin_angle + (top.y - center.y) * cos_angle * 10},
-	0x00FF00);
+    draw_line(cube->img, rotated_top, rotated_bottom_left, 0xFF0000);
+    draw_line(cube->img, rotated_top, rotated_bottom_right, 0xFF0000);
+    draw_line(cube->img, rotated_bottom_left, rotated_bottom_right, 0xFF0000);
+
+    // Dessiner le rayon de vision
+    // draw_line(cube->img, (t_vec){cube->map->player->p_pos_x, cube->map->player->p_pos_y}, raycast(cube), 0x008000);
 }
+

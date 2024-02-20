@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/19 21:56:09 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/20 10:00:22 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 	if (!cube.img)
 		return (1);
 	cube.win_ptr = mlx_new_window(cube.mlx_ptr, X_RES, Y_RES, "Cub3d");
-	cube.loadscreen = false;
+	cube.loadscreen = true;
 	cube.load = malloc(sizeof(t_load));
 	load_melt_textures_a(&cube);
 	load_melt_textures_b(&cube);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/19 21:55:41 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/20 10:21:24 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,8 @@ void			move_right(t_cube *cube);
 void			mlx_pixel(t_img *img, t_vec pos, int color);
 void			draw_line(t_img *img, t_vec start, t_vec end, int color);
 void			draw_square(t_img *img, t_vec pos, int size, int color);
-void			draw_triangle(t_img *img, t_vec center, int size, float angle);
+void			draw_triangle(t_cube *cube);
+t_vec			raycast(t_cube *cube);
 
 #endif
 
