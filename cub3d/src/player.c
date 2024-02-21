@@ -3,29 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:59:05 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/20 15:42:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:57:38 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void rotate_left(t_cube *cube)
+void	rotate_left(t_cube *cube)
 {
-    cube->map->player->p_pos_a -= 90 / FINE_RATIO / ROT_RATIO;
-    if (cube->map->player->p_pos_a % 360 == 0)
-        cube->map->player->p_pos_a += 360;
+	cube->map->player->p_pos_a -= 90 / FINE_RATIO / ROT_RATIO;
+	if (cube->map->player->p_pos_a % 360 == 0)
+		cube->map->player->p_pos_a += 360;
 }
 
-void rotate_right(t_cube *cube)
+void	rotate_right(t_cube *cube)
 {
-    cube->map->player->p_pos_a += 90 / FINE_RATIO / ROT_RATIO;
-    if (cube->map->player->p_pos_a % 360 == 0)
-        cube->map->player->p_pos_a -= 360;
+	cube->map->player->p_pos_a += 90 / FINE_RATIO / ROT_RATIO;
+	if (cube->map->player->p_pos_a % 360 == 0)
+		cube->map->player->p_pos_a -= 360;
 }
-
 
 void	move_front(t_cube *cube)
 {
