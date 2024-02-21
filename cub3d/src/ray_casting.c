@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:35:00 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/21 22:02:35 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/21 23:02:53 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,15 @@ void	draw_wall(t_cube *cube)
 	ra = (cube->map->player->p_pos_a - 90) * M_PI / 180;
 	while (col < X_RES)
 	{
-		ratio = ((col - X_RES / 2) / (float)X_RES) ;
+		ratio = ((col - X_RES / 2) / (float)X_RES);
 		dir.x = (cos(ra) / 2 + (cos(ra - M_PI_2)) * ratio);
 		dir.y = (sin(ra) / 2 + (sin(ra - M_PI_2)) * ratio);
 		map.x = floor(cube->map->player->p_pos_x) / MINI_SCALE;
 		map.y = floor(cube->map->player->p_pos_y) / MINI_SCALE;
-		delta.x = sqrt(1 + ((dir.y * dir.y) / (dir.x * dir.x)));
-		delta.y = sqrt(1 + ((dir.x * dir.x) / (dir.y * dir.y)));
+		// delta.x = sqrt(1 + ((dir.y * dir.y) / (dir.x * dir.x)));
+		// delta.y = sqrt(1 + ((dir.x * dir.x) / (dir.y * dir.y)));
+		delta.x = fabs(1 / dir.x);
+		delta.y = fabs(1 / dir.y);
 		if (dir.x < 0)
 		{
 			step.x = -1;
@@ -77,7 +79,7 @@ void	draw_wall(t_cube *cube)
 		hit = 0;
 		while (!hit)
 		{
-			if (sided.y <= 0 || (sided.x <= 0 && sided.x < sided.y))
+			if (sided.x < sided.y)
 			{
 				sided.x += delta.x;
 				map.x += step.x;
@@ -93,16 +95,17 @@ void	draw_wall(t_cube *cube)
 				hit = 1;
 		}
 		if (side == 0)
-			p_walld = (map.x - (cube->map->player->p_pos_x / MINI_SCALE) + (1 - step.x) / 2)
-				/ dir.x;
+			// p_walld = (map.x - (cube->map->player->p_pos_x / MINI_SCALE) + (1 - step.x) / 2)
+			// 	/ dir.x;
+			p_walld = sided.x - delta.x;
 		else
-			p_walld = (map.y - (cube->map->player->p_pos_y / MINI_SCALE) + (1 - step.y) / 2)
-				/ dir.y;
+			// p_walld = (map.y - (cube->map->player->p_pos_y / MINI_SCALE) + (1 - step.y) / 2)
+			// 	/ dir.y;
+			p_walld = sided.y - delta.y;
 		if (side == 0)
 			color = 0x808080;
 		else
-			color = 0xFFFFFF;
-			
+			color =	0x808080 / 2;
 		float wall_height = fabs(Y_RES / p_walld);
 		float wall_top = (Y_RES / 2) - (wall_height / 2);
 		float wall_bottom = (Y_RES / 2) + (wall_height / 2);
