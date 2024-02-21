@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:52:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/20 10:26:08 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:09:32 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,38 +21,43 @@ void	mlx_pixel(t_img *img, t_vec pos, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_line(t_img *img, t_vec start, t_vec end, int color)
+void draw_line(t_img *img, t_vec start, t_vec end, int color)
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	e2;
+    int dx = abs(end.x - start.x);
+    int dy = abs(end.y - start.y);
+    int sx = (start.x < end.x) ? 1 : -1;
+    int sy = (start.y < end.y) ? 1 : -1;
+    int err = dx - dy;
+    int e2;
 
-	dx = abs(end.x - start.x);
-	dy = abs(end.y - start.y);
-	sx = start.x < end.x ? 1 : -1;
-	sy = start.y < end.y ? 1 : -1;
-	err = (dx > dy ? dx : -dy) / 2;
-	while (1)
-	{
-		mlx_pixel(img, (t_vec){start.x, start.y}, color);
-		if (start.x == end.x && start.y == end.y)
-			break ;
-		e2 = err;
-		if (e2 > -dx)
-		{
-			err -= dy;
-			start.x += sx;
-		}
-		if (e2 < dy)
-		{
-			err += dx;
-			start.y += sy;
-		}
-	}
+    while (1)
+    {
+        // Vérifiez si nous sommes toujours à l'intérieur des limites de l'image
+        if (start.x >= 0 && start.x < X_RES && start.y >= 0 && start.y < Y_RES)
+        {
+            // Dessiner un pixel à la position actuelle
+            mlx_pixel(img,  (t_vec){start.x, start.y}, color);
+        }
+
+        // Vérifiez si nous avons atteint la fin de la ligne
+        if (start.x == end.x && start.y == end.y)
+            break;
+
+        // Calculez l'erreur et mettez à jour les coordonnées en conséquence
+        e2 = 2 * err;
+        if (e2 > -dy)
+        {
+            err -= dy;
+            start.x += sx;
+        }
+        if (e2 < dx)
+        {
+            err += dx;
+            start.y += sy;
+        }
+    }
 }
+
 
 void	draw_square(t_img *img, t_vec pos, int size, int color)
 {
@@ -112,6 +117,8 @@ void draw_triangle(t_cube *cube)
     draw_line(cube->img, rotated_bottom_left, rotated_bottom_right, 0xFF0000);
 
     // Dessiner le rayon de vision
-    // draw_line(cube->img, (t_vec){cube->map->player->p_pos_x, cube->map->player->p_pos_y}, raycast(cube), 0x008000);
+	// t_vecf ray = raycast(cube);
+    // draw_line(cube->img, (t_vec){cube->map->player->p_pos_x, cube->map->player->p_pos_y},
+	// 	(t_vec){(int)ray.x, (int)ray.y}, 0x008000);
 }
 
