@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:35:00 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/21 15:04:18 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:49:19 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ void	draw_wall(t_cube *cube)
 	t_vecf	sided;
 	t_vecf	delta;
 
-	ra = (cube->map->player->p_pos_a - 90) * M_PI / 180;
 	col = 0;
+	int scale =  MINI_SCALE * FINE_RATIO;
+	ra = (cube->map->player->p_pos_a - 90) * M_PI / 180;
 	while (col < X_RES)
 	{
-		ratio = ((col - X_RES / 2) / (float)X_RES) * MINI_SCALE;
-		dir.x = (cos(ra) / 2 + (cos(ra - 0.25 )) * ratio);
-		dir.y = (sin(ra) / 2 + (sin(ra - 0.25 )) * ratio);
+		ratio = ((col - X_RES / 2) / (float)X_RES) * scale;
+		dir.x = (cos(ra) / 2 + (cos(ra - 0.25 )) * ratio) / scale;
+		dir.y = (sin(ra) / 2 + (sin(ra - 0.25 )) * ratio) / scale;
 		map.x = floor(cube->map->player->p_pos_x);
 		map.y = floor(cube->map->player->p_pos_y);
 		delta.x = sqrt(1 + ((dir.y * dir.y) / (dir.x * dir.x)));
@@ -95,16 +96,16 @@ void	draw_wall(t_cube *cube)
 		}
 		if (side == 0)
 			p_walld = (map.x - cube->map->player->p_pos_x + (1 - step.x) / 2)
-				/ dir.x * MINI_SCALE;
+				/ dir.x * scale;
 		else
 			p_walld = (map.y - cube->map->player->p_pos_y + (1 - step.y) / 2)
-				/ dir.y * MINI_SCALE;
+				/ dir.y * scale;
 		if (side == 0)
 			color = 0x808080;
 		else
 			color = 0xFFFFFF;
-		draw_line(cube->img, (t_vec){col, (X_RES / 2) - (X_RES / 4) / p_walld * 2 * MINI_SCALE},
-			(t_vec){col, (X_RES / 2) + (X_RES / 4) / p_walld * 2 * MINI_SCALE}, color);
+		draw_line(cube->img, (t_vec){col, (X_RES / 2) - (X_RES / 4) / p_walld * 2 * scale},
+			(t_vec){col, (X_RES / 2) + (X_RES / 4) / p_walld * 2 * scale}, color);
 		col++;
 	}
 }
