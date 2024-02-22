@@ -3,39 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   keybord.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:26 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/19 21:57:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:13:12 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// int	player_move(int keysym, t_cube *cube)
-// {
-// 	if (keysym == K_ESC)
-// 		on_destroy(cube);
-// 	else if (keysym == K_A)
-// 		rotate_left(cube);
-// 	else if (keysym == K_D)
-// 		rotate_right(cube);
-// 	else if (keysym == K_W)
-// 		move_front(cube);
-// 	else if (keysym == K_S)
-// 		move_back(cube);
-// 	else if (keysym == K_LEFT_ARROW)
-// 		move_left(cube);
-// 	else if (keysym == K_UP_ARROW)
-// 		move_up(cube);
-// 	else if (keysym == K_DOWN_ARROW)
-// 		move_down(cube);
-// 	else if (keysym == K_RIGHT_ARROW)
-// 		move_right(cube);
-// 	// printf("Key : %d\n", keysym);
-// 	frame_render(cube);
-// 	return (0);
-// }
 void    key_init(t_cube *cube)
 {
     cube->key = malloc(sizeof(t_key));
@@ -71,7 +47,7 @@ void    update_player(t_cube *cube)
 		move_down(cube);
 	else if (cube->key->k_right == true)
 		move_right(cube);
-	else if (cube->key->k_enter == true)
+	else if (cube->key->k_enter == true && cube->loadscreen == false)
 	{
 		cube->loadscreen = true;
 		load_transition(cube);

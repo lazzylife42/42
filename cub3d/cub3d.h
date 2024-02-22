@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/22 12:53:09 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:05:15 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define X_RES 1280
 # define Y_RES 720
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
-# define FINE_RATIO 5
+# define FINE_RATIO 3
 # define ROT_RATIO 5
 
 # define K_ESC 53
@@ -104,6 +104,7 @@ typedef struct s_map
 {
 	int			m_width;
 	int			m_height;
+	bool		m_display;
 	int			m_wall[X_RES][Y_RES];
 	char		**m_mini_map;
 	t_player	*player;
@@ -146,6 +147,7 @@ typedef struct s_key
 	bool		k_down;
 	bool		k_right;
 	bool		k_enter;
+	bool		k_m;
 }				t_key;
 
 typedef struct s_cube

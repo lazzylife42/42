@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/22 12:49:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:13:44 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	on_destroy(t_cube *cube)
 
 int	game_loop(t_cube *cube)
 {
-		fps_count();
+	fps_count();
 	if (cube->loadscreen == false)
 	{
 		loadscreen(cube);
@@ -94,7 +94,6 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(cube.mlx_ptr, game_loop, &cube);
 	mlx_hook(cube.win_ptr, 2, 1L << 0, &keypress, &cube);
 	mlx_hook(cube.win_ptr, 3, 1L << 1, &keyrelease, &cube);
-	mlx_hook(cube.win_ptr, 17, 0, &on_destroy, &cube);
 	mlx_loop(cube.mlx_ptr);
 	return (0);
 }
