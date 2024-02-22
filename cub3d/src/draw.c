@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:52:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/21 21:27:46 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:50:38 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,20 @@ void draw_line(t_img *img, t_vec start, t_vec end, int color)
     int sy = (start.y < end.y) ? 1 : -1;
     int err = dx - dy;
     int e2;
+    int max_iter = dx + dy;
 
-    while (1)
+    if (start.x < 0 || start.x >= X_RES || start.y < 0 || start.y >= Y_RES ||
+        end.x < 0 || end.x >= X_RES || end.y < 0 || end.y >= Y_RES)
+        return;
+    if (start.x == end.x && start.y == end.y)
+        return;
+
+    while (max_iter--)
     {
-        // Vérifiez si nous sommes toujours à l'intérieur des limites de l'image
         if (start.x >= 0 && start.x < X_RES && start.y >= 0 && start.y < Y_RES)
         {
-            // Dessiner un pixel à la position actuelle
-            mlx_pixel(img,  (t_vec){start.x, start.y}, color);
+            mlx_pixel(img, (t_vec){start.x, start.y}, color);
         }
-
-        // Vérifiez si nous avons atteint la fin de la ligne
-        if (start.x == end.x && start.y == end.y)
-            break;
-
-        // Calculez l'erreur et mettez à jour les coordonnées en conséquence
         e2 = 2 * err;
         if (e2 > -dy)
         {
@@ -55,8 +54,11 @@ void draw_line(t_img *img, t_vec start, t_vec end, int color)
             err += dx;
             start.y += sy;
         }
+        if (start.x == end.x && start.y == end.y)
+            break;
     }
 }
+
 
 
 void	draw_square(t_img *img, t_vec pos, int size, int color)
