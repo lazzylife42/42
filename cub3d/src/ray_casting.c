@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:35:00 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/22 10:55:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:44:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	draw_wall(t_cube *cube)
 	ra = (cube->map->player->p_pos_a - 90) * M_PI / 180;
 	while (col < X_RES)
 	{
-		ratio = (((cube->map->player->p_pos_x / MINI_SCALE) * 2) / ((double)col - 1));
-		dir.x = (cos(ra - M_PI_2) * ratio) + cos(ra);
-		dir.y = (sin(ra - M_PI_2) * ratio) + sin(ra);
-		map.x = cube->map->player->p_pos_x / MINI_SCALE;
-		map.y = cube->map->player->p_pos_y / MINI_SCALE;
+		ratio = ((col * 2) / (double)X_RES) - 1;
+		dir.x = (cos(ra + M_PI_2) * ratio) + cos(ra);
+		dir.y = (sin(ra + M_PI_2) * ratio) + sin(ra);
+		map.x = floor(cube->map->player->p_pos_x / MINI_SCALE);
+		map.y = floor(cube->map->player->p_pos_y / MINI_SCALE);
 		delta.x = fabs(1 / dir.x);
 		delta.y = fabs(1 / dir.y);
 		if (dir.x < 0)
@@ -84,7 +84,7 @@ void	draw_wall(t_cube *cube)
 			color = 0x808080;
 		else
 			color =	0x808080 / 2;
-		double wall_height = fabs(Y_RES / p_walld);
+		double wall_height = Y_RES / p_walld;
 		double wall_top = (Y_RES / 2) - (wall_height / 2);
 		double wall_bottom = (Y_RES / 2) + (wall_height / 2);
 		draw_line(cube->img, (t_vec){col, wall_top}, (t_vec){col, wall_bottom}, color);

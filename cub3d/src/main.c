@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/22 10:57:17 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:49:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 	if (!cube.img)
 		return (1);
 	cube.win_ptr = mlx_new_window(cube.mlx_ptr, X_RES, Y_RES, "Cub3d");
-	cube.loadscreen = true;
+	cube.loadscreen = false;
 	cube.load = malloc(sizeof(t_load));
 	load_melt_textures_a(&cube);
 	load_melt_textures_b(&cube);
