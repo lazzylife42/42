@@ -3,40 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:35:00 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/21 23:02:53 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:55:52 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// t_vecf	raycast(t_cube *cube)
-// {
-// 	int		fov;
-// 	float	ra;
-// 	float	a_tan;
-// 	float   dx, dy;
-// 	float   sdx, sdy;
-// 	t_vecf	ray;
-
-// 	ray.x = cube->map->player->p_pos_x;
-//     ray.y = cube->map->player->p_pos_y;
-// 	ra = (cube->map->player->p_pos_a - 90) * M_PI / 180;
-
-// 	return (ray);
-// }
-
 void	draw_wall(t_cube *cube)
 {
 	int		color;
-	int		ratio;
 	int		side;
 	int		col;
 	int		hit;
-	float	ra;
-	float	p_walld;
+	double	ra;
+	double	p_walld;
+	double	ratio;
 	t_vecf	map;
 	t_vecf	dir;
 	t_vecf	step;
@@ -47,13 +31,11 @@ void	draw_wall(t_cube *cube)
 	ra = (cube->map->player->p_pos_a - 90) * M_PI / 180;
 	while (col < X_RES)
 	{
-		ratio = ((col - X_RES / 2) / (float)X_RES);
-		dir.x = (cos(ra) / 2 + (cos(ra - M_PI_2)) * ratio);
-		dir.y = (sin(ra) / 2 + (sin(ra - M_PI_2)) * ratio);
-		map.x = floor(cube->map->player->p_pos_x) / MINI_SCALE;
-		map.y = floor(cube->map->player->p_pos_y) / MINI_SCALE;
-		// delta.x = sqrt(1 + ((dir.y * dir.y) / (dir.x * dir.x)));
-		// delta.y = sqrt(1 + ((dir.x * dir.x) / (dir.y * dir.y)));
+		ratio = (((cube->map->player->p_pos_x / MINI_SCALE) * 2) / ((double)col - 1));
+		dir.x = (cos(ra - M_PI_2) * ratio) + cos(ra);
+		dir.y = (sin(ra - M_PI_2) * ratio) + sin(ra);
+		map.x = cube->map->player->p_pos_x / MINI_SCALE;
+		map.y = cube->map->player->p_pos_y / MINI_SCALE;
 		delta.x = fabs(1 / dir.x);
 		delta.y = fabs(1 / dir.y);
 		if (dir.x < 0)
@@ -95,20 +77,16 @@ void	draw_wall(t_cube *cube)
 				hit = 1;
 		}
 		if (side == 0)
-			// p_walld = (map.x - (cube->map->player->p_pos_x / MINI_SCALE) + (1 - step.x) / 2)
-			// 	/ dir.x;
 			p_walld = sided.x - delta.x;
 		else
-			// p_walld = (map.y - (cube->map->player->p_pos_y / MINI_SCALE) + (1 - step.y) / 2)
-			// 	/ dir.y;
 			p_walld = sided.y - delta.y;
 		if (side == 0)
 			color = 0x808080;
 		else
 			color =	0x808080 / 2;
-		float wall_height = fabs(Y_RES / p_walld);
-		float wall_top = (Y_RES / 2) - (wall_height / 2);
-		float wall_bottom = (Y_RES / 2) + (wall_height / 2);
+		double wall_height = fabs(Y_RES / p_walld);
+		double wall_top = (Y_RES / 2) - (wall_height / 2);
+		double wall_bottom = (Y_RES / 2) + (wall_height / 2);
 		draw_line(cube->img, (t_vec){col, wall_top}, (t_vec){col, wall_bottom}, color);
 		col++;
 	}
