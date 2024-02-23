@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:35:00 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/23 16:16:41 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/23 23:50:13 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,15 @@ void draw_wall(t_cube *cube)
             color = 0x808080;
         else
             color = 0x808080 / 2;
+        double camera_height = cube->map->player->offset;
         double wall_height = Y_RES / p_walld;
-        double wall_top = (Y_RES / 2) - (wall_height / 2) - cube->map->player->offset;
-        double wall_bottom = (Y_RES / 2) + (wall_height / 2) - cube->map->player->offset;
+        double wall_center = (Y_RES / 2) - cube->map->player->offset;
+        double wall_top = wall_center - (wall_height / 2) - (camera_height - cube->map->player->offset);
+        double wall_bottom = wall_center + (wall_height / 2) - (camera_height - cube->map->player->offset);
+        if (wall_top < 0)
+            wall_top = 0;
+        if (wall_bottom >= Y_RES)
+            wall_bottom = Y_RES - 1;
         draw_line(cube->img, (t_vec){col, wall_top}, (t_vec){col, wall_bottom}, color);
         col++;
     }

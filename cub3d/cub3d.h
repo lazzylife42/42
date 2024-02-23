@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/23 15:53:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 00:13:45 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,13 @@
 # define CYA "\033[1;36m"
 # define WHT "\033[1;37m"
 
-# define TRUE 1
-# define FALSE 0
-# define DEBUG 0
 # define MAP_LINE 8
 # define X_RES 1280
 # define Y_RES 720
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
-# define FINE_RATIO 3
-# define ROT_RATIO 5
-# define PLAYER_RADIUS 8
+# define FINE_RATIO 3 // ajuste la vitesse de déplacement
+# define ROT_RATIO 3 // vitesse de rotation en Y
+# define X_RATIO 5 // vitesse de rotation en X
 
 # define K_ESC 53
 # define K_ENTER 36

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:59:05 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/23 18:28:10 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 00:07:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,28 @@ void	rotate_right(t_cube *cube)
 		cube->map->player->p_pos_a -= 360;
 }
 
-void	rotate_up(t_cube *cube)
+void rotate_up(t_cube *cube)
 {
-	if (cube->map->player->offset <= - (Y_RES / 2) + MINI_SCALE)
-		return ;
-	cube->map->player->offset -= MINI_SCALE / FINE_RATIO;
+    double increment = MINI_SCALE / FINE_RATIO * X_RATIO;
+    double max_offset = Y_RES / 2 - MINI_SCALE;
+    if (cube->map->player->offset - increment <= -max_offset)
+        cube->map->player->offset = -max_offset;
+    else
+        cube->map->player->offset -= increment;
 }
 
-void	rotate_down(t_cube *cube)
+void rotate_down(t_cube *cube)
 {
-	if (cube->map->player->offset >= Y_RES / 2)
-		return ;
-	cube->map->player->offset += MINI_SCALE / FINE_RATIO;
+    double increment = MINI_SCALE / FINE_RATIO * X_RATIO;
+    double max_offset = Y_RES / 2 - MINI_SCALE;
+    if (cube->map->player->offset + increment >= max_offset)
+        cube->map->player->offset = max_offset;
+    else
+        cube->map->player->offset += increment;
 }
+
+
+
 
 void move_front(t_cube *cube)
 {
