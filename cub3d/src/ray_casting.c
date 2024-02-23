@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:35:00 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/22 15:50:19 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:16:41 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void draw_wall(t_cube *cube)
         else
             color = 0x808080 / 2;
         double wall_height = Y_RES / p_walld;
-        double wall_top = (Y_RES / 2) - (wall_height / 2);
-        double wall_bottom = (Y_RES / 2) + (wall_height / 2);
+        double wall_top = (Y_RES / 2) - (wall_height / 2) - cube->map->player->offset;
+        double wall_bottom = (Y_RES / 2) + (wall_height / 2) - cube->map->player->offset;
         draw_line(cube->img, (t_vec){col, wall_top}, (t_vec){col, wall_bottom}, color);
         col++;
     }

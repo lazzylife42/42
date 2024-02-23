@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:26 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/22 16:13:12 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:53:46 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void    update_player(t_cube *cube)
 	else if (cube->key->k_left == true)
 		move_left(cube);
 	else if (cube->key->k_up == true)
-		move_up(cube);
+		rotate_up(cube);
 	else if (cube->key->k_down == true)
-		move_down(cube);
+		rotate_down(cube);
 	else if (cube->key->k_right == true)
 		move_right(cube);
 	else if (cube->key->k_enter == true && cube->loadscreen == false)
