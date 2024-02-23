@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:49:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/15 14:14:54 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:05:23 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_player(t_cube *cube)
 				cube->map->player->p_pos_x = x * MINI_SCALE + (MINI_SCALE / 2);
 				cube->map->player->p_pos_y = y * MINI_SCALE + (MINI_SCALE / 2);
 				cube->map->player->p_pos_a = 0; //gérer ici l'orientation
+				cube->map->player->offset = 0;
 				return ;
 			}
 			x++;

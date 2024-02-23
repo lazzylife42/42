@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/23 14:07:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:53:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_player
 	int			p_pos_x;
 	int			p_pos_y;
 	int			p_pos_a;
+	int			offset;
 }				t_player;
 
 typedef struct s_map
@@ -197,6 +198,8 @@ void			move_front(t_cube *cube);
 void			move_back(t_cube *cube);
 void			rotate_left(t_cube *cube);
 void			rotate_right(t_cube *cube);
+void			rotate_up(t_cube *cube);
+void			rotate_down(t_cube *cube);
 void			move_up(t_cube *cube);
 void			move_left(t_cube *cube);
 void			move_down(t_cube *cube);
