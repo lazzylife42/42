@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:38:23 by smonte-e          #+#    #+#              #
-#    Updated: 2023/11/04 18:28:47 by smonte-e         ###   ########.fr        #
+#    Updated: 2023/09/27 16:16:17 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ MY_SOURCES =	ft_isalpha.c \
 				ft_memcpy.c \
 				ft_memmove.c \
 				ft_strlcpy.c \
-				ft_strcat.c \
 				ft_strlcat.c \
 				ft_toupper.c \
 				ft_tolower.c \
