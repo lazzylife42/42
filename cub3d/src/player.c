@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:59:05 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/23 16:13:36 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:28:10 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	rotate_right(t_cube *cube)
 
 void	rotate_up(t_cube *cube)
 {
-	if (cube->map->player->offset < - (Y_RES / 2) + MINI_SCALE)
+	if (cube->map->player->offset <= - (Y_RES / 2) + MINI_SCALE)
 		return ;
 	cube->map->player->offset -= MINI_SCALE / FINE_RATIO;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keybord.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:26 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/23 15:53:46 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:23:33 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,21 @@ void    update_player(t_cube *cube)
 {
 	if (cube->key->k_esc == true)
 		on_destroy(cube);
-	else if (cube->key->k_a == true)
+	if (cube->key->k_a == true)
 		rotate_left(cube);
 	else if (cube->key->k_d == true)
 		rotate_right(cube);
-	else if (cube->key->k_w == true)
+	if (cube->key->k_w == true)
 		move_front(cube);
 	else if (cube->key->k_s == true)
 		move_back(cube);
-	else if (cube->key->k_left == true)
+	if (cube->key->k_left == true)
 		move_left(cube);
-	else if (cube->key->k_up == true)
+	if (cube->key->k_up == true)
 		rotate_up(cube);
 	else if (cube->key->k_down == true)
 		rotate_down(cube);
-	else if (cube->key->k_right == true)
+	if (cube->key->k_right == true)
 		move_right(cube);
 	else if (cube->key->k_enter == true && cube->loadscreen == false)
 	{
