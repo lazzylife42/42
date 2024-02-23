@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/22 16:05:15 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:07:55 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
 # define FINE_RATIO 3
 # define ROT_RATIO 5
+# define PLAYER_RADIUS 8
 
 # define K_ESC 53
 # define K_ENTER 36

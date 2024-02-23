@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:59:05 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/22 15:18:08 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:11:37 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,26 @@ void	rotate_right(t_cube *cube)
 	if (cube->map->player->p_pos_a % 360 == 0)
 		cube->map->player->p_pos_a -= 360;
 }
-
-void	move_front(t_cube *cube)
+void move_front(t_cube *cube)
 {
-	int		next_x;
-	int		next_y;
-	float	angle_rad;
-	float	sin_angle;
-	float	cos_angle;
+    int next_x;
+    int next_y;
+    float angle_rad;
+    float sin_angle;
+    float cos_angle;
+    float radius = MINI_SCALE * 2;
 
-	angle_rad = (cube->map->player->p_pos_a - 90) * M_PI / 180.0;
-	sin_angle = sin(angle_rad);
-	cos_angle = cos(angle_rad);
-	next_x = (MINI_SCALE / FINE_RATIO) * cos_angle + cube->map->player->p_pos_x;
-	next_y = (MINI_SCALE / FINE_RATIO) * sin_angle + cube->map->player->p_pos_y;
-	if (cube->map->m_wall[next_y][next_x] == 1)
-		return ;
-	cube->map->player->p_pos_x += (MINI_SCALE / FINE_RATIO) * cos_angle;
-	cube->map->player->p_pos_y += (MINI_SCALE / FINE_RATIO) * sin_angle;
+    angle_rad = (cube->map->player->p_pos_a - 90) * M_PI / 180.0;
+    sin_angle = sin(angle_rad);
+    cos_angle = cos(angle_rad);
+    next_x = cube->map->player->p_pos_x + (radius / FINE_RATIO) * cos_angle;
+    next_y = cube->map->player->p_pos_y + (radius / FINE_RATIO) * sin_angle;
+    if (cube->map->m_wall[next_y][next_x] == 1)
+        return;
+    cube->map->player->p_pos_x += (MINI_SCALE / FINE_RATIO) * cos_angle;
+    cube->map->player->p_pos_y += (MINI_SCALE / FINE_RATIO) * sin_angle;
 }
+
 
 void	move_back(t_cube *cube)
 {

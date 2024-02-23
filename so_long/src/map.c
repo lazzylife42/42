@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 20:47:56 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/02 16:48:58 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:20:11 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	map_renderer_init(t_data *data, char **argv)
 	if (fd == -1)
 	{
 		write(2, "Error\nLa carte est introvable.\n", 31);
-		exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE); 
 	}
 	else if (ft_strncmp(".ber", argv[1] + (ft_strlen(argv[1]) - 4), 4) != 0)
 	{
