@@ -1,4 +1,4 @@
-.vscode/settings.json
+.git
 *.o
-cube
 *.a
+.DS_Store
