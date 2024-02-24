@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:26 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 03:45:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 04:15:51 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    key_init(t_cube *cube)
 	cube->key->k_down = false;
 	cube->key->k_right = false;
 	cube->key->k_enter = false;
-	cube->map->mini_map = true;
+	cube->map->mini_map = false;
 }
 
 void    update_player(t_cube *cube)
@@ -33,22 +33,22 @@ void    update_player(t_cube *cube)
 	if (cube->key->k_esc == true)
 		on_destroy(cube);
 	if (cube->key->k_a == true)
-		rotate_left(cube);
+		move_left(cube);
 	else if (cube->key->k_d == true)
-		rotate_right(cube);
+		move_right(cube);
 	if (cube->key->k_w == true)
 		move_front(cube);
 	else if (cube->key->k_s == true)
 		move_back(cube);
 	if (cube->key->k_left == true)
-		move_left(cube);
+		rotate_left(cube);
+	else if (cube->key->k_right == true)
+		rotate_right(cube);
 	if (cube->key->k_up == true)
 		rotate_up(cube);
 	else if (cube->key->k_down == true)
 		rotate_down(cube);
-	if (cube->key->k_right == true)
-		move_right(cube);
-	else if (cube->key->k_enter == true && cube->loadscreen == false)
+	if (cube->key->k_enter == true && cube->loadscreen == false)
 	{
 		cube->loadscreen = true;
 		load_transition(cube);

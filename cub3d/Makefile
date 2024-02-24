@@ -7,8 +7,8 @@ RM = rm -f
 OPTIONS = -Iminilibx/mlx -Ilibftsrc/
 INCLUDES = -I/opt/X11/include -Imlx
 
-SRC = src/main.c src/map.c src/map2.c src/player.c src/draw.c src/mouse.c \
-      src/game_map.c src/keybord.c src/loadscreen.c src/ray_casting.c \
+SRC = src/main.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
+      src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \
       
 	  
 SRC_BONUS = src/main_bonus.c
