@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 06:43:37 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 07:14:36 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ typedef struct s_raycast
 {
 	int			color;
 	int			side;
+	int			hit;
 	int			col; // Nouveau membre ajouté
 	double		ra;
 	double		p_walld;
@@ -164,7 +165,6 @@ typedef struct s_raycast
 	t_vecf		step;
 	t_vecf		sided;
 	t_vecf		delta;
-	int			hit;
 	double		camera_height;
 	double		wall_height;
 	double		wall_center;
@@ -183,6 +183,7 @@ typedef struct s_cube
 	t_key		*key;
 	t_img		*img;
 	t_load		*load;
+	t_raycast	*ray;
 	bool		loadscreen;
 }				t_cube;
 

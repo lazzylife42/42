@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 06:42:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 06:57:35 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 07:14:20 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ t_raycast	initialize_raycast(t_cube *cube, int col)
 
 void	perform_dda(t_cube *cube, t_raycast *ray)
 {
-	int	hit;
-
-	hit = 0;
-	while (!hit)
+	cube->ray->hit = 0;
+	while (!cube->ray->hit)
 	{
 		if (ray->sided.x < ray->sided.y)
 		{
@@ -66,7 +64,7 @@ void	perform_dda(t_cube *cube, t_raycast *ray)
 			ray->side = 1;
 		}
 		if (cube->map->m_mini_map[(int)ray->map.y][(int)ray->map.x] == '1')
-			hit = 1;
+			cube->ray->hit = 1;
 	}
 }
 

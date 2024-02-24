@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 05:16:13 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 06:16:19 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 07:05:11 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,12 @@ int	init_all(t_cube *cube, char **argv)
 	cube->win_ptr = mlx_new_window(cube->mlx_ptr, X_RES, Y_RES, "Cub3d");
 	cube->loadscreen = false;
 	cube->load = malloc(sizeof(t_load));
-	load_melt_textures_a(cube);
-	load_melt_textures_b(cube);
+	load_melt_textures(cube);
 	return (1);
 }
 
 int	game_loop(t_cube *cube)
 {
-	fps_count();
 	if (cube->loadscreen == false)
 	{
 		loadscreen(cube);
