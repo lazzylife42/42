@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 04:13:59 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 05:29:08 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,6 @@ typedef struct s_key
 
 typedef struct s_cube
 {
-	// int			*textures[6];
 	void		*mlx_ptr;
 	void		*win_ptr;
 	int			width;
@@ -176,6 +175,7 @@ void			loadscreen(t_cube *cube);
 void			load_transition(t_cube *cube);
 void			load_melt_textures_a(t_cube *cube);
 void			load_melt_textures_b(t_cube *cube);
+void			load_melt_textures(t_cube *cube);
 /*		INIT			*/
 
 void			key_init(t_cube *cube);

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:02:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 01:48:10 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 06:22:28 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,4 @@
 
 void	init_textures(t_cube *cube)
 {
-	cube->img->text[0] = mlx_xpm_file_to_image(cube->mlx_ptr, "xpm/textures/redbrick.xpm",
-		&cube->img->t_width, &cube->img->t_height);
 }
-

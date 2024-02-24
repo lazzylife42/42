@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:49:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 01:47:32 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 06:21:04 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_wall(t_cube *cube)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < Y_RES)
@@ -33,13 +33,12 @@ void	print_wall(t_cube *cube)
 
 void	init_player(t_cube *cube)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
 	y = 0;
 	cube->map->player = (t_player *)malloc(sizeof(t_player));
 	init_wall(cube);
-	// print_wall(cube);
 	while (y < cube->map->m_height)
 	{
 		x = 0;
@@ -49,7 +48,7 @@ void	init_player(t_cube *cube)
 			{
 				cube->map->player->p_pos_x = x * MINI_SCALE + (MINI_SCALE / 2);
 				cube->map->player->p_pos_y = y * MINI_SCALE + (MINI_SCALE / 2);
-				cube->map->player->p_pos_a = 0; //gérer ici l'orientation
+				cube->map->player->p_pos_a = 0;
 				cube->map->player->offset = 0;
 				return ;
 			}
@@ -61,9 +60,9 @@ void	init_player(t_cube *cube)
 
 static void	fill_m_wall(t_cube *cube, int px, int py)
 {
-	int x;
-	int y;
-	
+	int	x;
+	int	y;
+
 	y = 0;
 	while (y < MINI_SCALE)
 	{
@@ -79,32 +78,24 @@ static void	fill_m_wall(t_cube *cube, int px, int py)
 
 void	init_wall(t_cube *cube)
 {
-	int x;
+	int	x;
 	int	y;
 
-	y = 0;
-	while (y < Y_RES)
+	y = -1;
+	while (++y < Y_RES)
 	{
-		x = 0;
-		while (x < X_RES)
-		{
+		x = -1;
+		while (++x < X_RES)
 			cube->map->m_wall[y][x] = 0;
-			x++;
-		}
-		y++;
 	}
-	y = 0;
-	while (y < cube->map->m_height)
+	y = -1;
+	while (++y < cube->map->m_height)
 	{
-		x = 0;
-		while (x < cube->map->m_width)
+		x = -1;
+		while (++x < cube->map->m_width)
 		{
 			if (cube->map->m_mini_map[y][x] == '1')
 				fill_m_wall(cube, x * MINI_SCALE, y * MINI_SCALE);
-			x++;
 		}
-		y++;
 	}
 }
-
-

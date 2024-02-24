@@ -1,16 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 06:08:30 by smonte-e         ###   ########.fr       */
+/*   Created: 2024/02/24 05:16:13 by smonte-e          #+#    #+#             */
+/*   Updated: 2024/02/24 06:16:19 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <time.h>
+
+static int		g_frame_count = 0;
+static time_t	g_start_time = 0;
+
+void	fps_count(void)
+{
+	time_t	current_time;
+	double	elapsed_time;
+	double	fps;
+
+	if (g_start_time == 0)
+		g_start_time = time(NULL);
+	g_frame_count++;
+	current_time = time(NULL);
+	elapsed_time = difftime(current_time, g_start_time);
+	if (elapsed_time >= 1)
+	{
+		fps = g_frame_count / elapsed_time;
+		printf("FPS: %.2f\n", fps);
+		g_frame_count = 0;
+		g_start_time = current_time;
+	}
+}
 
 int	on_destroy(t_cube *cube)
 {
@@ -34,12 +58,14 @@ int	init_all(t_cube *cube, char **argv)
 	cube->win_ptr = mlx_new_window(cube->mlx_ptr, X_RES, Y_RES, "Cub3d");
 	cube->loadscreen = false;
 	cube->load = malloc(sizeof(t_load));
-	load_melt_textures(cube);
+	load_melt_textures_a(cube);
+	load_melt_textures_b(cube);
 	return (1);
 }
 
 int	game_loop(t_cube *cube)
 {
+	fps_count();
 	if (cube->loadscreen == false)
 	{
 		loadscreen(cube);

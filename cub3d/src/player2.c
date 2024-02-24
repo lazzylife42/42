@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 04:07:34 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 04:07:59 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 06:15:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	move_front(t_cube *cube)
 	next_x = cube->map->player->p_pos_x + (MINI_SCALE / FINE_RATIO) * cos_angle;
 	next_y = cube->map->player->p_pos_y + (MINI_SCALE / FINE_RATIO) * sin_angle;
 	if (cube->map->m_wall[next_y][next_x] != 1)
-    {
-        cube->map->player->p_pos_y += (MINI_SCALE / FINE_RATIO) * sin_angle;
-        cube->map->player->p_pos_x += (MINI_SCALE / FINE_RATIO) * cos_angle;
-    }
+	{
+		cube->map->player->p_pos_y += (MINI_SCALE / FINE_RATIO) * sin_angle;
+		cube->map->player->p_pos_x += (MINI_SCALE / FINE_RATIO) * cos_angle;
+	}
 }
 
 void	move_back(t_cube *cube)
@@ -46,10 +46,10 @@ void	move_back(t_cube *cube)
 	next_x = (MINI_SCALE / FINE_RATIO) * cos_angle + cube->map->player->p_pos_x;
 	next_y = (MINI_SCALE / FINE_RATIO) * sin_angle + cube->map->player->p_pos_y;
 	if (cube->map->m_wall[next_y][next_x] != 1)
-    {
-        cube->map->player->p_pos_y += (MINI_SCALE / FINE_RATIO) * sin_angle;
-        cube->map->player->p_pos_x += (MINI_SCALE / FINE_RATIO) * cos_angle;
-    }
+	{
+		cube->map->player->p_pos_y += (MINI_SCALE / FINE_RATIO) * sin_angle;
+		cube->map->player->p_pos_x += (MINI_SCALE / FINE_RATIO) * cos_angle;
+	}
 }
 
 void	move_left(t_cube *cube)

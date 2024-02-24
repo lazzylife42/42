@@ -6,16 +6,16 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:26 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 04:15:51 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 05:25:35 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    key_init(t_cube *cube)
+void	key_init(t_cube *cube)
 {
-    cube->key = malloc(sizeof(t_key));
-    cube->key->k_esc = false;
+	cube->key = malloc(sizeof(t_key));
+	cube->key->k_esc = false;
 	cube->key->k_a = false;
 	cube->key->k_d = false;
 	cube->key->k_w = false;
@@ -28,8 +28,22 @@ void    key_init(t_cube *cube)
 	cube->map->mini_map = false;
 }
 
-void    update_player(t_cube *cube)
+static void	menu(t_cube *cube)
 {
+	if (cube->key->k_enter == true && cube->loadscreen == false)
+	{
+		cube->loadscreen = true;
+		load_transition(cube);
+	}
+	if (cube->key->k_m == true && cube->map->mini_map == true)
+		cube->map->mini_map = false;
+	else if (cube->key->k_m == true && cube->map->mini_map == false)
+		cube->map->mini_map = true;
+}
+
+void	update_player(t_cube *cube)
+{
+	menu(cube);
 	if (cube->key->k_esc == true)
 		on_destroy(cube);
 	if (cube->key->k_a == true)
@@ -48,18 +62,9 @@ void    update_player(t_cube *cube)
 		rotate_up(cube);
 	else if (cube->key->k_down == true)
 		rotate_down(cube);
-	if (cube->key->k_enter == true && cube->loadscreen == false)
-	{
-		cube->loadscreen = true;
-		load_transition(cube);
-	}
-	if (cube->key->k_m == true && cube->map->mini_map == true)
-		cube->map->mini_map = false;
-	else if (cube->key->k_m == true && cube->map->mini_map == false)
-		cube->map->mini_map = true;
 }
 
-int keypress(int keysym, t_cube *cube)
+int	keypress(int keysym, t_cube *cube)
 {
 	if (keysym == K_ESC)
 		cube->key->k_esc = true;
@@ -83,11 +88,10 @@ int keypress(int keysym, t_cube *cube)
 		cube->key->k_right = true;
 	else if (keysym == K_M)
 		cube->key->k_m = true;
-	// printf("%d\n", keysym);
 	return (0);
 }
 
-int keyrelease(int keysym, t_cube *cube)
+int	keyrelease(int keysym, t_cube *cube)
 {
 	if (keysym == K_ESC)
 		cube->key->k_esc = false;
