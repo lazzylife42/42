@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 05:29:08 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 06:43:37 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@
 # define X_RES 1280
 # define Y_RES 720
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
-# define FINE_RATIO 3 // ajuste la vitesse de déplacement
-# define ROT_RATIO 9 // vitesse de rotation en Y
-# define X_RATIO 10 // vitesse de rotation en X
+# define FINE_RATIO 3  // ajuste la vitesse de déplacement
+# define ROT_RATIO 9   // vitesse de rotation en Y
+# define X_RATIO 10    // vitesse de rotation en X
 # define M_SENSITIVITY 0.2
 
 # define K_ESC 53
@@ -78,8 +78,8 @@ typedef struct s_vec
 
 typedef struct s_vecf
 {
-	float			x;
-	float			y;
+	float		x;
+	float		y;
 }				t_vecf;
 
 typedef struct s_error
@@ -150,6 +150,28 @@ typedef struct s_key
 	bool		k_enter;
 	bool		k_m;
 }				t_key;
+
+typedef struct s_raycast
+{
+	int			color;
+	int			side;
+	int			col; // Nouveau membre ajouté
+	double		ra;
+	double		p_walld;
+	double		ratio;
+	t_vecf		map;
+	t_vecf		dir;
+	t_vecf		step;
+	t_vecf		sided;
+	t_vecf		delta;
+	int			hit;
+	double		camera_height;
+	double		wall_height;
+	double		wall_center;
+	double		wall_top;
+	double		wall_bottom;
+}				t_raycast;
+
 
 typedef struct s_cube
 {
