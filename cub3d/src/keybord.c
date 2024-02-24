@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:26 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 01:47:36 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 03:45:56 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void    key_init(t_cube *cube)
 	cube->key->k_down = false;
 	cube->key->k_right = false;
 	cube->key->k_enter = false;
+	cube->map->mini_map = true;
 }
 
 void    update_player(t_cube *cube)
@@ -52,6 +53,10 @@ void    update_player(t_cube *cube)
 		cube->loadscreen = true;
 		load_transition(cube);
 	}
+	if (cube->key->k_m == true && cube->map->mini_map == true)
+		cube->map->mini_map = false;
+	else if (cube->key->k_m == true && cube->map->mini_map == false)
+		cube->map->mini_map = true;
 }
 
 int keypress(int keysym, t_cube *cube)
@@ -76,6 +81,9 @@ int keypress(int keysym, t_cube *cube)
 		cube->key->k_down = true;
 	else if (keysym == K_RIGHT_ARROW)
 		cube->key->k_right = true;
+	else if (keysym == K_M)
+		cube->key->k_m = true;
+	// printf("%d\n", keysym);
 	return (0);
 }
 
@@ -101,5 +109,7 @@ int keyrelease(int keysym, t_cube *cube)
 		cube->key->k_down = false;
 	else if (keysym == K_RIGHT_ARROW)
 		cube->key->k_right = false;
+	else if (keysym == K_M)
+		cube->key->k_m = false;
 	return (0);
 }

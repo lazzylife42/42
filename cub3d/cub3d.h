@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 03:15:34 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 03:44:20 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 # define K_A 0
 # define K_S 1
 # define K_D 2
+# define K_M 46
 
 # define TEX_NORTH "xpm/tile02.xpm"
 # define TEX_WEST "xpm/tile02.xpm"
@@ -104,7 +105,7 @@ typedef struct s_map
 {
 	int			m_width;
 	int			m_height;
-	bool		m_display;
+	bool		mini_map;
 	int			m_wall[X_RES][Y_RES];
 	char		**m_mini_map;
 	t_player	*player;
