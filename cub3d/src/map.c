@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:57:31 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/15 12:36:51 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 01:47:53 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	map_dim(int fd, t_cube *cube)
 	max_width = 0;
 	cube->map->m_width = 0;
 	cube->map->m_height = 0;
-	while (TRUE)
+	while (true)
 	{
 		buff = get_next_line(fd);
 		if (buff == NULL)

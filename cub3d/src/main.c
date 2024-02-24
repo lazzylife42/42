@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/22 16:13:44 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 03:08:40 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 #include <time.h>
 
@@ -59,6 +59,8 @@ int	game_loop(t_cube *cube)
 		cube->img->addr = mlx_get_data_addr(cube->img->img,
 				&cube->img->bits_per_pixel, &cube->img->line_length,
 				&cube->img->endian);
+		mlx_mouse_hide();
+		handle_mouse(cube);
 		update_player(cube);
 		map_renderer(cube);
 		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0,

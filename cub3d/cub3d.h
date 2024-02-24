@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 00:13:45 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/24 03:15:34 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@
 # define Y_RES 720
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
 # define FINE_RATIO 3 // ajuste la vitesse de déplacement
-# define ROT_RATIO 3 // vitesse de rotation en Y
-# define X_RATIO 5 // vitesse de rotation en X
+# define ROT_RATIO 9 // vitesse de rotation en Y
+# define X_RATIO 10 // vitesse de rotation en X
+# define M_SENSITIVITY 0.2
 
 # define K_ESC 53
 # define K_ENTER 36
@@ -168,6 +169,7 @@ typedef struct s_cube
 int				on_destroy(t_cube *cube);
 int				keypress(int keysym, t_cube *cube);
 int				keyrelease(int keysym, t_cube *cube);
+void			handle_mouse(t_cube *cube);
 void			update_player(t_cube *cube);
 void			loadscreen(t_cube *cube);
 void			load_transition(t_cube *cube);
