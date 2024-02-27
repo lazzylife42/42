@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 17:07:23 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 06:09:00 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/26 00:09:45 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ void	load_transition(t_cube *cube)
 		mlx_do_sync(cube->mlx_ptr);
 		frame_index++;
 	}
+	mlx_mouse_move(cube->win_ptr, X_RES / 2, Y_RES / 2);
 }

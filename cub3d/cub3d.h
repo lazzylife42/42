@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 07:14:36 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/26 00:12:41 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ typedef struct s_raycast
 	int			color;
 	int			side;
 	int			hit;
-	int			col; // Nouveau membre ajouté
+	int			col;
 	double		ra;
 	double		p_walld;
 	double		ratio;
