@@ -5,90 +5,115 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 16:35:00 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/23 16:16:41 by smonte-e         ###   ########.fr       */
+/*   Created: 2024/02/24 06:42:02 by smonte-e          #+#    #+#             */
+/*   Updated: 2024/02/28 17:50:22 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void draw_wall(t_cube *cube)
+t_raycast	initialize_raycast(t_cube *cube, int col)
 {
-    int color;
-    int side;
-    int col;
-    int hit;
-    double ra;
-    double p_walld;
-    double ratio;
-    t_vecf map;
-    t_vecf dir;
-    t_vecf step;
-    t_vecf sided;
-    t_vecf delta;
+	t_raycast	ray;
 
-    col = 0;
-    ra = (cube->map->player->p_pos_a - 90) * M_PI / 180;
-    while (col < X_RES)
-    {
-        ratio = ((col * 2) / (double)X_RES) - 1;
-        dir.x = (cos(ra + M_PI_2) * ratio) + cos(ra);
-        dir.y = (sin(ra + M_PI_2) * ratio) + sin(ra);
-        map.x = floor(cube->map->player->p_pos_x / MINI_SCALE);
-        map.y = floor(cube->map->player->p_pos_y / MINI_SCALE);
-        delta.x = fabs(1 / dir.x);
-        delta.y = fabs(1 / dir.y);
-        if (dir.x < 0)
-        {
-            step.x = -1;
-            sided.x = (((double)cube->map->player->p_pos_x / (double)MINI_SCALE) - map.x) * delta.x;
-        }
-        else
-        {
-            step.x = 1;
-            sided.x = (map.x + 1 - ((double)cube->map->player->p_pos_x / (double)MINI_SCALE)) * delta.x;
-        }
-        if (dir.y < 0)
-        {
-            step.y = -1;
-            sided.y = (((double)cube->map->player->p_pos_y / (double)MINI_SCALE) - map.y) * delta.y;
-        }
-        else
-        {
-            step.y = 1;
-            sided.y = (map.y + 1 - ((double)cube->map->player->p_pos_y / (double)MINI_SCALE)) * delta.y;
-        }
-        hit = 0;
-        while (!hit)
-        {
-            if (sided.x < sided.y)
-            {
-                sided.x += delta.x;
-                map.x += step.x;
-                side = 0;
-            }
-            else
-            {
-                sided.y += delta.y;
-                map.y += step.y;
-                side = 1;
-            }
-            if (cube->map->m_mini_map[(int)map.y][(int)map.x] == '1')
-                hit = 1;
-        }
-		if (side == 0)
-			p_walld = (sided.x  - delta.x);
-		else
-			p_walld = (sided.y  - delta.y);
-        if (side == 0)
-            color = 0x808080;
-        else
-            color = 0x808080 / 2;
-        double wall_height = Y_RES / p_walld;
-        double wall_top = (Y_RES / 2) - (wall_height / 2) - cube->map->player->offset;
-        double wall_bottom = (Y_RES / 2) + (wall_height / 2) - cube->map->player->offset;
-        draw_line(cube->img, (t_vec){col, wall_top}, (t_vec){col, wall_bottom}, color);
-        col++;
-    }
+	ray.col = col;
+	ray.ra = (cube->map->player->p_pos_a - 90) * M_PI / 180;
+	ray.ratio = ((col * 2) / (double)X_RES) - 1;
+	ray.dir.x = (cos(ray.ra + M_PI_2) * ray.ratio) + cos(ray.ra);
+	ray.dir.y = (sin(ray.ra + M_PI_2) * ray.ratio) + sin(ray.ra);
+	ray.map.x = floor(cube->map->player->p_pos_x / MINI_SCALE);
+	ray.map.y = floor(cube->map->player->p_pos_y / MINI_SCALE);
+	ray.delta.x = fabs(1 / ray.dir.x);
+	ray.delta.y = fabs(1 / ray.dir.y);
+	if (ray.dir.x < 0)
+		ray.sided.x = ((cube->map->player->p_pos_x / (double)MINI_SCALE
+					- ray.map.x) * ray.delta.x);
+	else
+		ray.sided.x = ((ray.map.x + 1.0 - cube->map->player->p_pos_x
+					/ (double)MINI_SCALE) * ray.delta.x);
+	if (ray.dir.y < 0)
+		ray.sided.y = ((cube->map->player->p_pos_y / (double)MINI_SCALE
+					- ray.map.y) * ray.delta.y);
+	else
+		ray.sided.y = ((ray.map.y + 1.0 - cube->map->player->p_pos_y
+					/ (double)MINI_SCALE) * ray.delta.y);
+	return (ray);
 }
 
+void	perform_dda(t_cube *cube, t_raycast *ray)
+{
+	cube->ray->hit = 0;
+	while (!cube->ray->hit)
+	{
+		if (ray->sided.x < ray->sided.y)
+		{
+			ray->sided.x += ray->delta.x;
+			if (ray->dir.x < 0)
+				ray->map.x += -1;
+			else
+				ray->map.x += 1;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->sided.y += ray->delta.y;
+			if (ray->dir.y < 0)
+				ray->map.y += -1;
+			else
+				ray->map.y += 1;
+			ray->side = 1;
+		}
+		if (cube->map->m_mini_map[(int)ray->map.y][(int)ray->map.x] == '1')
+			cube->ray->hit = 1;
+	}
+}
+
+void	set_wall_parameters(t_raycast *ray, t_cube *cube, double camera_height)
+{
+	double	wall_height;
+	double	wall_center;
+
+	if (ray->side == 0)
+		ray->p_walld = (ray->sided.x - ray->delta.x);
+	else
+		ray->p_walld = (ray->sided.y - ray->delta.y);
+	if (ray->side == 0)
+		ray->color = 0x808080;
+	else
+		ray->color = 0x808080 / 2;
+	wall_height = Y_RES / ray->p_walld;
+	wall_center = (Y_RES / 2) - cube->map->player->offset;
+	ray->wall_top = wall_center - (wall_height / 2) - (camera_height
+			- cube->map->player->offset);
+	ray->wall_bottom = wall_center + (wall_height / 2) - (camera_height
+			- cube->map->player->offset);
+	if (ray->wall_top < 0)
+		ray->wall_top = 0;
+	if (ray->wall_bottom >= Y_RES)
+		ray->wall_bottom = Y_RES - 1;
+}
+
+void	render_wall(t_cube *cube, t_raycast *ray)
+{
+	double	camera_height;
+
+	camera_height = cube->map->player->offset;
+	set_wall_parameters(ray, cube, camera_height);
+	draw_line(cube->img, (t_vec){ray->col, ray->wall_top}, (t_vec){ray->col,
+		ray->wall_bottom}, ray->color);
+}
+
+void	draw_wall(t_cube *cube)
+{
+	int			col;
+	t_raycast	ray;
+
+	col = 0;
+	while (col < X_RES)
+	{
+		ray = initialize_raycast(cube, col);
+		perform_dda(cube, &ray);
+		render_wall(cube, &ray);
+		col++;
+	}
+}

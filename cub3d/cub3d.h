@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/23 15:53:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:49:43 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,14 @@
 # define CYA "\033[1;36m"
 # define WHT "\033[1;37m"
 
-# define TRUE 1
-# define FALSE 0
-# define DEBUG 0
 # define MAP_LINE 8
 # define X_RES 1280
 # define Y_RES 720
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
-# define FINE_RATIO 3
-# define ROT_RATIO 5
-# define PLAYER_RADIUS 8
+# define FINE_RATIO 3  // ajuste la vitesse de déplacement
+# define ROT_RATIO 9   // vitesse de rotation en Y
+# define X_RATIO 10    // vitesse de rotation en X
+# define M_SENSITIVITY 0.2
 
 # define K_ESC 53
 # define K_ENTER 36
@@ -57,6 +55,7 @@
 # define K_A 0
 # define K_S 1
 # define K_D 2
+# define K_M 46
 
 # define TEX_NORTH "xpm/tile02.xpm"
 # define TEX_WEST "xpm/tile02.xpm"
@@ -79,8 +78,8 @@ typedef struct s_vec
 
 typedef struct s_vecf
 {
-	float			x;
-	float			y;
+	float		x;
+	float		y;
 }				t_vecf;
 
 typedef struct s_error
@@ -106,7 +105,7 @@ typedef struct s_map
 {
 	int			m_width;
 	int			m_height;
-	bool		m_display;
+	bool		mini_map;
 	int			m_wall[X_RES][Y_RES];
 	char		**m_mini_map;
 	t_player	*player;
@@ -152,9 +151,30 @@ typedef struct s_key
 	bool		k_m;
 }				t_key;
 
+typedef struct s_raycast
+{
+	int			color;
+	int			side;
+	int			hit;
+	int			col;
+	double		ra;
+	double		p_walld;
+	double		ratio;
+	t_vecf		map;
+	t_vecf		dir;
+	t_vecf		step;
+	t_vecf		sided;
+	t_vecf		delta;
+	double		camera_height;
+	double		wall_height;
+	double		wall_center;
+	double		wall_top;
+	double		wall_bottom;
+}				t_raycast;
+
+
 typedef struct s_cube
 {
-	// int			*textures[6];
 	void		*mlx_ptr;
 	void		*win_ptr;
 	int			width;
@@ -163,6 +183,7 @@ typedef struct s_cube
 	t_key		*key;
 	t_img		*img;
 	t_load		*load;
+	t_raycast	*ray;
 	bool		loadscreen;
 }				t_cube;
 
@@ -171,11 +192,13 @@ typedef struct s_cube
 int				on_destroy(t_cube *cube);
 int				keypress(int keysym, t_cube *cube);
 int				keyrelease(int keysym, t_cube *cube);
+void			handle_mouse(t_cube *cube);
 void			update_player(t_cube *cube);
 void			loadscreen(t_cube *cube);
 void			load_transition(t_cube *cube);
 void			load_melt_textures_a(t_cube *cube);
 void			load_melt_textures_b(t_cube *cube);
+void			load_melt_textures(t_cube *cube);
 /*		INIT			*/
 
 void			key_init(t_cube *cube);

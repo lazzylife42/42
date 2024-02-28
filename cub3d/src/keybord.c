@@ -6,16 +6,16 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:26 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/23 15:53:46 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:50:04 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    key_init(t_cube *cube)
+void	key_init(t_cube *cube)
 {
-    cube->key = malloc(sizeof(t_key));
-    cube->key->k_esc = false;
+	cube->key = malloc(sizeof(t_key));
+	cube->key->k_esc = false;
 	cube->key->k_a = false;
 	cube->key->k_d = false;
 	cube->key->k_w = false;
@@ -25,36 +25,46 @@ void    key_init(t_cube *cube)
 	cube->key->k_down = false;
 	cube->key->k_right = false;
 	cube->key->k_enter = false;
+	cube->map->mini_map = false;
 }
 
-void    update_player(t_cube *cube)
+static void	menu(t_cube *cube)
 {
-	if (cube->key->k_esc == true)
-		on_destroy(cube);
-	else if (cube->key->k_a == true)
-		rotate_left(cube);
-	else if (cube->key->k_d == true)
-		rotate_right(cube);
-	else if (cube->key->k_w == true)
-		move_front(cube);
-	else if (cube->key->k_s == true)
-		move_back(cube);
-	else if (cube->key->k_left == true)
-		move_left(cube);
-	else if (cube->key->k_up == true)
-		rotate_up(cube);
-	else if (cube->key->k_down == true)
-		rotate_down(cube);
-	else if (cube->key->k_right == true)
-		move_right(cube);
-	else if (cube->key->k_enter == true && cube->loadscreen == false)
+	if (cube->key->k_enter == true && cube->loadscreen == false)
 	{
 		cube->loadscreen = true;
 		load_transition(cube);
 	}
+	if (cube->key->k_m == true && cube->map->mini_map == true)
+		cube->map->mini_map = false;
+	else if (cube->key->k_m == true && cube->map->mini_map == false)
+		cube->map->mini_map = true;
 }
 
-int keypress(int keysym, t_cube *cube)
+void	update_player(t_cube *cube)
+{
+	menu(cube);
+	if (cube->key->k_esc == true)
+		on_destroy(cube);
+	if (cube->key->k_a == true)
+		move_left(cube);
+	else if (cube->key->k_d == true)
+		move_right(cube);
+	if (cube->key->k_w == true)
+		move_front(cube);
+	else if (cube->key->k_s == true)
+		move_back(cube);
+	if (cube->key->k_left == true)
+		rotate_left(cube);
+	else if (cube->key->k_right == true)
+		rotate_right(cube);
+	if (cube->key->k_up == true)
+		rotate_up(cube);
+	else if (cube->key->k_down == true)
+		rotate_down(cube);
+}
+
+int	keypress(int keysym, t_cube *cube)
 {
 	if (keysym == K_ESC)
 		cube->key->k_esc = true;
@@ -76,10 +86,12 @@ int keypress(int keysym, t_cube *cube)
 		cube->key->k_down = true;
 	else if (keysym == K_RIGHT_ARROW)
 		cube->key->k_right = true;
+	else if (keysym == K_M)
+		cube->key->k_m = true;
 	return (0);
 }
 
-int keyrelease(int keysym, t_cube *cube)
+int	keyrelease(int keysym, t_cube *cube)
 {
 	if (keysym == K_ESC)
 		cube->key->k_esc = false;
@@ -101,5 +113,7 @@ int keyrelease(int keysym, t_cube *cube)
 		cube->key->k_down = false;
 	else if (keysym == K_RIGHT_ARROW)
 		cube->key->k_right = false;
+	else if (keysym == K_M)
+		cube->key->k_m = false;
 	return (0);
 }

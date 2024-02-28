@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/15 22:39:15 by smonte-e          #+#    #+#              #
-#    Updated: 2024/02/22 13:29:12 by smonte-e         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = cube
 DIR_SRC = src/
 CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
@@ -19,9 +7,12 @@ RM = rm -f
 OPTIONS = -Iminilibx/mlx -Ilibftsrc/
 INCLUDES = -I/opt/X11/include -Imlx
 
-SRC = src/main.c src/map.c src/map2.c src/player.c src/draw.c \
-      src/game_map.c src/keybord.c src/loadscreen.c src/ray_casting.c
-SRC_BONUS = src/main_bonus.c
+SRC = src/main.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
+      src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \
+      
+	  
+SRC_BONUS = src/main_bonus.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
+      src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \
 
 OBJS = $(SRC:.c=.o)
 
@@ -39,10 +30,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@echo "$(GREEN)Compiling $(NAME)...$(NC)"
 	$(MAKE) -sC $(LIBFT)
-	@echo "$(GREEN)Making libft...$(NC)"
 	$(MAKE) -sC $(MLX)
-	@echo "$(GREEN)Making minilibx...$(NC)"
-	gcc $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	gcc $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(INCLUDES)
 
 %.o : %.c
 	@clear
