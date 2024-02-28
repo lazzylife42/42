@@ -2,7 +2,7 @@ NAME = cube
 DIR_SRC = src/
 CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 LIBFT = libft
-MLX = minilibx2
+MLX = minilibx
 RM = rm -f
 OPTIONS = -Iminilibx/mlx -Ilibftsrc/
 INCLUDES = -I/opt/X11/include -Imlx
