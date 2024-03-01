@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 05:16:13 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 07:05:11 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:12:58 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ int	init_all(t_cube *cube, char **argv)
 	map_renderer_init(cube, argv);
 	init_player(cube);
 	key_init(cube);
+	cube->ray = (t_raycast *)malloc(sizeof(t_raycast));
+	if (!cube->ray)
+		return (0);
 	cube->img = (t_img *)malloc(sizeof(t_img));
 	if (!cube->img)
 		return (0);
@@ -64,6 +67,7 @@ int	init_all(t_cube *cube, char **argv)
 
 int	game_loop(t_cube *cube)
 {
+	fps_count();
 	if (cube->loadscreen == false)
 	{
 		loadscreen(cube);

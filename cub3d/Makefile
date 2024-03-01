@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/03/01 17:12:16 by smonte-e          #+#    #+#              #
+#    Updated: 2024/03/01 17:12:26 by smonte-e         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = cube
 DIR_SRC = src/
 CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
@@ -64,7 +76,7 @@ clean:
 	@echo "$(RED)Cleaning...$(NC)"
 	$(MAKE) -sC $(LIBFT) clean
 	$(MAKE) -sC $(MLX) clean
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
 	@echo "$(RED)Fcleaning...$(NC)"
