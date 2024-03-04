@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/28 17:49:43 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:06:55 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define Y_RES 720
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
 # define FINE_RATIO 3  // ajuste la vitesse de déplacement
-# define ROT_RATIO 9   // vitesse de rotation en Y
+# define ROT_RATIO 5   // vitesse de rotation en Y
 # define X_RATIO 10    // vitesse de rotation en X
 # define M_SENSITIVITY 0.2
 
@@ -136,6 +136,14 @@ typedef struct s_img
 	int			endian;
 }				t_img;
 
+typedef	struct s_text
+{
+	int			t_width;
+	int			t_height;
+	void		*t_img;
+}				t_text;
+
+
 typedef struct s_key
 {
 	bool		k_esc;
@@ -183,6 +191,7 @@ typedef struct s_cube
 	t_key		*key;
 	t_img		*img;
 	t_load		*load;
+	t_text		*text;
 	t_raycast	*ray;
 	bool		loadscreen;
 }				t_cube;
@@ -196,9 +205,8 @@ void			handle_mouse(t_cube *cube);
 void			update_player(t_cube *cube);
 void			loadscreen(t_cube *cube);
 void			load_transition(t_cube *cube);
-void			load_melt_textures_a(t_cube *cube);
-void			load_melt_textures_b(t_cube *cube);
 void			load_melt_textures(t_cube *cube);
+int				init_textures(t_cube *cube);
 /*		INIT			*/
 
 void			key_init(t_cube *cube);
@@ -223,9 +231,7 @@ void			rotate_left(t_cube *cube);
 void			rotate_right(t_cube *cube);
 void			rotate_up(t_cube *cube);
 void			rotate_down(t_cube *cube);
-void			move_up(t_cube *cube);
 void			move_left(t_cube *cube);
-void			move_down(t_cube *cube);
 void			move_right(t_cube *cube);
 
 /*		DRAW			*/

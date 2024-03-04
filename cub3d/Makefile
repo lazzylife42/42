@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/01 17:12:16 by smonte-e          #+#    #+#              #
-#    Updated: 2024/03/01 17:12:26 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/03/04 16:01:18 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ INCLUDES = -I/opt/X11/include -Imlx
 
 SRC = src/main.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
       src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \
-      
+      src/textures.c
 	  
 SRC_BONUS = src/main_bonus.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
       src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \

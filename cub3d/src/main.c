@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 07:13:24 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:06:39 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	init_all(t_cube *cube, char **argv)
 	cube->loadscreen = false;
 	cube->load = malloc(sizeof(t_load));
 	load_melt_textures(cube);
+	if (!init_textures(cube))
+		return (0);
 	return (1);
 }
 
@@ -53,7 +55,7 @@ int	game_loop(t_cube *cube)
 		cube->img->img = mlx_new_image(cube->mlx_ptr, X_RES, Y_RES);
 		cube->img->addr = mlx_get_data_addr(cube->img->img,
 				&cube->img->bits_per_pixel, &cube->img->line_length,
-				&cube->img->endian);
+				&cube->img->endian); 
 		mlx_mouse_hide();
 		handle_mouse(cube);
 		update_player(cube);
