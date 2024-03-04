@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 07:13:24 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:44:12 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	init_all(t_cube *cube, char **argv)
 	cube->loadscreen = false;
 	cube->load = malloc(sizeof(t_load));
 	load_melt_textures(cube);
+	init_textures(cube);
 	return (1);
 }
 
@@ -60,6 +61,9 @@ int	game_loop(t_cube *cube)
 		map_renderer(cube);
 		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0,
 			0);
+		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[0]->img, 0,
+			0);
+		get_texture_color(cube, 0, (t_vec){0, 0});
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/28 17:49:43 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:42:59 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,6 @@
 # define K_S 1
 # define K_D 2
 # define K_M 46
-
-# define TEX_NORTH "xpm/tile02.xpm"
-# define TEX_WEST "xpm/tile02.xpm"
-# define TEX_SOUTH "xpm/tile02.xpm"
-# define TEX_EAST "xpm/tile02.xpm"
-# define TEX_WALL "xpm/tile02.xpm"
-# define TEX_FLOOR "xpm/tile01.xpm"
-# define TEX_CEILING "xpm/tile01.xpm"
-# define TEX_PLAYER "xpm/kaaris.xpm"
 
 # define LOADSCREEN "xpm/loadscreen.xpm"
 
@@ -172,6 +163,13 @@ typedef struct s_raycast
 	double		wall_bottom;
 }				t_raycast;
 
+typedef struct s_text
+{
+	int			t_width;
+	int			t_height;
+	t_img		*t_img[4];
+}				t_text;
+
 
 typedef struct s_cube
 {
@@ -182,6 +180,7 @@ typedef struct s_cube
 	t_map		*map;
 	t_key		*key;
 	t_img		*img;
+	t_text		*text;
 	t_load		*load;
 	t_raycast	*ray;
 	bool		loadscreen;
@@ -196,9 +195,8 @@ void			handle_mouse(t_cube *cube);
 void			update_player(t_cube *cube);
 void			loadscreen(t_cube *cube);
 void			load_transition(t_cube *cube);
-void			load_melt_textures_a(t_cube *cube);
-void			load_melt_textures_b(t_cube *cube);
 void			load_melt_textures(t_cube *cube);
+void			init_textures(t_cube *cube);
 /*		INIT			*/
 
 void			key_init(t_cube *cube);
@@ -223,9 +221,7 @@ void			rotate_left(t_cube *cube);
 void			rotate_right(t_cube *cube);
 void			rotate_up(t_cube *cube);
 void			rotate_down(t_cube *cube);
-void			move_up(t_cube *cube);
 void			move_left(t_cube *cube);
-void			move_down(t_cube *cube);
 void			move_right(t_cube *cube);
 
 /*		DRAW			*/
@@ -236,6 +232,7 @@ void			draw_square(t_img *img, t_vec pos, int size, int color);
 void			draw_rec(t_img *img, t_vec start, t_vec end, int color);
 void			draw_triangle(t_cube *cube);
 void			draw_wall(t_cube *cube);
+int				get_texture_color(t_cube *cube, int text_id, t_vec pos);
 
 #endif
 
