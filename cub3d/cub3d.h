@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/04 16:06:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:52:25 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,6 @@
 # define K_S 1
 # define K_D 2
 # define K_M 46
-
-# define TEX_NORTH "xpm/tile02.xpm"
-# define TEX_WEST "xpm/tile02.xpm"
-# define TEX_SOUTH "xpm/tile02.xpm"
-# define TEX_EAST "xpm/tile02.xpm"
-# define TEX_WALL "xpm/tile02.xpm"
-# define TEX_FLOOR "xpm/tile01.xpm"
-# define TEX_CEILING "xpm/tile01.xpm"
-# define TEX_PLAYER "xpm/kaaris.xpm"
 
 # define LOADSCREEN "xpm/loadscreen.xpm"
 
@@ -140,7 +131,7 @@ typedef	struct s_text
 {
 	int			t_width;
 	int			t_height;
-	void		*t_img;
+	t_img		*t_img;
 }				t_text;
 
 
@@ -179,7 +170,6 @@ typedef struct s_raycast
 	double		wall_top;
 	double		wall_bottom;
 }				t_raycast;
-
 
 typedef struct s_cube
 {
@@ -242,6 +232,7 @@ void			draw_square(t_img *img, t_vec pos, int size, int color);
 void			draw_rec(t_img *img, t_vec start, t_vec end, int color);
 void			draw_triangle(t_cube *cube);
 void			draw_wall(t_cube *cube);
+int				get_texture_color(t_cube *cube, int text_id, t_vec pos);
 
 #endif
 

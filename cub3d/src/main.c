@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/04 16:06:39 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:57:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,17 @@ int	game_loop(t_cube *cube)
 		handle_mouse(cube);
 		update_player(cube);
 		map_renderer(cube);
-		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0,
-			0);
+		// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0,
+		// 	0);
+		// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[0].img, 0,
+		// 	0);
+		// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[1].img, 300,
+		// 	0);
+		// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[2].img, 0,
+		// 	300);
+		// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[3].img, 300,
+		// 	300);
+		// get_texture_color(cube, 0, (t_vec){0, 0});
 	}
 	return (0);
 }
