@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:26 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/28 17:50:04 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:45:03 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	key_init(t_cube *cube)
 	cube->key->k_down = false;
 	cube->key->k_right = false;
 	cube->key->k_enter = false;
-	cube->map->mini_map = false;
+	cube->map->mini_map = true;
 }
 
 static void	menu(t_cube *cube)

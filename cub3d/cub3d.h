@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/04 23:31:26 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:37:47 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define MAP_LINE 8
 # define X_RES 1280
 # define Y_RES 720
+# define TEXTURES_NUM 5
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
 # define FINE_RATIO 3  // ajuste la vitesse de déplacement
 # define ROT_RATIO 5   // vitesse de rotation en Y
@@ -122,18 +123,19 @@ typedef struct s_img
 {
 	void		*img;
 	char		*addr;
+	int			width;
+	int			height;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
 }				t_img;
 
-typedef	struct s_text
+typedef struct s_text
 {
 	int			t_width;
 	int			t_height;
 	t_img		*t_img;
 }				t_text;
-
 
 typedef struct s_key
 {
@@ -231,10 +233,18 @@ void			draw_square(t_img *img, t_vec pos, int size, int color);
 void			draw_rec(t_img *img, t_vec start, t_vec end, int color);
 void			draw_triangle(t_cube *cube);
 void			draw_wall(t_cube *cube);
-void 			draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id);
+void			draw_textures(t_cube *cube, t_vec start, t_vec end,
+					int texture_id);
 int				get_texture_color(t_cube *cube, int text_id, t_vec pos);
 
+/*		RAYCAST		*/
 
+t_raycast		initialize_raycast(t_cube *cube, int col);
+void			perform_dda(t_cube *cube, t_raycast *ray);
+void			set_wall_parameters(t_raycast *ray, t_cube *cube,
+					double camera_height);
+void			render_wall(t_cube *cube, t_raycast *ray);
+void			draw_wall(t_cube *cube);
 
 #endif
 

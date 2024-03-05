@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:02:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/04 23:49:38 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:41:51 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,26 @@
 int	init_textures(t_cube *cube)
 {
 	int		i;
-	int		t_num;
 	char	*file_path;
 
 	i = 0;
-	t_num = 4;
 	cube->text = (t_text *)malloc(sizeof(t_text));
 	if (cube->text == NULL)
 		return (0);
-	cube->text->t_img = (t_img *)malloc(sizeof(t_img) * t_num);
+	cube->text->t_img = (t_img *)malloc(sizeof(t_img) * TEXTURES_NUM);
 	if (cube->text->t_img == NULL)
 	{
 		free(cube->text);
 		return (0);
 	}
-    cube->text->t_width = 300;
-    cube->text->t_height = 300;
-	while (i < t_num)
+    // cube->text->t_width = 300;
+    // cube->text->t_height = 300;
+	while (i < TEXTURES_NUM)
 	{
 		file_path = ft_strjoin("xpm/textures/text0", ft_itoa(i));
 		ft_strlcpy(ft_strrchr(file_path, '\0'), ".xpm", 5);
 		cube->text->t_img[i].img = mlx_xpm_file_to_image(cube->mlx_ptr,
-				file_path, &cube->text->t_width, &cube->text->t_height);
+				file_path, &cube->text->t_img[i].width, &cube->text->t_img[i].height);
         cube->text->t_img[i].addr = mlx_get_data_addr(cube->text->t_img[i].img, &cube->text->t_img[i].bits_per_pixel,
             &cube->text->t_img[i].line_length, &cube->text->t_img[i].endian);
 		if (cube->text->t_img[i].img == NULL)
@@ -60,18 +58,18 @@ int	get_texture_color(t_cube *cube, int text_id, t_vec pos)
     int     bpp;
     int     endian;
 
-    if (text_id < 0 || text_id >= 4 || cube->text[text_id].t_img == NULL)
+    if (text_id < 0 || text_id >= TEXTURES_NUM || cube->text->t_img[text_id].img == NULL)
         return (0);
     x = (int)pos.x;
     y = (int)pos.y;
-    if (x < 0 || x >= cube->text[text_id].t_width || y < 0 || y >= cube->text[text_id].t_height)
+    if (x < 0 || x >= cube->text->t_img[text_id].width || y < 0 || y >= cube->text->t_img[text_id].height)
         return (0);
-    bpp = cube->text[text_id].t_img->bits_per_pixel;
-    endian = cube->text[text_id].t_img->endian;
+    bpp = cube->text->t_img[text_id].bits_per_pixel;
+    endian = cube->text->t_img[text_id].endian;
 
-    int index = (y * cube->text[text_id].t_img->line_length) + (x * (bpp / 8));
+    int index = (y * cube->text->t_img[text_id].line_length) + (x * (bpp / 8));
 
-    color = *(unsigned int *)(cube->text[text_id].t_img->addr + index);
+    color = *(unsigned int *)(cube->text->t_img[text_id].addr + index);
 
     if (endian == 1) {
         color = ((color & 0xFF) << 24) | ((color & 0xFF00) << 8) | ((color >> 8) & 0xFF00) | ((color >> 24) & 0xFF);
@@ -95,54 +93,90 @@ int map_y(int value, int texture_height, int wall_height)
     return value * wall_height / texture_height;
 }
 
-void draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id)
+// void draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id)
+// {
+//     // Calcul de la hauteur de la ligne sur l'écran
+//     int lineHeight = abs(end.y - start.y);
+
+//     // Récupération des dimensions de la texture
+//     // int texture_width = cube->text[texture_id].t_width;
+//     int texture_height = cube->text[texture_id].t_height;
+
+//     // Calcul de l'incrément de la coordonnée de texture par pixel
+//     double step = 1.0 * texture_height / lineHeight;
+
+//     // Calcul de la position de départ de la texture en fonction de la position verticale sur l'écran
+//     double texture_pos = (start.y - Y_RES / 2 + lineHeight / 2) * step;
+
+//     // Parcours de chaque pixel de la ligne sur l'écran
+//     for (int y = start.y; y < end.y; y++)
+//     {
+//         // Conversion de la position de texture en entier et gestion du débordement
+//         int tex_y = (int)texture_pos & (texture_height - 1);
+
+//         // Mise à jour de la position de texture pour le prochain pixel
+//         texture_pos += step;
+
+//         // Obtention de la couleur de la texture à partir des coordonnées de texture
+//         int texture_color = get_texture_color(cube, texture_id, (t_vec){150, tex_y});
+
+//         // Dessin du pixel avec la couleur de la texture
+//         mlx_pixel(cube->img, (t_vec){start.x, y}, texture_color);
+//     }
+// }
+
+int calculate_tex_x(t_cube *cube, int texture_id)
 {
-    int dx = abs(end.x - start.x);
-    int dy = abs(end.y - start.y);
-    int sx = (start.x < end.x) ? 1 : -1;
-    int sy = (start.y < end.y) ? 1 : -1;
-    int err = dx - dy;
-    int e2;
-    int max_iter = dx + dy;
+    // Calcul de la position exacte du mur touché sur l'écran
+    double wallX;
+    if (cube->ray->side == 0) // Si le rayon a frappé une face est/ouest
+        wallX = cube->map->player->p_pos_y + cube->ray->p_walld * cube->ray->dir.y;
+    else // Si le rayon a frappé une face nord/sud
+        wallX = cube->map->player->p_pos_x + cube->ray->p_walld * cube->ray->dir.x;
+    wallX -= floor(wallX); // Retirer la partie entière pour obtenir la partie fractionnaire
 
-    int texture_width = cube->text[texture_id].t_width;
-    int texture_height = cube->text[texture_id].t_height;
-    int wall_width = abs(end.x - start.x);
-    int wall_height = abs(end.y - start.y);
+    // Calcul de la coordonnée x de la texture en fonction de la position exacte du mur touché
+    int tex_x = (int)(wallX * (double)cube->text->t_img[texture_id].width);
+    if ((cube->ray->side == 0 && cube->ray->dir.x > 0) || (cube->ray->side == 1 && cube->ray->dir.y < 0)) // Ajustement pour certaines orientations
+        tex_x = cube->text->t_img[texture_id].width - tex_x - 1;
 
-    while (max_iter--)
-    {
-        if (start.x >= 0 && start.x < X_RES && start.y >= 0 && start.y < Y_RES)
-        {
-            // Convertir les coordonnées de texture en fonction de la position dans la ligne
-            int texture_x = map_x(end.x - start.x, texture_width, wall_width);
-            int texture_y = map_y(end.y - start.y, texture_height, wall_height);
-
-            // Obtenir la couleur de la texture et dessiner le pixel
-            int texture_color = get_texture_color(cube, texture_id, (t_vec){texture_x, texture_y});
-            mlx_pixel(cube->img, start, texture_color);
-        }
-        e2 = 2 * err;
-        if (e2 > -dy)
-        {
-            err -= dy;
-            start.x += sx;
-        }
-        if (e2 < dx)
-        {
-            err += dx;
-            start.y += sy;
-        }
-        if (start.x == end.x && start.y == end.y)
-            break;
-    }
+    return tex_x;
 }
 
 
+void draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id)
+{
+    // Récupération des informations de texture à partir de la structure cube
+    int texture_height = cube->text->t_img[texture_id].height;
+    
+    // Calcul de la hauteur de la ligne sur l'écran
+    int lineHeight = abs(end.y - start.y);
 
+    // Calcul de l'incrément de la coordonnée de texture par pixel
+    double step = 1.0 * texture_height / lineHeight;
 
+    // Calcul de la position de départ de la texture en fonction de la position verticale sur l'écran
+    double texture_pos = (start.y - Y_RES / 2 + lineHeight / 2) * step;
 
+    // Parcours de chaque pixel de la ligne sur l'écran
+    for (int y = start.y; y < end.y; y++)
+    {
+        // Conversion de la position de texture en entier et gestion du débordement
+        int tex_y = (int)texture_pos & (texture_height - 1);
 
+        // Mise à jour de la position de texture pour le prochain pixel
+        texture_pos += step;
+
+        // Obtention de la couleur de la texture à partir des coordonnées de texture
+        int tex_x = calculate_tex_x(cube, texture_id); // Fonction à implémenter pour calculer tex_x
+        int texture_color = get_texture_color(cube, texture_id, (t_vec){tex_x, tex_y});
+
+        // Affichage temporaire pour vérifier
+        // printf("pos : {%d;%d}(%d)\n", start.x, y, texture_color);
+        // (void)texture_color;
+        mlx_pixel(cube->img, (t_vec){start.x, y}, texture_color);
+    }
+}
 
 
 

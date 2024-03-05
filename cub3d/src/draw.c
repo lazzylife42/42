@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:52:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 03:28:39 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:52:35 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	mlx_pixel(t_img *img, t_vec pos, int color)
+void mlx_pixel(t_img *img, t_vec pos, int color)
 {
-	char	*dst;
+    char *dst;
 
-	dst = img->addr + (pos.y * img->line_length + pos.x * (img->bits_per_pixel
-				/ 8));
-	*(unsigned int *)dst = color;
+    if (pos.x < 0 || pos.x >= X_RES || pos.y < 0 || pos.y >= Y_RES)
+        return;
+    dst = img->addr + (pos.y * img->line_length + pos.x * (img->bits_per_pixel / 8));
+    *(unsigned int *)dst = color;
 }
+
 
 void draw_line(t_img *img, t_vec start, t_vec end, int color)
 {

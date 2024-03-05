@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 06:42:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/04 23:31:13 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:42:26 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,19 @@ void	render_wall(t_cube *cube, t_raycast *ray)
 	// draw_line(cube->img, (t_vec){ray->col, ray->wall_top}, (t_vec){ray->col,
 	// 	ray->wall_bottom}, ray->color);
 	draw_textures(cube, (t_vec){ray->col, ray->wall_top}, (t_vec){ray->col,
-		ray->wall_bottom}, 0);	
+		ray->wall_bottom}, 4);	
 }
 
 void	draw_wall(t_cube *cube)
 {
-	int			col;
 	t_raycast	ray;
 
-	col = 0;
-	while (col < X_RES)
+	ray.col = 0;
+	while (ray.col < X_RES)
 	{
-		ray = initialize_raycast(cube, col);
+		ray = initialize_raycast(cube, ray.col);
 		perform_dda(cube, &ray);
 		render_wall(cube, &ray);
-		col++;
+		ray.col++;
 	}
 }
