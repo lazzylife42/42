@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:02:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/06 13:28:32 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/06 20:55:02 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void draw_textures(t_cube *cube, t_raycast *ray, t_vec start, t_vec end, int tex
     while (y < end.y)
 	{
         color = get_texture_color(cube, texture_id, 
-		(t_vec){(start.x), ty});
+		(t_vec){(start.x % cube->text->t_img[texture_id].width), ty});
         mlx_pixel(cube->img, (t_vec){ray->col, y}, color);
         ty += ty_step;
         y++;
