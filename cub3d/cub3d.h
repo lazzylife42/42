@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/06 12:38:18 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/06 22:18:37 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define MAP_LINE 8
 # define X_RES 1280
 # define Y_RES 720
-# define TEXTURES_NUM 5
+# define TEXTURES_NUM 6
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
 # define FINE_RATIO 3  // ajuste la vitesse de déplacement
 # define ROT_RATIO 5   // vitesse de rotation en Y
