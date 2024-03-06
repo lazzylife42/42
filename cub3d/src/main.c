@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/05 13:43:39 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:59:34 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	game_loop(t_cube *cube)
 		// 	300);
 		// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[3].img, 300,
 		// 	300);
-		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[4].img, 0, 0);
+		// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[4].img, 0, 0);
 	}
 	return (0);
 }

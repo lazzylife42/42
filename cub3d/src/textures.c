@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:02:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/05 16:13:45 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/06 13:28:32 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,23 @@ int	get_texture_color(t_cube *cube, int texture_id, t_vec pos)
 	return (color);
 }
 
-void	draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id)
+void draw_textures(t_cube *cube, t_raycast *ray, t_vec start, t_vec end, int texture_id)
 {
+    (void)ray;
+    int y;
+    float ty = 0;
+    float ty_step = (float)cube->text->t_img[texture_id].height / (float)(end.y - start.y);
+    int color;
 
+    y = start.y;
+    while (y < end.y)
+	{
+        color = get_texture_color(cube, texture_id, 
+		(t_vec){(start.x), ty});
+        mlx_pixel(cube->img, (t_vec){ray->col, y}, color);
+        ty += ty_step;
+        y++;
+    }
 }
+
+
