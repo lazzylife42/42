@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:02:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/06 20:55:02 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:24:34 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,29 @@ int	get_texture_color(t_cube *cube, int texture_id, t_vec pos)
 	return (color);
 }
 
-void draw_textures(t_cube *cube, t_raycast *ray, t_vec start, t_vec end, int texture_id)
+void	draw_textures(t_cube *cube, t_raycast *ray, t_vec start, t_vec end,
+		int texture_id)
 {
-    (void)ray;
-    int y;
-    float ty = 0;
-    float ty_step = (float)cube->text->t_img[texture_id].height / (float)(end.y - start.y);
-    int color;
+	int		y;
+	float	ty;
+	float	ty_step;
+	int		color;
+	int		texture_to_use;
 
-    y = start.y;
-    while (y < end.y)
+	ty = 0;
+	ty_step = (float)cube->text->t_img[texture_id].height / (float)(end.y
+			- start.y);
+	y = start.y;
+	while (y < end.y)
 	{
-        color = get_texture_color(cube, texture_id, 
-		(t_vec){(start.x % cube->text->t_img[texture_id].width), ty});
-        mlx_pixel(cube->img, (t_vec){ray->col, y}, color);
-        ty += ty_step;
-        y++;
-    }
+		texture_to_use = (texture_id + (int)(((ray->ra + M_PI / 2.0) / (M_PI
+							* 2)) * 4) % 4) % 4;
+		if (texture_to_use < 0)
+			texture_to_use += 4;
+		color = get_texture_color(cube, texture_to_use, (t_vec){(ray->col
+					% cube->text->t_img[texture_to_use].width), ty});
+		mlx_pixel(cube->img, (t_vec){ray->col, y}, color);
+		ty += ty_step;
+		y++;
+	}
 }
-
-
