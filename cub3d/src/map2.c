@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:55:52 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 20:29:31 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 21:06:56 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@ void	map_renderer(t_cube *cube)
 			if (cube->map->m_mini_map[y][x] == '1')
 				draw_square(cube->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE},
 					MINI_SCALE - 2, 0x909090);
-			else if (cube->map->m_mini_map[y][x] == '0' || cube->map->m_mini_map[y][x] == 'P'
-					|| cube->map->m_mini_map[y][x] == 'd')
+			else if (cube->map->m_mini_map[y][x] == '0' || cube->map->m_mini_map[y][x] == 'P')
 				draw_square(cube->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE},
 					MINI_SCALE - 2, 0xFFFFFF);
 			else if (cube->map->m_mini_map[y][x] == 'D')
 				draw_square(cube->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE},
 					MINI_SCALE - 2, 0xFF0000);
+			else if (cube->map->m_mini_map[y][x] == 'd')
+				draw_square(cube->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE},
+					MINI_SCALE - 2, 0x800080);
 			x++;
 		}
 		y++;
