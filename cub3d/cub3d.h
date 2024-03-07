@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 15:10:57 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:27:06 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_map
 	bool		mini_map;
 	int			m_wall[X_RES][Y_RES];
 	char		**m_mini_map;
+	double		fps;
 	t_player	*player;
 
 }				t_map;

@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/01 17:12:16 by smonte-e          #+#    #+#              #
-#    Updated: 2024/03/07 14:58:12 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/03/07 16:47:49 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC = src/main.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
 	  
 SRC_BONUS = src/main_bonus.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
       src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \
+		src/textures.c
 
 OBJS = $(SRC:.c=.o)
 

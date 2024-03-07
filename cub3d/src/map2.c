@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:55:52 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/28 17:50:12 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:42:00 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	map_renderer(t_cube *cube)
 	int	y;
 
 	draw_rec(cube->img, (t_vec){0, 0}, (t_vec){X_RES, Y_RES / 2
-		- cube->map->player->offset}, 0x000080);
+		- cube->map->player->offset}, 0x00FFFF);
 	draw_wall(cube);
 	y = 0;
 	while (cube->map->mini_map && y < cube->map->m_height)
