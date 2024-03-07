@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:26 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/05 13:45:03 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 20:27:26 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	key_init(t_cube *cube)
 	cube->key->k_down = false;
 	cube->key->k_right = false;
 	cube->key->k_enter = false;
+	cube->key->k_o = false;
 	cube->map->mini_map = true;
 }
 
@@ -44,6 +45,7 @@ static void	menu(t_cube *cube)
 void	update_player(t_cube *cube)
 {
 	menu(cube);
+	handle_door(cube);
 	if (cube->key->k_esc == true)
 		on_destroy(cube);
 	if (cube->key->k_a == true)
@@ -88,6 +90,8 @@ int	keypress(int keysym, t_cube *cube)
 		cube->key->k_right = true;
 	else if (keysym == K_M)
 		cube->key->k_m = true;
+	else if (keysym == K_O)
+		cube->key->k_o = true;
 	return (0);
 }
 
@@ -115,5 +119,7 @@ int	keyrelease(int keysym, t_cube *cube)
 		cube->key->k_right = false;
 	else if (keysym == K_M)
 		cube->key->k_m = false;
+	else if (keysym == K_O)
+		cube->key->k_o = false;
 	return (0);
 }

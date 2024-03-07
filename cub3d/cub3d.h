@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 16:27:06 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 20:09:55 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # define K_S 1
 # define K_D 2
 # define K_M 46
+# define K_O 31
 
 # define LOADSCREEN "xpm/loadscreen.xpm"
 
@@ -151,6 +152,7 @@ typedef struct s_key
 	bool		k_right;
 	bool		k_enter;
 	bool		k_m;
+	bool		k_o;
 }				t_key;
 
 typedef struct s_raycast
@@ -194,12 +196,14 @@ typedef struct s_cube
 int				on_destroy(t_cube *cube);
 int				keypress(int keysym, t_cube *cube);
 int				keyrelease(int keysym, t_cube *cube);
+int				init_textures(t_cube *cube);
 void			handle_mouse(t_cube *cube);
 void			update_player(t_cube *cube);
 void			loadscreen(t_cube *cube);
 void			load_transition(t_cube *cube);
 void			load_melt_textures(t_cube *cube);
-int				init_textures(t_cube *cube);
+void 			handle_door(t_cube *cube);
+
 /*		INIT			*/
 
 void			key_init(t_cube *cube);

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:02:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 16:15:48 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:45:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,27 +86,35 @@ void	draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id)
 	y = start.y;
 	while (y < end.y)
 	{
-		texture_to_use = texture_id;
-		if (cube->ray->side == 0)
+		if (cube->ray->hit == 2)
 		{
-			if (cube->ray->dir.x > 0)
-				texture_to_use = (texture_id + 1) % 4;
-			else
-				texture_to_use = (texture_id + 3) % 4;
+			mlx_pixel(cube->img, (t_vec){cube->ray->col, y}, 0xFF0000);
+			y++;
 		}
 		else
 		{
-			if (cube->ray->dir.y > 0)
-				texture_to_use = (texture_id + 2) % 4;
+			texture_to_use = texture_id;
+			if (cube->ray->side == 0)
+			{
+				if (cube->ray->dir.x > 0)
+					texture_to_use = (texture_id + 1) % 4;
+				else
+					texture_to_use = (texture_id + 3) % 4;
+			}
 			else
-				texture_to_use = texture_id;
-		}
-		color = get_texture_color(cube, texture_to_use, (t_vec){(cube->ray->col
-					% cube->text->t_img[texture_to_use].width), ty});
-		if (cube->ray->side > 0)
-			color = (color >> 1) & 0x7F7F7F;
-		mlx_pixel(cube->img, (t_vec){cube->ray->col, y}, color);
-		ty += ty_step;
-		y++;
+			{
+				if (cube->ray->dir.y > 0)
+					texture_to_use = (texture_id + 2) % 4;
+				else
+					texture_to_use = texture_id;
+			}
+			color = get_texture_color(cube, texture_to_use, (t_vec){(cube->ray->col
+						% cube->text->t_img[texture_to_use].width), ty});
+			if (cube->ray->side > 0)
+				color = (color >> 1) & 0x7F7F7F;
+			mlx_pixel(cube->img, (t_vec){cube->ray->col, y}, color);
+			ty += ty_step;
+			y++;	
+		}	
 	}
 }

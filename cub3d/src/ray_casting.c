@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 06:42:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 14:59:40 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:41:24 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	perform_dda(t_cube *cube, t_raycast *ray)
 		}
 		if (cube->map->m_mini_map[(int)ray->map.y][(int)ray->map.x] == '1')
 			cube->ray->hit = 1;
+		else if (cube->map->m_mini_map[(int)ray->map.y][(int)ray->map.x] == 'D')
+			cube->ray->hit = 2;
 	}
 }
 

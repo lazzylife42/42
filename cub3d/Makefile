@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/01 17:12:16 by smonte-e          #+#    #+#              #
-#    Updated: 2024/03/07 16:47:49 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/03/07 20:09:17 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,21 +21,21 @@ INCLUDES = -I/opt/X11/include -Imlx
 
 SRC = src/main.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
       src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \
-      src/textures.c
+      src/textures.c src/door.c
 	  
 SRC_BONUS = src/main_bonus.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
       src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \
-		src/textures.c
+		src/textures.c src/door.c
 
 OBJS = $(SRC:.c=.o)
 
 OBJS_BONUS = $(SRC_BONUS:.c=.o)
 
 # Colors
-GREEN = \033[0;32m
-RED = \033[0;31m
-YELLOW = \033[0;33m
-BLUE = \033[0;34m
+GREEN = \033[1;32m
+RED = \033[1;31m
+YELLOW = \033[1;33m
+BLUE = \033[1;36m
 NC = \033[0m
 
 all: $(NAME)

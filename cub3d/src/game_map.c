@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:49:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 16:15:02 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 20:26:04 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init_player(t_cube *cube)
 	}
 }
 
-static void	fill_m_wall(t_cube *cube, int px, int py)
+static void	fill_m_wall(t_cube *cube, int px, int py, bool door)
 {
 	int	x;
 	int	y;
@@ -69,7 +69,10 @@ static void	fill_m_wall(t_cube *cube, int px, int py)
 		x = 0;
 		while (x < MINI_SCALE)
 		{
-			cube->map->m_wall[y + py][x + px] = 1;
+			if (door)
+				cube->map->m_wall[y + py][x + px] = 1;
+			else
+				cube->map->m_wall[y + py][x + px] = 0;
 			x++;
 		}
 		y++;
@@ -94,8 +97,10 @@ void	init_wall(t_cube *cube)
 		x = -1;
 		while (++x < cube->map->m_width)
 		{
-			if (cube->map->m_mini_map[y][x] == '1')
-				fill_m_wall(cube, x * MINI_SCALE, y * MINI_SCALE);
+			if (cube->map->m_mini_map[y][x] == '1' || cube->map->m_mini_map[y][x] == 'D')
+				fill_m_wall(cube, x * MINI_SCALE, y * MINI_SCALE, true);
+			else if (cube->map->m_mini_map[y][x] == 'd')
+				fill_m_wall(cube, x * MINI_SCALE, y * MINI_SCALE, false);
 		}
 	}
 }

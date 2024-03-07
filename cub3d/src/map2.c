@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:55:52 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 16:42:00 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 20:29:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	map_renderer(t_cube *cube)
 	int	y;
 
 	draw_rec(cube->img, (t_vec){0, 0}, (t_vec){X_RES, Y_RES / 2
-		- cube->map->player->offset}, 0x00FFFF);
+		- cube->map->player->offset}, 0x000080);
 	draw_wall(cube);
 	y = 0;
 	while (cube->map->mini_map && y < cube->map->m_height)
@@ -48,9 +48,13 @@ void	map_renderer(t_cube *cube)
 			if (cube->map->m_mini_map[y][x] == '1')
 				draw_square(cube->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE},
 					MINI_SCALE - 2, 0x909090);
-			else if (cube->map->m_mini_map[y][x] == '0')
+			else if (cube->map->m_mini_map[y][x] == '0' || cube->map->m_mini_map[y][x] == 'P'
+					|| cube->map->m_mini_map[y][x] == 'd')
 				draw_square(cube->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE},
 					MINI_SCALE - 2, 0xFFFFFF);
+			else if (cube->map->m_mini_map[y][x] == 'D')
+				draw_square(cube->img, (t_vec){x * MINI_SCALE, y * MINI_SCALE},
+					MINI_SCALE - 2, 0xFF0000);
 			x++;
 		}
 		y++;
