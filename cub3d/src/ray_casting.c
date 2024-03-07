@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 06:42:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 10:49:50 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:31:47 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,8 @@ void	render_wall(t_cube *cube, t_raycast *ray)
 
 	camera_height = cube->map->player->offset;
 	set_wall_parameters(ray, cube, camera_height);
-	// draw_line(cube->img, (t_vec){ray->col, ray->wall_top}, (t_vec){ray->col,
-	// 	ray->wall_bottom}, ray->color);
-	draw_textures(cube, ray, (t_vec){ray->col, ray->wall_top}, (t_vec){ray->col,
+	cube->ray = ray;
+	draw_textures(cube, (t_vec){ray->col, ray->wall_top}, (t_vec){ray->col,
 		ray->wall_bottom}, 0);
 }
 

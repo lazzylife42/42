@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/06 22:18:37 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:30:08 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ void			draw_square(t_img *img, t_vec pos, int size, int color);
 void			draw_rec(t_img *img, t_vec start, t_vec end, int color);
 void			draw_triangle(t_cube *cube);
 void			draw_wall(t_cube *cube);
-void			draw_textures(t_cube *cube, t_raycast *ray, t_vec start, t_vec end, int texture_id);
+void	draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id);
 int				get_texture_color(t_cube *cube, int text_id, t_vec pos);
 
 /*		RAYCAST		*/
