@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keybord.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:26 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 20:27:26 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 21:16:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ static void	menu(t_cube *cube)
 
 void	update_player(t_cube *cube)
 {
-	menu(cube);
-	handle_door(cube);
 	if (cube->key->k_esc == true)
 		on_destroy(cube);
 	if (cube->key->k_a == true)
@@ -64,6 +62,10 @@ void	update_player(t_cube *cube)
 		rotate_up(cube);
 	else if (cube->key->k_down == true)
 		rotate_down(cube);
+	else if (cube->key->k_o == true)
+		handle_door(cube);
+	else if (cube->key->k_enter == true || cube->key->k_m == true)
+		menu(cube);
 }
 
 int	keypress(int keysym, t_cube *cube)

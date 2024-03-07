@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 05:16:13 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 16:48:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/07 21:29:51 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int		g_frame_count = 0;
 static time_t	g_start_time = 0;
 
-void	fps_count(t_cube *cube)
+void	fps_count()
 {
 	time_t	current_time;
 	double	elapsed_time;
@@ -30,7 +30,6 @@ void	fps_count(t_cube *cube)
 	if (elapsed_time >= 1)
 	{
 		fps = g_frame_count / elapsed_time;
-		cube->map->fps = fps;
 		printf("FPS: %.2f\n", fps);
 		g_frame_count = 0;
 		g_start_time = current_time;
@@ -70,7 +69,7 @@ int	init_all(t_cube *cube, char **argv)
 
 int	game_loop(t_cube *cube)
 {
-	fps_count(cube);
+	fps_count();
 	if (cube->loadscreen == false)
 	{
 		loadscreen(cube);
@@ -82,13 +81,10 @@ int	game_loop(t_cube *cube)
 		cube->img->addr = mlx_get_data_addr(cube->img->img,
 				&cube->img->bits_per_pixel, &cube->img->line_length,
 				&cube->img->endian); 
-		mlx_string_put(cube->mlx_ptr, cube->win_ptr, 300, 300, 0x000000,
-			 "salut salut");
 		mlx_mouse_hide();
 		handle_mouse(cube);
 		update_player(cube);
 		map_renderer(cube);
-
 		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0,
 			0);
 	}
