@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:49:40 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/08 09:27:00 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:11:53 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,12 @@ void    handle_door(t_cube *cube)
 	if (cube->map->m_mini_map[next_y / MINI_SCALE][next_x / MINI_SCALE] == 'D')
 	{
 		if (cube->key->k_o == true)
-		{
 			cube->map->m_mini_map[next_y / MINI_SCALE][next_x / MINI_SCALE] = 'd';
-			init_wall(cube);
-			// map_renderer(cube);
-		}
 	}
 	else if (cube->map->m_mini_map[next_y / MINI_SCALE][next_x / MINI_SCALE] == 'd')
 	{
 		if (cube->key->k_o == true)
-		{
 			cube->map->m_mini_map[next_y / MINI_SCALE][next_x / MINI_SCALE] = 'D';
-			init_wall(cube);
-			// map_renderer(cube);
-		}
 	}
+	init_wall(cube);
 }

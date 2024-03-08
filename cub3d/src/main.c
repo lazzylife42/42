@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 19:49:47 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:11:15 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,6 @@ int	game_loop(t_cube *cube)
 		map_renderer(cube);
 		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0,
 			0);
-		// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[0].img, 0,
-		// 	0);
-		// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[1].img, 300,
-		// 	0);
-		// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[2].img, 0,
-		// 	300);
-		// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[3].img, 300,
-		// 	300);
-		// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[4].img, 0, 0);
 	}
 	return (0);
 }

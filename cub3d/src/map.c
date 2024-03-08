@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:57:31 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 19:37:29 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:11:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void	map_renderer_init(t_cube *cube, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	map_init(fd, cube);
-	// map_sprit_init(data);
 	close(fd);
 	fd = open(argv[1], O_RDONLY);
 	map_to_tab(fd, cube);
