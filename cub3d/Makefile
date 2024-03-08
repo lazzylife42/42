@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/01 17:12:16 by smonte-e          #+#    #+#              #
-#    Updated: 2024/03/07 20:09:17 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/03/08 09:29:29 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,11 +66,11 @@ $(LIBFT):
 $(MLX):
 	$(MAKE) -sC $(MLX)
 
-bonus: fclean $(OBJS_BONUS)
+bonus: clean $(OBJS_BONUS)
 	@echo "$(GREEN)Compiling bonus...$(NC)"
 	$(MAKE) -sC $(LIBFT)
 	$(MAKE) -sC $(MLX)
-	gcc $(CFLAGS) $(OBJS_BONUS) -L$(LIBFT) -lft -L$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	gcc $(CFLAGS) $(OBJS_BONUS) -L$(LIBFT) -lft -L$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(INCLUDES)
 
 clean:
 	@clear
