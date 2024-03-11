@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 06:42:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/08 09:31:57 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:00:21 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,16 @@ void	set_wall_parameters(t_raycast *ray, t_cube *cube, double camera_height)
 		ray->color = 0x808080;
 	else
 		ray->color = 0x808080 / 2;
-	wall_height = Y_RES / ray->p_walld;
-	wall_center = (Y_RES / 2) - cube->map->player->offset;
+	wall_height = (Y_RES) / ray->p_walld;
+	wall_center = ((Y_RES - HUD) / 2) - cube->map->player->offset;
 	ray->wall_top = wall_center - (wall_height / 2) - (camera_height
 			- cube->map->player->offset);
 	ray->wall_bottom = wall_center + (wall_height / 2) - (camera_height
 			- cube->map->player->offset);
 	if (ray->wall_top < 0)
 		ray->wall_top = 0;
-	if (ray->wall_bottom >= Y_RES)
-		ray->wall_bottom = Y_RES - 1;
+	if (ray->wall_bottom >= Y_RES - HUD)
+		ray->wall_bottom = Y_RES - HUD - 1;
 }
 
 void	render_wall(t_cube *cube, t_raycast *ray)
@@ -103,7 +103,7 @@ void	render_wall(t_cube *cube, t_raycast *ray)
 	set_wall_parameters(ray, cube, camera_height);
 	cube->ray = ray;
 	draw_textures(cube, (t_vec){ray->col, ray->wall_top}, (t_vec){ray->col,
-		ray->wall_bottom}, 0);
+		ray->wall_bottom }, 0);
 }
 
 void	draw_wall(t_cube *cube)

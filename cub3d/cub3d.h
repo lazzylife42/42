@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 20:09:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:09:16 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@
 # define MAP_LINE 8
 # define X_RES 1280
 # define Y_RES 720
-# define TEXTURES_NUM 4
+# define HUD 212
+# define TEXTURES_NUM 6
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
 # define FINE_RATIO 3  // ajuste la vitesse de déplacement
 # define ROT_RATIO 5   // vitesse de rotation en Y

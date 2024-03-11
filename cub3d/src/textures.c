@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:02:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/07 21:33:46 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:46:11 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	init_textures(t_cube *cube)
 	}
 	while (i < TEXTURES_NUM)
 	{
-		file_path = ft_strjoin("xpm/textures/text0", ft_itoa(i));
+		file_path = ft_strjoin("xpm/textures3/text0", ft_itoa(i));
 		ft_strlcpy(ft_strrchr(file_path, '\0'), ".xpm", 5);
 		cube->text->t_img[i].img = mlx_xpm_file_to_image(cube->mlx_ptr,
 				file_path, &cube->text->t_img[i].width,
@@ -88,7 +88,11 @@ void	draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id)
 	{
 		if (cube->ray->hit == 2)
 		{
-			mlx_pixel(cube->img, (t_vec){cube->ray->col, y}, 0xFF0000);
+			texture_to_use = 4;
+			color = get_texture_color(cube, texture_to_use, (t_vec){(cube->ray->col
+						% cube->text->t_img[texture_to_use].width), ty});
+			mlx_pixel(cube->img, (t_vec){cube->ray->col, y}, color);
+			ty += ty_step;
 			y++;
 		}
 		else
