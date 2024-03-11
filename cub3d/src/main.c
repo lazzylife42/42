@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/08 11:11:15 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:27:29 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	game_loop(t_cube *cube)
 		map_renderer(cube);
 		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0,
 			0);
+		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[5].img, 0, Y_RES - HUD);
 	}
 	return (0);
 }
