@@ -6,92 +6,30 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:02:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/12 20:16:09 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:05:48 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	count_textures(t_textures *textures)
-{
-	printf("f is %s\n", textures->f);
-	printf("c is %s\n", textures->c);
-	if (textures->f_color == NULL && textures->c_color == NULL)
-		return (4);
-	else if (textures->f_color == NULL || textures->c_color == NULL)
-		return (4);
-	else
-		return (4);
-}
-
-char	*get_texture_path(int index, t_textures *texture)
-{
-	char	*file_path;
-
-	file_path = NULL;
-	if (index == 0)
-		file_path = texture->no;
-	else if (index == 1)
-		file_path = texture->so;
-	else if (index == 2)
-		file_path = texture->we;
-	else if (index == 3)
-		file_path = texture->ea;
-	return (file_path);
-}
-
 int	init_textures(t_cube *cube, t_textures *textures)
 {
-	int		i;
-	char	*file_path;
-	int		texture_count;
+	int	texture_count;
 
-	i = 0;
 	cube->text = (t_text *)malloc(sizeof(t_text));
 	if (cube->text == NULL)
 		return (0);
 	texture_count = count_textures(textures);
-	printf("texture count is %d\n", texture_count);
 	cube->text->t_img = (t_img *)malloc(sizeof(t_img) * (texture_count + 2));
 	if (cube->text->t_img == NULL)
 	{
 		free(cube->text);
 		return (0);
 	}
-	while (i < texture_count)
-	{
-		file_path = get_texture_path(i, textures);
-		cube->text->t_img[i].img = mlx_xpm_file_to_image(cube->mlx_ptr,
-				file_path, &cube->text->t_img[i].width,
-				&cube->text->t_img[i].height);
-		cube->text->t_img[i].addr = mlx_get_data_addr(cube->text->t_img[i].img,
-				&cube->text->t_img[i].bits_per_pixel,
-				&cube->text->t_img[i].line_length,
-				&cube->text->t_img[i].endian);
-		if (cube->text->t_img[i].img == NULL)
-		{
-			free(cube->text->t_img);
-			free(cube->text);
-			return (0);
-		}
-		i++;
-		printf("i:%d\n", i);
-	}
-	cube->text->t_img[i].img = mlx_xpm_file_to_image(cube->mlx_ptr,
-			"xpm/textures3/text04.xpm", &cube->text->t_img[i].width,
-			&cube->text->t_img[i].height);
-	cube->text->t_img[i].addr = mlx_get_data_addr(cube->text->t_img[i].img,
-			&cube->text->t_img[i].bits_per_pixel,
-			&cube->text->t_img[i].line_length,
-			&cube->text->t_img[i].endian);
-			i++;
-	cube->text->t_img[i].img = mlx_xpm_file_to_image(cube->mlx_ptr,
-			"xpm/textures3/text05.xpm", &cube->text->t_img[i].width,
-			&cube->text->t_img[i].height);
-	cube->text->t_img[i].addr = mlx_get_data_addr(cube->text->t_img[i].img,
-			&cube->text->t_img[i].bits_per_pixel,
-			&cube->text->t_img[i].line_length,
-			&cube->text->t_img[i].endian);
+	if (!load_textures(cube, textures, texture_count))
+		return (0);
+	if (!load_default_textures(cube, texture_count))
+		return (0);
 	return (1);
 }
 
@@ -112,7 +50,8 @@ int	get_texture_color(t_cube *cube, int texture_id, t_vec pos)
 			* (cube->text->t_img[texture_id].bits_per_pixel / 8));
 	color = *(unsigned int *)(cube->text->t_img[texture_id].addr + index);
 	if (cube->text->t_img[texture_id].endian == 1)
-		color = ((color & 0xFF) << 24) | ((color & 0xFF00) << 8) | ((color >> 8) & 0xFF00) | ((color >> 24) & 0xFF);
+		color = ((color & 0xFF) << 24) | ((color & 0xFF00) << 8)
+			| ((color >> 8) & 0xFF00) | ((color >> 24) & 0xFF);
 	return (color);
 }
 
@@ -160,7 +99,7 @@ void	draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id)
 						% cube->text->t_img[texture_to_use].width), ty});
 			mlx_pixel(cube->img, (t_vec){cube->ray->col, y}, color);
 			ty += ty_step;
-			y++;	
+			y++;
 		}	
 	}
 }

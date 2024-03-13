@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 06:42:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/12 19:48:07 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:06:22 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	render_wall(t_cube *cube, t_raycast *ray)
 	set_wall_parameters(ray, cube, camera_height);
 	cube->ray = ray;
 	draw_textures(cube, (t_vec){ray->col, ray->wall_top}, (t_vec){ray->col,
-		ray->wall_bottom }, 0);
+		ray->wall_bottom}, 0);
 }
 
 void	draw_wall(t_cube *cube)

@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/12 19:54:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:05:31 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,6 +303,45 @@ void			get_map_start(t_map *map, char *arg);
 int				set_map(char *arg, char **argv, t_cube *cube);
 int				ft_is_empty(char *tmp);
 int				is_part_of_map(char *buff);
+void			flood_fill(char **map, t_cube *cube, int x, int y);
+int				ft_strlen_wo_spaces(char *str);
+int				is_xpm_file(const char *file_path);
+int				validate_rgb_format(char **colors);
+t_rgb			*allocate_rgb_mem(void);
+char			**split_to_rgb(char *texture);
+int				skip_empty_or_single_char_lines(char *buff);
+int				open_file(char *file);
+void			print_mini_map_header(void);
+void			read_and_store_map(int fd, t_cube *cube);
+void			initialize_mini_map(t_cube *cube);
+void			allocate_and_initialize_row(t_cube *cube, int row_index, int width); 
+void			allocate_mini_map(t_cube *cube);
+int				check_players(t_cube *cube);
+void			error_players(t_cube *cube);
+void			set_player_position(t_cube *cube, int x, int y, char direction);
+t_player		*allocate_mem_player(t_cube *cube);
+int				init_all(t_cube *cube, char **argv, int argc);
+int				init_mlx(t_cube *cube);
+int				init_map(t_cube *cube);
+int				init_ray_and_img(t_cube *cube);
+int				init_window(t_cube *cube);
+int				init_load_and_textures(t_cube *cube);
+int				count_valid_map_lines(char *file_path);
+int				count_total_lines(const char *file_path);
+int				skip_lines_before_map(int fd, int num_lines_to_skip);
+int				calculate_longest_line_width(int fd, int num_lines);
+char			*get_texture_path(int index, t_textures *texture);
+int				count_textures(t_textures *textures);
+int				load_textures(t_cube *cube, t_textures *textures, int texture_count);
+int				load_default_textures(t_cube *cube, int index);
+int				texture_to_mlx(t_cube *cube, int i, char *file_path);
+int				is_valid_char(char letter);
+int				check_valid_chars_in_line(char *line);
+void			handle_invalid_char(char *line);
+void			map_pos(char *tmp);
+void			check_duplicates(int i, int *found);
+char			*remove_backslash(char *tmp);
+void			assign_array(int i, int *found);
 
 #endif
 

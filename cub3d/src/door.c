@@ -6,13 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:49:40 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/11 18:45:16 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/12 21:42:35 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void    handle_door(t_cube *cube)
+void	handle_door(t_cube *cube)
 {
 	int		next_x;
 	int		next_y;
@@ -28,12 +28,15 @@ void    handle_door(t_cube *cube)
 	if (cube->map->m_mini_map[next_y / MINI_SCALE][next_x / MINI_SCALE] == 'D')
 	{
 		if (cube->key->k_o == true)
-			cube->map->m_mini_map[next_y / MINI_SCALE][next_x / MINI_SCALE] = 'd';
+			cube->map->m_mini_map[next_y
+				/ MINI_SCALE][next_x / MINI_SCALE] = 'd';
 	}
-	else if (cube->map->m_mini_map[next_y / MINI_SCALE][next_x / MINI_SCALE] == 'd')
+	else if (cube->map->m_mini_map[next_y
+			/ MINI_SCALE][next_x / MINI_SCALE] == 'd')
 	{
 		if (cube->key->k_o == true)
-			cube->map->m_mini_map[next_y / MINI_SCALE][next_x / MINI_SCALE] = 'D';
+			cube->map->m_mini_map[next_y
+				/ MINI_SCALE][next_x / MINI_SCALE] = 'D';
 	}
 	init_wall(cube);
 }

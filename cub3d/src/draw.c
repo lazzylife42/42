@@ -6,24 +6,24 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:52:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/12 21:13:04 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/12 21:48:05 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void mlx_pixel(t_img *img, t_vec pos, int color)
+void	mlx_pixel(t_img *img, t_vec pos, int color)
 {
-    char *dst;
+	char	*dst;
 
-    if (pos.x < 0 || pos.x >= X_RES || pos.y < 0 || pos.y >= Y_RES)
-        return;
-    dst = img->addr + (pos.y * img->line_length + pos.x * (img->bits_per_pixel / 8));
-    *(unsigned int *)dst = color;
+	if (pos.x < 0 || pos.x >= X_RES || pos.y < 0 || pos.y >= Y_RES)
+		return ;
+	dst = img->addr + (pos.y * img->line_length + pos.x
+			* (img->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
-
-void draw_line(t_img *img, t_vec start, t_vec end, int color)
+void	draw_line(t_img *img, t_vec start, t_vec end, int color)
 {
 	int dx = abs(end.x - start.x);
 	int dy = abs(end.y - start.y);
@@ -33,12 +33,11 @@ void draw_line(t_img *img, t_vec start, t_vec end, int color)
 	int e2;
 	int max_iter = dx + dy;
 
-	if (start.x < 0 || start.x >= X_RES || start.y < 0 || start.y >= Y_RES ||
-		end.x < 0 || end.x >= X_RES || end.y < 0 || end.y >= Y_RES)
-		return;
+	if (start.x < 0 || start.x >= X_RES || start.y < 0 || start.y >= Y_RES
+			|| end.x < 0 || end.x >= X_RES || end.y < 0 || end.y >= Y_RES)
+		return ;
 	if (start.x == end.x && start.y == end.y)
-		return;
-
+		return ;
 	while (max_iter--)
 	{
 		if (start.x >= 0 && start.x < X_RES && start.y >= 0 && start.y < Y_RES)
@@ -57,7 +56,7 @@ void draw_line(t_img *img, t_vec start, t_vec end, int color)
 			start.y += sy;
 		}
 		if (start.x == end.x && start.y == end.y)
-			break;
+			break ;
 	}
 }
 
@@ -80,29 +79,35 @@ void	draw_square(t_img *img, t_vec pos, int size, int color)
 	}
 }
 
-void draw_rec(t_img *img, t_vec start, t_vec end, int color)
+void	draw_rec(t_img *img, t_vec start, t_vec end, int color)
 {
-    int j = start.y;
-    while (j <= end.y)
-    {
-        int i = start.x;
-        while (i <= end.x)
-        {
-            mlx_pixel(img, (t_vec){i, j}, color);
-            i++;
-        }
-        j++;
-    }
+	int	j;
+	int	i;
+
+	j = start.y;
+	while (j <= end.y)
+	{
+		i = start.x;
+		while (i <= end.x)
+		{
+			mlx_pixel(img, (t_vec){i, j}, color);
+			i++;
+		}
+		j++;
+	}
 }
 
-float distance(t_vec p1, t_vec p2)
+float	distance(t_vec p1, t_vec p2)
 {
-	float dx = p2.x - p1.x;
-	float dy = p2.y - p1.y;
-	return sqrt(dx * dx + dy * dy);
+	float	dx;
+	float	dy;
+
+	dx = p2.x - p1.x;
+	dy = p2.y - p1.y;
+	return (sqrt(dx * dx + dy * dy));
 }
 
-void draw_triangle(t_cube *cube)
+void	draw_triangle(t_cube *cube)
 {
 	float angle_rad = (cube->map->player->p_pos_a) * M_PI / 180;
 	float cos_angle = cos(angle_rad);

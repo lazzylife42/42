@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/12 20:21:57 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:29:52 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,37 +18,6 @@ int	on_destroy(t_cube *cube)
 	mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
 	exit(EXIT_SUCCESS);
 	return (0);
-}
-
-int	init_all(t_cube *cube, char **argv, int argc)
-{
-	cube->mlx_ptr = mlx_init();
-	if (!cube->mlx_ptr)
-		return (0);
-	cube->map = malloc(sizeof(t_map));
-	if (cube->map == NULL)
-		ft_error(RED "Error\nMalloc failed\n" RST);
-	cube->map->textures = malloc(sizeof(t_textures));
-	if (cube->map->textures == NULL)
-		ft_error(RED "Error\nMalloc failed\n" RST);
-	if (check_args(argc) == 0 && check_map_file(argv[1]) == 0
-		&& check_textures(argv[1], cube, cube->map->textures) == 0)
-		set_map(argv[1], argv, cube);
-	init_player(cube);
-	key_init(cube);
-	cube->ray = (t_raycast *)malloc(sizeof(t_raycast));
-	if (!cube->ray)
-		return (0);
-	cube->img = (t_img *)malloc(sizeof(t_img));
-	if (!cube->img)
-		return (0);
-	cube->win_ptr = mlx_new_window(cube->mlx_ptr, X_RES, Y_RES, "Cub3d");
-	cube->loadscreen = false;
-	cube->load = malloc(sizeof(t_load));
-	load_melt_textures(cube);
-	if (!init_textures(cube, cube->map->textures))
-		return (0);
-	return (1);
 }
 
 int	game_loop(t_cube *cube)
@@ -70,9 +39,25 @@ int	game_loop(t_cube *cube)
 		map_renderer(cube);
 		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0,
 			0);
-		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[5].img, 0, Y_RES - HUD);
+		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr,
+			cube->text->t_img[5].img, 0, Y_RES - HUD);
 	}
 	return (0);
+}
+
+int	init_all(t_cube *cube, char **argv, int argc)
+{
+	if (!init_mlx(cube) || !init_map(cube))
+		return (0);
+	if (check_args(argc) == 0 && check_map_file(argv[1]) == 0
+		&& check_textures(argv[1], cube, cube->map->textures) == 0)
+		set_map(argv[1], argv, cube);
+	init_player(cube);
+	key_init(cube);
+	if (!init_ray_and_img(cube) || !init_window(cube)
+		|| !init_load_and_textures(cube))
+		return (0);
+	return (1);
 }
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: lmedrano <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:58:50 by lmedrano          #+#    #+#             */
-/*   Updated: 2024/03/11 18:38:51 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/13 09:25:18 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 int	rgb_to_hexa(t_rgb *rgb)
 {
 	return (((rgb->r & 0xFF) << 16) + ((rgb->g & 0xFF) << 8) + (rgb->b & 0xFF));
-}
-
-void	my_pixel_put(t_cube *cube, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = cube->img->addr + (y * cube->img->line_length
-			+ x * (cube->img->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
 }
 
 void	check_colors(char **colors, t_rgb *texture)
@@ -37,11 +28,8 @@ void	check_colors(char **colors, t_rgb *texture)
 	else
 	{
 		texture->r = ft_atoi(colors[0]);
-		printf("red is %d\n", texture->r);
 		texture->g = ft_atoi(colors[1]);
-		printf("green is %d\n", texture->g);
 		texture->b = ft_atoi(colors[2]);
-		printf("blue is %d\n", texture->b);
 	}
 	if ((texture->r < 0 || texture->r > 255)
 		|| (texture->g < 0 || texture->g > 255)

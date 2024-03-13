@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:59:05 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/09 17:26:35 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/12 22:36:49 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	rotate_left(t_cube *cube)
 	if (cube->map->player->p_pos_a % 360 == 0)
 		cube->map->player->p_pos_a += 360;
 }
-
 
 void	rotate_right(t_cube *cube)
 {
