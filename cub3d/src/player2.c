@@ -6,11 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 04:07:34 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/24 06:15:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:29:05 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	move_front(t_cube *cube)
 {

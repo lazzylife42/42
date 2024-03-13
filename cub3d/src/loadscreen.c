@@ -6,11 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 17:07:23 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/02/26 00:09:45 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:46:59 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	loadscreen(t_cube *cube)
 {

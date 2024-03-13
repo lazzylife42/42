@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 06:42:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/11 18:00:21 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:48:07 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 t_raycast	initialize_raycast(t_cube *cube, int col)
 {
@@ -79,10 +79,6 @@ void	set_wall_parameters(t_raycast *ray, t_cube *cube, double camera_height)
 		ray->p_walld = (ray->sided.x - ray->delta.x);
 	else
 		ray->p_walld = (ray->sided.y - ray->delta.y);
-	if (ray->side == 0)
-		ray->color = 0x808080;
-	else
-		ray->color = 0x808080 / 2;
 	wall_height = (Y_RES) / ray->p_walld;
 	wall_center = ((Y_RES - HUD) / 2) - cube->map->player->offset;
 	ray->wall_top = wall_center - (wall_height / 2) - (camera_height

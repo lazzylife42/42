@@ -3,19 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   map2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:55:52 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/11 18:06:34 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:39:16 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-static void	player_render(t_cube *cube)
+// static	int	get_texture_index(char cell)
+// {
+// 	if (cell == '1')
+// 		return (2);
+// 	else if (cell == '0')
+// 		return (3);
+// 	else if (cell == 'P')
+// 		return (0);
+// 	else if (cell == ' ')
+// 		return (0);
+// 	return (0);
+// }
+
+int frame_render(t_cube *cube)
 {
-	int	x;
-	int	y;
+	cube->img->img = mlx_new_image(cube->mlx_ptr, X_RES, Y_RES);
+	cube->img->addr = mlx_get_data_addr(cube->img->img, &cube->img->bits_per_pixel,
+		&cube->img->line_length, &cube->img->endian);
+	map_renderer(cube);
+	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0, 0);
+	return (0);
+}
+
+static	void	player_render(t_cube *cube)
+{
+	int		x;
+	int		y;
 
 	y = 0;
 	while (y < cube->map->m_height)
@@ -23,12 +46,16 @@ static void	player_render(t_cube *cube)
 		x = 0;
 		while (x < cube->map->m_width)
 		{
-			if (cube->map->m_mini_map[y][x] == 'P')
+			if (cube->map->m_mini_map[y][x] == 'N'
+					|| cube->map->m_mini_map[y][x] == 'E'
+					|| cube->map->m_mini_map[y][x] == 'W'
+					|| cube->map->m_mini_map[y][x] == 'S')
 				draw_triangle(cube);
-			x++;
+						x++;
 		}
 		y++;
 	}
+
 }
 
 void	map_renderer(t_cube *cube)
@@ -37,7 +64,9 @@ void	map_renderer(t_cube *cube)
 	int	y;
 
 	draw_rec(cube->img, (t_vec){0, 0}, (t_vec){X_RES, (Y_RES - HUD) / 2
-		- cube->map->player->offset}, 0x000080);
+		- cube->map->player->offset}, rgb_to_hexa(cube->map->textures->c_color));
+	draw_rec(cube->img, (t_vec){0,  (Y_RES - HUD) / 2
+		- cube->map->player->offset}, (t_vec){X_RES, (Y_RES - HUD)}, rgb_to_hexa(cube->map->textures->f_color));
 	draw_wall(cube);
 	y = 0;
 	while (cube->map->mini_map && y < cube->map->m_height)
@@ -79,3 +108,4 @@ void	free_map(t_cube *cube)
 	cube->map = NULL;
 	cube = NULL;
 }
+

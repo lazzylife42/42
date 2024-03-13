@@ -6,11 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:52:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/05 11:52:35 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/12 21:13:04 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void mlx_pixel(t_img *img, t_vec pos, int color)
 {
@@ -82,35 +82,18 @@ void	draw_square(t_img *img, t_vec pos, int size, int color)
 
 void draw_rec(t_img *img, t_vec start, t_vec end, int color)
 {
-	int i;
-	int j;
-
-	// Assurer que start.x <= end.x et start.y <= end.y
-	if (start.x > end.x) {
-		int temp = start.x;
-		start.x = end.x;
-		end.x = temp;
-	}
-	if (start.y > end.y) {
-		int temp = start.y;
-		start.y = end.y;
-		end.y = temp;
-	}
-
-	i = start.x;
-	while (i <= end.x)
-	{
-		j = start.y;
-		while (j <= end.y)
-		{
-			mlx_pixel(img, (t_vec){i, j}, color);
-			j++;
-		}
-		i++;
-	}
+    int j = start.y;
+    while (j <= end.y)
+    {
+        int i = start.x;
+        while (i <= end.x)
+        {
+            mlx_pixel(img, (t_vec){i, j}, color);
+            i++;
+        }
+        j++;
+    }
 }
-
-
 
 float distance(t_vec p1, t_vec p2)
 {
@@ -144,4 +127,3 @@ void draw_triangle(t_cube *cube)
 	draw_line(cube->img, rotated_top, rotated_bottom_right, 0xFF0000);
 	draw_line(cube->img, rotated_bottom_left, rotated_bottom_right, 0xFF0000);
 }
-

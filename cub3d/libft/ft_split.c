@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 18:10:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2022/12/13 15:47:38 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:53:58 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	**ft_split(char const *s, char c)
 
 	split = (char **)malloc((word_numb(s, c) + 1) * sizeof(char *));
 	if (!s || !split)
-		return (NULL);
+		free_arr(split);
 	i = -1;
 	j = 0;
 	w_start = -1;
@@ -88,7 +88,7 @@ char	**ft_split(char const *s, char c)
 			if (!(split[j++]))
 				return (free_arr(split));
 			w_start = -1;
-		}	
+		}
 	}
 	split[j] = NULL;
 	return (split);

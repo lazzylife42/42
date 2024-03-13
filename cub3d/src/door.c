@@ -6,11 +6,11 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:49:40 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/08 11:11:53 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:45:16 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void    handle_door(t_cube *cube)
 {

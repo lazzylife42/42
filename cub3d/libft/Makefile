@@ -6,13 +6,13 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:38:23 by smonte-e          #+#    #+#              #
-#    Updated: 2023/09/27 16:16:17 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/02/21 16:47:03 by lmedrano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = gcc
-CFLACGS = -Wall -Wextra -Werror
+CFLACGS = -Wall -Wextra -Werror -g
 RM = rm -f
 
 MY_SOURCES =	ft_isalpha.c \

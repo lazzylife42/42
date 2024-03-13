@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 05:16:13 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/11 18:06:47 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:58:47 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 #include <time.h>
 
 static int		g_frame_count = 0;
 static time_t	g_start_time = 0;
 
-void	fps_count()
+void	fps_count(void)
 {
 	time_t	current_time;
 	double	elapsed_time;
@@ -44,12 +44,20 @@ int	on_destroy(t_cube *cube)
 	return (0);
 }
 
-int	init_all(t_cube *cube, char **argv)
+int	init_all(t_cube *cube, char **argv, int argc)
 {
 	cube->mlx_ptr = mlx_init();
 	if (!cube->mlx_ptr)
 		return (0);
-	map_renderer_init(cube, argv);
+	cube->map = malloc(sizeof(t_map));
+	if (cube->map == NULL)
+		ft_error(RED "Error\nMalloc failed\n" RST);
+	cube->map->textures = malloc(sizeof(t_textures));
+	if (cube->map->textures == NULL)
+		ft_error(RED "Error\nMalloc failed\n" RST);
+	if (check_args(argc) == 0 && check_map_file(argv[1]) == 0
+		&& check_textures(argv[1], cube, cube->map->textures) == 0)
+		set_map(argv[1], argv, cube);
 	init_player(cube);
 	key_init(cube);
 	cube->ray = (t_raycast *)malloc(sizeof(t_raycast));
@@ -62,14 +70,14 @@ int	init_all(t_cube *cube, char **argv)
 	cube->loadscreen = false;
 	cube->load = malloc(sizeof(t_load));
 	load_melt_textures(cube);
-	if (!init_textures(cube))
+	if (!init_textures(cube, cube->map->textures))
 		return (0);
 	return (1);
 }
 
 int	game_loop(t_cube *cube)
 {
-	fps_count();
+    fps_count();
 	if (cube->loadscreen == false)
 	{
 		loadscreen(cube);
@@ -80,30 +88,24 @@ int	game_loop(t_cube *cube)
 		cube->img->img = mlx_new_image(cube->mlx_ptr, X_RES, Y_RES);
 		cube->img->addr = mlx_get_data_addr(cube->img->img,
 				&cube->img->bits_per_pixel, &cube->img->line_length,
-				&cube->img->endian); 
+				&cube->img->endian);
 		mlx_mouse_hide();
 		handle_mouse(cube);
 		update_player(cube);
 		map_renderer(cube);
 		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img->img, 0,
 			0);
-		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->text->t_img[5].img, 0, Y_RES - HUD);
+		mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr,
+			cube->text->t_img[5].img, 0, Y_RES - HUD);
 	}
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	t_cube	cube;
+	t_cube cube;
 
-	if (argc != 2)
-	{
-		ft_putstr_fd(RED "Bad Args :\n" GRN "Try : <" BLU "./cube" GRN
-			"> <" BLU "map/\'your_chosen _map\'" GRN ">\n" RST,
-			2);
-		exit(EXIT_FAILURE);
-	}
-	if (!init_all(&cube, argv))
+	if (!init_all(&cube, argv, argc))
 		return (1);
 	mlx_loop_hook(cube.mlx_ptr, game_loop, &cube);
 	mlx_hook(cube.win_ptr, 2, 1L << 0, &keypress, &cube);

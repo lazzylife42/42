@@ -1,10 +1,10 @@
-NO img/128/duke/north.xpm
-SO img/128/duke/south.xpm
-WE img/128/duke/west.xpm
-EA img/128/duke/east.xpm
+NO xpm/textures3/text00.xpm
+SO xpm/textures3/text01.xpm
+WE xpm/textures3/text02.xpm
+EA xpm/textures3/text03.xpm
 
-F ./img/128/duke/floor.xpm
-C ./img/128/duke/ceiling.xpm
+F 255,15,80
+C 155,65,180
 
         1111111111111111111111111
         1000000000110000000000001

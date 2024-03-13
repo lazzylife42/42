@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/01 17:12:16 by smonte-e          #+#    #+#              #
-#    Updated: 2024/03/08 09:29:29 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/03/12 21:00:27 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,17 @@ CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 LIBFT = libft
 MLX = minilibx
 RM = rm -f
-OPTIONS = -Iminilibx/mlx -Ilibftsrc/
-INCLUDES = -I/opt/X11/include -Imlx
+OPTIONS = -Imlx -Ilibft
+INCLUDES =  -I/opt/X11/include -Imlx
 
-SRC = src/main.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
+SRC = src/check_map.c src/checker.c src/colors.c src/flood_fill.c src/main.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
       src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \
-      src/textures.c src/door.c
+      src/textures.c src/textures_2.c src/door.c src/utils.c src/error.c
+
+SRC_BONUS = src/check_map.c src/checker.c src/colors.c src/flood_fill.c src/main_bonus.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
+      src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \
+      src/textures.c src/textures_2.c src/door.c src/utils.c src/error.c
 	  
-SRC_BONUS = src/main_bonus.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
-      src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \
-		src/textures.c src/door.c
-
 OBJS = $(SRC:.c=.o)
 
 OBJS_BONUS = $(SRC_BONUS:.c=.o)
@@ -43,8 +43,10 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@echo "$(GREEN)Compiling $(NAME)...$(NC)"
 	$(MAKE) -sC $(LIBFT)
+	@echo "$(GREEN)Making libft...$(NC)"
 	$(MAKE) -sC $(MLX)
-	gcc $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(INCLUDES)
+	@echo "$(GREEN)Making minilibx...$(NC)"
+	gcc $(CFLAGS) $(OBJS) -L./$(LIBFT) -lft -L./$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o : %.c
 	@clear
@@ -58,27 +60,27 @@ $(NAME): $(OBJS)
 	\t\t\t░╚════╝░░╚═════╝░╚═════╝░╚═════╝░╚═════╝░\n\
 	\n$(NC)"
 	@echo "$(YELLOW)Compiling src...$(NC)"
-	gcc $(CFLAGS) $(OPTIONS) -c $< -o $@ $(INCLUDES)
+	gcc $(CFLAGS) $(OPTIONS)$(DIR_SRC) -c $< -o $@ $(INCLUDES)
 
 $(LIBFT):
 	$(MAKE) -sC $(LIBFT)
 
 $(MLX):
-	$(MAKE) -sC $(MLX)
+	$(MAKE) -sC $(@D)
 
-bonus: clean $(OBJS_BONUS)
+bonus: fclean $(OBJS_BONUS)
 	@echo "$(GREEN)Compiling bonus...$(NC)"
 	$(MAKE) -sC $(LIBFT)
 	$(MAKE) -sC $(MLX)
-	gcc $(CFLAGS) $(OBJS_BONUS) -L$(LIBFT) -lft -L$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(INCLUDES)
+	gcc $(CFLAGS) $(OBJS_BONUS) -L./$(LIBFT) -lft -L./$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
 	@clear
 	@echo "$(RED)Cleaning...$(NC)"
 	$(MAKE) -sC $(LIBFT) clean
 	$(MAKE) -sC $(MLX) clean
-	$(RM) $(OBJS) $(OBJS_BONUS)
-
+	$(RM) $(OBJS)
+	
 fclean: clean
 	@echo "$(RED)Fcleaning...$(NC)"
 	$(RM) $(NAME)

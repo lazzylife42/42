@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/11 18:09:16 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:54:05 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@
 # define CYA "\033[1;36m"
 # define WHT "\033[1;37m"
 
+# define DEBUG 1
 # define MAP_LINE 8
 # define X_RES 1280
 # define Y_RES 720
 # define HUD 212
-# define TEXTURES_NUM 6
+# define TEXTURES_NUM 5
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
 # define FINE_RATIO 3  // ajuste la vitesse de déplacement
 # define ROT_RATIO 5   // vitesse de rotation en Y
@@ -61,6 +62,7 @@
 # define K_O 31
 
 # define LOADSCREEN "xpm/loadscreen.xpm"
+# define XPM_MAGIC "/* XPM */"
 
 //      STRUCTS         //
 
@@ -95,6 +97,25 @@ typedef struct s_player
 	int			offset;
 }				t_player;
 
+typedef struct s_rgb
+{
+	int			r;
+	int			g;
+	int			b;
+}				t_rgb;
+
+typedef struct s_textures
+{
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	char		*f;
+	char		*c;
+	t_rgb		*f_color;
+	t_rgb		*c_color;
+}				t_textures;
+
 typedef struct s_map
 {
 	int			m_width;
@@ -104,6 +125,9 @@ typedef struct s_map
 	char		**m_mini_map;
 	double		fps;
 	t_player	*player;
+	t_textures	*textures;
+	t_rgb		*rgb;
+	int			file_height;
 
 }				t_map;
 
@@ -197,7 +221,7 @@ typedef struct s_cube
 int				on_destroy(t_cube *cube);
 int				keypress(int keysym, t_cube *cube);
 int				keyrelease(int keysym, t_cube *cube);
-int				init_textures(t_cube *cube);
+int				init_textures(t_cube *cube, t_textures *textures);
 void			handle_mouse(t_cube *cube);
 void			update_player(t_cube *cube);
 void			loadscreen(t_cube *cube);
@@ -208,7 +232,7 @@ void 			handle_door(t_cube *cube);
 /*		INIT			*/
 
 void			key_init(t_cube *cube);
-void			map_init(int fd, t_cube *cube);
+void			map_init(t_cube *cube);
 void			map_renderer_init(t_cube *cube, char **argv);
 void			init_player(t_cube *cube);
 void			init_wall(t_cube *cube);
@@ -216,7 +240,7 @@ void			init_wall(t_cube *cube);
 /*		MAP				*/
 
 void			map_dim(int fd, t_cube *cube);
-void			map_to_tab(int fd, t_cube *cube);
+void			map_to_tab(char *arg, t_cube *cube);
 void			map_renderer(t_cube *cube);
 void			free_map(t_cube *cube);
 
@@ -241,6 +265,7 @@ void			draw_triangle(t_cube *cube);
 void			draw_wall(t_cube *cube);
 void	draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id);
 int				get_texture_color(t_cube *cube, int text_id, t_vec pos);
+int				rgb_to_hexa(t_rgb *rgb);
 
 /*		RAYCAST		*/
 
@@ -250,6 +275,34 @@ void			set_wall_parameters(t_raycast *ray, t_cube *cube,
 					double camera_height);
 void			render_wall(t_cube *cube, t_raycast *ray);
 void			draw_wall(t_cube *cube);
+
+/*			PARSING		*/
+
+int				check_extension(char *arg, char *extension);
+int				check_args(int argc);
+int				check_existing_file(char *arg);
+int				check_map_file(char *arg);
+int				check_textures(char *av, t_cube *cube, t_textures *textures);
+void			ft_error(char *msg);
+void			textures_null(t_textures *textures);
+void			find_cardinal(int fd, t_textures *textures);
+void			ft_error_long(char *msg1, char *msg2);
+char			*extract_path(char *str);
+void			init_texture_path(t_textures *textures);
+void			check_texture_exists(char *path);
+void			check_colors(char **colors, t_rgb *texture);
+int				find_commas(char *texture);
+int				count_words(char **colors);
+void			digit_check(char **colors);
+void			get_map_height(t_map *map, char *arg);
+void			get_map_width(t_map *map, char *arg);
+int				ft_isspace(int c);
+void			map_delete(t_cube *cube);
+int				is_within_walls(char **map, t_cube *cube);
+void			get_map_start(t_map *map, char *arg);
+int				set_map(char *arg, char **argv, t_cube *cube);
+int				ft_is_empty(char *tmp);
+int				is_part_of_map(char *buff);
 
 #endif
 
