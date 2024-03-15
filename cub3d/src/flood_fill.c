@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmedrano <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 17:13:22 by lmedrano          #+#    #+#             */
-/*   Updated: 2024/03/13 10:47:12 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:56:22 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,33 @@ void	init_flood_y(int flood_y[4])
 	flood_y[3] = -1;
 }
 
+void	replace_spaces(char *line)
+{
+	int	i;
+	int	start;
+	int	end;
+
+	i = 0;
+	start = 0;
+	end = 0;
+	while (line[i] != '\0' && line[i] != '\n')
+	{
+		if (line[i] == ' ')
+			line[i] = 'x';
+		i++;
+	}
+	end = ft_strlen(line) - 1;
+	while (end >= 0 && line[end] == ' ')
+		end--;
+	i = start;
+	while (i <= end)
+	{
+		if (line[i] == ' ')
+			line[i] = 'x';
+		i++;
+	}
+}
+
 void	flood_fill(char **map, t_cube *cube, int x, int y)
 {
 	int	width;
@@ -42,9 +69,9 @@ void	flood_fill(char **map, t_cube *cube, int x, int y)
 	init_flood_x(flood_x);
 	init_flood_y(flood_y);
 	if (x < 0 || x >= width || y < 0 || y >= height
-		|| map[x][y] == '1' || map[x][y] == '2')
+		|| map[y][x] == '1' || map[y][x] == '2' || map[y][x] == 'x')
 		return ;
-	map[x][y] = '2';
+	map[y][x] = '2';
 	while (i < 4)
 	{
 		flood_fill(map, cube, x + flood_x[i], y + flood_y[i]);

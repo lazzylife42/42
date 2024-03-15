@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmedrano <lmedrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:57:31 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/13 11:00:19 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:50:32 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	map_renderer_init(t_cube *cube, char **argv)
 	(void)argv;
 	map_init(cube);
 	map_to_tab(argv[1], cube);
+	check_players(cube);
+	error_players(cube);
 	if (is_within_walls(cube->map->m_mini_map, cube) == -1)
 		ft_error(RED "Error\nMap is not closed\n" RST);
 	else

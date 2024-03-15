@@ -63,16 +63,6 @@ int	load_textures(t_cube *cube, t_textures *textures, int texture_count)
 	return (1);
 }
 
-int	count_textures(t_textures *textures)
-{
-	if (textures->f_color == NULL && textures->c_color == NULL)
-		return (4);
-	else if (textures->f_color == NULL || textures->c_color == NULL)
-		return (4);
-	else
-		return (4);
-}
-
 char	*get_texture_path(int index, t_textures *texture)
 {
 	char	*file_path;

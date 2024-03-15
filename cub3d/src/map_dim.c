@@ -3,96 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   map_dim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmedrano <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: lmedrano <lmedrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 09:13:37 by lmedrano          #+#    #+#             */
-/*   Updated: 2024/03/13 13:10:21 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:42:24 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	is_valid_map_line(char *line)
+void	assign_heights(int height, t_cube *cube, int map_start)
 {
-	if (ft_strlen(line) == 1)
-		return (0);
-	if (is_part_of_map(line) == -1 && ft_is_empty(line) == 1)
-		return (0);
-	return (1);
+	cube->map->m_height = height;
+	printf("Height is %d\n", cube->map->m_height);
+	if (map_start)
+		cube->map->map_start = map_start;
+		printf("Map start is %d\n", cube->map->map_start);
 }
 
-int	count_total_lines(const char *file_path)
-{
-	int	fd;
-	int	count;
-
-	count = 0;
-	fd = open(file_path, O_RDONLY);
-	if (fd == -1)
-		ft_error(RED "Error\nCould not open file\n" RST);
-	while (get_next_line(fd))
-		count++;
-	close(fd);
-	return (count);
-}
-
-int	count_valid_map_lines(char *file_path)
+void	get_map_height(t_cube *cube, char *arg)
 {
 	int		fd;
-	int		count;
-	char	*line;
+	char	*buff;
+	int		height;
+	int		map_start;
+	int		counter;
 
-	count = 0;
-	fd = open(file_path, O_RDONLY);
-	if (fd == -1)
-		ft_error(RED "Error\nCould not open file\n" RST);
-	line = get_next_line(fd);
-	while (line != NULL)
+	height = 0;
+	map_start = 0;
+	counter = 0;
+	fd = open_file(arg);
+	buff = get_next_line(fd);
+	while (buff != NULL)
 	{
-		if (is_valid_map_line(line))
-			count++;
-		free(line);
-		line = get_next_line(fd);
+		if (ft_is_texture(buff) != 0 || ft_is_empty(buff))
+		{
+			counter++;
+			buff = get_next_line(fd);
+		}
+		else
+		{
+			if (!map_start)
+			{
+				map_start = counter;
+				height++;
+				counter++;
+			}
+			buff = get_next_line(fd);
+			counter++;
+			height++;
+		}
 	}
+	assign_heights(height, cube, map_start);
+	free(buff);
 	close(fd);
-	return (count);
 }
 
-int	skip_lines_before_map(int fd, int num_lines_to_skip)
+void	get_map_width(t_cube *cube, char *arg)
 {
-	char	*line;
-	int		lines_skipped;
-
-	lines_skipped = 0;
-	line = get_next_line(fd);
-	while (lines_skipped < num_lines_to_skip && line != NULL)
-	{
-		free(line);
-		line = get_next_line(fd);
-		lines_skipped++;
-	}
-	return (lines_skipped);
-}
-
-int	calculate_longest_line_width(int fd, int num_lines)
-{
-	char	*line;
-	int		longest_width;
-	int		line_width;
+	int		fd;
+	char	*buff;
+	int		width;
 	int		i;
+	int		j;
 
-	i = 0;
-	longest_width = 0;
-	while (i < num_lines)
+	j = 0;
+	width = 0;
+	fd = open_file(arg);
+	while (j++ < cube->map->map_start)
+		buff = get_next_line(fd);
+	j = 0;
+	while (j < cube->map->m_height)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		line_width = ft_strlen_wo_spaces(line);
-		if (line_width > longest_width)
-			longest_width = line_width;
-		free(line);
-		i++;
+		i = 0;
+		while (buff[i] != '\n' && buff[i] != '\0')
+			i++;
+		if (i > width)
+			width = i;
+		buff = get_next_line(fd);
+		j++;
 	}
-	return (longest_width);
+	cube->map->m_width = width;
+	free(buff);
+	close(fd);
 }

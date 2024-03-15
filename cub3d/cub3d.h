@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/14 09:28:47 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/15 21:05:24 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,13 @@ typedef struct s_vecf
 	float		y;
 }				t_vecf;
 
+typedef	struct s_tri
+{
+	t_vecf		top;
+	t_vecf		bottom_left;
+	t_vecf		bottom_right;
+}				t_tri;
+
 typedef struct s_error
 {
 	int			e_empty;
@@ -127,7 +134,7 @@ typedef struct s_map
 	t_player	*player;
 	t_textures	*textures;
 	t_rgb		*rgb;
-	int			file_height;
+	int			map_start;
 
 }				t_map;
 
@@ -294,8 +301,8 @@ void			check_colors(char **colors, t_rgb *texture);
 int				find_commas(char *texture);
 int				count_words(char **colors);
 void			digit_check(char **colors);
-void			get_map_height(t_map *map, char *arg);
-void			get_map_width(t_map *map, char *arg);
+void			get_map_height(t_cube *cube, char *arg);
+void			get_map_width(t_cube *cube, char *arg);
 int				ft_isspace(int c);
 void			map_delete(t_cube *cube);
 int				is_within_walls(char **map, t_cube *cube);
@@ -342,6 +349,8 @@ void			map_pos(char *tmp);
 void			check_duplicates(int i, int *found);
 char			*remove_backslash(char *tmp);
 void			assign_array(int i, int *found);
+int				ft_is_texture(char *tmp);
+void			replace_spaces(char *line);
 
 #endif
 

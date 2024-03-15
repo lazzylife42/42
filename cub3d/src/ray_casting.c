@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 06:42:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/13 11:06:22 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:05:46 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_raycast	initialize_raycast(t_cube *cube, int col)
 
 void	perform_dda(t_cube *cube, t_raycast *ray)
 {
-	cube->ray->hit = 0;
 	while (!cube->ray->hit)
 	{
 		if (ray->sided.x < ray->sided.y)
@@ -110,6 +109,7 @@ void	draw_wall(t_cube *cube)
 	while (ray.col < X_RES)
 	{
 		ray = initialize_raycast(cube, ray.col);
+		cube->ray->hit = 0;
 		perform_dda(cube, &ray);
 		render_wall(cube, &ray);
 		ray.col++;

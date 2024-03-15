@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmedrano <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: lmedrano <lmedrano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 09:15:11 by lmedrano          #+#    #+#             */
-/*   Updated: 2024/03/13 09:16:21 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/14 14:40:47 by lmedrano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,15 @@ int	ft_is_texture(char *tmp)
 		return (0);
 }
 
-int	ft_is_empty(char *tmp)
+int	ft_is_empty(char *line)
 {
-	size_t	i;
-
-	i = 0;
-	if (tmp == NULL)
-		return (0);
-	if (ft_strlen(tmp) == 1)
-		return (1);
-	while (tmp[i] != '\n')
+	while (*line != '\0')
 	{
-		if (ft_isspace(tmp[i]))
-			return (1);
-		i++;
+		if (*line != ' ' && *line != '\n')
+			return (0);
+		line++;
 	}
-	return (0);
+	return (1);
 }
 
 int	ft_strlen_wo_spaces(char *str)

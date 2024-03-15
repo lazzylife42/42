@@ -1,10 +1,10 @@
-NO xpm/booba_backup.xpm
-SO xpm/booba_backup.xpm
-WE xpm/booba_backup.xpm
-EA xpm/booba_backup.xpm
+NO xpm/booba.xpm
+SO xpm/booba.xpm
+WE xpm/booba.xpm
+EA xpm/booba.xpm
 
-F xpm/booba_backup.xpm
-C xpm/booba_backup.xpm
+F 250,250,250
+C 2,10,99
 
 111111111111111
 111111000111111

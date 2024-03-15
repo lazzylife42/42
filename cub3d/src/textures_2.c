@@ -21,6 +21,7 @@ t_rgb	*final_check_textures(char *texture)
 	el_color = NULL;
 	colors = NULL;
 	count = 0;
+	printf("texture is %s\n", texture);
 	if (find_commas(texture) == 2)
 	{
 		colors = split_to_rgb(texture);
@@ -34,7 +35,7 @@ t_rgb	*final_check_textures(char *texture)
 	else if (find_commas(texture) == 1)
 		ft_error(RED "Error\nRGB should be 3 numbers\n" RST);
 	else
-		is_xpm_file(texture);
+		ft_error(RED "Error\nNo colors...\n" RST);
 	return (el_color);
 }
 
@@ -53,13 +54,13 @@ void	check_texture_exists(char *path)
 void	init_texture_path(t_textures *textures)
 {
 	if (textures->no != NULL)
-		final_check_textures(textures->no);
+		is_xpm_file(textures->no);
 	if (textures->so != NULL)
-		final_check_textures(textures->so);
+		is_xpm_file(textures->no);
 	if (textures->ea != NULL)
-		final_check_textures(textures->ea);
+		is_xpm_file(textures->no);
 	if (textures->we != NULL)
-		final_check_textures(textures->we);
+		is_xpm_file(textures->no);
 	if (textures->f != NULL)
 		textures->f_color = final_check_textures(textures->f);
 	if (textures->c != NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmedrano <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:05:51 by lmedrano          #+#    #+#             */
-/*   Updated: 2024/03/13 18:18:02 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:06:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	find_textures(char *tmp, t_textures *textures, int *found)
 		textures->we = remove_backslash(tmp + 3);
 		found[3]++;
 	}
-	if (found[0] == 0 && found[1] == 0 && found[2] == 0 && found[3] == 0 && found[4] == 0 && found[5] == 0)
+	if (found[0] == 0 && found[1] == 0 && found[2] == 0 && found[3] == 0
+		&& found[4] == 0 && found[5] == 0)
 		ft_error(RED "Error\nMap not last or invalid file\n" RST);
 }
 

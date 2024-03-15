@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:02:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/13 14:05:48 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:18:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	init_textures(t_cube *cube, t_textures *textures)
 	cube->text = (t_text *)malloc(sizeof(t_text));
 	if (cube->text == NULL)
 		return (0);
-	texture_count = count_textures(textures);
+	texture_count = 4;
 	cube->text->t_img = (t_img *)malloc(sizeof(t_img) * (texture_count + 2));
 	if (cube->text->t_img == NULL)
 	{
@@ -55,6 +55,28 @@ int	get_texture_color(t_cube *cube, int texture_id, t_vec pos)
 	return (color);
 }
 
+int	get_texture_to_use(t_cube *cube, int texture_id)
+{
+	int	texture_to_use;
+
+	texture_to_use = texture_id;
+	if (cube->ray->side == 0)
+	{
+		if (cube->ray->dir.x > 0)
+			texture_to_use = (texture_id + 1) % 4;
+		else
+			texture_to_use = (texture_id + 3) % 4;
+	}
+	else
+	{
+		if (cube->ray->dir.y > 0)
+			texture_to_use = (texture_id + 2) % 4;
+		else
+			texture_to_use = texture_id;
+	}
+	return (texture_to_use);
+}
+
 void	draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id)
 {
 	int		y;
@@ -70,36 +92,13 @@ void	draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id)
 	while (y < end.y)
 	{
 		if (cube->ray->hit == 2)
-		{
 			texture_to_use = 4;
-			color = get_texture_color(cube, texture_to_use, (t_vec){(cube->ray->col
-						% cube->text->t_img[texture_to_use].width), ty});
-			mlx_pixel(cube->img, (t_vec){cube->ray->col, y}, color);
-			ty += ty_step;
-			y++;
-		}
 		else
-		{
-			texture_to_use = texture_id;
-			if (cube->ray->side == 0)
-			{
-				if (cube->ray->dir.x > 0)
-					texture_to_use = (texture_id + 1) % 4;
-				else
-					texture_to_use = (texture_id + 3) % 4;
-			}
-			else
-			{
-				if (cube->ray->dir.y > 0)
-					texture_to_use = (texture_id + 2) % 4;
-				else
-					texture_to_use = texture_id;
-			}
-			color = get_texture_color(cube, texture_to_use, (t_vec){(cube->ray->col
-						% cube->text->t_img[texture_to_use].width), ty});
-			mlx_pixel(cube->img, (t_vec){cube->ray->col, y}, color);
-			ty += ty_step;
-			y++;
-		}	
+			texture_to_use = get_texture_to_use(cube, texture_id);
+		color = get_texture_color(cube, texture_to_use, (t_vec){(cube->ray->col
+					% cube->text->t_img[texture_to_use].width), ty});
+		mlx_pixel(cube->img, (t_vec){cube->ray->col, y}, color);
+		ty += ty_step;
+		y++;
 	}
 }

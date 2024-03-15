@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmedrano <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:58:07 by lmedrano          #+#    #+#             */
-/*   Updated: 2024/03/13 11:00:49 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:02:04 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,22 @@ int	check_players(t_cube *cube)
 	char	current_char;
 
 	player = 0;
-	y = 0;
-	cube->map->player = (t_player *)malloc(sizeof(t_player));
-	while (y < cube->map->m_height)
+	y = -1;
+	cube->map->player = allocate_mem_player(cube);
+	while (++y < cube->map->m_height)
 	{
-		x = 0;
-		while (x < cube->map->m_width)
+		x = -1;
+		while (++x < cube->map->m_width)
 		{
 			current_char = cube->map->m_mini_map[y][x];
 			if (current_char == 'N' || current_char == 'E'
 				|| current_char == 'S' || current_char == 'W')
+			{
+				cube->map->player->p_pos_x = x;
+				cube->map->player->p_pos_y = y;
 				player++;
-			x++;
+			}
 		}
-		y++;
 	}
 	return (player);
 }
