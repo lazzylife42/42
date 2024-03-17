@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/01 17:12:16 by smonte-e          #+#    #+#              #
-#    Updated: 2024/03/13 17:08:20 by lmedrano         ###   ########.fr        #
+#    Updated: 2024/03/17 19:01:04 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cube
 DIR_SRC = src/
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g3
 LIBFT = libft
 MLX = minilibx
 RM = rm -f
@@ -24,14 +24,14 @@ SRC = src/checker.c src/colors.c src/flood_fill.c src/main.c src/map.c src/map2.
       src/textures.c src/textures_2.c src/door.c src/utils.c src/error.c src/map_checker.c \
 	  src/draw_walls.c src/map_dim.c src/map_utils.c src/xpm.c src/rgb.c \
 	  src/map_to_tab.c src/mini_map.c src/player_utils.c src/init.c src/textures_utils.c \
-	  src/invalid_char.c src/utils_2.c
+	  src/invalid_char.c src/utils_2.c src/draw_triangle.c
 
 SRC_BONUS = src/checker.c src/colors.c src/flood_fill.c src/main_bonus.c src/map.c src/map2.c src/player.c src/player2.c src/draw.c \
-     		src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \
-      		src/textures.c src/textures_2.c src/door.c src/utils.c src/error.c src/map_checker.c \
-	  		src/draw_walls.c src/map_dim.c src/map_utils.c src/xpm.c src/rgb.c \
-			src/map_to_tab.c src/mini_map.c src/player_utils.c src/init.c src/textures_utils.c \
-	  		src/invalid_char.c src/utils_2.c
+      src/game_map.c src/keybord.c src/mouse.c src/loadscreen.c src/ray_casting.c \
+      src/textures.c src/textures_2.c src/door.c src/utils.c src/error.c src/map_checker.c \
+	  src/draw_walls.c src/map_dim.c src/map_utils.c src/xpm.c src/rgb.c \
+	  src/map_to_tab.c src/mini_map.c src/player_utils.c src/init.c src/textures_utils.c \
+	  src/invalid_char.c src/utils_2.c src/draw_triangle.c
 	  
 OBJS = $(SRC:.c=.o)
 

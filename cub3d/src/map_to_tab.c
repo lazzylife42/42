@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_to_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmedrano <lmedrano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 09:54:32 by lmedrano          #+#    #+#             */
-/*   Updated: 2024/03/14 15:51:20 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:31:02 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,10 @@ void	read_and_store_map(int fd, t_cube *cube)
 	char	*buff;
 	int		i;
 	int		j;
-	int		map_encountered;
-	int		texture_encountered;
+	// int		map_encountered;
 
 	i = 0;
 	j = -1;
-	map_encountered = 0;
-	texture_encountered = 0;
 	while (j++ < cube->map->map_start)
 		buff = get_next_line(fd);
 	while (buff != NULL)
@@ -78,8 +75,8 @@ void	read_and_store_map(int fd, t_cube *cube)
 			buff = get_next_line(fd);
 			continue ;
 		}
-		if (ft_is_texture(buff) == 0 || !ft_is_empty(buff))
-			map_encountered = 1;
+		// if (ft_is_texture(buff) == 0 || !ft_is_empty(buff))
+		// 	map_encountered = 1;
 		store_map_line(cube, i, buff);
 		if (DEBUG == 1)
 			ft_printf(BLU "%s\n" RST, cube->map->m_mini_map[i]);

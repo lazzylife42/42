@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:02:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/13 18:11:32 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:24:49 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 t_rgb	*final_check_textures(char *texture)
 {
 	char	**colors;
-	int		count;
 	t_rgb	*el_color;
 
 	el_color = NULL;
 	colors = NULL;
-	count = 0;
 	printf("texture is %s\n", texture);
 	if (find_commas(texture) == 2)
 	{

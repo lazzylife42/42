@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 06:42:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/15 19:05:46 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:12:04 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void	perform_dda(t_cube *cube, t_raycast *ray)
 				ray->map.y += 1;
 			ray->side = 1;
 		}
+		if (ray->map.x < 0 || ray->map.x >= cube->map->m_width || ray->map.y < 0
+			|| ray->map.y >= cube->map->m_height)
+			break ;
 		if (cube->map->m_mini_map[(int)ray->map.y][(int)ray->map.x] == '1')
 			cube->ray->hit = 1;
 		else if (cube->map->m_mini_map[(int)ray->map.y][(int)ray->map.x] == 'D')

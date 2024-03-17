@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmedrano <lmedrano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 09:07:22 by lmedrano          #+#    #+#             */
-/*   Updated: 2024/03/14 16:31:42 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:29:07 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char 	**copy_map_to_tmp(char **map, t_cube *cube)
 {
 	char **tmp;
 	int i;
-	int j;
 
 	tmp = (char **)malloc(sizeof(char *) * cube->map->m_height + 1);
 	if (tmp == NULL)
@@ -55,7 +54,6 @@ char 	**copy_map_to_tmp(char **map, t_cube *cube)
 	i = 0;
 	while (i < cube->map->m_height)
 	{
-		j = 0;
 		tmp[i] = (char *)malloc(ft_strlen(map[i]) + 1);
 		if (tmp[i] == NULL)
 			ft_error(RED "Error\nMalloc Failed\n" RST);
