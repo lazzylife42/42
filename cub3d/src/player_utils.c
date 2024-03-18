@@ -43,9 +43,9 @@ int	check_players(t_cube *cube)
 void	error_players(t_cube *cube)
 {
 	if (check_players(cube) > 1)
-		ft_error(RED "Error\nThere should only be one player.Pls fix map.\n" RST);
+		ft_error(RED "Error\nThere should only be one player.\n" RST);
 	else if (check_players(cube) == 0)
-		ft_error(RED "Error\nNo player found :'(. Pls fix map\n" RST);
+		ft_error(RED "Error\nNo player found :'(.\n" RST);
 }
 
 void	set_player_position(t_cube *cube, int x, int y, char direction)

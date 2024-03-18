@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:02:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/17 19:24:49 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:00:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_rgb	*final_check_textures(char *texture)
 
 	el_color = NULL;
 	colors = NULL;
-	printf("texture is %s\n", texture);
 	if (find_commas(texture) == 2)
 	{
 		colors = split_to_rgb(texture);
@@ -54,11 +53,11 @@ void	init_texture_path(t_textures *textures)
 	if (textures->no != NULL)
 		is_xpm_file(textures->no);
 	if (textures->so != NULL)
-		is_xpm_file(textures->no);
+		is_xpm_file(textures->so);
 	if (textures->ea != NULL)
-		is_xpm_file(textures->no);
+		is_xpm_file(textures->ea);
 	if (textures->we != NULL)
-		is_xpm_file(textures->no);
+		is_xpm_file(textures->we);
 	if (textures->f != NULL)
 		textures->f_color = final_check_textures(textures->f);
 	if (textures->c != NULL)
@@ -95,7 +94,7 @@ int	check_textures(char *av, t_cube *cube, t_textures *textures)
 	{
 		assign_textures(textures, fd);
 		if (!init_textures(cube, textures))
-			return (0);
+			return (1);
 	}
 	return (0);
 }

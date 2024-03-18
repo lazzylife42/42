@@ -45,3 +45,32 @@ char	**split_to_rgb(char *texture)
 	}
 	return (colors);
 }
+
+char	*trim_spaces(char *texture)
+{
+	char	*start;
+	char	*end;
+	char	*i;
+	char	*j;
+
+	start = texture;
+	end = texture + ft_strlen(texture - 1);
+	while (ft_isspace((unsigned char)*start))
+		start++;
+	while (end > start && ft_isspace((unsigned char)*end))
+	{
+		if (*(end - 1) == ' ' && *end == '\n')
+			break ;
+		end--;
+	}
+	i = start;
+	j = start;
+	while (*j)
+	{
+		if (*j != ' ' || (*(j + 1) == '\n' && *(j + 2) == '\0'))
+			*i++ = *j;
+		j++;
+	}
+	*i = '\0';
+	return (start);
+}

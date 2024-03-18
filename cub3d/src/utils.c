@@ -35,27 +35,27 @@ char	*remove_backslash(char *tmp)
 	return (NULL);
 }
 
-void	assign_array(int i, int *found)
-{
-	while (i < 6)
-	{
-		found[i] = 0;
-		i++;
-	}
-}
-
-void	check_duplicates(int i, int *found)
-{
-	while (i < 6)
-	{
-		if (found[i] > 1)
-			ft_error(RED "Error\nDuplicated texture\n" RST);
-		i++;
-	}
-}
-
 void	map_pos(char *tmp)
 {
 	if (is_part_of_map(tmp) != -1 && ft_is_empty(tmp) != 1)
 		ft_error(RED "Error\nMap should be last position\n" RST);
+}
+
+int	has_textures(char *tmp)
+{
+	if (ft_strncmp(tmp, "NO ", 3) == 0
+		|| ft_strncmp(tmp, "SO ", 3) == 0
+		|| ft_strncmp(tmp, "EA ", 3) == 0
+		|| ft_strncmp(tmp, "WE ", 3) == 0)
+		return (1);
+	else
+		return (0);
+}
+
+int	has_colors(char *tmp)
+{
+	if (ft_strncmp(tmp, "F ", 2) == 0 || ft_strncmp(tmp, "C ", 2) == 0)
+		return (1);
+	else
+		return (0);
 }

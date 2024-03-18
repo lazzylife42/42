@@ -36,22 +36,6 @@ int	ft_is_empty(char *line)
 	return (1);
 }
 
-int	ft_strlen_wo_spaces(char *str)
-{
-	size_t	i;
-	size_t	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (ft_isspace(str[i]) == 0)
-			count++;
-		i++;
-	}
-	return (count);
-}
-
 int	is_part_of_map(char *buff)
 {
 	int	i;

@@ -37,6 +37,16 @@ int	check_valid_chars_in_line(char *line)
 
 void	handle_invalid_char(char *line)
 {
-	ft_error(RED "Error\nInvalid character in the map\n" RST);
+	ft_error(RED "Error\nInvalid map file\n" RST);
 	free(line);
+}
+
+char	*has_invalid(int fd, char *buff)
+{
+	if (!check_valid_chars_in_line(buff))
+	{
+		handle_invalid_char(buff);
+		buff = get_next_line(fd);
+	}
+	return (buff);
 }

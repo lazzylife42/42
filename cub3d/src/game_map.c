@@ -14,8 +14,12 @@
 
 int	set_map(char *arg, char **argv, t_cube *cube)
 {
-	get_map_height(cube, arg);
+	if (!get_map_height(cube, arg, 0, 0))
+		ft_error(RED "Error\n There is only one map...\n" RST);
 	get_map_width(cube, arg);
+	if (cube->map->m_height > (Y_RES / cube->map->m_height * MINI_SCALE)
+		|| cube->map->m_width > (X_RES / cube->map->m_width * MINI_SCALE))
+		ft_error(RED "Error\nMap too big\n" RST);
 	map_renderer_init(cube, argv);
 	return (0);
 }

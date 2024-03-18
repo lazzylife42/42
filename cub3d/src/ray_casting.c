@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 06:42:02 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/17 19:12:04 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:37:32 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,33 @@ t_raycast	initialize_raycast(t_cube *cube, int col)
 	return (ray);
 }
 
+void	update_side_and_map(t_raycast *ray)
+{
+	if (ray->sided.x < ray->sided.y)
+	{
+		ray->sided.x += ray->delta.x;
+		if (ray->dir.x < 0)
+			ray->map.x += -1;
+		else
+			ray->map.x += 1;
+		ray->side = 0;
+	}
+	else
+	{
+		ray->sided.y += ray->delta.y;
+		if (ray->dir.y < 0)
+			ray->map.y += -1;
+		else
+			ray->map.y += 1;
+		ray->side = 1;
+	}
+}
+
 void	perform_dda(t_cube *cube, t_raycast *ray)
 {
 	while (!cube->ray->hit)
 	{
-		if (ray->sided.x < ray->sided.y)
-		{
-			ray->sided.x += ray->delta.x;
-			if (ray->dir.x < 0)
-				ray->map.x += -1;
-			else
-				ray->map.x += 1;
-			ray->side = 0;
-		}
-		else
-		{
-			ray->sided.y += ray->delta.y;
-			if (ray->dir.y < 0)
-				ray->map.y += -1;
-			else
-				ray->map.y += 1;
-			ray->side = 1;
-		}
+		update_side_and_map(ray);
 		if (ray->map.x < 0 || ray->map.x >= cube->map->m_width || ray->map.y < 0
 			|| ray->map.y >= cube->map->m_height)
 			break ;
@@ -69,6 +74,8 @@ void	perform_dda(t_cube *cube, t_raycast *ray)
 			cube->ray->hit = 1;
 		else if (cube->map->m_mini_map[(int)ray->map.y][(int)ray->map.x] == 'D')
 			cube->ray->hit = 2;
+		else if (cube->map->m_mini_map[(int)ray->map.y][(int)ray->map.x] == 'x')
+			cube->ray->hit = 3;
 	}
 }
 
@@ -91,30 +98,4 @@ void	set_wall_parameters(t_raycast *ray, t_cube *cube, double camera_height)
 		ray->wall_top = 0;
 	if (ray->wall_bottom >= Y_RES - HUD)
 		ray->wall_bottom = Y_RES - HUD - 1;
-}
-
-void	render_wall(t_cube *cube, t_raycast *ray)
-{
-	double	camera_height;
-
-	camera_height = cube->map->player->offset;
-	set_wall_parameters(ray, cube, camera_height);
-	cube->ray = ray;
-	draw_textures(cube, (t_vec){ray->col, ray->wall_top}, (t_vec){ray->col,
-		ray->wall_bottom}, 0);
-}
-
-void	draw_wall(t_cube *cube)
-{
-	t_raycast	ray;
-
-	ray.col = 0;
-	while (ray.col < X_RES)
-	{
-		ray = initialize_raycast(cube, ray.col);
-		cube->ray->hit = 0;
-		perform_dda(cube, &ray);
-		render_wall(cube, &ray);
-		ray.col++;
-	}
 }
