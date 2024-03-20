@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmedrano <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 11:26:33 by lmedrano          #+#    #+#             */
-/*   Updated: 2024/03/13 11:30:42 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:05:08 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ int	init_map(t_cube *cube)
 
 int	init_ray_and_img(t_cube *cube)
 {
-	cube->ray = (t_raycast *)malloc(sizeof(t_raycast));
-	if (!cube->ray)
-		return (0);
+	cube->ray = NULL;
 	cube->img = (t_img *)malloc(sizeof(t_img));
 	if (!cube->img)
 		return (0);

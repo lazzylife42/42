@@ -3,34 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   textures_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:02:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/13 18:11:32 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:00:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-t_rgb	*final_check_textures(char *texture)
+t_rgb	*final_check_textures(char *texture, t_textures *textures)
 {
 	char	**colors;
-	int		count;
 	t_rgb	*el_color;
 
 	el_color = NULL;
 	colors = NULL;
-	count = 0;
-	printf("texture is %s\n", texture);
 	if (find_commas(texture) == 2)
 	{
 		colors = split_to_rgb(texture);
+		if (colors == NULL)
+		{
+			free_textures(textures);
+			ft_error(RED "Error\nSplit error\n" RST);
+		}
 		if (validate_rgb_format(colors) != 0)
 			ft_error(RED "Error\nRGB should be 3 numbers\n" RST);
 		el_color = allocate_rgb_mem();
 		digit_check(colors);
 		check_colors(colors, el_color);
-		free(colors);
+		free_colors(colors);
 	}
 	else if (find_commas(texture) == 1)
 		ft_error(RED "Error\nRGB should be 3 numbers\n" RST);
@@ -56,15 +58,15 @@ void	init_texture_path(t_textures *textures)
 	if (textures->no != NULL)
 		is_xpm_file(textures->no);
 	if (textures->so != NULL)
-		is_xpm_file(textures->no);
+		is_xpm_file(textures->so);
 	if (textures->ea != NULL)
-		is_xpm_file(textures->no);
+		is_xpm_file(textures->ea);
 	if (textures->we != NULL)
-		is_xpm_file(textures->no);
+		is_xpm_file(textures->we);
 	if (textures->f != NULL)
-		textures->f_color = final_check_textures(textures->f);
+		textures->f_color = final_check_textures(textures->f, textures);
 	if (textures->c != NULL)
-		textures->c_color = final_check_textures(textures->c);
+		textures->c_color = final_check_textures(textures->c, textures);
 }
 
 int	assign_textures(t_textures *textures, int fd)
@@ -96,8 +98,9 @@ int	check_textures(char *av, t_cube *cube, t_textures *textures)
 	else
 	{
 		assign_textures(textures, fd);
+		cube->text = NULL;
 		if (!init_textures(cube, textures))
-			return (0);
+			return (1);
 	}
 	return (0);
 }

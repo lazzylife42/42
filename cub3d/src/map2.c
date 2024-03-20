@@ -88,18 +88,3 @@ void	map_renderer(t_cube *cube)
 	if (cube->map->mini_map)
 		player_render(cube);
 }
-
-void	free_map(t_cube *cube)
-{
-	int	i;
-
-	i = 0;
-	while (i < cube->map->m_height)
-	{
-		free(cube->map->m_mini_map[i]);
-		i++;
-	}
-	free(cube->map);
-	cube->map = NULL;
-	cube = NULL;
-}

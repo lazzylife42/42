@@ -16,6 +16,13 @@ int	init_textures(t_cube *cube, t_textures *textures)
 {
 	int	texture_count;
 
+	if (cube->text != NULL)
+	{
+		free(cube->text->t_img);
+		cube->text->t_img = NULL;
+		free(cube->text);
+		cube->text = NULL;
+	}
 	cube->text = (t_text *)malloc(sizeof(t_text));
 	if (cube->text == NULL)
 		return (0);

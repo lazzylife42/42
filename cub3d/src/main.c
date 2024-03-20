@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:28:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/13 11:29:52 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:05:51 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	on_destroy(t_cube *cube)
 {
+	free_textures(cube->map->textures);
 	free_map(cube);
 	mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
 	exit(EXIT_SUCCESS);

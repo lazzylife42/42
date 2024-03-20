@@ -17,12 +17,9 @@ void	allocate_mini_map(t_cube *cube)
 	int	height;
 
 	height = cube->map->m_height;
-	cube->map->m_mini_map = (char **)malloc((height + 1) * sizeof(char *));
+	cube->map->m_mini_map = (char **)malloc((height) * sizeof(char *));
 	if (cube->map->m_mini_map == NULL)
-	{
-		map_delete(cube);
 		ft_error(RED "Error\nMalloc failed\n" RST);
-	}
 }
 
 void	allocate_and_initialize_row(t_cube *cube, int row_index, int width)
@@ -30,10 +27,7 @@ void	allocate_and_initialize_row(t_cube *cube, int row_index, int width)
 	cube->map->m_mini_map[row_index] = (char *)malloc((width + 1)
 			* sizeof(char));
 	if (cube->map->m_mini_map[row_index] == NULL)
-	{
-		map_delete(cube);
 		ft_error(RED "Error\nMalloc failed\n" RST);
-	}
 	ft_bzero(cube->map->m_mini_map[row_index], width);
 }
 

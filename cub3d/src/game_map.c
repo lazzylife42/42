@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmedrano <lmedrano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:49:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/14 13:18:22 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:15:08 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 int	set_map(char *arg, char **argv, t_cube *cube)
 {
-	get_map_height(cube, arg);
+	if (!get_map_height(cube, arg, 0, 0))
+		ft_error(RED "Error\n There is only one map...\n" RST);
 	get_map_width(cube, arg);
+	if (cube->map->m_height > (X_RES / MINI_SCALE)
+		|| cube->map->m_width > (Y_RES / MINI_SCALE))
+		ft_error(RED "Error\nMap too big\n" RST);
 	map_renderer_init(cube, argv);
 	return (0);
 }

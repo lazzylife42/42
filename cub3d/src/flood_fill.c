@@ -30,27 +30,26 @@ void	init_flood_y(int flood_y[4])
 
 void	replace_spaces(char *line)
 {
-	int	i;
-	int	start;
-	int	end;
+	size_t	start;
+	size_t	end;
+	size_t	i;
 
-	i = 0;
 	start = 0;
-	end = 0;
-	while (line[i] != '\0' && line[i] != '\n')
-	{
-		if (line[i] == ' ')
-			line[i] = 'x';
-		i++;
-	}
 	end = ft_strlen(line) - 1;
+	while (line[start] == ' ')
+		start++;
 	while (end >= 0 && line[end] == ' ')
 		end--;
-	i = start;
-	while (i <= end)
+	i = 0;
+	while (i < start)
 	{
-		if (line[i] == ' ')
-			line[i] = 'x';
+		line[i] = 'x';
+		i++;
+	}
+	i = end + 1;
+	while (i < ft_strlen(line))
+	{
+		line[i] = 'x';
 		i++;
 	}
 }
@@ -69,8 +68,12 @@ void	flood_fill(char **map, t_cube *cube, int x, int y)
 	init_flood_x(flood_x);
 	init_flood_y(flood_y);
 	if (x < 0 || x >= width || y < 0 || y >= height
-		|| map[y][x] == '1' || map[y][x] == '2' || map[y][x] == 'x')
+		|| map[y][x] == '1' || map[y][x] == 'D' || map[y][x] == '2')
 		return ;
+	if (map[y][x] == ' ')
+		ft_error(RED "Error\nMap not closed\n" RST);
+	if (map[y][x] == 'x')
+		ft_error(RED "Error\nMap not closed\n" RST);
 	map[y][x] = '2';
 	while (i < 4)
 	{

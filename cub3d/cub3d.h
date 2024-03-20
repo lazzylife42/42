@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:19:10 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/15 21:05:24 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:04:19 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@
 # define MINI_SCALE 16 // valeur magique à recalculer !!!
 # define FINE_RATIO 3  // ajuste la vitesse de déplacement
 # define ROT_RATIO 5   // vitesse de rotation en Y
-# define X_RATIO 10    // vitesse de rotation en X
-# define M_SENSITIVITY 0.2
+# define X_RATIO 5    // vitesse de rotation en X
+# define M_SENSITIVITY 0.3
 
 # define K_ESC 53
 # define K_ENTER 36
@@ -62,9 +62,8 @@
 # define K_O 31
 
 # define LOADSCREEN "xpm/loadscreen.xpm"
-# define XPM_MAGIC "/* XPM */"
 
-//      STRUCTS         //
+/*      STRUCTS         */
 
 typedef struct s_vec
 {
@@ -78,23 +77,23 @@ typedef struct s_vecf
 	float		y;
 }				t_vecf;
 
-typedef	struct s_tri
+typedef struct s_tri
 {
 	t_vecf		top;
 	t_vecf		bottom_left;
 	t_vecf		bottom_right;
 }				t_tri;
 
-typedef struct s_error
+typedef struct s_draw
 {
-	int			e_empty;
-	int			e_square;
-	int			e_walls;
-	int			e_overflow;
-	int			e_bad_char;
-	int			e_bad_map;
-	int			e_v_path;
-}				t_error;
+	int			dx;
+	int			dy;
+	int			sx;
+	int			sy;
+	int			err;
+	int			e2;
+	int			max_iter;
+}				t_draw;
 
 typedef struct s_player
 {
@@ -234,7 +233,7 @@ void			update_player(t_cube *cube);
 void			loadscreen(t_cube *cube);
 void			load_transition(t_cube *cube);
 void			load_melt_textures(t_cube *cube);
-void 			handle_door(t_cube *cube);
+void			handle_door(t_cube *cube);
 
 /*		INIT			*/
 
@@ -270,7 +269,8 @@ void			draw_square(t_img *img, t_vec pos, int size, int color);
 void			draw_rec(t_img *img, t_vec start, t_vec end, int color);
 void			draw_triangle(t_cube *cube);
 void			draw_wall(t_cube *cube);
-void	draw_textures(t_cube *cube, t_vec start, t_vec end, int texture_id);
+void			draw_textures(t_cube *cube, t_vec start, t_vec end,
+					int texture_id);
 int				get_texture_color(t_cube *cube, int text_id, t_vec pos);
 int				rgb_to_hexa(t_rgb *rgb);
 
@@ -301,7 +301,8 @@ void			check_colors(char **colors, t_rgb *texture);
 int				find_commas(char *texture);
 int				count_words(char **colors);
 void			digit_check(char **colors);
-void			get_map_height(t_cube *cube, char *arg);
+int				get_map_height(t_cube *cube, char *arg, int height,
+					int map_start);
 void			get_map_width(t_cube *cube, char *arg);
 int				ft_isspace(int c);
 void			map_delete(t_cube *cube);
@@ -321,7 +322,8 @@ int				open_file(char *file);
 void			print_mini_map_header(void);
 void			read_and_store_map(int fd, t_cube *cube);
 void			initialize_mini_map(t_cube *cube);
-void			allocate_and_initialize_row(t_cube *cube, int row_index, int width); 
+void			allocate_and_initialize_row(t_cube *cube,
+					int row_index, int width);
 void			allocate_mini_map(t_cube *cube);
 int				check_players(t_cube *cube);
 void			error_players(t_cube *cube);
@@ -339,7 +341,8 @@ int				skip_lines_before_map(int fd, int num_lines_to_skip);
 int				calculate_longest_line_width(int fd, int num_lines);
 char			*get_texture_path(int index, t_textures *texture);
 int				count_textures(t_textures *textures);
-int				load_textures(t_cube *cube, t_textures *textures, int texture_count);
+int				load_textures(t_cube *cube, t_textures *textures,
+					int texture_count);
 int				load_default_textures(t_cube *cube, int index);
 int				texture_to_mlx(t_cube *cube, int i, char *file_path);
 int				is_valid_char(char letter);
@@ -351,6 +354,19 @@ char			*remove_backslash(char *tmp);
 void			assign_array(int i, int *found);
 int				ft_is_texture(char *tmp);
 void			replace_spaces(char *line);
+char			*trim_spaces(char *texture);
+int				has_textures(char *tmp);
+int				has_colors(char *tmp);
+int				check_ea_we(char *str);
+int				check_line(char *line);
+int				check_before_flooding(char **map, t_cube *cube, int i, int j);
+int				check_edgy_player(char **map, t_cube *cube, int i, int j);
+char			*has_invalid(int fd, char *buff);
+void			free_textures(t_textures *textures);
+void			free_colors(char **colors);
+void			error_wrapper(t_textures *textures, char *error);
+char			*get_map_line_start(t_cube *cube, char *buff, int fd);
+char			*get_map_line_start_2(t_cube *cube, char *buff, int fd);
 
 #endif
 

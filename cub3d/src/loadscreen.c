@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loadscreen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 17:07:23 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/11 18:46:59 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:37:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,24 @@ void	loadscreen(t_cube *cube)
 		0);
 }
 
+char	*generate_filename(int i)
+{
+	char	*base_filename;
+	char	*itoa;
+
+	base_filename = (char *)malloc(sizeof(char) * 50);
+	if (!base_filename)
+		exit(EXIT_FAILURE);
+	ft_strlcpy(base_filename, "xpm/melt_xpm/melt", 20);
+	if (i < 9)
+		ft_strlcat(base_filename, "0", 50);
+	itoa = ft_itoa(i + 1);
+	ft_strlcat(base_filename, itoa, 50);
+	ft_strlcat(base_filename, ".xpm", 50);
+	free(itoa);
+	return (base_filename);
+}
+
 void	load_melt_textures(t_cube *cube)
 {
 	int		i;
@@ -29,14 +47,7 @@ void	load_melt_textures(t_cube *cube)
 	i = 0;
 	while (i < 31)
 	{
-		base_filename = (char *)malloc(sizeof(char) * 50);
-		if (!base_filename)
-			exit(EXIT_FAILURE);
-		ft_strlcpy(base_filename, "xpm/melt_xpm/melt", 20);
-		if (i < 9)
-			ft_strlcat(base_filename, "0", 50);
-		ft_strlcat(base_filename, ft_itoa(i + 1), 50);
-		ft_strlcat(base_filename, ".xpm", 50);
+		base_filename = generate_filename(i);
 		cube->load->melt[i] = mlx_xpm_file_to_image(cube->mlx_ptr,
 				base_filename, &cube->load->l_width, &cube->load->l_height);
 		if (!cube->load->melt[i])

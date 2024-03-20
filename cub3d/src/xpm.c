@@ -30,7 +30,7 @@ int	ends_with_xpm(char *str)
 
 int	xpm_mem_cmp(char *header, int fd)
 {
-	if (ft_memcmp(header, XPM_MAGIC, sizeof(XPM_MAGIC)) == 10)
+	if (ft_memcmp(header, "/* XPM */", sizeof("/* XPM */")) == 10)
 	{
 		close(fd);
 		return (0);
@@ -46,20 +46,20 @@ int	xpm_mem_cmp(char *header, int fd)
 int	is_xpm_file(const char *file_path)
 {
 	int				fd;
-	char			header[sizeof(XPM_MAGIC)];
+	char			header[sizeof("/* XPM */")];
 	ssize_t			bytes_read;
 
 	fd = open(file_path, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_error(RED "Error\nUnable to open file\n" RST);
+		ft_error(RED "Error\nXPM file does not exist\n" RST);
 		return (-1);
 	}
 	bytes_read = read(fd, header, sizeof(header));
 	if (bytes_read < (ssize_t) sizeof(header))
 	{
 		close(fd);
-		ft_error(RED "Error\nUnable to read file\n" RST);
+		ft_error(RED "Error\nUnable to read xpm file\n" RST);
 		return (-1);
 	}
 	if (xpm_mem_cmp(header, fd) == -1)

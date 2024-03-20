@@ -15,48 +15,60 @@
 void	assign_heights(int height, t_cube *cube, int map_start)
 {
 	cube->map->m_height = height;
-	printf("Height is %d\n", cube->map->m_height);
+	if (cube->map->m_height < 1)
+		ft_error(RED "Error\nNo map!\n" RST);
 	if (map_start)
 		cube->map->map_start = map_start;
-		printf("Map start is %d\n", cube->map->map_start);
 }
 
-void	get_map_height(t_cube *cube, char *arg)
+int	get_map_height(t_cube *cube, char *arg, int height, int map_start)
 {
 	int		fd;
 	char	*buff;
-	int		height;
-	int		map_start;
 	int		counter;
 
-	height = 0;
-	map_start = 0;
 	counter = 0;
 	fd = open_file(arg);
 	buff = get_next_line(fd);
 	while (buff != NULL)
 	{
 		if (ft_is_texture(buff) != 0 || ft_is_empty(buff))
-		{
 			counter++;
-			buff = get_next_line(fd);
-		}
 		else
 		{
 			if (!map_start)
-			{
 				map_start = counter;
-				height++;
-				counter++;
-			}
-			buff = get_next_line(fd);
-			counter++;
 			height++;
+			counter++;
 		}
+		free(buff);
+		buff = get_next_line(fd);
 	}
 	assign_heights(height, cube, map_start);
 	free(buff);
 	close(fd);
+	return (counter);
+}
+
+void	assign_widths(t_cube *cube, int width)
+{
+	cube->map->m_width = width;
+	if (cube->map->m_height == 2 && cube->map->m_width == 3)
+		ft_error(RED "Error\nMap too small\n" RST);
+}
+
+char	*get_map_line_start_1(t_cube *cube, char *buff, int fd)
+{
+	int	j;
+
+	j = 0;
+	while (j++ < cube->map->map_start - 1)
+	{
+		buff = get_next_line(fd);
+		free(buff);
+		buff = NULL;
+	}
+	return (buff);
 }
 
 void	get_map_width(t_cube *cube, char *arg)
@@ -67,23 +79,23 @@ void	get_map_width(t_cube *cube, char *arg)
 	int		i;
 	int		j;
 
-	j = 0;
 	width = 0;
+	buff = NULL;
 	fd = open_file(arg);
-	while (j++ < cube->map->map_start)
-		buff = get_next_line(fd);
+	buff = get_map_line_start_1(cube, buff, fd);
+	buff = get_next_line(fd);
 	j = 0;
-	while (j < cube->map->m_height)
+	while (j++ < cube->map->m_height)
 	{
 		i = 0;
 		while (buff[i] != '\n' && buff[i] != '\0')
 			i++;
 		if (i > width)
 			width = i;
+		free(buff);
 		buff = get_next_line(fd);
-		j++;
 	}
-	cube->map->m_width = width;
+	assign_widths(cube, width);
 	free(buff);
 	close(fd);
 }

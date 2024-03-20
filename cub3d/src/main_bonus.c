@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 05:16:13 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/03/13 11:30:05 by lmedrano         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:06:23 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,15 @@ void	fps_count(void)
 
 int	on_destroy(t_cube *cube)
 {
+	free_textures(cube->map->textures);
 	free_map(cube);
 	mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
 
-int	init_all(t_cube *cube, char **argv, int argc)
-{
-	if (!init_mlx(cube) || !init_map(cube))
-		return (0);
-	if (check_args(argc) == 0 && check_map_file(argv[1]) == 0
-		&& check_textures(argv[1], cube, cube->map->textures) == 0)
-		set_map(argv[1], argv, cube);
-	init_player(cube);
-	key_init(cube);
-	if (!init_ray_and_img(cube) || !init_window(cube)
-		|| !init_load_and_textures(cube))
-		return (0);
-	return (1);
-}
-
 int	game_loop(t_cube *cube)
 {
-	fps_count();
 	if (cube->loadscreen == false)
 	{
 		loadscreen(cube);
@@ -83,6 +68,21 @@ int	game_loop(t_cube *cube)
 			cube->text->t_img[5].img, 0, Y_RES - HUD);
 	}
 	return (0);
+}
+
+int	init_all(t_cube *cube, char **argv, int argc)
+{
+	if (!init_mlx(cube) || !init_map(cube))
+		return (0);
+	if (check_args(argc) == 0 && check_map_file(argv[1]) == 0
+		&& check_textures(argv[1], cube, cube->map->textures) == 0)
+		set_map(argv[1], argv, cube);
+	init_player(cube);
+	key_init(cube);
+	if (!init_ray_and_img(cube) || !init_window(cube)
+		|| !init_load_and_textures(cube))
+		return (0);
+	return (1);
 }
 
 int	main(int argc, char **argv)
