@@ -3,36 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 10:52:51 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/18 09:53:22 by nreichel         ###   ########.fr       */
+/*   Created: 2022/11/11 20:31:38 by smonte-e          #+#    #+#             */
+/*   Updated: 2022/11/29 00:12:24 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+//#include <sting.h>
+//#include <stdio.h>
 
-char	*ft_strrchr( const char *str, int chr )
+char	*ft_strrchr(const char *s, int c)
 {
-	char	*tstr;
-	char	*mem;
-	char	c_chr;
+	size_t	i;
+	char	*new;
 
-	c_chr = (char)chr;
-	tstr = (char *) str;
-	mem = tstr;
-	while (*tstr)
-		tstr += 1;
-	while (tstr != mem - 1)
-	{
-		if (*tstr == c_chr)
-			return (tstr);
-		tstr -= 1;
-	}
-	return (NULL);
+	i = ft_strlen(s);
+	new = (char *)s;
+	while (new[i] != (char)c && i != 0)
+		i--;
+	if (new[i] != (char)c)
+		return (NULL);
+	else
+		return (&new[i]);
 }
-/*
-int main(void)
-{
-	prntf("%s", ft_strrchr("abccdbce", '7'));
-}*/

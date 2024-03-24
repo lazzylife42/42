@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_printf_ptr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 18:16:48 by smonte-e          #+#    #+#             */
-/*   Updated: 2023/11/11 17:51:25 by smonte-e         ###   ########.fr       */
+/*   Created: 2023/08/13 18:08:12 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/08/13 18:35:28 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strcat(char *dest, const char *src)
+int	ft_printf_ptr(unsigned long ptr)
 {
-	int	i;
-	int	j;
+	int		len;
+	char	*str;
 
-	i = 0;
-	j = 0;
-	while (dest[i] != '\0')
-		i++;
-	while (src[j] != '\0')
+	len = ft_printf_str("0x");
+	if (ptr == 0)
+		len += ft_printf_char('0');
+	else
 	{
-		dest[i] = src[j];
-		i++;
-		j++;
+		str = ft_ulltoa_base(ptr, "0123456789abcdef");
+		if (!str)
+			return (0);
+		len += ft_printf_str(str);
+		free(str);
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (len);
 }

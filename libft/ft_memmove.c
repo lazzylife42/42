@@ -3,46 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 16:20:09 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/18 09:52:00 by nreichel         ###   ########.fr       */
+/*   Created: 2022/11/09 13:55:53 by smonte-e          #+#    #+#             */
+/*   Updated: 2022/12/07 22:38:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove( void *dest, const void *src, size_t n )
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*c_src;
-	char	*c_dest;
+	char	*temp;
 	size_t	i;
 
-	if (!n)
-		return (dest);
-	c_src = (char *)src;
-	c_dest = (char *)dest;
+	temp = (char *)src;
 	i = 0;
-	if (!dest && !src)
-		return (NULL);
-	if (c_dest > c_src)
-		while (n-- > 0)
-			c_dest[n] = c_src[n];
+	if ((char *)dst == temp)
+		return (dst);
+	else if ((char *)dst > temp)
+		while (len-- > 0)
+			((char *)dst)[len] = temp[len];
 	else
 	{
-		while (i < n)
+		while (i < len)
 		{
-			c_dest[i] = c_src[i];
-			i += 1;
+			((char *)dst)[i] = temp[i];
+			i++;
 		}
 	}
-	return (dest);
+	return (dst);
 }
-/*
-int main ()
-{
-  char str[] = "memove can be very useful......";
-  memove (str+15,str+20,11);
-  puts (str);
-  return 0;
-}*/

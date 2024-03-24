@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 14:21:19 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/16 09:55:12 by nreichel         ###   ########.fr       */
+/*   Created: 2023/08/12 12:51:51 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/08/12 12:55:36 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+char	*ft_strndup(char *buff, size_t end)
 {
-	if (lst && del)
+	char	*str;
+	size_t	i;
+
+	str = (char *)ft_calloc(end + 2, sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i <= end && buff[i])
 	{
-		del(lst->content);
-		free(lst);
+		str[i] = buff[i];
+		i++;
 	}
+	str[i] = '\0';
+	return (str);
 }

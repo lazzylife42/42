@@ -3,49 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 11:46:28 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/18 09:53:17 by nreichel         ###   ########.fr       */
+/*   Created: 2022/11/12 19:50:34 by smonte-e          #+#    #+#             */
+/*   Updated: 2022/12/07 22:47:38 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 	size_t	j;
-	char	*c_big;
-	char	*c_little;
 
+	if (s2[0] == '\0')
+		return ((char *)s1);
 	i = 0;
-	j = 0;
-	c_big = (char *) big;
-	c_little = (char *) little;
-	if (*c_little == 0)
-		return (c_big);
-	while (c_big[i])
+	while (s1[i] != '\0' && i < n)
 	{
-		while (c_little[j] == c_big[i + j] && (i + j < len))
-		{
-			j += 1;
-			if (!c_little[j])
-				return (c_big + i);
-		}
 		j = 0;
-		i += 1;
+		if (s1[i] == s2[j])
+		{
+			while (s1[i + j] == s2[j] && i + j < n)
+			{
+				j++;
+				if (s2[j] == '\0')
+					return ((char *)&s1[i]);
+			}
+		}
+		i++;
 	}
 	return (NULL);
 }
-/*
-int main(void)
-{
-	char *big = "abcdef";
-	char *little = "abc";
-	size_t max = 6;
-
-	pintf("%s\n", ststr(big, little, max));
-	prntf("%s", ft_strnstr(big, little, max));
-
-}*/

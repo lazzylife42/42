@@ -3,115 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 10:58:32 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/18 09:54:42 by nreichel         ###   ########.fr       */
+/*   Created: 2022/12/05 17:43:42 by smonte-e          #+#    #+#             */
+/*   Updated: 2022/12/07 22:34:57 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	str_invert(char *str)
+static int	ft_intlen(long n)
 {
-	int	i;
-	int	mem;
-	int	size;
-
-	size = 0;
-	while (str[size])
-		size += 1;
-	i = 0;
-	while (i < size / 2)
-	{
-		mem = str[i];
-		str[i] = str[size - i - 1];
-		str[size - i - 1] = mem;
-		i += 1;
-	}	
-}
-
-static char	*fill(int n, char *str, int sign)
-{
-	int		count;
-
-	count = 0;
-	while (n > 0)
-	{
-		str[count] = n % 10 + '0';
-		n /= 10;
-		count += 1;
-	}
-	if (sign == -1)
-	{
-		str[count] = '-';
-		count += 1;
-	}
-	str[count] = '\0';
-	return (str);
-}
-
-static int	get_len(int n)
-{
-	int	res;
-
-	res = 0;
-	while (n > 0)
-	{
-		n /= 10;
-		res += 1;
-	}
-	return (res);
-}
-
-static char	*exception(char *nbr)
-{
-	char	*res;
-	int		i;
-	int		len;
+	int	len;
 
 	len = 0;
-	while (nbr[len])
-		len += 1;
-	i = 0;
-	res = malloc(len + 1);
-	if (!res)
-		return (NULL);
-	while (nbr[i])
+	if (n < 0)
 	{
-		res[i] = nbr[i];
-		i += 1;
+		n *= -1;
+		len++;
 	}
-	res[i] = '\0';
-	return (res);
+	else if (n == 0)
+		len++;
+	while (n > 0)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	int		sign;
-	char	*res;
+	char	*str;
+	long	number;
+	size_t	i;
 
-	sign = 1;
-	if (n == -2147483648)
-		return (exception("-2147483648"));
-	if (n == 0)
-		return (exception("0"));
-	if (n < 0)
-	{
-		sign *= -1;
-		n *= -1;
-	}
-	res = malloc(get_len(n) + 1 + (sign == -1));
-	if (!res)
+	number = n;
+	i = ft_intlen(number);
+	str = (char *)malloc((i + 1) * sizeof(char));
+	if (!str)
 		return (NULL);
-	res = fill(n, res, sign);
-	str_invert(res);
-	return (res);
+	if (number < 0)
+	{
+		number *= -1;
+		str[0] = '-';
+	}
+	str[i--] = '\0';
+	if (number == 0)
+		str[i] = '0';
+	while (number > 0)
+	{
+		str[i--] = (number % 10) + '0';
+		number /= 10;
+	}
+	return (str);
 }
-/*
-int main(void)
-{
-	pritf("%s", ft_itoa(-2147483648));
-
-
-}*/

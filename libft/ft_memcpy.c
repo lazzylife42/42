@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 16:18:49 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/18 09:54:35 by nreichel         ###   ########.fr       */
+/*   Created: 2022/11/04 14:22:35 by smonte-e          #+#    #+#             */
+/*   Updated: 2022/12/07 22:37:25 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,36 @@
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t			i;
-	unsigned char	*c_src;
-	unsigned char	*c_dest;
+	unsigned char	*coppy;
+	unsigned char	*paste;
 
-	c_src = (unsigned char *)src;
-	c_dest = (unsigned char *)dest;
-	i = 0;
-	if (!dest && !src)
-		return (NULL);
-	while (i < n)
+	if (dest == src)
+		return (dest);
+	coppy = (unsigned char *)src;
+	paste = (unsigned char *)dest;
+	while (n--)
 	{
-		c_dest[i] = c_src[i];
-		i += 1;
+		*paste++ = *coppy++;
 	}
 	return (dest);
 }
+
 /*
-int main () {
-   const char src[50] = "123456789/ww.com";
-   char dest[50] = "Heloooo!!";
-   pritf("Before memcp dest = %d\n", 0);
-   ft_memcpy(((void *)0), ((void *)0), 0);
-   prinf("After memcp dest = %d\n", 0);
+struct {
+  char name[40];
+  int age;
+} person, person_copy;
+
+int main ()
+{
+  char myname[] = "Pierre de Fermat";
+
+  ft_memcpy ( person.name, myname, strlen(myname)+1 );
+  person.age = 46;
+
+  ft_memcpy ( &person_copy, &person, sizeof(person) );
+
+  printf ("person_copy: %s, %d \n", person_copy.name, person_copy.age );
+
+  return 0;
 }*/

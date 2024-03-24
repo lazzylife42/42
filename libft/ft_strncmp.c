@@ -3,35 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 11:02:59 by nreichel          #+#    #+#             */
-/*   Updated: 2023/12/20 14:50:10 by nreichel         ###   ########.fr       */
+/*   Created: 2022/11/12 19:00:00 by smonte-e          #+#    #+#             */
+/*   Updated: 2022/11/29 01:27:52 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp( const char *str1, const char *str2, size_t len)
+int	ft_strncmp(char *s1, char *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	*u_str1;
-	unsigned char	*u_str2;
+	size_t	i;
 
-	if (str1 && str2)
-	{
-		u_str1 = (unsigned char *) str1;
-		u_str2 = (unsigned char *) str2;
-		i = 0;
-		while (i < len)
-		{
-			if (u_str1[i] == u_str2[i] && u_str1[i] == '\0')
-				return (0);
-			if (u_str1[i] != u_str2[i])
-				return (u_str1[i] - u_str2[i]);
-			i += 1;
-		}
+	i = 0;
+	if (n == 0)
 		return (0);
-	}
-	return (-1);
+	while (s1[i] != '\0' && s1[i] != '\0' && s1[i] == s2[i] && i < n - 1)
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

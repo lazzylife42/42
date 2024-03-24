@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 16:18:55 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/18 09:54:08 by nreichel         ###   ########.fr       */
+/*   Created: 2022/11/01 16:47:26 by smonte-e          #+#    #+#             */
+/*   Updated: 2022/12/07 22:39:14 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,15 @@
 
 void	*ft_memset(void *str, int c, size_t n)
 {
-	unsigned char	*strf;
-	size_t			i;
+	unsigned int	i;
+	unsigned char	*buffer;
 
-	strf = (unsigned char *)str;
 	i = 0;
+	buffer = str;
 	while (i < n)
 	{
-		strf[i] = (unsigned char)c;
-		i += 1;
+		buffer[i] = (unsigned char)c;
+		i++;
 	}
-	return (str);
+	return (buffer);
 }
-/*
-int main () {
-   char str[] = "Je ";
-   pritf("%s\n", str);
-
-   ft_memset(str,'d',7);
-   prinf("%s", str);
-   
-   return(0);
-}*/

@@ -3,34 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 12:57:12 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/17 15:43:47 by nreichel         ###   ########.fr       */
+/*   Created: 2022/11/25 19:17:54 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/08/12 12:50:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc( size_t count, size_t size )
+void	*ft_calloc(size_t nb_elem, size_t size_elem)
 {
-	void	*res;
-	size_t	i;
+	void			*ptr;
+	size_t			i;
+	unsigned char	c;
 
-	i = 0;
-	res = malloc(count * size);
-	if (res == NULL)
+	ptr = malloc(nb_elem * size_elem);
+	if (!ptr)
 		return (NULL);
-	while (i < count * size)
+	i = 0;
+	c = '\0';
+	while (i < (nb_elem * size_elem))
 	{
-		((char *)res)[i] = 0;
-		i += 1;
+		((char *)ptr)[i] = c;
+		i++;
 	}
-	return (res);
+	return (ptr);
 }
-/*
-int main(void)
-{
-	char *str = (char *) ft_calloc(5,4);
-	*str = 'a';
-}*/

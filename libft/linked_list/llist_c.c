@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   llist_c.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nreichel <nreichel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 13:25:22 by nreichel          #+#    #+#             */
-/*   Updated: 2023/10/16 09:55:32 by nreichel         ###   ########.fr       */
+/*   Created: 2023/09/19 15:00:09 by smonte-e          #+#    #+#             */
+/*   Updated: 2023/09/19 15:05:44 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "linked_list.h"
 
-t_list	*ft_lstnew(void *ctnt)
+t_List	*free_list(t_List *list)
 {
-	t_list	*res;
+	t_List	*tmp;
 
-	res = malloc(sizeof(t_list));
-	if (!res)
-		return (NULL);
-	res->content = ctnt;
-	res->next = NULL;
-	return (res);
+	tmp = NULL;
+	while (list)
+	{
+		tmp = list->next;
+		free(list);
+		list = tmp;
+	}
+	return (list);
 }
