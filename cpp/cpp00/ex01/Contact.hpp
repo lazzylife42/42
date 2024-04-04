@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 18:01:50 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/04 20:59:45 by smonte-e         ###   ########.fr       */
+/*   Created: 2024/04/04 19:47:07 by smonte-e          #+#    #+#             */
+/*   Updated: 2024/04/04 21:10:29 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_H
-# define PHONEBOOK_H
+#ifndef CONTACT_H
+# define CONTACT_H
 #define RST "\033[0m"
 #define RED "\033[1;31m"
 #define GRN "\033[1;32m"
@@ -21,18 +21,19 @@
 #define CYA "\033[1;36m"
 #define WHT "\033[1;37m"
 
-#include "Contact.hpp"
 
-class Phonebook
+class Contact
 {
 public:
     // Public members
-    Phonebook();
-    ~Phonebook();
+    Contact();
+    ~Contact();
 
-    Contact contact[8];
-    void printBook(void) const;
-    void addContact(Contact &contact);
-    void addToBook(Contact &contact);
+    char firstName[64];
+    char lastName[64];
+    char nickName[64];
+    char phoneNum[11];
+    char darkSecret[256];
 };
+
 #endif

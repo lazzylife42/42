@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/04 17:53:52 by smonte-e          #+#    #+#              #
-#    Updated: 2024/04/04 17:53:53 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/04/04 20:00:42 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = phonebook
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -f
 GCC = g++
-SRC = main.cpp phonebook.cpp
+SRC = main.cpp Phonebook.cpp Contact.cpp
 
 OBJS = $(SRC:.cpp=.o)
 
