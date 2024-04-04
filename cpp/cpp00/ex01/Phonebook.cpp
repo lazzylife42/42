@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:55:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/04 21:14:21 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/04 22:18:10 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void Phonebook::printBook(void) const
 {
     for (int i = 0; i < 8; i++)
         std::cout << MAG << i + 1 << ") "<< RST << 
-            Phonebook::contact->firstName[i] << std::endl;
+            this->contact[i].firstName << std::endl;
     return;    
 }
 
@@ -54,17 +54,15 @@ void Phonebook::addContact(Contact &contact)
 void Phonebook::addToBook(Contact& newContact)
 {
     addContact(newContact);
-    // for (int i = 0; i < 8; i++)
-    // {
-    //     if (contact[i].firstName[0] == '\0')
-    //     {
-    //         std::strcpy(contact[i].firstName, newContact.firstName);
-    //         std::strcpy(contact[i].lastName, newContact.lastName);
-    //         std::strcpy(contact[i].nickName, newContact.nickName);
-    //         std::strcpy(contact[i].phoneNum, newContact.phoneNum);
-    //         std::strcpy(contact[i].darkSecret, newContact.darkSecret);
-    //         return;
-    //     }
-    // }
-    std::cout << "Le carnet d'adresses est plein. Impossible d'ajouter un nouveau contact." << std::endl;
+    for (int i = 0; i < 8; i++)
+    {
+        if (std::strcmp(contact[i + 1].firstName, contact[i].firstName) != 0)
+        {
+            std::strcpy(contact[i + 1].firstName, contact[i].firstName);
+            std::strcpy(contact[i + 1].lastName, contact[i].lastName);
+            std::strcpy(contact[i + 1].nickName, contact[i].nickName);
+            std::strcpy(contact[i + 1].phoneNum, contact[i].phoneNum);
+            std::strcpy(contact[i + 1].darkSecret, contact[i].darkSecret);
+        }
+    }
 }
