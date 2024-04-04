@@ -17,5 +17,5 @@ Voici la liste de mes différents projets finis ou en cours dans le cadre de mon
 ## Rank 4 (En cours...)
 - [cub3d](./cub3d) : Un clone de Wolfenstein 3D utilisant le ray casting et la MLX.
 - [net practice](./net_practice) : Ce projet consiste à résoudre des problèmes liés à la mise en place d’un petit réseau fonctionnel.
-- [piscine C++ (Partie 1)](./cpp_00) : Exercices de la piscine C++, première partie.
+- [piscine C++ (Partie 1)](./cpp) : Exercices de la piscine C++, première partie.
 
