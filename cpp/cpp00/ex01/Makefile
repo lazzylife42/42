@@ -5,16 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/04 16:43:14 by smonte-e          #+#    #+#              #
-#    Updated: 2024/04/04 17:57:40 by smonte-e         ###   ########.fr        #
+#    Created: 2024/04/04 17:53:52 by smonte-e          #+#    #+#              #
+#    Updated: 2024/04/04 17:53:53 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = phonebook
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -f
 GCC = g++
-SRC = megaphone.cpp
+SRC = main.cpp phonebook.cpp
 
 OBJS = $(SRC:.cpp=.o)
 
@@ -39,4 +39,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: clean fclean all re
-
