@@ -6,11 +6,12 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 19:52:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/04 21:11:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/06 19:21:56 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <cstring>
 #include "Contact.hpp"
 
 Contact::Contact(void)

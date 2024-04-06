@@ -6,11 +6,12 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 19:03:01 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/04 21:13:48 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/06 19:22:07 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <cstring>
 #include "Phonebook.hpp"
 #include "Contact.hpp"
 
