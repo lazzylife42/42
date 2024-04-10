@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:55:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/09 22:36:34 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:53:48 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ Phonebook::~Phonebook(void)
     return;
 }
 
-void Phonebook::printBook(void) const
+void Phonebook::printBook() const
 {
     for (int i = 0; i < 8; i++)
-        std::cout << MAG << i + 1 << ") " << RST <<
-        this->contact[i].firstName << std::endl;
-    return;
+        std::cout << MAG << i + 1 << ") " << RST << this->contact[i].firstName << std::endl;
 }
+
 
 void Phonebook::addContact(Contact& contact)
 {
@@ -111,11 +110,9 @@ void Phonebook::searchContact() const
         std::cout << RED << "Index incorrect." << RST << std::endl;
 }
 
-
-
 void Phonebook::addToBook(Contact& newContact)
 {
-    for (int i = 7; i >= 0; i--)
-        contact[i + 1] = contact[i];
+    for (int i = 7; i > 0; i--)
+        contact[i] = contact[i - 1];
     contact[0] = newContact;
 }

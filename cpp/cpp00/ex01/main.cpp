@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 19:03:01 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/09 22:45:16 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:54:56 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int main(void)
         std::cout << "|📞 PHONE BOOK 📞|" << std::endl;
         std::cout << "+----------------+" << RST << std::endl;
         std::getline(std::cin, input);
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         if (input == "PHONEBOOK")
             ph.printBook();
@@ -40,7 +39,8 @@ int main(void)
             ph.searchContact();
         else if (input == "EXIT")
         {
-            std::cout << RED << "EXIT" << RST << std::endl;
+            std::cout << MAG << "😎 See You Soon 😎" << RST << std::endl;
+            std::cin.clear();
             return 0;
         }
         else
