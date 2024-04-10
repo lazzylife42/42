@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 19:47:07 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/04 21:10:29 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:40:55 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ public:
     Contact();
     ~Contact();
 
-    char firstName[64];
-    char lastName[64];
-    char nickName[64];
-    char phoneNum[11];
-    char darkSecret[256];
+    std::string firstName;
+    std::string lastName;
+    std::string nickName;
+    std::string phoneNum;
+    std::string darkSecret;
 };
 
 #endif

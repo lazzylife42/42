@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
+/*   Phonebook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:01:50 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/04 20:59:45 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:40:27 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,17 @@ public:
 
     Contact contact[8];
     void printBook(void) const;
-    void addContact(Contact &contact);
-    void addToBook(Contact &contact);
+    void addContact(Contact& contact);
+    void addToBook(Contact& contact);
+    void searchContact(void) const;
+private:
+    // Private members
+    std::string truncateString(const std::string& str, size_t length) const
+    {
+        if (str.length() <= length)
+            return str;
+        else
+            return str.substr(0, length - 1) + ".";
+    }
 };
 #endif

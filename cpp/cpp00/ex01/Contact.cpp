@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 19:52:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/06 19:21:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:43:01 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,11 @@
 #include <cstring>
 #include "Contact.hpp"
 
-Contact::Contact(void)
+Contact::Contact() : firstName(""), lastName(""), nickName(""), phoneNum(""), darkSecret("")
 {
     std::cout << GRN << "Constructor called" << RST << std::endl;
-    this->firstName[0] = '\0';
-    this->lastName[0] = '\0';
-    this->nickName[0] = '\0';
-    this->phoneNum[0] = '\0';
-    this->darkSecret[0] = '\0';
-    return;
 }
+
 
 Contact::~Contact(void)
 {

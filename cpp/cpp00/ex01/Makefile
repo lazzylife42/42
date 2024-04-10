@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/04 17:53:52 by smonte-e          #+#    #+#              #
-#    Updated: 2024/04/04 20:00:42 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/04/08 20:21:50 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = phonebook
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -std=c++98  -g
 RM = rm -f
 GCC = g++
 SRC = main.cpp Phonebook.cpp Contact.cpp
