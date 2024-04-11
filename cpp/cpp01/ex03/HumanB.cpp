@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:07:49 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/11 11:04:31 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/11 12:23:59 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,30 @@
 #include "Weapon.hpp"
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string name) : name(name) , weapon("None") 
+HumanB::HumanB(std::string name) : _name(name) , _weapon(NULL) 
 {
-    std::cout << GRN << "Constructor Human B called" << RST << std::endl;
+    std::cout << GRN << "Constructor Human B called for : " << this->_name << RST << std::endl;
     return;
 }
 
 HumanB::~HumanB(void)
 {
-    std::cout << RED << "~Destructor Human B called~" << RST << std::endl;
+    std::cout << RED << "~Destructor Human B called~ for : " << this->_name << RST << std::endl;
     return;
 }
 
 void HumanB::attack(void) const
 {
-    std::cout << CYA << this->name << " attacks with their " << this->weapon.getType() << std::endl;
+    if (_weapon == NULL)
+    {
+        std::cout << RED << this->_name << " must have a weapon " << _weapon->getType() << std::endl;
+        return;
+    }
+    std::cout << CYA << this->_name << " attacks with their " << _weapon->getType() << std::endl;
 }
 
-void HumanB::setWeapon(const Weapon& newWeapon)
+void HumanB::setWeapon(Weapon& newWeapon)
 {
-    weapon = newWeapon;
+    _weapon = &newWeapon;
     return;
 }

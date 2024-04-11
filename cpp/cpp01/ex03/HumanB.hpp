@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 09:42:39 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/11 10:58:07 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/11 12:23:48 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ public:
     HumanB(std::string name);
     ~HumanB();
     void attack(void) const;
-    void setWeapon(const Weapon& newWeapon);
+    void setWeapon(Weapon& newWeapon);
     
 private:
     // Private members
-    std::string name;
-    Weapon weapon;
+    std::string _name;
+    Weapon* _weapon;
 };
 
 #endif

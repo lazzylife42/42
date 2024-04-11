@@ -6,32 +6,32 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 09:34:50 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/11 11:04:55 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:51:07 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Weapon.hpp"
 
-Weapon::Weapon(std::string type) : type(type)
+Weapon::Weapon(std::string type) : _type(type)
 {
-    std::cout << GRN << "Constructor Weapon called" << RST << std::endl;
+    std::cout << GRN << "Constructor Weapon called : " << this->_type << RST << std::endl;
     return;
 }
 
 Weapon::~Weapon(void)
 {
-    std::cout << RED << "~Destructor Weapon called~" << RST << std::endl;
+    std::cout << RED << "~Destructor Weapon called~ : " << this->_type << RST << std::endl;
     return;
 }
 
-const std::string& Weapon::getType() const
+std::string Weapon::getType() const
 {
-    return type;
+    return _type;
 }
 
-void Weapon::setType(const std::string& newType)
+void Weapon::setType(const std::string newType)
 {
-    type = newType;
+    _type = newType;
     return;
 }

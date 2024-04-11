@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 09:32:13 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/11 10:54:25 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:50:55 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@
 
 class Weapon
 {
-public:
-    // Public members
-    Weapon(std::string type);
-    ~Weapon();
+    public:
+        // Public members
+        Weapon(std::string type);
+        ~Weapon();
 
-    const std::string& getType() const;
-    void setType(const std::string& newType);
-    
-private:
-    // Private members
-    std::string type;
+        std::string   getType() const;
+        void                setType(const std::string newType);
+        
+    private:
+        // Private members
+        std::string _type;
 };
 
 #endif

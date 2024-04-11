@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 09:39:13 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/11 11:09:47 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:56:12 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ class HumanA
 {
 public:
     // Public members
-    HumanA(std::string name, Weapon weapon);
+    HumanA(std::string name, Weapon& weapon);
     ~HumanA();
     void attack(void) const;
     
 private:
     // Private members
     std::string _name;
-    Weapon _weapon;
+    Weapon& _weapon;
 };
 
 #endif
