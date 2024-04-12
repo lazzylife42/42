@@ -6,7 +6,7 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 15:07:19 by smonte-e          #+#    #+#              #
-#    Updated: 2024/04/11 15:07:45 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/04/12 10:53:11 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = Sed\ is\ for\ losers
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -f
 GCC = g++
-SRC = main.cpp
+SRC = main.cpp replace.cpp
 
 OBJS = $(SRC:.cpp=.o)
 
@@ -31,7 +31,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@echo "\033[1;33mCleaning object files...\033[0m"
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) *.replace
 	@clear
 
 fclean: clean
