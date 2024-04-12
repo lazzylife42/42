@@ -5,19 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/10 16:09:33 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/12 21:01:08 by smonte-e         ###   ########.fr       */
+/*   Created: 2024/04/12 17:05:03 by smonte-e          #+#    #+#             */
+/*   Updated: 2024/04/12 17:06:23 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
-
 int main(void)
 {
-    Zombie z;
-    z.nameZombie("Booba");
-    z.announce();
-    z.randomChump("Kaaris");
-    
     return 0;
 }

@@ -6,14 +6,13 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:55:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/10 15:53:48 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:18:06 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <cstring>
 #include <iomanip>
-#include <algorithm>
 #include "Phonebook.hpp"
 #include "Contact.hpp"
 
@@ -115,4 +114,12 @@ void Phonebook::addToBook(Contact& newContact)
     for (int i = 7; i > 0; i--)
         contact[i] = contact[i - 1];
     contact[0] = newContact;
+}
+
+std::string Phonebook::truncateString(const std::string& str, size_t length) const
+{
+    if (str.length() <= length)
+        return str;
+    else
+        return str.substr(0, length - 1) + ".";
 }

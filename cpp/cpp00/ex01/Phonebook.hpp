@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Phonebook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:01:50 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/07 18:40:27 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:18:34 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,6 @@ public:
     void searchContact(void) const;
 private:
     // Private members
-    std::string truncateString(const std::string& str, size_t length) const
-    {
-        if (str.length() <= length)
-            return str;
-        else
-            return str.substr(0, length - 1) + ".";
-    }
+    std::string truncateString(const std::string& str, size_t length) const;
 };
 #endif
