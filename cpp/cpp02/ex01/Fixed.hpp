@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:07:29 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/13 21:00:00 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/13 21:08:01 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,32 @@
 #define CYA "\033[1;36m"
 #define WHT "\033[1;37m"
 
+# include <iostream>
+# include <string>
+# include <cmath>
 
 class Fixed
 {
 public:
     // Public Constructors and Destructor
     Fixed();
-    Fixed(Fixed const &src);
-    Fixed& operator=(const Fixed &rhs);
+    Fixed(const int val);
+    Fixed(const float val);
+    Fixed(Fixed const& src);
+    Fixed& operator=(const Fixed& rhs);
     ~Fixed();
     // Public Methods
     int     getRawBits(void) const;
     void    setRawBits(int const raw);
+    float   toFloat(void) const;
+    int     toInt(void) const;
 
 private:
     // Private members
     int _value;
     static const int _bits = 8;
 };
+
+std::ostream &operator<<(std::ostream &os, const Fixed &rhs);
 
 #endif

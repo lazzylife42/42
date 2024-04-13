@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:07:14 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/13 20:50:51 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/13 21:44:40 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,20 @@ Fixed::Fixed() : _value(0)
 Fixed::Fixed(Fixed const &src) : _value(src._value)
 {
     std::cout << GRN << "Copy constructor called" << RST << std::endl;
-    *this = src;
     return;
+}
+
+Fixed::Fixed(const int val)
+{
+    std::cout << GRN << "Int constructor called" << RST << std::endl;
+    this->_value = val * (1 << this->_bits);
+}
+
+
+Fixed::Fixed(const float val)
+{
+    std::cout << GRN << "Float constructor called" << RST << std::endl;
+    this->_value = roundf(val * (1 << this->_bits));
 }
 
 Fixed& Fixed::operator=(const Fixed &rhs)
@@ -52,4 +64,22 @@ void Fixed::setRawBits(int raw)
 {
     std::cout << BLU << "setRawBits member function called" << RST << std::endl;
     this->_value = raw;
+}
+
+// Member Functions
+float Fixed::toFloat(void) const
+{
+    return (this->_value / (1 << this->_bits));
+}
+
+int Fixed::toInt(void) const
+{
+    return (this->_value / (1 << this->_bits));
+}
+
+// Functions
+std::ostream &operator<<(std::ostream &os, const Fixed &rhs)
+{
+	os << rhs.toFloat();
+	return (os);
 }
