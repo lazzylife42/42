@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:07:14 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/13 21:44:40 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:53:34 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Fixed::Fixed(const int val)
 
 Fixed::Fixed(const float val)
 {
-    std::cout << GRN << "Float constructor called" << RST << std::endl;
+    std::cout << GRN << "Constructeur float appelé" << RST << std::endl;
     this->_value = roundf(val * (1 << this->_bits));
 }
 
@@ -69,8 +69,9 @@ void Fixed::setRawBits(int raw)
 // Member Functions
 float Fixed::toFloat(void) const
 {
-    return (this->_value / (1 << this->_bits));
+    return (static_cast<float>(this->_value) / (1 << this->_bits));
 }
+
 
 int Fixed::toInt(void) const
 {
