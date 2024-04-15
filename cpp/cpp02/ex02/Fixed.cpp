@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:07:14 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/15 16:44:16 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:39:01 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ bool	Fixed::operator!=(const Fixed &rhs) const
 	return (this->toFloat() != rhs.toFloat());
 }
 
-// Arithmetic operators
+// Arithmetic Operators
 Fixed	Fixed::operator+(const Fixed &rhs) const
 {
 	return (this->toFloat() + rhs.toFloat());
@@ -137,31 +137,31 @@ Fixed	Fixed::operator/(const Fixed &rhs) const
 	return (this->toFloat() / rhs.toFloat());
 }
 
-// Incre/Decrementation operators
-Fixed&	Fixed::operator++(void)
+// Incrementation/Decrementation Operators
+Fixed& Fixed::operator++(void)
 {
-	this->setRawBits(this->getRawBits() + 1);
-	return (*this);
+    this->setRawBits(this->getRawBits() + 1);
+    return *this;
 }
 
-Fixed&	Fixed::operator--(void)
+Fixed& Fixed::operator--(void)
 {
-	this->setRawBits(this->getRawBits() - 1);
-	return (*this);
+    this->setRawBits(this->getRawBits() - 1);
+    return *this;
 }
 
-Fixed	Fixed::operator++(int)
+Fixed Fixed::operator++(int)
 {
-	Fixed	prev = *this;
-	this->setRawBits(this->getRawBits() + 1);
-	return (prev);
+    Fixed temp(*this);
+    this->setRawBits(this->getRawBits() + 1);
+    return temp;
 }
 
-Fixed	Fixed::operator--(int)
+Fixed Fixed::operator--(int)
 {
-	Fixed	prev = *this;
-	this->setRawBits(this->getRawBits() - 1);
-	return (prev);
+    Fixed temp(*this);
+    this->setRawBits(this->getRawBits() - 1);
+    return temp;
 }
 
 // Min/Max

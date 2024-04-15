@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:05:03 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/15 16:45:38 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:07:54 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ int main(void)
     std::cout << MAG << "Test Min(a, b): " << RST << min_result << std::endl;
     std::cout << MAG << "Test Max(a, b): " << RST << max_result << std::endl;
 	std::cout << std::endl;
-	
+
+    std::cout << BLU << "Incrémentation/Décrémentation:" << std::endl;
+    std::cout << BLU << "a avant ++  : " << RST << a << std::endl;
+    std::cout << BLU << "a++:          " << RST << a++ << std::endl;
+    std::cout << BLU << "a après a++ : " << RST << a << std::endl;
+    std::cout << BLU << "++a:          " << RST << ++a << std::endl;
+    std::cout << BLU << "a après ++a : " << RST << a << std::endl;
+    std::cout << BLU << "a--:          " << RST << a-- << std::endl;
+    std::cout << BLU << "a après a-- : " << RST << a << std::endl;
+    std::cout << BLU << "--a:          " << RST << --a << std::endl;
+    std::cout << BLU << "a après --a : " << RST << a << std::endl;
+
     return (0);
 }
+

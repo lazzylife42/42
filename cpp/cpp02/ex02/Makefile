@@ -6,12 +6,12 @@
 #    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 15:53:59 by smonte-e          #+#    #+#              #
-#    Updated: 2024/04/15 16:28:16 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/04/15 18:28:18 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Maintenant,\ on\ peut\ parler
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 RM = rm -f
 GCC = g++
 SRC = main.cpp Fixed.cpp
