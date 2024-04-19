@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:34:14 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/18 20:39:41 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:44:36 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ public:
 
     // Public Methods
     void attack(const std::string& target);
-    void guardGate();
+    void takeDamage(unsigned int amount);
+    void beRepaired(unsigned int amount);
+    void guardGate(void);
 };
 
 #endif
