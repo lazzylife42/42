@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:55:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/25 15:00:49 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:55:51 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,11 @@ void Phonebook::searchContact() const
     while (true)
     {
         std::getline(std::cin, input);
+        if (std::cin.eof())
+        {
+            std::cout << RED << "\nFin de la saisie. Opération annulée." << RST << std::endl;
+            exit(0);
+        }
         if (std::all_of(input.begin(), input.end(), ::isdigit))
         {
             index = std::stoi(input);

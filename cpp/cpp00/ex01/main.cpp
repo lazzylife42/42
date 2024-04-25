@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 19:03:01 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/25 14:50:06 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:10 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(void)
         }
         else if (input == "SEARCH")
             ph.searchContact();
-        else if (input == "EXIT")
+        else if (input == "EXIT" || std::cin.eof())
         {
             std::cout << MAG << "😎 See You Soon 😎" << RST << std::endl;
             std::cin.clear();
