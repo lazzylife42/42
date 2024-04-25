@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:55:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/12 15:18:06 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:00:49 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,22 @@
 #include "Phonebook.hpp"
 #include "Contact.hpp"
 
-Phonebook::Phonebook(void)
+
+Phonebook::Phonebook()
 {
     std::cout << GRN << "📞Constructor called📞" << RST << std::endl;
-    return;
 }
 
-Phonebook::~Phonebook(void)
+Phonebook::~Phonebook()
 {
     std::cout << RED << "📞~Destructor called~📞" << RST << std::endl;
-    return;
 }
 
 void Phonebook::printBook() const
 {
     for (int i = 0; i < 8; i++)
-        std::cout << MAG << i + 1 << ") " << RST << this->contact[i].firstName << std::endl;
+        std::cout << MAG << i + 1 << ") " << RST << contact[i].getStringRef("firstName") << std::endl;
 }
-
 
 void Phonebook::addContact(Contact& contact)
 {
@@ -41,30 +39,37 @@ void Phonebook::addContact(Contact& contact)
     std::cout << "|📞 ADD CONTACT 📞|" << std::endl;
     std::cout << "+-----------------+" << RST << std::endl;
 
+    std::string newString;
+
     do {
         std::cout << "First Name :" << std::endl;
-        std::getline(std::cin, contact.firstName);
-    } while (contact.firstName.empty());
+        std::getline(std::cin, newString);
+    } while (newString.empty());
+    contact.setStringRef("firstName", newString);
     
     do {
         std::cout << "Last Name :" << std::endl;
-        std::getline(std::cin, contact.lastName);
-    } while (contact.lastName.empty());
+        std::getline(std::cin, newString);
+    } while (newString.empty());
+    contact.setStringRef("lastName", newString);
     
     do {
         std::cout << "Nick Name :" << std::endl;
-        std::getline(std::cin, contact.nickName);
-    } while (contact.nickName.empty());
+        std::getline(std::cin, newString);
+    } while (newString.empty());
+    contact.setStringRef("nickName", newString);
     
     do {
         std::cout << "Phone Number :" << std::endl;
-        std::getline(std::cin, contact.phoneNum);
-    } while (contact.phoneNum.empty());
+        std::getline(std::cin, newString);
+    } while (newString.empty());
+    contact.setStringRef("phoneNum", newString);
     
     do {
         std::cout << "Dark Secret 🤫 :" << std::endl;
-        std::getline(std::cin, contact.darkSecret);
-    } while (contact.darkSecret.empty());
+        std::getline(std::cin, newString);
+    } while (newString.empty());
+    contact.setStringRef("darkSecret", newString);
 }
 
 void Phonebook::searchContact() const
@@ -74,9 +79,9 @@ void Phonebook::searchContact() const
     for (int i = 0; i < 8; i++)
     {
         std::cout << std::setw(10) << std::right << MAG << i + 1 << "  | " << RST;
-        std::cout << std::setw(10) << std::right << truncateString(contact[i].firstName, 10) << MAG << " | " << RST;
-        std::cout << std::setw(10) << std::right << truncateString(contact[i].lastName, 10) << MAG << " | " << RST;
-        std::cout << std::setw(10) << std::right << truncateString(contact[i].nickName, 10) << std::endl;
+        std::cout << std::setw(10) << std::right << truncateString(contact[i].getStringRef("firstName"), 10) << MAG << " | " << RST;
+        std::cout << std::setw(10) << std::right << truncateString(contact[i].getStringRef("lastName"), 10) << MAG << " | " << RST;
+        std::cout << std::setw(10) << std::right << truncateString(contact[i].getStringRef("nickName"), 10) << std::endl;
     }
 
     std::cout << std::endl << MAG << "🔎 Entrez l'index du contact à afficher : " << RST << std::endl;
@@ -99,11 +104,11 @@ void Phonebook::searchContact() const
     std::cout << std::endl;
     if (index >= 1 && index <= 8)
     {
-        std::cout << "First Name:   " << contact[index - 1].firstName << std::endl;
-        std::cout << "Last Name:    " << contact[index - 1].lastName << std::endl;
-        std::cout << "Nick Name:    " << contact[index - 1].nickName << std::endl;
-        std::cout << "Phone Number: " << contact[index - 1].phoneNum << std::endl;
-        std::cout << "Dark Secret:  " << contact[index - 1].darkSecret << std::endl;
+        std::cout << "First Name:   " << contact[index - 1].getStringRef("firstName") << std::endl;
+        std::cout << "Last Name:    " << contact[index - 1].getStringRef("lastName") << std::endl;
+        std::cout << "Nick Name:    " << contact[index - 1].getStringRef("nickName") << std::endl;
+        std::cout << "Phone Number: " << contact[index - 1].getStringRef("phoneNum") << std::endl;
+        std::cout << "Dark Secret:  " << contact[index - 1].getStringRef("darkSecret") << std::endl;
     }
     else
         std::cout << RED << "Index incorrect." << RST << std::endl;
@@ -116,8 +121,7 @@ void Phonebook::addToBook(Contact& newContact)
     contact[0] = newContact;
 }
 
-std::string Phonebook::truncateString(const std::string& str, size_t length) const
-{
+std::string Phonebook::truncateString(const std::string& str, size_t length) const {
     if (str.length() <= length)
         return str;
     else

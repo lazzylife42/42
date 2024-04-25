@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:01:50 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/12 15:18:34 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:56:19 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ public:
     Phonebook();
     ~Phonebook();
 
-    Contact contact[8];
     void printBook(void) const;
     void addContact(Contact& contact);
     void addToBook(Contact& contact);
     void searchContact(void) const;
 private:
     // Private members
+    Contact contact[8];
     std::string truncateString(const std::string& str, size_t length) const;
 };
 #endif

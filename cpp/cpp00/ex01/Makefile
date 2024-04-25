@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/04 17:53:52 by smonte-e          #+#    #+#              #
-#    Updated: 2024/04/08 20:21:50 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/04/25 13:40:34 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = phonebook
-CFLAGS = -Wall -Werror -Wextra -std=c++98  -g
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -f
 GCC = g++
 SRC = main.cpp Phonebook.cpp Contact.cpp
@@ -27,14 +27,17 @@ $(NAME): $(OBJS)
 %.o : %.cpp
 	@echo "\033[1;36mGenerating object files...\033[0m"
 	$(GCC) $(CFLAGS) -c $< -o $@
+	@clear
 
 clean:
 	@echo "\033[1;33mCleaning object files...\033[0m"
 	$(RM) $(OBJS)
+	@clear
 
 fclean: clean
 	@echo "\033[1;33mRemoving $(NAME)...\033[0m"
 	$(RM) $(NAME)
+	@clear
 
 re: fclean all
 
