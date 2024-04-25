@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:53:28 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/19 16:47:46 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:25:19 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ public:
     FragTrap& operator=(const FragTrap &rhs);
     ~FragTrap();
     // Public Methods
-    void attack(const std::string& target);
-    void takeDamage(unsigned int amount);
-    void beRepaired(unsigned int amount);
+    // void attack(const std::string& target);
+    // void takeDamage(unsigned int amount);
+    // void beRepaired(unsigned int amount);
     void highFivesGuys(void);
 
 private:

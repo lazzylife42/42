@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:30:57 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/10 18:05:04 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/25 10:04:50 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ public:
     ~Zombie();
     void announce(void);
     void nameZombie(std::string name);
-    void randomChump(std::string name);
     
 private:
     // Private members
     std::string name;
 };
 
+void randomChump(std::string name);
 Zombie* newZombie(std::string name);
 
 #endif
