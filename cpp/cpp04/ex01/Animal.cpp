@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 22:22:16 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/24 10:08:33 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/26 18:41:40 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ Animal& Animal::operator=(const Animal &rhs)
     if (this != &rhs)
     {
         _type = rhs.getType();
-        *_brain = *(rhs._brain);
+        delete _brain;
+        _brain = new Brain(*(rhs._brain));
     }
     return *this;
 }

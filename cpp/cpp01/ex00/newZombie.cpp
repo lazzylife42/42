@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:29:46 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/10 17:08:15 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:27:55 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,5 @@
 
 Zombie* newZombie(std::string name)
 {
-    Zombie* z = new Zombie();
-    z->nameZombie(name);
-    return z;
+    return (new Zombie(name));
 }

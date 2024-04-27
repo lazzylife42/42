@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:30:57 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/25 10:31:53 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:29:53 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ class Zombie
 public:
     // Public members
     Zombie();
+    Zombie(std::string name);
     ~Zombie();
     void announce(void);
-    void nameZombie(std::string name);
+    void setName(std::string name);
     
 private:
     // Private members
-    std::string name;
+    std::string _name;
 };
 
 void randomChump(std::string name);

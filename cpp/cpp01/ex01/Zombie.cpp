@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:29:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/25 10:32:24 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:31:39 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,31 @@
 
 Zombie::Zombie(void)
 {
-    std::cout << GRN << "Constructor called" << RST << std::endl;
+    std::cout << GRN << "Default Constructor called" << RST << std::endl;
+    return;
+}
+
+Zombie::Zombie(std::string name) : _name(name)
+{
+    std::cout << GRN << "Constructor called for " << this->_name << RST << std::endl;
     return;
 }
 
 Zombie::~Zombie(void)
 {
-    std::cout << RED << "~Destructor called for : " << RST << this->name << RED << " ~"  << RST << std::endl;
+    std::cout << RED << "~Destructor called for : " << this->_name  << " ~"  << RST << std::endl;
     return;
 }
 
 void Zombie::announce(void)
 {
-    std::cout << this->name << " : BraiiiiiiinnnzzzZ..." << std::endl;
+    std::cout << this->_name << " : BraiiiiiiinnnzzzZ..." << std::endl;
     return;
 }
 
-void Zombie::nameZombie(std::string name)
+void	Zombie::setName(std::string name)
 {
-    this->name = name;
-    return;
+	this->_name = name;
 }
 
 void randomChump(std::string name)
@@ -47,7 +52,6 @@ void randomChump(std::string name)
 
 Zombie* newZombie(std::string name)
 {
-    Zombie* z = new Zombie();
-    z->nameZombie(name);
-    return z;
+    return (new Zombie(name));
+
 }

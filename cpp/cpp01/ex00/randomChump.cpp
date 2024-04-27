@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:30:24 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/25 10:05:09 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:28:41 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void randomChump(std::string name)
 {
-    Zombie* z = newZombie(name);
+    Zombie* z = new Zombie(name);
     z->announce();
     delete z;
     return;

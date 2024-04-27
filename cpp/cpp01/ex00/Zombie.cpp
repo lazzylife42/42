@@ -6,33 +6,28 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:29:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/10 18:15:05 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:28:22 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Zombie.hpp"
 
-Zombie::Zombie(void)
+Zombie::Zombie(std::string name) : _name(name)
 {
-    std::cout << GRN << "Constructor called" << RST << std::endl;
+    std::cout << GRN << "Constructor called for " << this->_name << RST << std::endl;
     return;
 }
 
 Zombie::~Zombie(void)
 {
-    std::cout << RED << "~Destructor called for : " << RST << this->name << RED << " ~"  << RST << std::endl;
+    std::cout << RED << "~Destructor called for : " << this->_name  << " ~"  << RST << std::endl;
     return;
 }
 
 void Zombie::announce(void)
 {
-    std::cout << this->name << " : BraiiiiiiinnnzzzZ..." << std::endl;
+    std::cout << this->_name << " : BraiiiiiiinnnzzzZ..." << std::endl;
     return;
 }
 
-void Zombie::nameZombie(std::string name)
-{
-    this->name = name;
-    return;
-}
