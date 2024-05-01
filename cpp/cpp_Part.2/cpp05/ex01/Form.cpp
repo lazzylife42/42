@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/04/29 21:02:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/05/01 11:24:11 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool Form::getIsSigned() const
 
 unsigned int Form::getToSign() const
 {
-	return _grade_to_exec;
+	return _grade_to_sign;
 }
 
 unsigned int Form::getToExec() const

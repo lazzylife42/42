@@ -6,16 +6,16 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:32:48 by smonte-e          #+#    #+#              #
-#    Updated: 2024/05/01 18:19:04 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/05/01 18:38:08 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = No,\ you\ need\ form\ 28B,\ not\ 28C...
+NAME = At\ least\ this\ beats\ coffee-making
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -f
 GCC = g++
 SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
-	  RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+	  RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 
 OBJS = $(SRC:.cpp=.o)
 
