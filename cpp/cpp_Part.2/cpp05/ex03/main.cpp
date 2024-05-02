@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:35:27 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/01 18:37:36 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/05/02 09:25:32 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(void)
 
 	std::cout << std::endl << std::endl;
 	std::cout << WHT "INIT INTERN" << RST << std::endl;
-	Intern		slave;
+	Intern		stagiaire;
 
 	std::cout << std::endl << std::endl;
 	std::cout << WHT "INTERN: MAKEFORM (INVALID VALUES)" << RST << std::endl;
@@ -40,7 +40,7 @@ int	main(void)
 	formTarget = "invalid";
 	try
 	{
-		slave.makeForm(formName, formTarget);
+		stagiaire.makeForm(formName, formTarget);
 	}
 	catch (const std::exception &e)
 	{
@@ -53,7 +53,7 @@ int	main(void)
 	formTarget = "";
 	try
 	{
-		slave.makeForm(formName, formTarget);
+		stagiaire.makeForm(formName, formTarget);
 	}
 	catch (const std::exception &e)
 	{
@@ -64,19 +64,19 @@ int	main(void)
 	std::cout << WHT "INTERN: MAKEFORM (SHRUBBERY)" << RST << std::endl;
 	formName = "shrubbery creation";
 	formTarget = "SCF";
-	AForm*	scf = slave.makeForm(formName, formTarget);
+	AForm*	scf = stagiaire.makeForm(formName, formTarget);
 
 	std::cout << std::endl << std::endl;
 	std::cout << WHT "INTERN: MAKEFORM (ROBOTOMY)" << RST << std::endl;
 	formName = "robotomy request";
 	formTarget = "RRF";
-	AForm*	rrf = slave.makeForm(formName, formTarget);
+	AForm*	rrf = stagiaire.makeForm(formName, formTarget);
 
 	std::cout << std::endl << std::endl;
 	std::cout << WHT "INTERN: MAKEFORM (PRESIDENTIAL)" << RST << std::endl;
 	formName = "presidential pardon";
 	formTarget = "PPF";
-	AForm*	ppf = slave.makeForm(formName, formTarget);
+	AForm*	ppf = stagiaire.makeForm(formName, formTarget);
 
 	std::cout << std::endl << std::endl;
 	std::cout << WHT "BUREAUCRATS: EXECUTEFORM (NO SIGNED)" << RST << std::endl;
