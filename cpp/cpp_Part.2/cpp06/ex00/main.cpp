@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:48:30 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/02 20:28:32 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:13:42 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 	while (argv[i])
 	{
 		std::cout << WHT "=============== OUTPUT " << i << " ===============" RST << std::endl;
-		std::cout << BLU "user input:\t\"" << argv[i] << "\"" RST << std::endl;
+		std::cout << WHT "→input:\t\t\"" << argv[i] << "\"" RST << std::endl;
 		
 		if (argv[i][0])
 			ScalarConverter::convert(argv[i++]);
