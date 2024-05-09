@@ -18,8 +18,8 @@ sudo visudo
 ### Étape 2 : Installation de Vim et Make
 
 ```bash
-apt-get install vim -y
-apt-get install make -y
+sudo apt install vim -y
+sudo apt install make -y
 ```
 
 ### Étape 3 : Installation et configuration de SSH
@@ -49,6 +49,7 @@ sudo ufw status numbered
 ```bash
 sudo mkdir /mnt/inception
 sudo mount -t vboxsf inception /mnt/inception
+ln -s /mnt/inception /home/sab
 ```
 
 ### Étape 6 : Installation de Docker et Docker Compose

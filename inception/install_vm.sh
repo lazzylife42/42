@@ -11,8 +11,8 @@ sudo visudo
 
 # Step 2: Installing Vim
 echo -e "\n\e[32m2 / Installing Vim\e[0m"
-apt-get install vim -y
-apt-get install make -y
+sudo apt install vim -y
+sudo apt install make -y
 
 # Step 3: Installing and Configuring SSH
 echo -e "\n\e[32m3 / Installing and Configuring SSH (Secure Shell Host)\e[0m"
