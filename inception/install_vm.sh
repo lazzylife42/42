@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Step 1: Installing Sudo
-echo "1 / Installing Sudo"
+echo -e "\e[32m1 / Installing Sudo\e[0m"
 su -
 apt-get update -y
 apt-get upgrade -y
@@ -10,23 +10,21 @@ usermod -aG $USER
 sudo visudo
 
 # Step 2: Installing Vim
-echo -e "\n2 / Installing Vim"
+echo -e "\n\e[32m2 / Installing Vim\e[0m"
 apt-get install vim -y
 apt-get install make -y
 
 # Step 3: Installing and Configuring SSH
-echo -e "\n3 / Installing and Configuring SSH (Secure Shell Host)"
+echo -e "\n\e[32m3 / Installing and Configuring SSH (Secure Shell Host)\e[0m"
 sudo apt install openssh-server
 sudo systemctl status ssh
 sudo vim /etc/ssh/sshd_config
-# Find this line #Port22
-# Change the line to Port 4242 without the # (Hash) in front of it
 sudo grep '#Port 22' /etc/ssh/sshd_config && sudo sed -i 's/#Port 22/Port 4242/' /etc/ssh/sshd_config
 sudo grep Port /etc/ssh/sshd_config
 sudo service ssh restart
 
 # Step 4: Installing and Configuring UFW
-echo -e "\n4 / Installing and Configuring UFW (Uncomplicated Firewall)"
+echo -e "\n\e[32m4 / Installing and Configuring UFW (Uncomplicated Firewall)\e[0m"
 apt-get install ufw
 sudo ufw enable
 sudo ufw status numbered
@@ -35,12 +33,12 @@ sudo ufw allow 4242
 sudo ufw status numbered
 
 # Step 5: Creating a shared folder
-echo -e "\n5 / Creating a shared folder"
-sudo mkdir /mnt/shared_folder
-sudo mount -t vboxsf nom_dossier_partagé /mnt/shared_folder
+echo -e "\n\e[32m5 / Creating a shared folder\e[0m"
+sudo mkdir /mnt/inception
+sudo mount -t vboxsf inception /mnt/inception
 
 # Step 6: Installing Docker and Docker Compose
-echo -e "\n6 / Installing Docker and Docker Compose"
+echo -e "\n\e[32m6 / Installing Docker and Docker Compose\e[0m"
 sudo apt update
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
@@ -50,9 +48,12 @@ sudo apt install docker-ce docker-ce-cli containerd.io
 sudo docker --version
 sudo usermod -aG docker $USER
 sudo apt install docker-compose
+mkdir -p /home/$USER/data/mariadb
+mkdir -p /home/$USER/data/wordpress
+
 
 # Instructions for VirtualBox
-echo -e "\n--- VirtualBox Instructions ---"
+echo -e "\n\e[36m--- VirtualBox Instructions ---\e[0m"
 echo "1. Ouvrez VirtualBox et sélectionnez votre machine virtuelle."
 echo "2. Accédez aux paramètres de la machine virtuelle."
 echo "3. Cliquez sur 'Réseau', puis sur 'Adaptateur 1'."
