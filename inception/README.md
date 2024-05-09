@@ -1,6 +1,8 @@
-# INCEPTION
+# 💭 INCEPTION  💭
 ---
 ## Part 1 | Configuration de l'environnement de développement
+
+Pour configurer un environnement de travail avec SSH (afin d'éviter le décalage de la machine virtuelle), vous pouvez exécuter directement le script → [install_vm.sh](./install_vm.sh). Voici une explication de ses fonctionnalités.
 
 ### Étape 1 : Installation de Sudo
 
