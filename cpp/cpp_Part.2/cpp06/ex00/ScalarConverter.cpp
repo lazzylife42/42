@@ -6,14 +6,16 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:10:53 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/03 23:56:56 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/05/09 10:55:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <limits>
 #include <climits>
+#include <cstdlib>
 #include <sstream>
 #include "ScalarConverter.hpp"
 
@@ -25,19 +27,13 @@ ScalarConverter::~ScalarConverter() {}
 
 // Members Functions
 
-// IsSomthing Functions
-#include <string>
-
+/// IsSomthing Functions
 bool ScalarConverter::isChar(const std::string& input)
 {
     if (input.size() == 1)
-    {
         return !isdigit(input[0]);
-    }
     else if (input.size() == 4 && input.substr(0, 2) == "\\x" && isxdigit(input[2]) && isxdigit(input[3]))
-    {
         return true;
-    }
     else
     {
         try
@@ -45,34 +41,23 @@ bool ScalarConverter::isChar(const std::string& input)
             int number = std::stoi(input);
             return (number >= 0 && number <= 255 && !isdigit(number));
         }
-        catch (std::invalid_argument& e)
-        {
-            return false;
-        }
+        catch (std::invalid_argument& e) { return false; }
     }
 }
-
-
-#include <limits>
-
-#include <cstdlib>
-#include <climits>
 
 bool ScalarConverter::isInt(const std::string& input)
 {
     if (input.empty())
         return false;
-
     char* endptr;
     strtol(input.c_str(), &endptr, 10);
-    if (*endptr != '\0' || *endptr != 'f') {
+    if (*endptr != '\0' || *endptr != 'f')
+    {
         try {
             std::stof(input);
-        } catch (...) {
-            return false;
         }
+        catch (...) { return false; }
     }
-
     return true;
 }
 
@@ -110,10 +95,10 @@ bool ScalarConverter::isInt(const std::string& input)
 
 
 
-// toSomething
+/// toSomething
 char ScalarConverter::toChar(const std::string& input)
 {
-    
+    int number;
     if (input.size() == 1)
     {
         if (!isdigit(input[0]) && !iscntrl(input[0]))
@@ -121,10 +106,10 @@ char ScalarConverter::toChar(const std::string& input)
     }
     else if (input.size() >= 4 && input.substr(0, 2) == "\\x" && isxdigit(input[2]))
     {
-        int number;
-        try{
+        try {
             number = std::stoi(input.substr(2), nullptr, 16);
-        } catch (...) {return '\0';}
+        }
+        catch (...) { return '\0'; }
         if (number >= 0 && number <= 255 && !iscntrl(static_cast<char>(number)))
             return static_cast<char>(number);
     }
@@ -132,10 +117,10 @@ char ScalarConverter::toChar(const std::string& input)
     {
         try
         {
-            int number;
             try {
                 number = std::stoi(input);
-            } catch (...) {return '\0';}
+            }
+            catch (...) { return '\0'; }
             if (number >= 0 && number <= 255 && !isdigit(number) && !iscntrl(static_cast<char>(number)))
                 return static_cast<char>(number);
         }
@@ -144,16 +129,17 @@ char ScalarConverter::toChar(const std::string& input)
     return '\0';
 }
 
-int ScalarConverter::toInt(const std::string& input) {
+int ScalarConverter::toInt(const std::string& input)
+{
     try {
-        // Tentative de conversion en int
         return std::stoi(input);
-    } catch (const std::out_of_range& e) {
+    }
+    catch (const std::out_of_range& e) {
         try {
-            // Tentative de conversion en float puis en int
             return static_cast<int>(std::stof(input));
-        } catch (const std::out_of_range& e) {
-            return std::numeric_limits<int>::min(); // Impossible
+        }
+        catch (const std::out_of_range& e) {
+            return std::numeric_limits<int>::min();
         }
     }
 }
@@ -212,10 +198,12 @@ void ScalarConverter::convert(const std::string& input)
         try {
             int value = std::stoi(input);
             std::cout << value;
-        } catch (...) {
+        }
+        catch (...) {
             std::cout << "Impossible";
         }
-    } else {
+    }
+    else {
         std::cout << "Impossible";
     }
     std::cout << std::endl;

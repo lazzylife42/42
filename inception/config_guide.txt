@@ -41,8 +41,8 @@
 	Click Network then Adapter 1 then Advanced and then click on Port Forwarding 
 	Change the "Host Port" and "Guest Port" to "4242"
 	Then head back to your Virtual Machine
-	Type sudo systemctl restart ssh to restart your SSH Server
-	Type sudo service sshd status to check your SSH Status
+	Type "sudo systemctl restart ssh" to restart your SSH Server
+	Type "sudo service sshd status" to check your SSH Status
 	Open an iTerm and type the following "ssh your_username@127.0.0.1 -p 4242"
 	In case an error occurs, then type "rm ~/.ssh/known_hosts" in your iTerm and then retype "ssh your_username@127.0.0.1 -p 4242"
 	Lastly type exit to quit your SSH iTerm Connection
@@ -58,7 +58,10 @@
 	Type "sudo apt update"
 	Type "sudo apt install docker-ce docker-ce-cli containerd.io"
 	Type "sudo docker --version"
-	type "sudo usermod -aG docker $USER"
+	Type "sudo usermod -aG docker $USER"
+	Type "sudo apt install gnome-terminal"
+	On the vm, dl https://desktop.docker.com/linux/main/amd64/149282/docker-desktop-4.30.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64
+	Type "sudo apt-get update ; sudo apt-get install ./docker-desktop-<version>-<arch>.deb"
 
 2 / Creating a shared folder
 
