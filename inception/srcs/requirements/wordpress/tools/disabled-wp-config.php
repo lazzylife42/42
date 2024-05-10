@@ -26,16 +26,18 @@ define( 'DB_NAME', getenv('DB_NAME') );
 define( 'DB_USER', getenv('DB_USER') );
 
 /** Database password */
-define( 'DB_PASSWORD', getenv('DB_PASS') );
+define( 'DB_PASSWORD', getenv('DB_PASSWORD') );
 
 /** Database hostname */
-define( 'DB_HOST', getenv('DB_ROOT') );
+define( 'DB_HOST', getenv('DB_HOST') );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
 
 /** The database collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
+
+define( 'WP_ALLOW_REPAIR', true );
 
 /**#@+
  * Authentication unique keys and salts.
@@ -48,15 +50,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'q,VrMu@W3N$8lsY~K;,&~}+mj|}PjcUdh)H0Lyk+jII0/ Plr^HP*(~IA#p#G%~p');
-define('SECURE_AUTH_KEY',  'KoGFkg1,vS+gINeNrx*BjS-pl#j[/Pi24PqPshVD?rm.`F*+}mU9*b d[F# l.qR');
-define('LOGGED_IN_KEY',    'E`{ub-R1I+7_0~$-wt6/7!},}uUc>Qwt#^?R[DUM~hfRDSnOz-LLc>z7s&!U?PMV');
-define('NONCE_KEY',        'h<F3U;b@z H>[+=/+Qz[e-eB5vw>>1-:{9-D^<p3rg futlYzO:a;R!COqggpM+Y');
-define('AUTH_SALT',        '>eX1*hly+,!f<<n1icTyla|MQi*|#_n{auFx+;mfyAwM[dvD{w1O`*]BobEE<PfT');
-define('SECURE_AUTH_SALT', '%uHMhw~C/!0L3h9emJ9YkMER{Ua?k%8/|ZNce!5<XM6?Q+)^v6ex):t&WxIq+@Pi');
-define('LOGGED_IN_SALT',   'nD*TTw#tk+uO{@iZ+YOHN`&*kuU@NMVSk/419Jr,,%Dfl-g?YdAi;` vW3N1FPs/');
-define('NONCE_SALT',       '+f=j&zTc0Pv8#JZKbQ96S1U!& <_tuapL!C9n_^Yy&$2Q*,,`{x2~l.?q#ZScOF+');
-
+	define('AUTH_KEY',         'Iayi41Eqjl{%C|v%Rnu>:-}<kYzRSWEf,*MPDzZB;amwaB&U{IWG@PrT3^#Ur4>=');
+	define('SECURE_AUTH_KEY',  'H?#uBMSRcWx<l;~xWl-CmOc.2j|s/ldF`6rrq6$.ennfTY+w!::D4SQ#J9k-5St?');
+	define('LOGGED_IN_KEY',    '/vrFGQ~(EFxD`>G@n(}`&^&u9KL[-M`$Eaj[s;VL *rC-BsCkGkQ(k>jW:G.W{(}');
+	define('NONCE_KEY',        ';GQ=1X%3E)$yymfv+4}Bb_2ty@;|&go>TwRC`~T8D{-5J}8$*8F<mpbp`bo^QW05');
+	define('AUTH_SALT',        'j+[dBP]7igR,0 aF9|f|?EbJw/Z;%,8xlVQqi-z|&uNOM9=qPSX(xp ~yKV.A5O-');
+	define('SECURE_AUTH_SALT', 'E?I0L/yQH^[]|hD)&6*3uR>s#7r]F9iZJE8eevM*,iV`@r#uF~z<FgVf1LP8B>JE');
+	define('LOGGED_IN_SALT',   ';i:N5-^yc0h?/1_wGZ#d-?k0|`P;Yi+QQeq?8a33iT#,<,xe*XdIDX;%=+i heVX');
+	define('NONCE_SALT',       'UKY+-0-qm(kU+{&/3XlO},B^}apxvs~K}t<eIb0Y)nKhyh=a4Y``dka?oSq{x^Xl');
 /**#@-*/
 
 /**
@@ -88,7 +89,7 @@ define( 'WP_DEBUG', false );
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-    define( 'ABSPATH', '/var/www/html/wordpress' );
+	define( 'ABSPATH', '/var/www/html/wordpress' );
 }
 
 /** Sets up WordPress vars and included files. */

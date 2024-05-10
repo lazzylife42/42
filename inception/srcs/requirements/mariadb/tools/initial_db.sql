@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS wordpress;
-CREATE USER IF NOT EXISTS 'wpuser'@'%' IDENTIFIED BY 'wppass';
-GRANT ALL PRIVILEGES ON wordpress.* TO 'wpuser'@'%';
+CREATE USER IF NOT EXISTS 'sab'@'%' IDENTIFIED BY 'sab12345';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'sab'@'%';
 FLUSH PRIVILEGES;
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'rootpass';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'root12345';
