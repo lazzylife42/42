@@ -13,4 +13,4 @@ cat db1.sql | mysql -u root
 # Arrêter le service MySQL
 service mysql stop
 # Redémarrer MySQL
-mysql
+mysqld
