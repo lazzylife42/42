@@ -6,14 +6,16 @@
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 03:24:16 by sab               #+#    #+#              #
-#    Updated: 2024/05/10 20:03:08 by smonte-e         ###   ########.fr        #
+#    Updated: 2024/05/11 18:30:16 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM debian:buster
 
-RUN apt-get update
-RUN apt-get -y install php7.3 php-mysql php-fpm wget sendmail mariadb-client
+RUN apt-get update && \
+    apt-get -y install php7.3 php-mysql php-fpm wget sendmail mariadb-client && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 EXPOSE 9000
 

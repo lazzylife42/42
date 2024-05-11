@@ -1,4 +1,3 @@
-
 version: '3'
 
 services:
@@ -13,7 +12,7 @@ services:
       - wp:/var/www/html
     networks:
       - network
-    restart: unless-stopped
+    restart: always
 
   wordpress:
     container_name: wordpress
@@ -26,7 +25,7 @@ services:
       - wp:/var/www/html
     networks:
       - network
-    restart: unless-stopped
+    restart: always
 
   mariadb:
     container_name: mariadb
@@ -37,23 +36,23 @@ services:
       - db:/var/lib/mysql
     networks:
       - network
-    restart: unless-stopped
+    restart: always
 
 volumes:
   wp:
-    driver: local
     name: wp
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/sab/data/wordpress
-  db:
     driver: local
-    name: db
     driver_opts:
+      device: /home/sab/data/wordpress
       type: none
       o: bind
+  db:
+    name: db
+    driver: local
+    driver_opts:
       device: /home/sab/data/mariadb
+      type: none
+      o: bind
 
 networks:
   network:
