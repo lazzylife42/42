@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Base.hpp                                           :+:      :+:    :+:   */
+/*   Data.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 16:53:04 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/17 18:47:07 by smonte-e         ###   ########.fr       */
+/*   Created: 2024/05/17 16:47:24 by smonte-e          #+#    #+#             */
+/*   Updated: 2024/05/17 16:47:50 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BASE_HPP
-# define BASE_HPP
-# define INSTANCES 12
-
-#include <iostream>
-
-class Base
+typedef struct  t_Data
 {
-public:
-    virtual ~Base();
-};
-
-#endif
+    void*       data;
+}               Data;

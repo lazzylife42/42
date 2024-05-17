@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Base.hpp                                           :+:      :+:    :+:   */
+/*   color.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 16:53:04 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/17 18:47:07 by smonte-e         ###   ########.fr       */
+/*   Created: 2024/05/02 16:50:27 by smonte-e          #+#    #+#             */
+/*   Updated: 2024/05/02 16:50:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BASE_HPP
-# define BASE_HPP
-# define INSTANCES 12
+#ifndef COLOR_HPP
+# define COLOR_HPP
 
-#include <iostream>
-
-class Base
-{
-public:
-    virtual ~Base();
-};
+#define RST "\033[0m"
+#define RED "\033[1;31m"
+#define GRN "\033[1;32m"
+#define YEL "\033[1;33m"
+#define BLU "\033[1;34m"
+#define MAG "\033[1;35m"
+#define CYA "\033[1;36m"
+#define WHT "\033[1;37m"
+#define CLR "\033[2J\033[1;1H"
 
 #endif

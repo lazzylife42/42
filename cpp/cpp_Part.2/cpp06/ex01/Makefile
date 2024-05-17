@@ -5,16 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/17 16:51:25 by smonte-e          #+#    #+#              #
-#    Updated: 2024/05/17 18:48:44 by smonte-e         ###   ########.fr        #
+#    Created: 2024/05/17 15:22:29 by smonte-e          #+#    #+#              #
+#    Updated: 2024/05/17 15:41:22 by smonte-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Identify\ real\ type
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
+NAME = Serialization
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -f
 GCC = g++
-SRC = main.cpp Base.cpp
+SRC = main.cpp Serialization.cpp
 
 OBJS = $(SRC:.cpp=.o)
 
