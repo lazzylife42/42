@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:25:17 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/17 16:48:14 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:45:31 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ public:
     static uintptr_t serialize(Data* ptr);
     static Data* deserialize(uintptr_t raw);
 
-protected:
-    // Protected members
+private:
+    // private members
     Serialization();
     Serialization(Serialization const &src);
     Serialization& operator=(const Serialization &rhs);

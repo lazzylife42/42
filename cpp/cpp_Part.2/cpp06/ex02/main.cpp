@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:02:18 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/17 18:54:13 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:47:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "B.hpp"
 #include "C.hpp"
 #include "color.hpp"
-
-
 
 Base*	generate(void)
 {
@@ -88,5 +86,4 @@ int main(void)
 		delete  instances[i];
 
     return 0;
-
 }
