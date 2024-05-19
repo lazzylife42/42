@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:37:12 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/19 19:06:52 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/05/19 19:17:53 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ Array<T>::Array(const Array& src) : _elements(new T[src._size]), _size(src._size
 }
 
 template <typename T>
-Array<T>::~Array() {
+Array<T>::~Array()
+{
 	delete[] _elements;
 }
 

@@ -6,13 +6,14 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 21:04:19 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/18 21:10:14 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/05/19 19:30:33 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "iter.hpp"
 #include "color.hpp"
+#include <stdio.h>
 
 int main()
 {
