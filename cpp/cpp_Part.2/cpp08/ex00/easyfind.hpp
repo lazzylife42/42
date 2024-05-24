@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:44:20 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/23 17:53:02 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/05/24 14:03:30 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,29 @@
 # define EASYFIND_HPP
 
 #include <iostream>
+#include <exception>
+#include <algorithm>
+#include <list>
+#include <vector>
 #include "color.hpp"
-#include "easyfind.tpp"
 
-template<typename T>
-class easyfind
+class	NotFoundException : public std::exception
 {
-    public:
-        easyfind(T firstPram, int secondPraram);
-        easyfind(easyfind const &src);
-        easyfind& operator=(const easyfind &rhs);        
-        ~easyfind();
-        
-    private:
-        easyfind();
+	public:
+		virtual const char *what() const throw()
+		{
+			return (RED "Element not found !" RST);
+		}
 };
 
+template <typename T>
+typename T::iterator easyfind(T &container, int element)
+{
+	typename T::iterator it = std::find(container.begin(), container.end(), element);
+
+	if (it == container.end())
+		throw (NotFoundException());
+	return (it);
+}
 
 #endif
