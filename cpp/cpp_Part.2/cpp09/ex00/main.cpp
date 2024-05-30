@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 00:48:32 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/30 16:21:51 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:22:36 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int main(int argc, char **argv)
             }
             else if (!FormatCheck::isValidDate(file2date) && file2date != "date ")
             {
-                std::cerr << RED "Error: Bad date input" WHT " => " RED << file2date << RST << std::endl;
+                std::cerr << RED "Error: bad date input" WHT " => " RED << file2date << RST << std::endl;
             }
             else if (!FormatCheck::isValidPrice(file2price_str))
             {
@@ -91,6 +91,8 @@ int main(int argc, char **argv)
                     std::cerr << RED "Error: not a positive number." << RST << std::endl;
                 else if (file2price > 1000.0f)
                     std::cerr << RED "Error: too large a number." << RST << std::endl;
+                else
+                    std::cerr << RED "Error: parsing error." << RST << std::endl;
             }
         }
     }
