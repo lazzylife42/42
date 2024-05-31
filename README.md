@@ -26,4 +26,4 @@ Voici la liste de mes différents projets finis ou en cours dans le cadre de mon
 ## Rank 5 (En cours)
 - [piscine C++ (Partie 2)](./cpp/cpp_Part.2/) : Exercices de la piscine C++, deuxième partie.
 - [inception](./inception) : Ce projet virtualise plusieurs images Docker en les créant dans une nouvelle machine virtuelle.
-- [webserv](./webserv/web_serv/) : Création d'un serveur HTTP à partir de zéro.
+- [webserv](./web_serv/) : Création d'un serveur HTTP à partir de zéro.
