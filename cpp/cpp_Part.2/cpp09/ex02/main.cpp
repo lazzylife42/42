@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:33:51 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/31 12:27:31 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:55:35 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iomanip>
 #include "PmergeMe.hpp"
 #include "color.hpp"
+
+// ./PmergeMe "$(jot -r 3000 1 1000 | tr '\n' ' ')"
 
 int main(int argc, char** argv)
 {
@@ -22,7 +24,7 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    std::cout << WHT "========================PMergeMe========================" RST << std::endl;
+    std::cout << WHT "============================PMergeMe=============================" RST << std::endl;
     
     // LIST PART
     std::list<int>& myList = PmergeMe::parseToList(argv[1]);
@@ -48,7 +50,7 @@ int main(int argc, char** argv)
     std::cout << " \"" << std::endl;
 
     std::cout << "->Time to sort list  : " << std::fixed << std::setprecision(2) << elapsed_time << " μs" << std::endl;
-    std::cout << WHT "--------------------------------------------------------" RST << std::endl;
+    std::cout << WHT "-----------------------------------------------------------------" RST << std::endl;
     
     // VECTOR PART
     std::vector<int>& myVector = PmergeMe::parseToVec(argv[1]);
@@ -75,7 +77,7 @@ int main(int argc, char** argv)
 
     std::cout << "->Time to sort vector: " << std::fixed << std::setprecision(2) << elapsed_time << " μs" << std::endl;
 
-    std::cout << WHT "========================================================" RST << std::endl;
+    std::cout << WHT "=================================================================" RST << std::endl;
     
     return 0;
 }
