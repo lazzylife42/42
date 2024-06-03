@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/03 18:25:15 by smonte-e          #+#    #+#             */
+/*   Updated: 2024/06/03 18:33:59 by smonte-e         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PMERGEME_HPP
-# define PMERGEME_HPP
+#define PMERGEME_HPP
 
 #include <iostream>
 #include <list>
 #include <vector>
 #include <utility>
 #include <algorithm>
+#include <sstream>
 
 class PmergeMe
 {
@@ -14,13 +27,10 @@ public:
     static std::vector<int>& parseToVec(const char* argv);
 
     template <typename T>
-    static T& sortContainer(T& container);
-
-    template <typename T>
     static T& FordJohnson(T& container);
 
     template <typename T>
-    bool comparePairs(const std::pair<T, T>& a, const std::pair<T, T>& b);
+    static bool comparePairs(const std::pair<typename T::value_type, typename T::value_type>& a, const std::pair<typename T::value_type, typename T::value_type>& b);
 
 private:
     PmergeMe();
@@ -29,27 +39,8 @@ private:
     ~PmergeMe();
 
     template <typename T>
-    static void mergeSort(T& container, typename T::iterator left, typename T::iterator right);
-
-    template <typename T>
-    static void merge(T& container, typename T::iterator left, typename T::iterator middle, typename T::iterator right);
-
-    template <typename T>
-    static void insertionSort(T& container, typename T::iterator left, typename T::iterator right);
-
-    template <typename T>
     static void mergePairs(std::vector<std::pair<typename T::value_type, typename T::value_type> >& pairs, T& container);
 };
-
-template <typename T>
-T& PmergeMe::sortContainer(T& container)
-{
-    if (container.size() <= 10)
-        insertionSort(container, container.begin(), container.end());
-    else
-        mergeSort(container, container.begin(), container.end());
-    return container;
-}
 
 template <typename T>
 T& PmergeMe::FordJohnson(T& container)
@@ -61,7 +52,7 @@ T& PmergeMe::FordJohnson(T& container)
     {
         typename T::value_type first = *it;
         ++it;
-        
+
         if (it != container.end())
         {
             typename T::value_type second = *it;
@@ -70,93 +61,20 @@ T& PmergeMe::FordJohnson(T& container)
         }
         else
         {
-            pairs.push_back(std::make_pair(first, typename T::value_type()));
+            pairs.push_back(std::make_pair(first, first)); // Ensure a valid pair
         }
     }
 
-    std::sort(pairs.begin(), pairs.end(), comparePairs<typename T::value_type>);
+    std::sort(pairs.begin(), pairs.end(), PmergeMe::comparePairs<typename T::value_type>);
     mergePairs(pairs, container);
-    
+
     return container;
 }
 
 template <typename T>
-bool comparePairs(const std::pair<T, T>& a, const std::pair<T, T>& b)
+bool PmergeMe::comparePairs(const std::pair<typename T::value_type, typename T::value_type>& a, const std::pair<typename T::value_type, typename T::value_type>& b)
 {
     return std::max(a.first, a.second) < std::max(b.first, b.second);
-}
-
-template <typename T>
-void PmergeMe::mergeSort(T& container, typename T::iterator left, typename T::iterator right)
-{
-    if (std::distance(left, right) <= 1)
-        return;
-
-    typename T::iterator middle = left;
-    std::advance(middle, std::distance(left, right) / 2);
-
-    mergeSort(container, left, middle);
-    mergeSort(container, middle, right);
-    merge(container, left, middle, right);
-}
-
-template <typename T>
-void PmergeMe::merge(T& container, typename T::iterator left, typename T::iterator middle, typename T::iterator right)
-{
-    T leftHalf(left, middle);
-    T rightHalf(middle, right);
-
-    typename T::iterator leftIt = leftHalf.begin();
-    typename T::iterator rightIt = rightHalf.begin();
-    typename T::iterator it = left;
-
-    while (leftIt != leftHalf.end() && rightIt != rightHalf.end())
-    {
-        if (*leftIt < *rightIt)
-        {
-            *it = *leftIt;
-            ++leftIt;
-        }
-        else
-        {
-            *it = *rightIt;
-            ++rightIt;
-        }
-        ++it;
-    }
-
-    while (leftIt != leftHalf.end())
-    {
-        *it = *leftIt;
-        ++leftIt;
-        ++it;
-    }
-
-    while (rightIt != rightHalf.end())
-    {
-        *it = *rightIt;
-        ++rightIt;
-        ++it;
-    }
-}
-
-template <typename T>
-void PmergeMe::insertionSort(T& container, typename T::iterator left, typename T::iterator right)
-{
-    for (typename T::iterator it = left; it != right; ++it)
-    {
-        typename T::value_type key = *it;
-        typename T::iterator j = it;
-        while (j != left && key < *(--j))
-        {
-            typename T::iterator next = j;
-            ++next;
-            *next = *j;
-        }
-        typename T::iterator next = j;
-        ++next;
-        *next = key;
-    }
 }
 
 template <typename T>
@@ -166,8 +84,46 @@ void PmergeMe::mergePairs(std::vector<std::pair<typename T::value_type, typename
     for (typename std::vector<std::pair<typename T::value_type, typename T::value_type> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
     {
         container.push_back(std::min(it->first, it->second));
+    }
+    for (typename std::vector<std::pair<typename T::value_type, typename T::value_type> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+    {
         container.push_back(std::max(it->first, it->second));
     }
+
+    // Since the container now has two sorted halves, we need to merge them.
+    std::vector<typename T::value_type> sorted;
+    typename T::iterator mid = container.begin();
+    std::advance(mid, container.size() / 2);
+    typename T::iterator left = container.begin();
+    typename T::iterator right = mid;
+
+    while (left != mid && right != container.end())
+    {
+        if (*left < *right)
+        {
+            sorted.push_back(*left);
+            ++left;
+        }
+        else
+        {
+            sorted.push_back(*right);
+            ++right;
+        }
+    }
+
+    while (left != mid)
+    {
+        sorted.push_back(*left);
+        ++left;
+    }
+
+    while (right != container.end())
+    {
+        sorted.push_back(*right);
+        ++right;
+    }
+
+    container.assign(sorted.begin(), sorted.end());
 }
 
 #endif
