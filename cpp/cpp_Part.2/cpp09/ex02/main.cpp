@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:33:51 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/31 13:55:35 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:38:07 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(int argc, char** argv)
     std::cout << "\"" << std::endl;
 
     clock_t start = clock();
-    PmergeMe::sortContainer(myList);
+    PmergeMe::FordJohnson(myList);
     clock_t end = clock();
     double elapsed_time = double(end - start) / CLOCKS_PER_SEC * 1e6; // convert to microseconds
 
@@ -63,7 +63,7 @@ int main(int argc, char** argv)
     std::cout << "\"" << std::endl;
 
     start = clock();
-    PmergeMe::sortContainer(myVector);
+    PmergeMe::FordJohnson(myVector);
     end = clock();
     elapsed_time = double(end - start) / CLOCKS_PER_SEC * 1e6; // convert to microseconds
 
