@@ -6,7 +6,7 @@
 /*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 18:25:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/06/04 00:33:23 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/06/04 01:04:39 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@
 class PmergeMe
 {
 public:
-    PmergeMe();
-    PmergeMe(PmergeMe const& src);
-    PmergeMe& operator=(const PmergeMe& rhs);
-    ~PmergeMe();
 
     static std::list<int> parseToList(const char* argv);
     static std::vector<int> parseToVec(const char* argv);
@@ -40,6 +36,11 @@ public:
     static bool isSorted(const T& container);
 
 private:
+    PmergeMe();
+    PmergeMe(PmergeMe const& src);
+    PmergeMe& operator=(const PmergeMe& rhs);
+    ~PmergeMe();
+    
     template <typename T>
     static void mergePairs(std::vector<std::pair<typename T::value_type, typename T::value_type> >& pairs, T& container);
     
@@ -50,9 +51,11 @@ private:
 template <typename T>
 T& PmergeMe::FordJohnson(T& container)
 {
+    // Vérifie si le conteneur est vide. Si oui, il retourne immédiatement.
     if (container.empty())
         return container;
 
+    // Crée des paires d'éléments consécutifs du conteneur. Si le nombre d'éléments est impair, le dernier élément est traité séparément.
     std::vector<std::pair<typename T::value_type, typename T::value_type> > pairs;
     typename T::value_type lastElement;
     bool hasOddElement = false;
@@ -76,24 +79,21 @@ T& PmergeMe::FordJohnson(T& container)
         }
     }
 
-    // Sort pairs individually
+    // Trie chaque paire individuellement et les trie ensuite par leur premier élément.
     for (size_t i = 0; i < pairs.size(); ++i)
     {
         if (pairs[i].first > pairs[i].second)
             std::swap(pairs[i].first, pairs[i].second);
     }
 
-    // Sort pairs by the first element
     std::sort(pairs.begin(), pairs.end(), comparePairs<T>);
 
-    // Merge sorted pairs into the container
+    // Fusionne les éléments des paires triées dans le conteneur.
     mergePairs(pairs, container);
 
-    // Add the last element if it exists and it's an odd element
+    // Ajoute le dernier élément séparé s'il existe.
     if (hasOddElement)
-    {
         container.insert(std::upper_bound(container.begin(), container.end(), lastElement), lastElement);
-    }
 
     return container;
 }
@@ -110,14 +110,10 @@ void PmergeMe::mergePairs(std::vector<std::pair<typename T::value_type, typename
     std::vector<typename T::value_type> merged;
 
     for (size_t i = 0; i < pairs.size(); ++i)
-    {
         merged.push_back(pairs[i].first);
-    }
 
     for (size_t i = 0; i < pairs.size(); ++i)
-    {
         merged.push_back(pairs[i].second);
-    }
 
     std::sort(merged.begin(), merged.end());
 
