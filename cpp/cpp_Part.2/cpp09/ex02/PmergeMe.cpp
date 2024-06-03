@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:59:41 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/05/31 11:12:57 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/06/03 23:53:52 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,26 @@ PmergeMe::PmergeMe(PmergeMe const& src) {(void)src;}
 PmergeMe& PmergeMe::operator=(const PmergeMe& rhs) {(void)rhs; return *this; }
 PmergeMe::~PmergeMe() {}
 
-std::list<int>& PmergeMe::parseToList(const char* argv)
+std::list<int> PmergeMe::parseToList(const char* argv)
 {
-    static std::list<int> list;
+    std::list<int> result;
     std::istringstream iss(argv);
-    std::copy(std::istream_iterator<int>(iss), std::istream_iterator<int>(), std::back_inserter(list));
-    return list;
+    int number;
+    while (iss >> number)
+    {
+        result.push_back(number);
+    }
+    return result;
 }
 
-std::vector<int>& PmergeMe::parseToVec(const char* argv)
+std::vector<int> PmergeMe::parseToVec(const char* argv)
 {
-    static std::vector<int> vec;
+    std::vector<int> result;
     std::istringstream iss(argv);
-    std::copy(std::istream_iterator<int>(iss), std::istream_iterator<int>(), std::back_inserter(vec));
-    return vec;
+    int number;
+    while (iss >> number)
+    {
+        result.push_back(number);
+    }
+    return result;
 }
