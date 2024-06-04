@@ -1,3 +1,6 @@
 [submodule "web_serv"]
 	path = web_serv
 	url = https://github.com/lrjussiau/web_serv.git
+[submodule "webserv/web_serv"]
+	path = webserv/web_serv
+	url = https://github.com/lrjussiau/web_serv.git

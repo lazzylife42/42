@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 18:25:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/06/04 01:04:39 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/06/04 10:27:35 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #include <iostream>
 #include <list>
+#include <deque>
 #include <vector>
 #include <utility>
 #include <algorithm>
@@ -28,6 +29,7 @@ public:
 
     static std::list<int> parseToList(const char* argv);
     static std::vector<int> parseToVec(const char* argv);
+    static std::deque<int> parseToDeque(const char* argv);
 
     template <typename T>
     static T& FordJohnson(T& container);

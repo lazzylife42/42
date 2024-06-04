@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smonte-e <smonte-e@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: smonte-e <smonte-e@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:20:15 by smonte-e          #+#    #+#             */
-/*   Updated: 2024/06/04 01:08:17 by smonte-e         ###   ########.fr       */
+/*   Updated: 2024/06/04 10:32:39 by smonte-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,40 @@ int main(int argc, char** argv)
     std::cout << "\"" << std::endl;
 
     std::cout << "->Time to sort vector\t: " << std::fixed << std::setprecision(2) << elapsed_time << " μs" << std::endl;
+
+        std::cout << WHT "-----------------------------------------------------------------" RST << std::endl;
+
+    // DEQUE PART
+    std::deque<int> myDeque = PmergeMe::parseToDeque(argv[1]);
+    std::cout << MAG "Deque before sort\t: " RST << "\"";
+    count = 0;
+    
+    for (std::deque<int>::iterator it = myDeque.begin(); it != myDeque.end() && count < max_display; ++it, ++count)
+        std::cout << *it << " ";
+    
+    if (myDeque.size() > max_display)
+        std::cout << "...";
+        
+    std::cout << "\"" << std::endl;
+
+    start = clock();
+    PmergeMe::FordJohnson(myDeque);
+    end = clock();
+    elapsed_time = double(end - start) / CLOCKS_PER_SEC * 1e6;
+
+    std::cout << (PmergeMe::isSorted(myDeque) ? GRN "Deque is sorted!" RST : RED "Deque is not sorted!" RST) << std::endl;
+
+    std::cout << WHT "Sorted deque\t\t: " RST << "\"";
+    count = 0;
+    for (std::deque<int>::iterator it = myDeque.begin(); it != myDeque.end() && count < max_display; ++it, ++count)
+        std::cout << *it << " ";
+
+    if (myDeque.size() > max_display)
+        std::cout << "...";
+
+    std::cout << "\"" << std::endl;
+
+    std::cout << "->Time to sort deque\t: " << std::fixed << std::setprecision(2) << elapsed_time << " μs" << std::endl;
 
     std::cout << WHT "=================================================================" RST << std::endl;
 
