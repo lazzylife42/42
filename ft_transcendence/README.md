@@ -10,7 +10,7 @@ L'architecture du projet est conçue pour être modulaire et scalable, en utilis
 
 ### Diagramme de l'Architecture
 
-![Diagramme de l'Architecture](diagram.png)
+![Diagramme de l'Architecture](board-comical-comic.jpg)
 
 ### Description des Composants
 
@@ -31,7 +31,7 @@ L'architecture du projet est conçue pour être modulaire et scalable, en utilis
    - **Description**: Composant AI pour le jeu Pong. Envoie l'état du jeu au Client WEB pour le support multi-joueurs en temps réel.
 
 6. **Base de Données (PostgreSQL)**:
-   - **Description**: Gestion du stockage des données et interactions avec la blockchain.
+   - **Description**: Gestion du stockage des données et interactions avec la blockchavn.
 
 7. **Blockchain Service (Ethereum, Web3.py, Contrats Solidity)**:
    - **Description**: Stocke les scores des tournois de Pong sur la blockchain.
@@ -47,7 +47,7 @@ ft_transcendence/
 ├── srcs/
 │   ├── client_web/
 │   │   ├── public/
-│   │   └── src/
+│   │   └── src/v
 │   │       ├── js/
 │   │       ├── css/
 │   │       └── index.html
