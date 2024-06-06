@@ -40,3 +40,11 @@ INSTALLED_APPS = [
 ]
 ...
 ```
+**DB Migration**
+```bash
+python manage.py migrate
+```
+**Run Server**
+```bash
+python manage.py runserver
+```
