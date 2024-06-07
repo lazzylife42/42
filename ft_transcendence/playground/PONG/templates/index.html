@@ -30,6 +30,9 @@
         let gameState = {};
         let gameStarted = false;
         let gameOver = false;
+        let player1Speed = 0;
+        let player2Speed = 0;
+        const keys = {};
 
         const socket = io();
 
@@ -46,7 +49,7 @@
                 draw();
             } else if (gameState.game_over && !gameOver) {
                 gameOver = true;
-                alert('Game Over! Press any key to start a new game.');
+                // alert('Game Over! Press any key to start a new game.');
             }
         });
 
@@ -76,12 +79,39 @@
             socket.emit('request_state');
         }
 
-        document.addEventListener('keydown', event => {
+        function handleKeyDown(event) {
+            keys[event.key] = true;
+            updateSpeeds();
             if (!gameStarted) {
                 socket.emit('start_game');
                 gameStarted = true;
                 gameOver = false;
                 requestAnimationFrame(update);
+            }
+        }
+
+        function handleKeyUp(event) {
+            keys[event.key] = false;
+            updateSpeeds();
+        }
+
+        function updateSpeeds() {
+            player1Speed = (keys['ArrowDown'] ? 7 : 0) + (keys['ArrowUp'] ? -7 : 0);
+            player2Speed = (keys['s'] ? 7 : 0) + (keys['w'] ? -7 : 0);
+            socket.emit('player_input', { player1Speed, player2Speed });
+        }
+
+        document.addEventListener('keydown', event => {
+            handleKeyDown(event);
+            if (['ArrowDown', 'ArrowUp', 's', 'w'].includes(event.key)) {
+                event.preventDefault();
+            }
+        });
+
+        document.addEventListener('keyup', event => {
+            handleKeyUp(event);
+            if (['ArrowDown', 'ArrowUp', 's', 'w'].includes(event.key)) {
+                event.preventDefault();
             }
         });
 

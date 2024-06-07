@@ -22,7 +22,6 @@ c_white = (255, 255, 255)
 ball_speed = [7 * random.choice((1, -1)), 7 * random.choice((1, -1))]
 player1_speed = 0
 player2_speed = 0
-player_speed = 7
 
 player1_score, player2_score, game_over = 0, 0, False
 game_started = False
@@ -36,11 +35,13 @@ def connect():
 
 @sio.event
 def update_state(data):
-    global ball, ball_speed, player1, player2, player1_score, player2_score, game_over, game_started
+    global ball, ball_speed, player1, player2, player1_score, player2_score, game_over, game_started, player1_speed, player2_speed
     ball.x, ball.y = data['ball']['x'], data['ball']['y']
     ball_speed[0], ball_speed[1] = data['ball']['vx'], data['ball']['vy']
     player1.y = data['player1']['y']
     player2.y = data['player2']['y']
+    player1_speed = data['player1']['speed']
+    player2_speed = data['player2']['speed']
     player1_score = data['player1_score']
     player2_score = data['player2_score']
     game_over = data['game_over']
@@ -76,11 +77,13 @@ def ball_animation():
         ball.left = player2.right
 
 def player1_animation():
+    global player1
     player1.y += player1_speed
     if player1.top <= 0: player1.top = 0
     if player1.bottom >= screen_height: player1.bottom = screen_height
 
 def player2_animation():
+    global player2
     player2.y += player2_speed
     if player2.top <= 0: player2.top = 0
     if player2.bottom >= screen_height: player2.bottom = screen_height
@@ -136,36 +139,16 @@ while True:
             stop_game()
             pygame.quit()
             sys.exit()
-        if event.type == pygame.KEYDOWN:
-            if not game_started:
-                start_game()
-            if event.key == pygame.K_DOWN:
-                player1_speed += player_speed
-            if event.key == pygame.K_UP:
-                player1_speed -= player_speed
-            if event.key == pygame.K_s:
-                player2_speed += player_speed
-            if event.key == pygame.K_w:
-                player2_speed -= player_speed
-            if event.key == pygame.K_ESCAPE:
-                stop_game()
-                pygame.quit()
-                sys.exit()
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_DOWN:
-                player1_speed -= player_speed
-            if event.key == pygame.K_UP:
-                player1_speed += player_speed
-            if event.key == pygame.K_s:
-                player2_speed -= player_speed
-            if event.key == pygame.K_w:
-                player2_speed += player_speed
 
     if game_started and not game_over:
         ball_animation()
         player1_animation()
         player2_animation()
-        send_game_state()  # Send state only when the game is running
+
+        # Send game state every 5 frames
+        # frame_count += 1
+        # if frame_count % 5 == 0:
+        send_game_state()
 
     screen.fill(bg_color)
     pygame.draw.rect(screen, c_white, player1)

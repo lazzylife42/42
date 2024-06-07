@@ -51,5 +51,12 @@ def handle_stop_game():
     game_state['game_over'] = True
     emit('update_state', game_state, broadcast=True)
 
+@socketio.on('player_input')
+def handle_player_input(data):
+    global game_state
+    game_state['player1']['speed'] = data['player1Speed']
+    game_state['player2']['speed'] = data['player2Speed']
+    emit('update_state', game_state, broadcast=True)
+
 if __name__ == '__main__':
     socketio.run(app, debug=True)
