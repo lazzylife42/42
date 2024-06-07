@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong Game</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background-color: black;
+        }
+        .middle-line {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: white;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="middle-line"></div>
+    <canvas id="gameCanvas" width="640" height="360"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let gameState = {};
+        let gameStarted = false;
+        let gameOver = false;
+
+        const socket = io();
+
+        socket.on('connect', () => {
+            console.log('Connected to server');
+            socket.emit('request_state');
+        });
+
+        socket.on('update_state', (data) => {
+            gameState = data;
+            if (gameState.game_started) {
+                gameStarted = true;
+                gameOver = false;
+                draw();
+            } else if (gameState.game_over && !gameOver) {
+                gameOver = true;
+                alert('Game Over! Press any key to start a new game.');
+            }
+        });
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+
+            // Draw ball
+            ctx.beginPath();
+            ctx.arc(gameState.ball.x, gameState.ball.y, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Draw paddles
+            ctx.fillRect(canvas.width - 15, gameState.player1.y, 10, 70);
+            ctx.fillRect(5, gameState.player2.y, 10, 70);
+
+            // Draw scores
+            ctx.font = '20px Arial';
+            ctx.fillText(gameState.player1_score, canvas.width - 50, 30);
+            ctx.fillText(gameState.player2_score, 30, 30);
+        }
+
+        function update() {
+            if (gameStarted) {
+                requestAnimationFrame(update);
+            }
+            socket.emit('request_state');
+        }
+
+        document.addEventListener('keydown', event => {
+            if (!gameStarted) {
+                socket.emit('start_game');
+                gameStarted = true;
+                gameOver = false;
+                requestAnimationFrame(update);
+            }
+        });
+
+        socket.on('disconnect', () => {
+            console.log('Disconnected from server');
+        });
+
+        socket.emit('request_state');
+    </script>
+</body>
+</html>
