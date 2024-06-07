@@ -4,3 +4,9 @@
 [submodule "webserv/web_serv"]
 	path = webserv/web_serv
 	url = https://github.com/lrjussiau/web_serv.git
+[submodule "transcendence"]
+	path = transcendence
+	url = https://github.com/lrjussiau/ft_transcendence.git
+[submodule "ft_transcendence/transcendence"]
+	path = ft_transcendence/transcendence
+	url = https://github.com/lrjussiau/ft_transcendence.git
