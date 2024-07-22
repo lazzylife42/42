@@ -43,3 +43,6 @@
 [submodule "push_swap"]
 	path = push_swap
 	url = https://github.com/lazzylife42/push_swap.git
+[submodule "so_long"]
+	path = so_long
+	url = https://github.com/lazzylife42/so_long.git
