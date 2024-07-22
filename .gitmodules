@@ -40,3 +40,6 @@
 [submodule "pipex"]
 	path = pipex
 	url = https://github.com/lazzylife42/pipex.git
+[submodule "push_swap"]
+	path = push_swap
+	url = https://github.com/lazzylife42/push_swap.git
