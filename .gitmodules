@@ -31,3 +31,6 @@
 [submodule "minishell"]
 	path = minishell
 	url = https://github.com/lazzylife42/minishell.git
+[submodule "net_practice"]
+	path = net_practice
+	url = https://github.com/lazzylife42/net_practice.git
