@@ -46,3 +46,6 @@
 [submodule "so_long"]
 	path = so_long
 	url = https://github.com/lazzylife42/so_long.git
+[submodule "vscode"]
+	path = vscode
+	url = https://github.com/lazzylife42/vscode.git
