@@ -19,3 +19,6 @@
 [submodule "cub3d"]
 	path = cub3d
 	url = https://github.com/lazzylife42/cub3d.git
+[submodule "ft_transcendence"]
+	path = ft_transcendence
+	url = https://github.com/lazzylife42/ft_transcendence.git
