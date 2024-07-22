@@ -1,51 +1,47 @@
-[submodule "web_serv"]
-	path = web_serv
-	url = https://github.com/lrjussiau/web_serv.git
-[submodule "webserv/web_serv"]
-	path = webserv/web_serv
-	url = https://github.com/lrjussiau/web_serv.git
-[submodule "transcendence"]
-	path = transcendence
-	url = https://github.com/lrjussiau/ft_transcendence.git
-[submodule "ft_transcendence/transcendence"]
-	path = ft_transcendence/transcendence
-	url = https://github.com/lrjussiau/ft_transcendence.git
-[submodule "ft_transcendence/ft_transcendence"]
-	path = ft_transcendence/ft_transcendence
-	url = https://github.com/lrjussiau/ft_transcendence.git
-[submodule "cpp"]
-	path = cpp
-	url = https://github.com/lazzylife42/cpp.git
-[submodule "cub3d"]
-	path = cub3d
-	url = https://github.com/lazzylife42/cub3d.git
-[submodule "ft_transcendence"]
-	path = ft_transcendence
-	url = https://github.com/lazzylife42/ft_transcendence.git
-[submodule "inception"]
-	path = inception
-	url = https://github.com/lazzylife42/inception.git
 [submodule "libft"]
 	path = libft
 	url = https://github.com/lazzylife42/libft.git
-[submodule "minishell"]
-	path = minishell
-	url = https://github.com/lazzylife42/minishell.git
-[submodule "net_practice"]
-	path = net_practice
-	url = https://github.com/lazzylife42/net_practice.git
-[submodule "philosophers"]
-	path = philosophers
-	url = https://github.com/lazzylife42/philosophers.git
-[submodule "pipex"]
-	path = pipex
-	url = https://github.com/lazzylife42/pipex.git
+
 [submodule "push_swap"]
 	path = push_swap
 	url = https://github.com/lazzylife42/push_swap.git
+
 [submodule "so_long"]
 	path = so_long
 	url = https://github.com/lazzylife42/so_long.git
-[submodule "vscode"]
-	path = vscode
-	url = https://github.com/lazzylife42/vscode.git
+
+[submodule "pipex"]
+	path = pipex
+	url = https://github.com/lazzylife42/pipex.git
+
+[submodule "philosophers"]
+	path = philosophers
+	url = https://github.com/lazzylife42/philosophers.git
+
+[submodule "minishell"]
+	path = minishell
+	url = https://github.com/lazzylife42/minishell.git
+
+[submodule "cub3d"]
+	path = cub3d
+	url = https://github.com/lazzylife42/cub3d.git
+
+[submodule "net_practice"]
+	path = net_practice
+	url = https://github.com/lazzylife42/net_practice.git
+
+[submodule "cpp"]
+	path = cpp
+	url = https://github.com/lazzylife42/cpp.git
+
+[submodule "inception"]
+	path = inception
+	url = https://github.com/lazzylife42/inception.git
+
+[submodule "webserv"]
+	path = webserv
+	url = https://github.com/lazzylife42/webserv.git
+
+[submodule "ft_transcendence"]
+	path = ft_transcendence
+	url = https://github.com/lazzylife42/ft_transcendence.git
