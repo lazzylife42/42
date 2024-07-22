@@ -16,3 +16,6 @@
 [submodule "cpp"]
 	path = cpp
 	url = https://github.com/lazzylife42/cpp.git
+[submodule "cub3d"]
+	path = cub3d
+	url = https://github.com/lazzylife42/cub3d.git
