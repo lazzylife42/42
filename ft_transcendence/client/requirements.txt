@@ -1,5 +1,0 @@
-# Bibliothèques externes de client.py
-# RUN 'pip install -r requirements.txt'
-websockets
-pygame
-urllib3
