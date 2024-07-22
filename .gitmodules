@@ -28,3 +28,6 @@
 [submodule "libft"]
 	path = libft
 	url = https://github.com/lazzylife42/libft.git
+[submodule "minishell"]
+	path = minishell
+	url = https://github.com/lazzylife42/minishell.git
