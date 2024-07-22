@@ -13,3 +13,6 @@
 [submodule "ft_transcendence/ft_transcendence"]
 	path = ft_transcendence/ft_transcendence
 	url = https://github.com/lrjussiau/ft_transcendence.git
+[submodule "cpp"]
+	path = cpp
+	url = https://github.com/lazzylife42/cpp.git
