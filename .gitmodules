@@ -34,3 +34,6 @@
 [submodule "net_practice"]
 	path = net_practice
 	url = https://github.com/lazzylife42/net_practice.git
+[submodule "philosophers"]
+	path = philosophers
+	url = https://github.com/lazzylife42/philosophers.git
