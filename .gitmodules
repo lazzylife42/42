@@ -37,3 +37,6 @@
 [submodule "philosophers"]
 	path = philosophers
 	url = https://github.com/lazzylife42/philosophers.git
+[submodule "pipex"]
+	path = pipex
+	url = https://github.com/lazzylife42/pipex.git
