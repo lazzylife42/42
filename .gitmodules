@@ -25,3 +25,6 @@
 [submodule "inception"]
 	path = inception
 	url = https://github.com/lazzylife42/inception.git
+[submodule "libft"]
+	path = libft
+	url = https://github.com/lazzylife42/libft.git
