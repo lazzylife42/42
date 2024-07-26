@@ -4,3 +4,36 @@
 [submodule "piscine_cpp_part2"]
 	path = piscine_cpp_part2
 	url = https://github.com/lazzylife42/cpp.git
+[submodule "libft"]
+	path = libft
+	url = https://github.com/lazzylife42/libft.git
+[submodule "push_swap"]
+	path = push_swap
+	url = https://github.com/lazzylife42/push_swap.git
+[submodule "so_long"]
+	path = so_long
+	url = https://github.com/lazzylife42/so_long.git
+[submodule "pipex"]
+	path = pipex
+	url = https://github.com/lazzylife42/pipex.git
+[submodule "philosophers"]
+	path = philosophers
+	url = https://github.com/lazzylife42/philosophers.git
+[submodule "minishell"]
+	path = minishell
+	url = https://github.com/lazzylife42/minishell.git
+[submodule "cub3d"]
+	path = cub3d
+	url = https://github.com/lazzylife42/cub3d.git
+[submodule "net_practice"]
+	path = net_practice
+	url = https://github.com/lazzylife42/net_practice.git
+[submodule "inception"]
+	path = inception
+	url = https://github.com/lazzylife42/inception.git
+[submodule "webserv"]
+	path = webserv
+	url = https://github.com/lazzylife42/webserv.git
+[submodule "ft_transcendence"]
+	path = ft_transcendence
+	url = https://github.com/lazzylife42/ft_transcendence.git
