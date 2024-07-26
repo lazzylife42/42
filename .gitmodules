@@ -37,3 +37,6 @@
 [submodule "ft_transcendence"]
 	path = ft_transcendence
 	url = https://github.com/lazzylife42/ft_transcendence.git
+[submodule "piscine_cpp"]
+	path = piscine_cpp
+	url = https://github.com/lazzylife42/cpp.git
