@@ -32,7 +32,7 @@ Voici la liste de mes différents projets finis ou en cours dans le cadre de mon
 ## Rank 5 ✅
 - [piscine C++ (Partie 2)](https://github.com/lazzylife42/cpp/) : Exercices de la piscine C++, deuxième partie.
 - [inception](https://github.com/lazzylife42/inception) : Ce projet virtualise plusieurs images Docker en les créant dans une nouvelle machine virtuelle.
-- [webserv](https://github.com/lazzylife42/webserv/web_serv) : Création d'un serveur HTTP à partir de zéro.
+- [webserv](https://github.com/lazzylife42/webserv) : Création d'un serveur HTTP à partir de zéro.
 
 ---
 
