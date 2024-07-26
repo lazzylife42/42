@@ -1,9 +1,6 @@
-[submodule "piscine_cpp_part1"]
-	path = piscine_cpp_part1
-	url = https://github.com/lazzylife42/cpp.git
-[submodule "piscine_cpp_part2"]
-	path = piscine_cpp_part2
-	url = https://github.com/lazzylife42/cpp.git
+[submodule "piscine_cpp"]
+    path = piscine_cpp
+    url = https://github.com/lazzylife42/cpp.git
 [submodule "libft"]
 	path = libft
 	url = https://github.com/lazzylife42/libft.git
@@ -37,6 +34,3 @@
 [submodule "ft_transcendence"]
 	path = ft_transcendence
 	url = https://github.com/lazzylife42/ft_transcendence.git
-[submodule "piscine_cpp"]
-	path = piscine_cpp
-	url = https://github.com/lazzylife42/cpp.git
