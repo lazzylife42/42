@@ -1,3 +1,6 @@
+[![English](https://img.shields.io/badge/lang-en-blue.svg)](../README.md)  [![Français](https://img.shields.io/badge/lang-fr-blue.svg)](./README.md)   
+
+
 # 42 Lausanne | Common Core Cursus
 
 Voici la liste de mes différents projets finis ou en cours dans le cadre de mon cursus à 42 Lausanne.
@@ -25,12 +28,12 @@ Voici la liste de mes différents projets finis ou en cours dans le cadre de mon
 ## Rank 4 ✅
 - [cub3d](https://github.com/lazzylife42/cub3d) : Un clone de Wolfenstein 3D.
 - [net practice](https://github.com/lazzylife42/net_practice) : Ce projet consiste à résoudre des problèmes liés à la mise en place d’un petit réseau fonctionnel.
-- [piscine C++ (Partie 1)](https://github.com/lazzylife42/cpp/) : Exercices de la piscine C++, première partie.
+- [piscine C++ (Partie 1)](https://github.com/lazzylife42/cpp/tree/main/cpp_Part.1) : Exercices de la piscine C++, première partie.
 
 ---
 
 ## Rank 5 ✅
-- [piscine C++ (Partie 2)](https://github.com/lazzylife42/cpp/) : Exercices de la piscine C++, deuxième partie.
+- [piscine C++ (Partie 2)](https://github.com/lazzylife42/cpp/tree/main/cpp_Part.2) : Exercices de la piscine C++, deuxième partie.
 - [inception](https://github.com/lazzylife42/inception) : Ce projet virtualise plusieurs images Docker en les créant dans une nouvelle machine virtuelle.
 - [webserv](https://github.com/lazzylife42/webserv) : Création d'un serveur HTTP à partir de zéro.
 
