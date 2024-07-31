@@ -1,9 +1,0 @@
-*.a
-*.o
-*.pyc
-.DS_Store
-.git
-.vscode
-__pycache__
-rendu_*
-.editorconfig
